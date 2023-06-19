@@ -9,5 +9,6 @@ import TestPage from './Test';
  root.render(
 
     //  <App />
-    <ModalSheet title={"난 타이틀"}/>
+   //  <ModalSheet title={"난 타이틀"}/>
+   <TestPage/>
  );
