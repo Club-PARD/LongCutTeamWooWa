@@ -25,16 +25,16 @@ width: 24px;
 height: 24px;
 `
 
- function App() {
+ function ModalHeader({title}) {
   return (
     <ModalHeaderContainer>
       <ModalExpandIcon src={require('../../assets/img/expand_icon.svg').default} alt="Expand Icon" />
       <ModalHeaderContainer>
-        경험 작성하기 
+        {title}
       </ModalHeaderContainer>
       <ModalCloseIcon src={require('../../assets/img/close_icon.svg').default} alt="Close Icon" />
     </ModalHeaderContainer>
   );
 }
 
-export default App;
+export default ModalHeader;

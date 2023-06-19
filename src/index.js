@@ -8,5 +8,5 @@ import TestPage from './Test';
  const root = ReactDOM.createRoot(document.getElementById('root'));
  root.render(
     //  <App />
-    <ModalSheet/>
+    <ModalSheet title={"난 타이틀"}/>
  );
