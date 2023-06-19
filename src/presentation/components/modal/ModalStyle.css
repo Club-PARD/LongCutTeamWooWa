@@ -11,9 +11,41 @@
     gap: 9px;
 }
 .chip-title{
-  padding: 4px 12px;
+  padding: 4px 0px;
+  padding-right: 12px;
+  white-space: nowrap;
 }
 .tag-chips-container{
   display: flex;
   gap: 10px;
+  padding: 0px 11px;
+}
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #CDCDCD;
+  border: 1px solid #CDCDCD;
+  border-radius: 100px;
+}
+button:focus {
+  background-color: #CDCDCD;
+  border: 1px solid #CDCDCD;
+  border-radius: 100px;
+}
+.button-wrapper {
+  display: flex;
+}
+.modal-sheet {
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
