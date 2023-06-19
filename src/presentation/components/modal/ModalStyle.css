@@ -10,3 +10,10 @@
     flex-wrap: wrap;
     gap: 9px;
 }
+.chip-title{
+  padding: 4px 12px;
+}
+.tag-chips-container{
+  display: flex;
+  gap: 10px;
+}
