@@ -1,5 +1,5 @@
 import styled from "styled-components";
-/* 컴포넌트에서 빠질것임 */ 
+
 const BtnText = styled.div`
   font-family: Pretendard;
   font-style: normal;
@@ -7,9 +7,8 @@ const BtnText = styled.div`
   font-size: 14px;
   line-height: 22px;
   color: #222222;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  flex: column;
+  text-align: center;
 `;
 
 const BtnDiv = styled.div`
@@ -18,15 +17,17 @@ const BtnDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  opacity: 0.6;
-  border-radius: 10px;
+  width: 95px;
+  background: #d8d8d8;
+  border-radius: 100px;
 `;
 
-function TmpSaveBtn() {
+function SubmitBtn({ buttonText }) {
   return (
     <BtnDiv>
-        <BtnText>임시저장</BtnText>
+      <BtnText>{buttonText}</BtnText>
     </BtnDiv>
   );
 }
-export default TmpSaveBtn;
+
+export default SubmitBtn;
