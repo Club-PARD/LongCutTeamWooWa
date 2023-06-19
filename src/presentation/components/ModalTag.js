@@ -1,4 +1,4 @@
-import "./ModalTag.css";
+import "./ModalStyle.css";
 
 const ModalTag = ({text}) => {
     return (
