@@ -13,13 +13,10 @@ const BtnText = styled.div`
   flex-grow: 0;
 `;
 
-const BtnDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const BtnDiv = styled.button`
   padding: 4px 12px;
   background: #d8d8d8;
+  border: 1px solid #CDCDCD;
   border-radius: 100px;
 `;
 
