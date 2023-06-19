@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+/* 컴포넌트에서 빠질것임 */ 
 const BtnText = styled.div`
   width: 49px;
   height: 22px;
