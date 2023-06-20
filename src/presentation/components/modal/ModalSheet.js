@@ -27,7 +27,7 @@ const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelect
                 <>
                     <Divider/>
                     <VerticalSpacing height={14}/>
-                    <DateSelector/> 
+                    <DateSelector onChange={() => {}}/> 
                     <VerticalSpacing height={14}/>
                 </> : 
                 <></>
