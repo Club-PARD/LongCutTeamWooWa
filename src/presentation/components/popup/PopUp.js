@@ -4,6 +4,9 @@ import SubmitBtn from '../SubmitBtn';
 
 const PopUpContainer = styled.div`
     display: flex;
+    width: 510px;
+    height: 217px;
+    border-radius: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -37,10 +40,10 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2 }) {
+function PopUp({imgSrc, text1, text2}) {
     return (
         <PopUpContainer>
-           <img src={require(`../../../assets/img/${imgSrc}`).default} alt="PopUp-Icon" />
+           <img src={imgSrc} alt="PopUp-Icon" />
 
             <TextContainer>
                 <FirstText>{text1}</FirstText>
