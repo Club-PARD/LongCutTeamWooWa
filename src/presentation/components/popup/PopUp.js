@@ -40,7 +40,7 @@ const SecondText = styled.p`
 function PopUp({ imgSrc, text1, text2 }) {
     return (
         <PopUpContainer>
-           <img src={require(`../../../assets/img/${imgSrc}`).default} alt="PopUp-Icon" />
+           <img src={imgSrc} alt="PopUp-Icon" />
 
             <TextContainer>
                 <FirstText>{text1}</FirstText>
