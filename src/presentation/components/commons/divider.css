@@ -8,5 +8,5 @@
 .dashed-divider {
     height: 1px;
     border: none;
-    border-top: var(--dash-size, 0.5px) dashed #D7D7D7;
+    border-top: var(--dash-size, 2px) dashed #D7D7D7;
 }
