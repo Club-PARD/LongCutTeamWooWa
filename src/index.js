@@ -7,6 +7,5 @@ import TestPage from './Test';
 
  const root = ReactDOM.createRoot(document.getElementById('root'));
  root.render(
-
    <TestPage/>
- );
+);

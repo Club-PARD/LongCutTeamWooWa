@@ -1,4 +1,5 @@
 import "./ModalLayout.css"
+import React from 'react';
 
 import Divider from "../Divider";
 import ModalButtons from "./ModalButtons";

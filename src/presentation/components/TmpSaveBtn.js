@@ -1,6 +1,8 @@
 import styled from "styled-components";
 /* 컴포넌트에서 빠질것임 */ 
 const BtnText = styled.div`
+  width: 49px;
+  height: 22px;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 500;
@@ -18,6 +20,10 @@ const BtnDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
+  gap: 10px;
+  position: relative;
+  width: 95px;
+  height: 35px;
   opacity: 0.6;
   border-radius: 10px;
 `;
