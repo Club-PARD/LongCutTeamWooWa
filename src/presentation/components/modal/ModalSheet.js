@@ -13,7 +13,7 @@ const ModalSheet = ({title, isTemplate}) => {
         <div className="modal-sheet">
             <ModalHeader title={title}/>
             <Divider/>
-            {/* <InputTitle/> */}
+            <InputTitle/>
             {/* {isTemplate ? 
                 <ModalWritingContent/> : 
                 <ModalTemplateContent/>

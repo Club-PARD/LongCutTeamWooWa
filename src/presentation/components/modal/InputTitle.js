@@ -13,14 +13,14 @@ const ImgDiv = styled.div`
 `;
 
 const Img1 = styled.img`
-//   width: 19.2px;
-//   height: 19.2px;
+  //  width: 19.2px;
+  //  height: 19.2px;
   
 `;
 
 const Img2 = styled.img`
-//   width: 19.2px;
-//   height: 19.2px;
+  //  width: 19.2px;
+  //  height: 19.2px;
 `;
 
 const Input = styled.input`
