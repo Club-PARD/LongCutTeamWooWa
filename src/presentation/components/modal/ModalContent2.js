@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import InputTextField from "../InputTextField";
+import InputTextField from "../commons/InputTextField";
 
 const Header = styled.div`
   position: sticky;
