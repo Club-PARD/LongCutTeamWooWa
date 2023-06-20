@@ -28,11 +28,11 @@ height: 24px;
  function ModalHeader({title}) {
   return (
     <ModalHeaderContainer>
-      <ModalExpandIcon src={require('../../assets/img/expand_icon.svg').default} alt="Expand Icon" />
+      <ModalExpandIcon src={require('../../../assets/img/expand_icon.svg').default} alt="Expand Icon" />
       <ModalHeaderContainer>
         {title}
       </ModalHeaderContainer>
-      <ModalCloseIcon src={require('../../assets/img/close_icon.svg').default} alt="Close Icon" />
+      <ModalCloseIcon src={require('../../../assets/img/close_icon.svg').default} alt="Close Icon" />
     </ModalHeaderContainer>
   );
 }

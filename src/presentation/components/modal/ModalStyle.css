@@ -47,5 +47,4 @@ button:focus {
   width: 460px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
