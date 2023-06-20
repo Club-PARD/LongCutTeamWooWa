@@ -13,7 +13,7 @@ const ModalTagSelection = ({title, modalTagList, width, hasButton}) => {
                 <></>}
             <div className="tag-chips" style={{width: width != null ? `${width}px` : "100%"}}>
                 {modalTagList.map((tag, index) => (
-                    <ModalTag text={tag}/>
+                    <ModalTag key={index} text={tag}/>
                 ))}
                 {hasButton ? 
                     <button className="add-button">

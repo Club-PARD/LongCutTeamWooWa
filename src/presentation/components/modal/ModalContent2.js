@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import InputTextField from "../InputTextField";
 const Header = styled.div`
   color: #222222;
   font-family: Pretendard;
@@ -9,24 +10,12 @@ const Header = styled.div`
   letter-spacing: 0em;
   text-align: start;
   margin-bottom: 9.93px;
-`;
-
-const Body = styled.div`
-  text-align: start;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 160%;
-  color: #222222;
-  opacity: 0.3;
+  position: sticky;
 `;
 
 const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
   padding: 0px 11px;
 `;
 
@@ -35,9 +24,10 @@ function ModalContent2() {
     <ContentDiv>
       <Header>
         이 경험에서 좋았던 포인트는 무엇이며
-        <br />왜 그렇게 생각하셨나요?
+        <br></br>왜 그렇게 생각하셨나요?
       </Header>
-      <Body>나의 경험을 작성하고 저장하세요! </Body>
+      <InputTextField placeholder={"나의 경험을 작성하고 저장하세요!"}/>
+      
     </ContentDiv>
   );
 }
