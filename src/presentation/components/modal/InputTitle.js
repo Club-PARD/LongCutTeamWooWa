@@ -3,6 +3,7 @@ import styled from "styled-components";
 import img1 from "../../../assets/img/이미지.png";
 import img2 from "../../../assets/img/템플릿.png";
 import InputTextField from "../InputTextField";
+import React from "react";
 
 const ImgDiv = styled.div`
   display: flex;
