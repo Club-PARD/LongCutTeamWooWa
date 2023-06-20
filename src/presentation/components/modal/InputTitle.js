@@ -40,13 +40,13 @@ const Div = styled.div`
 
 function InputTitle() {
   return (
-    <ContentDiv>
+    <Div>
       <Header>
         이 경험에서 좋았던 포인트는 무엇이며
         <br />왜 그렇게 생각하셨나요?
       </Header>
       <Body>나의 경험을 작성하고 저장하세요! </Body>
-    </ContentDiv>
+    </Div>
   );
 }
 export default InputTitle;
