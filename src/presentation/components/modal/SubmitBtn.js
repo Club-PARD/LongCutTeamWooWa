@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from "react";
 const BtnText = styled.div`
   font-family: "Pretendard";
   font-style: normal;

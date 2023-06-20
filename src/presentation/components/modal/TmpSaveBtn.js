@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 /* 컴포넌트에서 빠질것임 */ 
 const BtnText = styled.div`
   font-family: Pretendard;
