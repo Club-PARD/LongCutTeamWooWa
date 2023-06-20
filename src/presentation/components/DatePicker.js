@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {DatePicker} from '@gsebdev/react-simple-datepicker';
 
-function DatePicker({ data }) {
+function DatePicker1({ data }) {
   const onChangeCallback = (date) => {
     // 사용자가 날짜를 선택했을 때 실행되는 콜백 함수
     console.log('Selected Date:', date);
@@ -18,4 +18,4 @@ function DatePicker({ data }) {
   );
 }
 
-export default DatePicker;
+export default DatePicker1;
