@@ -4,6 +4,7 @@ import styled from "styled-components";
 const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 300px;
   padding: 0px 11px;
 `;
 const ModalWritingContent = () => {

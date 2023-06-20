@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
+import React from "react";
 const BtnText = styled.div`
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -11,20 +11,16 @@ const BtnText = styled.div`
   text-align: center;
 `;
 
-const BtnDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  width: 95px;
+const BtnDiv = styled.button`
+  padding: 4px 12px;
   background: #d8d8d8;
+  border: 1px solid #CDCDCD;
   border-radius: 100px;
 `;
 
-function SubmitBtn({ buttonText }) {
+function SubmitBtn({ buttonText, onClick }) {
   return (
-    <BtnDiv>
+    <BtnDiv onClick={onClick}>
       <BtnText>{buttonText}</BtnText>
     </BtnDiv>
   );

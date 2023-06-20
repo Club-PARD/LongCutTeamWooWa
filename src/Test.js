@@ -1,9 +1,9 @@
-import ModalSheet from "./presentation/components/modal/ModalSheet";
 import React from "react";
+import ModalSheetBuilder from "./presentation/components/modal/ModalSheetBuilder";
 
 const TestPage = () => {
     return (
-        <ModalSheet title={"경험 작성하기"} isTemplate={false}/>
+        <ModalSheetBuilder modalType={"add-free"}/>
     );
 }
 

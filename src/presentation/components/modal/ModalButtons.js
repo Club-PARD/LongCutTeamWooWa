@@ -1,11 +1,11 @@
 import React from 'react';
-import SubmitBtn from './SubmitBtn';
-import TmpSaveBtn from './TmpSaveBtn';
+import SubmitBtn from '../buttons/SubmitBtn';
+import TmpSaveBtn from '../buttons/TmpSaveBtn';
 
 const ModalButtons = () => {
   return (
     <div className="button-wrapper">
-    <TmpSaveBtn/>
+      <TmpSaveBtn/>
       <SubmitBtn buttonText={"기록하기"}/>
       
     </div>

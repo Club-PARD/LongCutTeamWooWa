@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import InputTextField from "../commons/InputTextArea";
+import InputTextArea from "../commons/InputTextArea";
 
 const Header = styled.div`
   position: sticky;
@@ -32,7 +32,7 @@ function ModalContent2() {
         <br />
         왜 그렇게 생각하셨나요?
       </Header>
-      <InputTextField placeholder={"나의 경험을 작성하고 저장하세요!"} />
+      <InputTextArea placeholder={"나의 경험을 작성하고 저장하세요!"} />
     </ContentDiv>
   );
 }
