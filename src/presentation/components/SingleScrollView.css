@@ -1,0 +1,9 @@
+.single-scroll-view {
+    height: 300px; /* Adjust the height as per your requirements */
+    overflow-y: auto;
+  }
+  
+  .scroll-content {
+    padding: 0px;
+  }
+  

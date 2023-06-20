@@ -4,4 +4,8 @@ const Divider = () => {
     return <div className="divider"></div>
 }
 
-export default Divider;
+const DashedDivider = () => {
+    return <div className="dashed-divider"></div>
+}
+
+export { Divider, DashedDivider};
