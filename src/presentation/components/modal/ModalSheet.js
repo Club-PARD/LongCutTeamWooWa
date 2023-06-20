@@ -22,9 +22,12 @@ const ModalSheet = ({title, isTemplate}) => {
             <VerticalSpacing height={13.9}/>
             <DashedDivider/>
             <VerticalSpacing height={21}/>
-            <SingleScrollView children={isTemplate ? 
+            <SingleScrollView children={
+                isTemplate ? 
                 <ModalTemplateContent/> : 
-                <ModalWritingContent/>}/>
+                <ModalWritingContent/>
+                }
+            />
             <VerticalSpacing height={19}/>
             <Divider/>
             <VerticalSpacing height={14}/>
