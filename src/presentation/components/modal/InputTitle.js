@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import img1 from "../../../assets/img/이미지.png";
 import img2 from "../../../assets/img/템플릿.png";
+import InputTextField from "../InputTextField";
 
 const ImgDiv = styled.div`
   display: flex;
@@ -8,38 +10,20 @@ const ImgDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4.8px;
-  margin-left: 10px;
 `;
 
 const Img1 = styled.img`
-//   width: 19.2px;
-//   height: 19.2px;
   
 `;
 
 const Img2 = styled.img`
-//   width: 19.2px;
-//   height: 19.2px;
-`;
 
-const Input = styled.input`
-  width: 350px;
-  height: 37.73px;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 38px;
-  color: #222222;
-  opacity: 0.5;
-  border: none;
-  outline: none; 
 `;
 
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: start;
+  justify-content: space-between;
   padding: 0px 11px;
 `;
 
@@ -59,7 +43,8 @@ const TextDiv = styled.div`
 function InputTitle() {
   return (
     <Div>
-      <Input type="text" placeholder="제목 입력" />
+      <InputTextField placeholder="제목 입력" fontsize={24}/>
+      <div style={{display: "flex", gap: "10px"}}>
       <ImgDiv>
         <Img1 src={img1} />
         <TextDiv>이미지</TextDiv>
@@ -68,6 +53,7 @@ function InputTitle() {
         <Img2 src={img2} />
         <TextDiv>템플릿</TextDiv>
       </ImgDiv>
+      </div>
     </Div>
   );
 }

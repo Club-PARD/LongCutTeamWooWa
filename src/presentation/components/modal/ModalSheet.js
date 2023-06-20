@@ -9,6 +9,7 @@ import InputTitle from "./InputTitle";
 import VerticalSpacing from "../VerticalSpacing";
 import ModalWritingContent from "./ModalWritingContent";
 import ModalTemplateContent from "./ModalTemplateContent";
+import SingleScrollView from "../SingleScrollView";
 const tags = ['도전정신', '성취감', '동기부여', '학습', '자기존중', '문제 해결 능력', '협업', '리더십', '커뮤니케이션', '신체적', '정서적'];
 
 const ModalSheet = ({title, isTemplate}) => {
@@ -21,10 +22,9 @@ const ModalSheet = ({title, isTemplate}) => {
             <VerticalSpacing height={13.9}/>
             <DashedDivider/>
             <VerticalSpacing height={21}/>
-            {isTemplate ? 
+            <SingleScrollView children={isTemplate ? 
                 <ModalTemplateContent/> : 
-                <ModalWritingContent/>
-            }
+                <ModalWritingContent/>}/>
             <VerticalSpacing height={19}/>
             <Divider/>
             <VerticalSpacing height={14}/>
