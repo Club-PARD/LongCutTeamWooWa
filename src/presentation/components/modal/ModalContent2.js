@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from "react";
 const Header = styled.div`
   color: #222222;
   font-family: Pretendard;

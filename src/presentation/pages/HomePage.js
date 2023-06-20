@@ -1,8 +1,8 @@
-import ModalContent2 from '../components/ModalContent2';
-import TmpSaveBtn from '../components/TmpSaveBtn';
-import SubmitBtn from '../components/SubmitBtn';
-import InputTitle from '../components/InputTitle';
-
+import ModalContent2 from '../components/modal/ModalContent2';
+import TmpSaveBtn from '../components/modal/TmpSaveBtn';
+import SubmitBtn from '../components/modal/SubmitBtn';
+import InputTitle from '../components/modal/InputTitle';
+import React from "react";
 function HomePage() {
     return (
         <div>
