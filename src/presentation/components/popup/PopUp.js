@@ -1,3 +1,5 @@
+import React from "react";
+import styled from "styled-components";
 import SubmitBtn from '../SubmitBtn';
 
 const PopUpContainer = styled.div`
@@ -17,26 +19,28 @@ const FirstText = styled.p`
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   color: black;
   flex: column;
   text-align: center;
+  margin-bottom: 0px;
 `;
 
 const SecondText = styled.p`
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   color: black;
   flex: column;
   text-align: center;
+  margin-top: 8px;
 `;
 
 function PopUp({ imgSrc, text1, text2 }) {
     return (
         <PopUpContainer>
-            <img src={imgSrc} alt="PopUp-Icon" />
+           <img src={require(`../../../assets/img/${imgSrc}`).default} alt="PopUp-Icon" />
 
             <TextContainer>
                 <FirstText>{text1}</FirstText>
