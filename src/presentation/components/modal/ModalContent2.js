@@ -27,6 +27,7 @@ const ContentDiv = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  padding: 0px 11px;
 `;
 
 function ModalContent2() {

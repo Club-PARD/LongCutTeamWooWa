@@ -39,16 +39,14 @@ const Input = styled.input`
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: start;
   align-items: start;
-  width: 432px;
-  height: 51.63px;
+  padding: 0px 11px;
 `;
 
 const TextDiv = styled.div`
-  width: 37px;
+  white-space: nowrap;
   height: 22px;
-  font-family: "Pretendard";
+  font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

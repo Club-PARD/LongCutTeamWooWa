@@ -1,6 +1,12 @@
 .divider {
     height: 1px;
     background-color: #EAEAEA;
-    margin: 40px 0px;
+    margin: 0px;
     width: 100%;
 }
+
+.dashed-divider {
+    height: 1px;
+    border: none;
+    border-top: 0.5px dashed #D7D7D7;
+  }
