@@ -24,6 +24,7 @@ const Img2 = styled.img`
 const Div = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   padding: 0px 11px;
 `;

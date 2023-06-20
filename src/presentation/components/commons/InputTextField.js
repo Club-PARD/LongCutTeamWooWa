@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from 'react';
 
-const TextArea = styled.textarea`
+const Input = styled.input`
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
@@ -11,23 +11,10 @@ const TextArea = styled.textarea`
   opacity: 0.5;
   border: none;
   outline: none;
-  resize: vertical;
-  overflow: hidden;
 `;
 
 const InputTextField = ({ placeholder, fontsize }) => {
-  const handleInputHeight = event => {
-    event.target.style.height = "auto";
-    event.target.style.height = `${event.target.scrollHeight}px`;
-  };
-
-  return (
-    <TextArea
-      placeholder={placeholder}
-      fontSize={fontsize}
-      onInput={handleInputHeight}
-    />
-  );
+  return <Input type="text" placeholder={placeholder} fontSize={fontsize} />;
 }
 
 export default InputTextField;
