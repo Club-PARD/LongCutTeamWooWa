@@ -3,7 +3,7 @@ import { FiPlus } from 'react-icons/fi';
 
 import "./ModalStyle.css";
 import React from "react";
-const ModalTagSelection = ({title, modalTagList, width, hasButton}) => {
+const ModalTagSelection = ({title, modalTagList, width, hasButton, onClick}) => {
     return (
         <div className="tag-chips-container">
             {title != null ? 
@@ -13,7 +13,7 @@ const ModalTagSelection = ({title, modalTagList, width, hasButton}) => {
                 <></>}
             <div className="tag-chips" style={{width: width != null ? `${width}px` : "100%"}}>
                 {modalTagList.map((tag, index) => (
-                    <ModalTag key={index} text={tag}/>
+                    <ModalTag key={index} text={tag} onClick={onClick}/>
                 ))}
                 {hasButton ? 
                     <button className="add-button">

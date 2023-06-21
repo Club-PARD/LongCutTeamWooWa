@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-const ModalTag = ({ text }) => {
+const ModalTag = ({ text, onClick }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
+    onClick(text);
     setIsClicked(!isClicked);
   };
 

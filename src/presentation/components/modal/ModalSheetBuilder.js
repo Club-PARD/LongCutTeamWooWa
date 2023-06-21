@@ -1,5 +1,5 @@
 import "./ModalLayout.css"
-import React from 'react';
+import React, { useState } from "react";
 import SubmitBtn from "../buttons/SubmitBtn";
 import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
@@ -43,6 +43,18 @@ const modalTypeInfo = {
 }
 
 const ModalSheetBuilder = ({modalType}) => {
+    const [clickedTags, setClickedTags] = useState([]);
+
+    const handleTagClick = (tag) => {
+        if (clickedTags.includes(tag)) {
+            setClickedTags(clickedTags.filter((t) => t !== tag));
+        } else {
+            setClickedTags([...clickedTags, tag]);
+        }
+    };
+
+    console.log(clickedTags);
+
     const data = modalTypeInfo[modalType];
     if(data === null) return <></>
     if(modalType === "post"){
@@ -53,7 +65,7 @@ const ModalSheetBuilder = ({modalType}) => {
                     hasTitleInput={data["hasTitleInput"]} 
                     children={data["children"]}
                     hasDatePicker={data["hasDatePicker"]}
-                    hasTagSelection={data["hasTagSelection"]} 
+                    hasTagSelection={data["hasTagSelection"] ? handleTagClick : null} 
                     Button={data["Button"]}
                     />
     );

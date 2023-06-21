@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
-
+import IconButton from '../buttons/IconBtn';
+import CloseIcon from '../../../assets/img/close_icon.svg';
+import ExpandIcon from '../../../assets/img/expand_icon.svg';
 const ModalHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -28,11 +29,11 @@ height: 24px;
  function ModalHeader({title}) {
   return (
     <ModalHeaderContainer>
-      <ModalExpandIcon src={require('../../../assets/img/expand_icon.svg').default} alt="Expand Icon" />
+      <IconButton iconImage={ExpandIcon} size={"24px"}/>
       <ModalHeaderContainer>
         {title}
       </ModalHeaderContainer>
-      <ModalCloseIcon src={require('../../../assets/img/close_icon.svg').default} alt="Close Icon" />
+      <IconButton iconImage={CloseIcon} size={"24px"}/>
     </ModalHeaderContainer>
   );
 }

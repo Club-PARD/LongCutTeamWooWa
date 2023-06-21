@@ -32,11 +32,11 @@ const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelect
                 </> : 
                 <></>
             }
-            {hasTagSelection ? 
+            {hasTagSelection != null ? 
                 <>
                     <Divider/>
                     <VerticalSpacing height={14}/>
-                    <ModalTagSelection title={"태그 입력"} hasButton={true} modalTagList={tags}/> 
+                    <ModalTagSelection title={"태그 입력"} hasButton={true} modalTagList={tags} onClick={hasTagSelection}/> 
                     <VerticalSpacing height={14}/>
                     <Divider/>
                 </> : 
