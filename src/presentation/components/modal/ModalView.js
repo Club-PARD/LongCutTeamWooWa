@@ -111,6 +111,7 @@ function ModalView() {
             <DateDiv>2022년 12월 15일</DateDiv>
           </DivRow>
           <SingleScrollView
+            height={400}
             children={
               <ContentDiv>
                 <ImgDiv>

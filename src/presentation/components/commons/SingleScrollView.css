@@ -1,5 +1,5 @@
 .single-scroll-view {
-  height: 200px; /* Adjust the height as per your requirements */
+  height: var(--frame-height, 200px);
   overflow-y: auto;
 }
 

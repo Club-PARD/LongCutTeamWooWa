@@ -5,6 +5,7 @@ import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
 import ModalSheet from "./ModalSheet";
+import ModalView from "./ModalView";
 
 
 const modalTypeInfo = {
@@ -44,6 +45,9 @@ const modalTypeInfo = {
 const ModalSheetBuilder = ({modalType}) => {
     const data = modalTypeInfo[modalType];
     if(data === null) return <></>
+    if(modalType === "post"){
+        return (<ModalView/>);
+    }
     return (
         <ModalSheet title={data["title"]} 
                     hasTitleInput={data["hasTitleInput"]} 
