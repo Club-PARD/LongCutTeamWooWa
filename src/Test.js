@@ -8,7 +8,7 @@ import ExperienceCard from "./presentation/components/commons/ExperienceCard";
 const TestPage = () => {
     const tagValue = "태그";
     const titleValue = "제목";
-    const summaryValue = "요약 내용";
+    const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.요약내용입니다.";
     const IMG = "https://img.hankyung.com/photo/202105/PRU20210518011301055_P4.jpg";
   
     return (
