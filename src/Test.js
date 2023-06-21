@@ -4,6 +4,7 @@ import styled from "styled-components";
 // import save_icon from "./assets/img/popup_save.svg";
 // import DateSelector from "./presentation/components/DateSelector";
 import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
+import ModalSheetBuilder from "./presentation/components/modal/ModalSheetBuilder";
 
 const TestPage = () => {
     const tagValue = "태그";
@@ -12,14 +13,15 @@ const TestPage = () => {
     const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
   
     return (
-      <div>
-        <ExperienceCardLink 
-            tag={tagValue} 
-            title={titleValue} 
-            summary={summaryValue} 
-            imgSrc={IMG}
-        />
-      </div>
+    //   <div>
+    //     <ExperienceCardLink 
+    //         tag={tagValue} 
+    //         title={titleValue} 
+    //         summary={summaryValue} 
+    //         imgSrc={IMG}
+    //     />
+    //   </div>
+        <ModalSheetBuilder modalType={"add-template"}/>
     );
 }
 

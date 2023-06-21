@@ -9,9 +9,9 @@ import InputTitle from "./InputTitle";
 import DateSelector from "../DateSelector";
 const tags = ['도전정신', '성취감', '동기부여', '학습', '자기존중', '문제 해결 능력', '협업', '리더십', '커뮤니케이션', '신체적', '정서적'];
 
-const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelection, Button}) => {
+const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelection, Button, sheetSize}) => {
     return (
-        <div className="modal-sheet">
+        <div className="modal-sheet" style={{"--sheet-size" : sheetSize}}>
             <ModalHeader title={title}/>
             <Divider/>
             <VerticalSpacing height={25}/>

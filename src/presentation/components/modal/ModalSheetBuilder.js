@@ -67,6 +67,7 @@ const ModalSheetBuilder = ({modalType}) => {
                     hasDatePicker={data["hasDatePicker"]}
                     hasTagSelection={data["hasTagSelection"] ? handleTagClick : null} 
                     Button={data["Button"]}
+                    sheetSize={"500px"}
                     />
     );
 }
