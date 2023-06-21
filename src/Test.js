@@ -4,7 +4,7 @@ import ModalView from "./presentation/components/modal/ModalView";
 
 const TestPage = () => {
     return (
-        <ModalSheetBuilder modalType={"add-link"}/>
+        <ModalSheetBuilder modalType={"add-template"}/>
     );
 }
 

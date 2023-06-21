@@ -21,7 +21,7 @@ const modalTypeInfo = {
         "title" : "경험 작성하기",
         "hasTitleInput" : true,
         "children" : <ModalWritingContent/>,
-        "hasDatePicker" : false,
+        "hasDatePicker" : true,
         "hasTagSelection" : true,
         "Button" : <SubmitBtn buttonText={"기록하기"}/>
     },
@@ -29,7 +29,7 @@ const modalTypeInfo = {
         "title" : "경험 작성하기",
         "hasTitleInput" : true,
         "children" : <ModalTemplateContent/>,
-        "hasDatePicker" : false,
+        "hasDatePicker" : true,
         "hasTagSelection" : true,
         "Button" : <SubmitBtn buttonText={"기록하기"}/>
     },
