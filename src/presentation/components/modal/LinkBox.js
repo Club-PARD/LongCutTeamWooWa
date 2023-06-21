@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import img1 from "../../../assets/img/link.png";
 import React from "react";
+import InputTextField from "../commons/InputTextField";
+import VerticalSpacing from "../commons/VerticalSpacing";
 
 const Title = styled.div`
   height: 22px;
-  margin-bottom: 15px;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
@@ -16,35 +17,27 @@ const Title = styled.div`
 const Div = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  width: 432px;
-  height: 78px;
+  padding: 0px 11px;
 `;
 
 const Img1 = styled.img`
   margin-left: auto;
-  padding-right: 13px;
 `;
 
 const InputDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: start;
   align-items: center;
-  width: 432px;
   height: 41px;
   background: #ebebeb;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
   border-radius: 10px;
   border: none;
   outline: none;
+  padding: 0px 13px;
 `;
 
 const Input = styled.input`
-  width: 320px;
-  height: 22px;
-  margin-left: 11px;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
@@ -54,16 +47,19 @@ const Input = styled.input`
   opacity: 0.3;
   border: none;
   outline: none;
+  width: 100%;
 `;
 
 function LinkBox() {
   return (
     <Div>
       <Title>나의 경험이 기록된 링크를 입력하고 저장하세요!</Title>
+      <VerticalSpacing height={15}/>
       <InputDiv>
         <Input placeholder="링크 삽입하기" />
         <Img1 src={img1} />
       </InputDiv>
+      <VerticalSpacing height={42}/>
     </Div>
   );
 }
