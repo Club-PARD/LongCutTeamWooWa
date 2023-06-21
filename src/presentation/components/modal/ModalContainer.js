@@ -10,7 +10,7 @@ const ModalContainer = ({title, children}) => {
     return (
         <div className="modal-sheet">
             <ModalHeader title={title}/>
-            <DashedDivider />
+            <DashedDivider dashSize={"2px"}/>
             <VerticalSpacing height={25}/>
             {children}
         </div>
