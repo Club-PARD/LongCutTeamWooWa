@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SubmitBtn from '../SubmitBtn';
+import SubmitBtn from '../buttons/SubmitBtn';
 
 const PopUpContainer = styled.div`
     display: flex;

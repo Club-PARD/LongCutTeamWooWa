@@ -4,7 +4,7 @@ import styled from "styled-components";
 // import save_icon from "./assets/img/popup_save.svg";
 // import DateSelector from "./presentation/components/DateSelector";
 import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
-import ModalSheetBuilder from "./presentation/components/modal/ModalSheetBuilder";
+import ModalSheetBuilder from "./presentation/components/modal";
 
 const TestPage = () => {
     const tagValue = "태그";
