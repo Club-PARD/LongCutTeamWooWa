@@ -15,10 +15,12 @@ const TextArea = styled.textarea`
   overflow: hidden;
 `;
 
-const InputTextArea = ({ placeholder, fontsize }) => {
-  const handleInputHeight = event => {
+const InputTextArea = ({ placeholder, fontsize, onChange }) => {
+  const handleInputHeight = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = `${event.target.scrollHeight}px`;
+    const {value} = event.target;
+    onChange(value);
   };
 
   return (

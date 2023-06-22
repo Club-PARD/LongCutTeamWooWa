@@ -8,11 +8,11 @@ const ContentDiv = styled.div`
   min-height: 300px;
   padding: 0px 11px;
 `;
-const ModalWritingContent = () => {
+const ModalWritingContent = ({onChange}) => {
     return (
       <SingleScrollView children={
         <ContentDiv>
-          <InputTextArea placeholder={"나의 경험을 작성하고 저장하세요!"}/>
+          <InputTextArea placeholder={"나의 경험을 작성하고 저장하세요!"} onChange={onChange} />
         </ContentDiv>
         }/>
     );

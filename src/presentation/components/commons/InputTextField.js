@@ -13,8 +13,12 @@ const Input = styled.input`
   outline: none;
 `;
 
-const InputTextField = ({ placeholder, fontsize }) => {
-  return <Input type="text" placeholder={placeholder} fontSize={fontsize} />;
+const InputTextField = ({onChange, placeholder, fontsize }) => {
+  const handleChange = (event) => {
+    const { value } = event.target;
+    onChange(value); // Invoke the onChange callback with the input value
+  };
+  return <Input type="text" placeholder={placeholder} fontSize={fontsize} onChange={handleChange} />;
 }
 
 export default InputTextField;

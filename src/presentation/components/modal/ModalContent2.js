@@ -24,7 +24,7 @@ const ContentDiv = styled.div`
   padding: 0px 11px;
 `;
 
-function ModalContent2() {
+function ModalContent2({onChange}) {
   return (
     <ContentDiv>
       <Header>
@@ -32,7 +32,7 @@ function ModalContent2() {
         <br />
         왜 그렇게 생각하셨나요?
       </Header>
-      <InputTextArea placeholder={"나의 경험을 작성하고 저장하세요!"} />
+      <InputTextArea placeholder={"나의 경험을 작성하고 저장하세요!"} onChange={onChange} />
     </ContentDiv>
   );
 }

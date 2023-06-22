@@ -20,9 +20,9 @@ const DateContainer = styled.div`
 `;
 
 function DateSelector({ onChange }) {
-  const onChangeCallback = (date) => {
-    // 사용자가 날짜를 선택했을 때 실행되는 콜백 함수
-    onChange(date);
+  const onChangeCallback = (event) => {
+    const { value } = event.target;
+    onChange(value);
   };
   const currentDate = new Date(); // 현재 날짜 정보 가져오기
   const currentDateString = currentDate.toLocaleDateString(); // 현재 날짜를 문자열로 변환

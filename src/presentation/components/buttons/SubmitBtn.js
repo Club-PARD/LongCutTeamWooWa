@@ -20,7 +20,7 @@ const BtnDiv = styled.button`
 
 function SubmitBtn({ buttonText, onClick }) {
   return (
-    <BtnDiv onClick={onClick}>
+    <BtnDiv className="action-button" onClick={onClick}>
       <BtnText>{buttonText}</BtnText>
     </BtnDiv>
   );

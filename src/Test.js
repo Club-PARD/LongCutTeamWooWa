@@ -16,14 +16,6 @@ const TestPage = () => {
     // const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
   
     return (
-    //   <div>
-    //     <ExperienceCardLink 
-    //         tag={tagValue} 
-    //         title={titleValue} 
-    //         summary={summaryValue} 
-    //         imgSrc={IMG}
-    //     />
-    //   </div>
         <ModalSheetBuilder modalType={"add-template"}/>
     );
 }

@@ -50,16 +50,20 @@ const Input = styled.input`
   width: 100%;
 `;
 
-function LinkBox() {
+function LinkBox({onChange}) {
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    onChange(value);
+  };
   return (
     <Div>
       <Title>나의 경험이 기록된 링크를 입력하고 저장하세요!</Title>
-      <VerticalSpacing height={15}/>
+      <VerticalSpacing height={15} />
       <InputDiv>
-        <Input placeholder="링크 삽입하기" />
+        <Input placeholder="링크 삽입하기" onChange={handleInputChange} />
         <Img1 src={img1} />
       </InputDiv>
-      <VerticalSpacing height={42}/>
+      <VerticalSpacing height={42} />
     </Div>
   );
 }

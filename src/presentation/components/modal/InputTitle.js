@@ -42,10 +42,10 @@ const TextDiv = styled.div`
   opacity: 0.3;
 `;
 
-function InputTitle() {
+function InputTitle({onChange}) {
   return (
     <Div>
-      <InputTextField placeholder="제목 입력" fontsize={24}/>
+      <InputTextField onChange={onChange} placeholder="제목 입력" fontsize={24}/>
       <div style={{display: "flex", gap: "10px"}}>
       <ImgDiv>
         <Img1 src={img1} />
