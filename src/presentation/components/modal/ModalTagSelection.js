@@ -1,13 +1,15 @@
 import ModalTag from "./ModalTag";
 import { FiPlus } from 'react-icons/fi';
-
 import "./ModalStyle.css";
 import React from "react";
+
+
+
 const ModalTagSelection = ({title, modalTagList, width, hasButton, onClick}) => {
     return (
         <div className="tag-chips-container">
             {title != null ? 
-                <div className="chip-title">
+                <div className="chip-title" >
                     {title}
                 </div> : 
                 <></>}

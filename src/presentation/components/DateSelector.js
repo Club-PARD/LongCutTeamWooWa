@@ -14,6 +14,10 @@ const Container = styled.div`
 
 
 const Text = styled.p`
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
 `;
 
 const DateContainer = styled.div`

@@ -1,22 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import SubmitBtn from '../buttons/SubmitBtn';
+import SubmitBtn from "../buttons/SubmitBtn";
 
 const PopUpContainer = styled.div`
-    display: flex;
-    width: 510px;
-    height: 217px;
-    border-radius: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
+  display: flex;
+  width: 510px;
+  height: 217px;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
+`;
 const TextContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const FirstText = styled.p`
   font-family: Pretendard;
@@ -40,18 +41,18 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({imgSrc, text1, text2}) {
-    return (
-        <PopUpContainer>
-           <img src={imgSrc} alt="PopUp-Icon" />
+function PopUp({ imgSrc, text1, text2, onClick }) {
+  return (
+    <PopUpContainer>
+      <img src={imgSrc} alt="PopUp-Icon" />
 
-            <TextContainer>
-                <FirstText>{text1}</FirstText>
-                <SecondText>{text2}</SecondText>    
-            </TextContainer>
+      <TextContainer>
+        <FirstText>{text1}</FirstText>
+        <SecondText>{text2}</SecondText>
+      </TextContainer>
 
-            <SubmitBtn buttonText="확인" />
-        </PopUpContainer>
-    );
-  }
-  export default PopUp;
+      <SubmitBtn buttonText="확인" onClick={onClick} />
+    </PopUpContainer>
+  );
+}
+export default PopUp;

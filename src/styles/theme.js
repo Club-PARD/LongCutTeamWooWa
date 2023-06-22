@@ -55,6 +55,15 @@ export const theme = {
     disabled: '#ABABAB',
     disabled2: '#CDCDCD',
     searchBackground: '#EBEBEB',
+
+    // cartagory1: '',
+    // cartagory2: '',
+    // cartagory3: '',
+    // cartagory4: '',
+    // cartagory5: '',
+    // cartagory6: '',
+    // cartagory7: '',
+    // cartagory8: '',
   }
 };
 

@@ -1,12 +1,16 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { theme } from './styles/theme';
+
 // import PopUp from "./presentation/components/popup/PopUp";
 // import save_icon from "./assets/img/popup_save.svg";
 // import DateSelector from "./presentation/components/DateSelector";
 import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
 // import ModalView from "./presentation/components/modal/ModalView";
-import { theme } from './styles/theme';
-import ModalWritingContent from "./presentation/components/modal/ModalWritingContent";
+import ModalSheetBuilder from "./presentation/components/modal";
+
+
+
 const TestPage = () => {
     // const tagValue = "태그";
     // const titleValue = "경험card - 링크로 기록";
@@ -15,15 +19,7 @@ const TestPage = () => {
   
     return (
         <ThemeProvider theme={theme}>
-            {/* <div>
-                <ExperienceCardLink 
-                    tag={tagValue} 
-                    title={titleValue} 
-                    summary={summaryValue} 
-                    imgSrc={IMG}
-                />
-          </div> */}
-          <ModalWritingContent/>
+            <ModalSheetBuilder modalType={"add-link"} />
         </ThemeProvider>
     );
 }

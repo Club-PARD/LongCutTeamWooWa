@@ -32,12 +32,13 @@ const DateDiv = styled.div`
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.theme.fontWeights.regular};
   font-size: ${props => props.theme.fontSizes.Body2};
-  
+  color: ${props => props.theme.color.blackHigh};
+
   line-height: 22px;
   display: flex;
   align-items: center;
   text-align: right;
-  color: ${props => props.theme.color.blackHigh};
+
   opacity: 0.3;
 `;
 

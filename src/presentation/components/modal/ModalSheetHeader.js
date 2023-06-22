@@ -7,6 +7,10 @@ import ExpandIcon from "../../../assets/img/expand_icon.svg";
 import PopUpBuilder from "../popup/PopUpBuilder";
 
 const ModalHeaderContainer = styled.div`
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.bold};
+  font-size: ${props => props.theme.fontSizes.Body1};
+  color: ${props => props.theme.color.blackHigh};
   display: flex;
   justify-content: space-between;
   align-items: center;
