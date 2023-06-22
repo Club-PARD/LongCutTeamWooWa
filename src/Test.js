@@ -5,6 +5,7 @@ import styled from "styled-components";
 // import DateSelector from "./presentation/components/DateSelector";
 import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
 import ModalSheetBuilder from "./presentation/components/modal";
+import FakeHomePage from "./presentation/pages/FakeHomePage";
 
 const TestPage = () => {
     const tagValue = "태그";
@@ -21,7 +22,8 @@ const TestPage = () => {
     //         imgSrc={IMG}
     //     />
     //   </div>
-        <ModalSheetBuilder modalType={"add-template"}/>
+        // <ModalSheetBuilder modalType={"add-template"}/>
+        <FakeHomePage/>
     );
 }
 
