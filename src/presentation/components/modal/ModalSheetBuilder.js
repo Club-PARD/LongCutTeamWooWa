@@ -44,6 +44,11 @@ const modalTypeInfo = {
 
 const ModalSheetBuilder = ({modalType}) => {
     const [clickedTags, setClickedTags] = useState([]);
+    const [expanded, setExpanded] = useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    }
 
     const handleTagClick = (tag) => {
         if (clickedTags.includes(tag)) {
@@ -67,7 +72,8 @@ const ModalSheetBuilder = ({modalType}) => {
                     hasDatePicker={data["hasDatePicker"]}
                     hasTagSelection={data["hasTagSelection"] ? handleTagClick : null} 
                     Button={data["Button"]}
-                    sheetSize={"500px"}
+                    isExpanded = {expanded}
+                    onExpandClick={handleExpandClick}
                     />
     );
 }

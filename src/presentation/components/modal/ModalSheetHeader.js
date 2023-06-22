@@ -26,14 +26,14 @@ width: 24px;
 height: 24px;
 `
 
- function ModalHeader({title}) {
+ function ModalHeader({title, onExpandClick, onCloseClick}) {
   return (
     <ModalHeaderContainer>
-      <IconButton iconImage={ExpandIcon} size={"24px"}/>
+      <IconButton iconImage={ExpandIcon} size={"24px"} onClick={onExpandClick}/>
       <ModalHeaderContainer>
         {title}
       </ModalHeaderContainer>
-      <IconButton iconImage={CloseIcon} size={"24px"}/>
+      <IconButton iconImage={CloseIcon} size={"24px"} onClick={onCloseClick}/>
     </ModalHeaderContainer>
   );
 }

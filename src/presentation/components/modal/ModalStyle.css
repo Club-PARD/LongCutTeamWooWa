@@ -48,6 +48,8 @@ button:focus {
   border-radius: 10px;
   border: 1px solid #CDCDCD;
   width: var(--sheet-size);
+  max-width: var(--max-width);
+  height: var(--sheet-height);
   display: flex;
   flex-direction: column;
   padding: 28px;

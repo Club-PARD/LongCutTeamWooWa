@@ -9,10 +9,10 @@ import InputTitle from "./InputTitle";
 import DateSelector from "../DateSelector";
 const tags = ['도전정신', '성취감', '동기부여', '학습', '자기존중', '문제 해결 능력', '협업', '리더십', '커뮤니케이션', '신체적', '정서적'];
 
-const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelection, Button, sheetSize}) => {
+const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelection, Button, isExpanded, onExpandClick, onCloseClick}) => {
     return (
-        <div className="modal-sheet" style={{"--sheet-size" : sheetSize}}>
-            <ModalHeader title={title}/>
+        <div className="modal-sheet" style={{"--sheet-size" : isExpanded ? "100%" : "500px", "--max-width" : "60%"}}>
+            <ModalHeader title={title} onExpandClick={onExpandClick} onCloseClick={onCloseClick}/>
             <Divider/>
             <VerticalSpacing height={25}/>
             {hasTitleInput ? 
@@ -48,7 +48,7 @@ const ModalSheet = ({title, children, hasTitleInput, hasDatePicker, hasTagSelect
                     <div className="button-layout">
                         {Button}
                     </div> 
-                </>: 
+                </> : 
                 <></>}
         </div>
     );
