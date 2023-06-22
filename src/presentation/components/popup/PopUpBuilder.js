@@ -29,7 +29,7 @@ function PopUpBuilder({id}){
     if(!popup_data.length > 0) return;
 
     const data = popup_data[0];
-    return <PopUp imgSrc={data["image"]} text1={data["title"]} text2={data["body"]}/>
+    return <PopUp imgSrc={data["image"]} text1={data["title"]} text2={data["body"]} id={data["id"]}/>
 }
 
 export default PopUpBuilder;
