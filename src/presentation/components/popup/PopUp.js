@@ -20,22 +20,22 @@ const TextContainer = styled.div`
 `;
 
 const FirstText = styled.p`
-  font-family: Pretendard;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.bold};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
   font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  color: black;
   flex: column;
   text-align: center;
   margin-bottom: 0px;
 `;
 
 const SecondText = styled.p`
-  font-family: Pretendard;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  color: black;
   flex: column;
   text-align: center;
   margin-top: 8px;
