@@ -1,6 +1,5 @@
 import ModalTag from "./ModalTag";
 import { FiPlus } from 'react-icons/fi';
-
 import "./ModalStyle.css";
 import React, { useState } from "react";
 

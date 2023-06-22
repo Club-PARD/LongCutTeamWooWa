@@ -30,16 +30,15 @@ const Div = styled.div`
 `;
 
 const TextDiv = styled.div`
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
+  font-style: normal;
   white-space: nowrap;
   height: 22px;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
   line-height: 22px;
   text-align: center;
-  color: #363636;
-  opacity: 0.3;
 `;
 
 function InputTitle({onChange}) {

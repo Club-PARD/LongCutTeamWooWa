@@ -4,14 +4,21 @@ import React from "react";
 import InputTextField from "../commons/InputTextField";
 import VerticalSpacing from "../commons/VerticalSpacing";
 
+
+
+
+
+
+
 const Title = styled.div`
   height: 22px;
-  font-family: Pretendard;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
   line-height: 22px;
-  color: #222222;
+
 `;
 
 const Div = styled.div`
@@ -29,7 +36,7 @@ const InputDiv = styled.div`
   flex-direction: row;
   align-items: center;
   height: 41px;
-  background: #ebebeb;
+  background: ${props => props.theme.color.searchBackground};
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
   border-radius: 10px;
   border: none;
@@ -38,13 +45,11 @@ const InputDiv = styled.div`
 `;
 
 const Input = styled.input`
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
   line-height: 22px;
   background: #ebebeb;
-  opacity: 0.3;
   border: none;
   outline: none;
   width: 100%;

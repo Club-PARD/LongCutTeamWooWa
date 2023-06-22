@@ -14,9 +14,16 @@
   padding: 4px 0px;
   padding-right: 12px;
   white-space: nowrap;
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-size: 14px; 
+  color: #222222;
 }
 .tag-chips-container{
   display: flex;
+  font-family: 'Pretendard';
+  font-weight: 300;
+  font-size: 14px; 
   gap: 10px;
   padding: 0px 11px;
 }

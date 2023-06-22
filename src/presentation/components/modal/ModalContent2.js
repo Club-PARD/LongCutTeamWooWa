@@ -3,14 +3,15 @@ import React from "react";
 import InputTextArea from "../commons/InputTextArea";
 
 const Header = styled.div`
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.Body1};
+  color: ${props => props.theme.color.blackHigh};
+
   position: sticky;
   top: 0;
   z-index: 1;
-  color: #222222;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 26px;
+  line-height: 160%;
   letter-spacing: 0em;
   text-align: start;
   margin-bottom: 9.93px;
