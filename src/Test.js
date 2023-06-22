@@ -3,9 +3,14 @@ import styled, { ThemeProvider } from "styled-components";
 // import PopUp from "./presentation/components/popup/PopUp";
 // import save_icon from "./assets/img/popup_save.svg";
 // import DateSelector from "./presentation/components/DateSelector";
+<<<<<<< HEAD
 // import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
 import ModalView from "./presentation/components/modal/ModalView";
 import { theme } from './styles/theme';
+=======
+import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
+import ModalSheetBuilder from "./presentation/components/modal";
+>>>>>>> c6d49d50d8cd35bf6a500f59e9f7ec4f0455dead
 
 const TestPage = () => {
     // const tagValue = "태그";
