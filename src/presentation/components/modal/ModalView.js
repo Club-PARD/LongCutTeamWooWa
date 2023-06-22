@@ -3,7 +3,7 @@ import React from "react";
 import SingleScrollView from "../commons/SingleScrollView";
 import ModalContainer from "./ModalContainer";
 import ModalTagSelection from "./ModalTagSelection";
-import Img1 from "../../../assets/img/edit.png";
+import Img1 from "../../../assets/img/edit.svg";
 
 
 const tags = ["협업", "성취감"];
@@ -33,13 +33,10 @@ const DateDiv = styled.div`
   font-weight: ${props => props.theme.fontWeights.regular};
   font-size: ${props => props.theme.fontSizes.Body2};
   color: ${props => props.theme.color.blackHigh};
-
   line-height: 22px;
   display: flex;
   align-items: center;
   text-align: right;
-
-  opacity: 0.3;
 `;
 
 const ImgDiv = styled.div`
@@ -92,12 +89,12 @@ const EditButton = styled.button`
 `;
 
 const Content = styled.div`
-  font-family: Pretendard;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  color: ${props => props.theme.color.blackHigh};
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
   line-height: 22px;
-  color: #222222;
   margin-bottom: 19px;
 `;
 

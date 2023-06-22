@@ -2,13 +2,12 @@ import styled from "styled-components";
 import React from 'react';
 
 const Input = styled.input`
-  font-family: Pretendard;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Header5};
+  color: ${props => props.theme.color.blackHigh};
   font-style: normal;
-  font-weight: 400;
-  font-size: ${props => props.fontSize}px;
   line-height: 38px;
-  color: #222222;
-  opacity: 0.5;
   border: none;
   outline: none;
 `;
