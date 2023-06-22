@@ -5,11 +5,13 @@ import ModalContainer from "./ModalContainer";
 import ModalTagSelection from "./ModalTagSelection";
 import Img1 from "../../../assets/img/edit.png";
 
+
 const tags = ["협업", "성취감"];
 
 const Div1 = styled.div`
   display: flex;
   flex-direction: column;
+
 `;
 
 const ContentDiv = styled.div`
@@ -27,15 +29,15 @@ const DivRow = styled.div`
 `;
 
 const DateDiv = styled.div`
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Body2};
+  
   line-height: 22px;
   display: flex;
   align-items: center;
   text-align: right;
-  color: #222222;
+  color: ${props => props.theme.color.blackHigh};
   opacity: 0.3;
 `;
 
@@ -64,12 +66,12 @@ const EditButton = styled.button`
   padding: 10.8571px;
   gap: 10.86px;
   border-radius: 602.571px;
-  font-family: Pretendard;
-  font-style: normal;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
-  color: #cdcdcd;
+  color: ${props => props.theme.color.primary400};
   background-color: transparent;
   border: none;
   margin-left: auto;
