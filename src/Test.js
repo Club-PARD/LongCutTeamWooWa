@@ -3,15 +3,10 @@ import styled, { ThemeProvider } from "styled-components";
 // import PopUp from "./presentation/components/popup/PopUp";
 // import save_icon from "./assets/img/popup_save.svg";
 // import DateSelector from "./presentation/components/DateSelector";
-<<<<<<< HEAD
-// import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
-import ModalView from "./presentation/components/modal/ModalView";
-import { theme } from './styles/theme';
-=======
 import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
-import ModalSheetBuilder from "./presentation/components/modal";
->>>>>>> c6d49d50d8cd35bf6a500f59e9f7ec4f0455dead
-
+// import ModalView from "./presentation/components/modal/ModalView";
+import { theme } from './styles/theme';
+import ModalWritingContent from "./presentation/components/modal/ModalWritingContent";
 const TestPage = () => {
     // const tagValue = "태그";
     // const titleValue = "경험card - 링크로 기록";
@@ -19,16 +14,16 @@ const TestPage = () => {
     // const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
   
     return (
-    //   <div>
-    //     <ExperienceCardLink 
-    //         tag={tagValue} 
-    //         title={titleValue} 
-    //         summary={summaryValue} 
-    //         imgSrc={IMG}
-    //     />
-    //   </div>
         <ThemeProvider theme={theme}>
-            <ModalView/>
+            {/* <div>
+                <ExperienceCardLink 
+                    tag={tagValue} 
+                    title={titleValue} 
+                    summary={summaryValue} 
+                    imgSrc={IMG}
+                />
+          </div> */}
+          <ModalWritingContent/>
         </ThemeProvider>
     );
 }
