@@ -1,28 +1,64 @@
 import styled from "styled-components";
 import React from "react";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 const BtnText = styled.div`
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-weight: ${props => props.theme.fontWeights.semibold};
-  font-size: ${props => props.theme.fontSizes.Body2};
-  color: ${props => props.theme.color.surface};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-size: ${(props) => props.theme.fontSizes.Body2};
+  color: ${(props) => props.theme.color.surface};
   line-height: 22px;
   flex: column;
   text-align: center;
 `;
 
-
 const BtnDiv = styled.button`
   padding: 4px 12px;
-  background: ${props => props.theme.color.primary300};
-  border: 1px solid #CDCDCD;
+  background: ${(props) => props.theme.color.primary300};
+  border: 1px solid #cdcdcd;
   border-radius: 100px;
 `;
 
-function SubmitBtn({ buttonText, onClick }) {
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+function SubmitBtn({ buttonText }) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (_event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
-    <BtnDiv className="action-button" onClick={onClick}>
-      <BtnText>{buttonText}</BtnText>
-    </BtnDiv>
+    <>
+      <BtnDiv onClick={handleClick}>
+        <BtnText>{buttonText}</BtnText>
+      </BtnDiv>
+      {buttonText === "기록하기" && (
+        <Stack spacing={2} sx={{ width: "100%" }}>
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              기록이 완료되었습니다.
+            </Alert>
+          </Snackbar>
+        </Stack>
+      )}
+    </>
   );
 }
 
