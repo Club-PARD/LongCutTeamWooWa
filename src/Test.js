@@ -12,11 +12,6 @@ import DisquiteCrawlerForm from "./service/disquite_api_form";
 
 
 const TestPage = () => {
-    // const tagValue = "태그";
-    // const titleValue = "경험card - 링크로 기록";
-    // const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.";
-    // const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
-  
     return (
         <ThemeProvider theme={theme}>
             <ModalSheetBuilder modalType={"add-free"} />

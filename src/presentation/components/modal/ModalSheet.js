@@ -46,7 +46,6 @@ const ModalSheet = ({modalType}) => {
     try {
       const documentData = { ...dataInput }; // Make a copy of dataInput if necessary
       const collection = 'post'; // Replace with your actual collection name
-      console.log("clicked");
       const docId = await FirebaseService.createDocument(collection, documentData);
       console.log('Document created with ID:', docId);
     } catch (error) {

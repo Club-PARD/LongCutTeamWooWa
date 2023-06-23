@@ -27,12 +27,16 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function SubmitBtn({onSubmit, buttonText }) {
   const [open, setOpen] = React.useState(false);
+  const [isBusy, setIsBusy] = React.useState(false);
 
   const handleClick = async () => {
+    if(isBusy) return;
+
+    setIsBusy(true);
     console.log("hi");
     await onSubmit();
     setOpen(true);
-    
+    setIsBusy(false);
   };
 
   const handleClose = (_event, reason) => {
@@ -45,7 +49,7 @@ function SubmitBtn({onSubmit, buttonText }) {
 
   return (
     <>
-      <BtnDiv onClick={handleClick}>
+      <BtnDiv onClick={!isBusy ? handleClick : () => {}}>
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
       {buttonText === "기록하기" && (
