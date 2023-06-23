@@ -42,9 +42,16 @@ const ModalSheet = ({modalType}) => {
   }
 
   // Function to handle button click and collect the input data
-  const handleSubmitBtnClick = () => {
-    // Access the collected input data from the state (inputData)
-    console.log(dataInput);
+  const handleSubmitBtnClick = async () => {
+    try {
+      const documentData = { ...dataInput }; // Make a copy of dataInput if necessary
+      const collection = 'yourCollection'; // Replace with your actual collection name
+  
+      const docId = await FirebaseService.createDocument(collection, documentData);
+      console.log('Document created with ID:', docId);
+    } catch (error) {
+      console.error('Error creating document:', error);
+    }
   };
 
   const modalTypeInfo = {
