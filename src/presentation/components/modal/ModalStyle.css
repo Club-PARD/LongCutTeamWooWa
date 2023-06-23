@@ -37,12 +37,22 @@
   border: none;
   cursor: pointer;
 }
-button:hover {
+.add-button:hover {
   background-color: #CDCDCD;
   border: 1px solid #CDCDCD;
   border-radius: 100px;
 }
-button:focus {
+.add-button:focus {
+  background-color: #CDCDCD;
+  border: 1px solid #CDCDCD;
+  border-radius: 100px;
+}
+.action-button:hover {
+  background-color: #CDCDCD;
+  border: 1px solid #CDCDCD;
+  border-radius: 100px;
+}
+.action-button:focus {
   background-color: #CDCDCD;
   border: 1px solid #CDCDCD;
   border-radius: 100px;

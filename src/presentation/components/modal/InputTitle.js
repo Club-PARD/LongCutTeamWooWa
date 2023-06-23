@@ -4,6 +4,7 @@ import img1 from "../../../assets/img/이미지.png";
 import img2 from "../../../assets/img/템플릿.png";
 import InputTextField from "../commons/InputTextField";
 import React from "react";
+import { UseDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
 const ImgDiv = styled.div`
   display: flex;
@@ -42,9 +43,13 @@ const TextDiv = styled.div`
 `;
 
 function InputTitle() {
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
+  };
   return (
     <Div>
-      <InputTextField placeholder="제목 입력" fontsize={24}/>
+      <InputTextField onChange={(value) => handleInputChange("title", value)} placeholder="제목 입력" fontsize={24}/>
       <div style={{display: "flex", gap: "10px"}}>
       <ImgDiv>
         <Img1 src={img1} />

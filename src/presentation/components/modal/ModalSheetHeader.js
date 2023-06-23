@@ -39,7 +39,7 @@ const PopUpContainer = styled.div`
   z-index: 9999;
 `;
 
-function ModalHeader({ title }) {
+function ModalHeader({ title, onExpandClick, onCloseClick }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
