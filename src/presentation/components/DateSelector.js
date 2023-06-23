@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { DatePicker } from "@gsebdev/react-simple-datepicker";
+import { useUpdateDataInput } from "../../service/providers/data_input_provider";
+
 
 const Container = styled.div`
   display: flex;
@@ -23,11 +25,18 @@ const Text = styled.p`
 const DateContainer = styled.div`
 `;
 
-function DateSelector({ onChange }) {
+function DateSelector() {
+
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
+  };
+  
   const onChangeCallback = (event) => {
     const { value } = event.target;
-    onChange(value);
+    handleInputChange("date", value);
   };
+
   const currentDate = new Date(); // 현재 날짜 정보 가져오기
   const currentDateString = currentDate.toLocaleDateString(); // 현재 날짜를 문자열로 변환
 

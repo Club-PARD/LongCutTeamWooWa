@@ -2,9 +2,14 @@ import ModalTag from "./ModalTag";
 import { FiPlus } from 'react-icons/fi';
 import "./ModalStyle.css";
 import React, { useState } from "react";
+import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
-const ModalTagSelection = ({ title, modalTagList, width, hasButton, onChange }) => {
+const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
   const [selectedTags, setSelectedTags] = useState([]);
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
+  };
 
   const handleTagClick = (tag) => {
     const isTagSelected = selectedTags.includes(tag);
@@ -17,7 +22,7 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton, onChange }) 
     }
   
     setSelectedTags(updatedTags);
-    onChange(updatedTags); // Pass the updatedTags directly to the onChange callback
+    handleInputChange("selected-tags", updatedTags);
   };
 
   const handleAddButtonClick = () => {

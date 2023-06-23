@@ -1,5 +1,5 @@
 import "./ModalLayout.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Divider, DashedDivider } from "../commons/Divider";
 import ModalHeader from "./ModalSheetHeader";
@@ -11,6 +11,8 @@ import SubmitBtn from "../buttons/SubmitBtn";
 import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
+import {useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
+
 
 const tags = [
   "도전정신",
@@ -27,36 +29,32 @@ const tags = [
 ];
 
 const ModalSheet = ({modalType}) => {
-  const [inputData, setInputData] = useState({}); // State to store input data
   const [expanded, setExpanded] = useState(false);
+
+  const dataInput = useDataInput();
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
-}
+  }
 
-const onCloseClick = () => {
+  const onCloseClick = () => {
 
-}
-// Function to handle input changes and update the state
-const handleInputChange = (name, value) => {
-setInputData((prevData) => ({
-  ...prevData,
-  [name]: value
-}));
-};
-// Function to handle button click and collect the input data
-const handleButtonClick = () => {
-  // Access the collected input data from the state (inputData)
-  console.log(inputData);
-};
+  }
+
+  // Function to handle button click and collect the input data
+  const handleSubmitBtnClick = () => {
+    // Access the collected input data from the state (inputData)
+    console.log(dataInput);
+  };
 
   const modalTypeInfo = {
     "add-link" : {
         "title" : "링크 추가하기",
         "hasTitleInput" : false,
-        "children" : <LinkBox onChange={(link) => handleInputChange("link", link)}/>,
+        "children" : <LinkBox/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleButtonClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
     },
     "add-free" : {
         "title" : "경험 작성하기",
@@ -64,22 +62,22 @@ const handleButtonClick = () => {
         "children" : <ModalWritingContent/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleButtonClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
     },
     "add-template" : {
         "title" : "경험 작성하기",
         "hasTitleInput" : true,
-        "children" : <ModalTemplateContent onChange={(content) => handleInputChange("template", content)}/>,
+        "children" : <ModalTemplateContent/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleButtonClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
     },
     "post" : {
         "title" : "경험 제목",
         "hasTitleInput" : false,
         "hasDatePicker" : false,
         "hasTagSelection" : false,
-        "Button" : <SubmitBtn buttonText={"수정하기"} onClick={handleButtonClick}/>
+        "Button" : <SubmitBtn buttonText={"수정하기"} onClick={handleSubmitBtnClick}/>
     },
   }
   
@@ -96,7 +94,7 @@ const handleButtonClick = () => {
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
         <>
-          <InputTitle onChange={(title) => handleInputChange("titleInput", title)} />
+          <InputTitle />
           <VerticalSpacing height={13.9} />
         </>
       ) : (
@@ -107,7 +105,7 @@ const handleButtonClick = () => {
         <>
           <Divider />
           <VerticalSpacing height={14} />
-          <DateSelector onChange={(date) => handleInputChange("dateInput", date)} />
+          <DateSelector />
           <VerticalSpacing height={14} />
         </>
       ) : (
@@ -121,7 +119,6 @@ const handleButtonClick = () => {
             title={"태그 입력"}
             hasButton={true}
             modalTagList={tags}
-            onChange={(selectedTags) => handleInputChange("tagSelection", selectedTags)}
           />
           <VerticalSpacing height={14} />
           <Divider />
