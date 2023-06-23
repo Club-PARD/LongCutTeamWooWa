@@ -25,11 +25,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function SubmitBtn({ buttonText }) {
+function SubmitBtn({onSubmit, buttonText }) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    console.log("hi");
+    await onSubmit();
     setOpen(true);
+    
   };
 
   const handleClose = (_event, reason) => {
