@@ -19,7 +19,7 @@ const TestPage = () => {
   
     return (
         <ThemeProvider theme={theme}>
-            <ModalSheetBuilder modalType={"add-template"} />
+            <ModalSheetBuilder modalType={"add-free"} />
         </ThemeProvider>
         // <DisquiteCrawlerForm/>
     );

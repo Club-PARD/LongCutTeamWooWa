@@ -12,7 +12,7 @@ import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
 import {useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
-
+import FirebaseService from "../../../service/firebase/FirebaseService";
 
 const tags = [
   "도전정신",
@@ -45,8 +45,8 @@ const ModalSheet = ({modalType}) => {
   const handleSubmitBtnClick = async () => {
     try {
       const documentData = { ...dataInput }; // Make a copy of dataInput if necessary
-      const collection = 'yourCollection'; // Replace with your actual collection name
-  
+      const collection = 'post'; // Replace with your actual collection name
+      console.log("clicked");
       const docId = await FirebaseService.createDocument(collection, documentData);
       console.log('Document created with ID:', docId);
     } catch (error) {
@@ -61,7 +61,7 @@ const ModalSheet = ({modalType}) => {
         "children" : <LinkBox/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
     },
     "add-free" : {
         "title" : "경험 작성하기",
@@ -69,7 +69,7 @@ const ModalSheet = ({modalType}) => {
         "children" : <ModalWritingContent/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
     },
     "add-template" : {
         "title" : "경험 작성하기",
@@ -77,14 +77,14 @@ const ModalSheet = ({modalType}) => {
         "children" : <ModalTemplateContent/>,
         "hasDatePicker" : true,
         "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onClick={handleSubmitBtnClick}/>
+        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
     },
     "post" : {
         "title" : "경험 제목",
         "hasTitleInput" : false,
         "hasDatePicker" : false,
         "hasTagSelection" : false,
-        "Button" : <SubmitBtn buttonText={"수정하기"} onClick={handleSubmitBtnClick}/>
+        "Button" : <SubmitBtn buttonText={"수정하기"} onSubmit={handleSubmitBtnClick}/>
     },
   }
   
