@@ -19,7 +19,7 @@ const TestPage = () => {
   
     return (
         <ThemeProvider theme={theme}>
-            <ModalSheetBuilder modalType={"post"} />
+            <ModalSheetBuilder modalType={"add-link"} />
         </ThemeProvider>
     );
 }
