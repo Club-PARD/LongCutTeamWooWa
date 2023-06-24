@@ -58,7 +58,9 @@ function SubmitBtn({onSubmit, buttonText }) {
             <Alert
               onClose={handleClose}
               severity="success"
-              sx={{ width: "100%" }}
+              sx={{ width: "100%",
+                    backgroundColor: "#7AAA8F", }}
+              
             >
               기록이 완료되었습니다.
             </Alert>
@@ -70,3 +72,4 @@ function SubmitBtn({onSubmit, buttonText }) {
 }
 
 export default SubmitBtn;
+
