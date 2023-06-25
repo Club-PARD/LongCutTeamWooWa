@@ -45,6 +45,9 @@ function ModalHeader({ title, onExpandClick, isExpanded }) {
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+  };
 
   return (
     <ModalHeaderContainer>
@@ -61,7 +64,7 @@ function ModalHeader({ title, onExpandClick, isExpanded }) {
       />
       {isPopupOpen && (
         <PopUpContainer>
-          <PopUpBuilder id={1} />
+          <PopUpBuilder id={1} close={handlePopupClose} />
         </PopUpContainer>
       )}
     </ModalHeaderContainer>
@@ -69,3 +72,4 @@ function ModalHeader({ title, onExpandClick, isExpanded }) {
 }
 
 export default ModalHeader;
+

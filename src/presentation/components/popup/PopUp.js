@@ -53,7 +53,8 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, onClick, id }) {
+function PopUp({ imgSrc, text1, text2, id, close}) {
+
   return (
     <PopUpContainer>
       <img src={imgSrc} alt="PopUp-Icon" />
@@ -64,12 +65,12 @@ function PopUp({ imgSrc, text1, text2, onClick, id }) {
       </TextContainer>
       {id === 1 ? (
         <BtnCantainer>
-          <CancelBtn buttonText="취소" onClick={onClick} />
+          <CancelBtn buttonText="취소" onClick={close} />
           <Space />
-          <SubmitBtn buttonText="나가기" onClick={onClick} />
+          <SubmitBtn buttonText="나가기" />
         </BtnCantainer>
       ) : (
-        <SubmitBtn buttonText="확인" onClick={onClick} />
+        <SubmitBtn buttonText="확인" />
       )}
     </PopUpContainer>
   );
