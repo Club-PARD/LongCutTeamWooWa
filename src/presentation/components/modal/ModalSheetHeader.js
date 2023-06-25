@@ -34,11 +34,13 @@ const ModalCloseIcon = styled.img`
 `;
 
 const PopUpContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 9999;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 `;
+
 
 function ModalHeader({ title, onExpandClick, isExpanded }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
