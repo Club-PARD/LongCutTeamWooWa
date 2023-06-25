@@ -4,13 +4,14 @@ import styled from "styled-components";
 import IconButton from "../buttons/IconBtn";
 import CloseIcon from "../../../assets/img/close_icon.svg";
 import ExpandIcon from "../../../assets/img/expand_icon.svg";
+import ReductionIcon from "../../../assets/img/reduction.svg";
 import PopUpBuilder from "../popup/PopUpBuilder";
 
 const ModalHeaderContainer = styled.div`
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-weight: ${props => props.theme.fontWeights.bold};
-  font-size: ${props => props.theme.fontSizes.Body1};
-  color: ${props => props.theme.color.blackHigh};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  font-size: ${(props) => props.theme.fontSizes.Body1};
+  color: ${(props) => props.theme.color.blackHigh};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,16 +40,25 @@ const PopUpContainer = styled.div`
   z-index: 9999;
 `;
 
-function ModalHeader({ title, onExpandClick, onCloseClick }) {
+function ModalHeader({ title, onExpandClick, isExpanded }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
+
   return (
     <ModalHeaderContainer>
-      <IconButton iconImage={ExpandIcon} size={"24px"} />
+      <IconButton
+        iconImage={isExpanded ? ReductionIcon : ExpandIcon}
+        size={"24px"}
+        onClick={onExpandClick}
+      />
       <ModalHeaderContainer>{title}</ModalHeaderContainer>
-      <IconButton iconImage={CloseIcon} size={"24px"} onClick={handlePopupOpen} />
+      <IconButton
+        iconImage={CloseIcon}
+        size={"24px"}
+        onClick={handlePopupOpen}
+      />
       {isPopupOpen && (
         <PopUpContainer>
           <PopUpBuilder id={1} />

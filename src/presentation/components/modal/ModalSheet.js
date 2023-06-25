@@ -11,7 +11,10 @@ import SubmitBtn from "../buttons/SubmitBtn";
 import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
-import {useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import {
+  useDataInput,
+  useUpdateDataInput,
+} from "../../../service/providers/data_input_provider";
 import FirebaseService from "../../../service/firebase/FirebaseService";
 
 const tags = [
@@ -25,77 +28,89 @@ const tags = [
   "리더십",
   "커뮤니케이션",
   "신체적",
-  "정서적"
+  "정서적",
 ];
 
-const ModalSheet = ({modalType}) => {
+const ModalSheet = ({ modalType }) => {
   const [expanded, setExpanded] = useState(false);
 
   const dataInput = useDataInput();
-  
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  }
+  };
 
-  const onCloseClick = () => {
-
-  }
+  const onCloseClick = () => {};
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
       const documentData = { ...dataInput }; // Make a copy of dataInput if necessary
-      const collection = 'post'; // Replace with your actual collection name
-      const docId = await FirebaseService.createDocument(collection, documentData);
-      console.log('Document created with ID:', docId);
+      const collection = "post"; // Replace with your actual collection name
+      const docId = await FirebaseService.createDocument(
+        collection,
+        documentData
+      );
+      console.log("Document created with ID:", docId);
     } catch (error) {
-      console.error('Error creating document:', error);
+      console.error("Error creating document:", error);
     }
   };
 
   const modalTypeInfo = {
-    "add-link" : {
-        "title" : "링크 추가하기",
-        "hasTitleInput" : false,
-        "children" : <LinkBox/>,
-        "hasDatePicker" : true,
-        "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
+    "add-link": {
+      title: "링크 추가하기",
+      hasTitleInput: false,
+      children: <LinkBox />,
+      hasDatePicker: true,
+      hasTagSelection: true,
+      Button: (
+        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+      ),
     },
-    "add-free" : {
-        "title" : "경험 작성하기",
-        "hasTitleInput" : true,
-        "children" : <ModalWritingContent/>,
-        "hasDatePicker" : true,
-        "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
+    "add-free": {
+      title: "경험 작성하기",
+      hasTitleInput: true,
+      children: <ModalWritingContent />,
+      hasDatePicker: true,
+      hasTagSelection: true,
+      Button: (
+        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+      ),
     },
-    "add-template" : {
-        "title" : "경험 작성하기",
-        "hasTitleInput" : true,
-        "children" : <ModalTemplateContent/>,
-        "hasDatePicker" : true,
-        "hasTagSelection" : true,
-        "Button" : <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick}/>
+    "add-template": {
+      title: "경험 작성하기",
+      hasTitleInput: true,
+      children: <ModalTemplateContent />,
+      hasDatePicker: true,
+      hasTagSelection: true,
+      Button: (
+        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+      ),
     },
-    "post" : {
-        "title" : "경험 제목",
-        "hasTitleInput" : false,
-        "hasDatePicker" : false,
-        "hasTagSelection" : false,
-        "Button" : <SubmitBtn buttonText={"수정하기"} onSubmit={handleSubmitBtnClick}/>
+    post: {
+      title: "경험 제목",
+      hasTitleInput: false,
+      hasDatePicker: false,
+      hasTagSelection: false,
+      Button: (
+        <SubmitBtn buttonText={"수정하기"} onSubmit={handleSubmitBtnClick} />
+      ),
     },
-  }
-  
+  };
+
   const data = modalTypeInfo[modalType];
-    if(data === null) return <></>
+  if (data === null) return <></>;
 
   return (
     <div
       className="modal-sheet"
-      style={{ "--sheet-size": expanded ? "100%" : "500px", "--max-width": "60%" }}
+      style={{
+        "--sheet-size": expanded ? "100%" : "500px",
+        "--max-width": "60%",
+      }}
     >
-      <ModalHeader title={data["title"]} onExpandClick={handleExpandClick} onCloseClick={onCloseClick} />
+      <ModalHeader title={data["title"]} onExpandClick={handleExpandClick} isExpanded={expanded} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
@@ -135,9 +150,7 @@ const ModalSheet = ({modalType}) => {
       {data["Button"] != null ? (
         <>
           <VerticalSpacing height={26.5} />
-          <div className="button-layout">
-            {data["Button"]}         
-          </div>
+          <div className="button-layout">{data["Button"]}</div>
         </>
       ) : (
         <></>
