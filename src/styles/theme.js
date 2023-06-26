@@ -23,7 +23,7 @@ export const theme = {
   },
   fontFamily: {
     mainfont: 'Pretendard',
-    
+    mont : 'Mont',
   },
   color: {
     primary050: '#e1faf2',

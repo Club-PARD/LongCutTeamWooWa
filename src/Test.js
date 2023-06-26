@@ -9,13 +9,14 @@ import { theme } from './styles/theme';
 // import ModalView from "./presentation/components/modal/ModalView";
 // import ModalSheetBuilder from "./presentation/components/modal";
 // import Hompage from "./presentation/pages/HomePage"
-import Header from "./presentation/components/header/Header";
+// import Header from "./presentation/components/header/Header";
+import GlobalNavBar from "./presentation/components/Nav/GlobalNavBar";
 
 const TestPage = () => {
     return (
         <ThemeProvider theme={theme}>
             {/* <ModalSheetBuilder modalType={"add-free"} /> */}
-            <Header/>
+            <GlobalNavBar/>
             {/* <DateSelector/> */}
             {/* <Hompage/> */}
         </ThemeProvider>
