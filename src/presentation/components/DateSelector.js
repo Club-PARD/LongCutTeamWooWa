@@ -17,12 +17,18 @@ const Container = styled.div`
 
 const Text = styled.p`
   font-family: ${props => props.theme.fontFamily.mainfont};
-  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-weight: ${props => props.theme.fontWeights.regular};
   font-size: ${props => props.theme.fontSizes.Body2};
   color: ${props => props.theme.color.blackHigh};
+  padding-right : 20px;   
 `;
 
-const DateContainer = styled.div`
+
+const CustomDatePicker = styled(DatePicker)`
+  /* 스타일 속성을 여기에 추가 */
+  /* 예시: 배경색과 테두리 스타일 지정 */
+  background-color: yellow;
+  border: 1px solid #000000;
 `;
 
 function DateSelector() {
@@ -41,9 +47,9 @@ function DateSelector() {
   const currentDateString = currentDate.toLocaleDateString(); // 현재 날짜를 문자열로 변환
 
   return (
-    <Container style={{flexWrap: "wrap"}}>
+    <Container style={{ flexWrap: "wrap" }}>
       <Text>날짜입력</Text>
-      <DatePicker
+      <CustomDatePicker
         id="datepicker-id"
         name="date-demo"
         onChange={onChangeCallback}
@@ -53,5 +59,6 @@ function DateSelector() {
     </Container>
   );
 }
+
 
 export default DateSelector;

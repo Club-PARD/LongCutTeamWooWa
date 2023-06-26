@@ -13,11 +13,13 @@ export const theme = {
     Subtitle2: '14px',
     Body1: '16px',
     Body2: '14px',
+
   },
   fontWeights: {
     regular: 300,
     semibold: 600,
     bold: 700,
+    heavy : 900,
   },
   fontFamily: {
     mainfont: 'Pretendard',
