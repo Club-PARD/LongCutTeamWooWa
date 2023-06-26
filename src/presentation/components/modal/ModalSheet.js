@@ -18,17 +18,16 @@ import {
 import FirebaseService from "../../../service/firebase/FirebaseService";
 
 const tags = [
-  "도전정신",
-  "성취감",
-  "동기부여",
-  "학습",
-  "자기존중",
-  "문제 해결 능력",
-  "협업",
-  "리더십",
-  "커뮤니케이션",
-  "신체적",
-  "정서적",
+  { tagName: "도전정신", color: "#4386F7" },
+  { tagName: "성취감", color: "#90BC77" },
+  { tagName: "동기부여", color: "#ED735D" },
+  { tagName: "학습", color: "#8560F6" },
+  { tagName: "자기존중", color: "#ED735D" },
+  { tagName: "문제 해결 능력", color: "#4386F7" },
+  { tagName: "협업", color: "#ED735D" },
+  { tagName: "리더십", color: "#8560F6" },
+  { tagName: "커뮤니케이션", color: "#90BC77" },
+  { tagName: "신체적", color: "#8560F6" },
 ];
 
 const ModalSheet = ({ modalType }) => {
@@ -110,7 +109,11 @@ const ModalSheet = ({ modalType }) => {
         "--max-width": "60%",
       }}
     >
-      <ModalHeader title={data["title"]} onExpandClick={handleExpandClick} isExpanded={expanded} />
+      <ModalHeader
+        title={data["title"]}
+        onExpandClick={handleExpandClick}
+        isExpanded={expanded}
+      />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (

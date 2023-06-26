@@ -1,5 +1,5 @@
 import ModalTag from "./ModalTag";
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus } from "react-icons/fi";
 import "./ModalStyle.css";
 import React, { useState } from "react";
 import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
@@ -14,13 +14,13 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
   const handleTagClick = (tag) => {
     const isTagSelected = selectedTags.includes(tag);
     let updatedTags;
-  
+
     if (isTagSelected) {
       updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
     } else {
       updatedTags = [...selectedTags, tag];
     }
-  
+
     setSelectedTags(updatedTags);
     handleInputChange("selected-tags", updatedTags);
   };
@@ -33,19 +33,19 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
 
   return (
     <div className="tag-chips-container">
-      {title != null ? (
-        <div className="chip-title">{title}</div>
-      ) : (
-        <></>
-      )}
-      <div className="tag-chips" style={{ width: width != null ? `${width}px` : "100%" }}>
+      {title != null ? <div className="chip-title">{title}</div> : <></>}
+      <div
+        className="tag-chips"
+        style={{ width: width != null ? `${width}px` : "100%" }}
+      >
         {modalTagList.map((tag, index) => (
           <ModalTag
             key={index}
-            text={tag}
+            tag={tag}
+           
             isSelected={selectedTags.includes(tag)}
             onClick={() => {
-                handleTagClick(tag)
+              handleTagClick(tag);
             }}
           />
         ))}
@@ -59,6 +59,6 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
       </div>
     </div>
   );
-}
+};
 
 export default ModalTagSelection;
