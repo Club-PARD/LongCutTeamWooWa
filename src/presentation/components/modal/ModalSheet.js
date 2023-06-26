@@ -141,7 +141,7 @@ const ModalSheet = ({ modalType }) => {
           <VerticalSpacing height={14} />
           <ModalTagSelection
             title={"태그 입력"}
-            hasButton={true}
+            hasButton={false}
             modalTagList={tags}
           />
           <VerticalSpacing height={14} />
