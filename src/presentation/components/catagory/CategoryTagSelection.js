@@ -15,13 +15,14 @@ const TagDiv = styled.div`
 `;
 
 const BarDiv = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   flex-shrink: 0;
   margin-top: 100px;
   margin-left: 77px;
   align-items: flex-start;
 `;
+
 
 const TitleDiv = styled.div`
   color: var(--black-high, #272727);
@@ -33,8 +34,16 @@ const TitleDiv = styled.div`
   margin-bottom: 29px;
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  margin-bottom: 10px;
+`;
+
 const CategoryTagSelection = ({ title, categoryTagList, width }) => {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [isTagClicked, setIsTagClicked] = useState(false);
   const updateDataInput = useUpdateDataInput();
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
@@ -52,11 +61,13 @@ const CategoryTagSelection = ({ title, categoryTagList, width }) => {
 
     setSelectedTags(updatedTags);
     handleInputChange("selected-tags", updatedTags);
+    setIsTagClicked(true);
   };
 
   return (
     <BarDiv>
-      {title != null ? <TitleDiv>{title}</TitleDiv> : <></>}
+      {title != null ? <TitleDiv>{title}</TitleDiv> : null}
+      {isTagClicked ? <Divider /> : null}
       <TagDiv>
         {categoryTagList.map((tag, index) => (
           <CategoryTag
