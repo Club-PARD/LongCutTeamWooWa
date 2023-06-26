@@ -3,7 +3,6 @@ import { Divider } from "../commons/Divider";
 import VerticalSpacing from "../commons/VerticalSpacing";
 import CategoryTagSelection from "./CategoryTagSelection";
 
-
 const tags = [
   { tagName: "도전정신", color: "#4386F7" },
   { tagName: "성취감", color: "#F0935F" },
@@ -20,12 +19,7 @@ const tags = [
 const CategoryBar = () => {
   return (
     <div>
-      <VerticalSpacing height={25} />
-      <Divider />
-      <VerticalSpacing height={14} />
       <CategoryTagSelection title={"Category"} categoryTagList={tags} />
-      <VerticalSpacing height={14} />
-      <Divider />
     </div>
   );
 };

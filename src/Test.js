@@ -11,12 +11,13 @@ import { theme } from './styles/theme';
 // import Hompage from "./presentation/pages/HomePage"
 // import Header from "./presentation/components/header/Header";
 import GlobalNavBar from "./presentation/components/Nav/GlobalNavBar";
+import CategoryBuilder from "./presentation/components/catagory";
 
 const TestPage = () => {
     return (
         <ThemeProvider theme={theme}>
             {/* <ModalSheetBuilder modalType={"add-free"} /> */}
-            <GlobalNavBar/>
+            <CategoryBuilder/>
             {/* <DateSelector/> */}
             {/* <Hompage/> */}
         </ThemeProvider>

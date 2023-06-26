@@ -2,6 +2,36 @@ import CategoryTag from "./CategoryTag";
 import "../modal/ModalStyle.css";
 import React, { useState } from "react";
 import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import { styled } from "styled-components";
+
+const TagDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  align-items: flex-start;
+  & > * + * {
+    margin-top: 10px;
+  }
+`;
+
+const BarDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-top: 100px;
+  margin-left: 77px;
+  align-items: flex-start;
+`;
+
+const TitleDiv = styled.div`
+  color: var(--black-high, #272727);
+  text-align: center;
+  font-size: ${(props) => props.theme.fontSizes.Body1};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  line-height: 160%;
+  margin-bottom: 29px;
+`;
 
 const CategoryTagSelection = ({ title, categoryTagList, width }) => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -25,12 +55,9 @@ const CategoryTagSelection = ({ title, categoryTagList, width }) => {
   };
 
   return (
-    <div className="tag-chips-container">
-      {title != null ? <div className="chip-title">{title}</div> : <></>}
-      <div
-        className="tag-chips"
-        style={{ width: width != null ? `${width}px` : "100%" }}
-      >
+    <BarDiv>
+      {title != null ? <TitleDiv>{title}</TitleDiv> : <></>}
+      <TagDiv>
         {categoryTagList.map((tag, index) => (
           <CategoryTag
             key={index}
@@ -40,8 +67,8 @@ const CategoryTagSelection = ({ title, categoryTagList, width }) => {
             }}
           />
         ))}
-      </div>
-    </div>
+      </TagDiv>
+    </BarDiv>
   );
 };
 
