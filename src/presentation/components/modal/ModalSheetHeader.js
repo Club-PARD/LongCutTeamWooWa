@@ -33,8 +33,8 @@ const ModalCloseIcon = styled.img`
   height: 24px;
 `;
 
-const PopUpContainer = styled.div`
-  position: fixed;
+const PopUpContainer = styled.div`;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
