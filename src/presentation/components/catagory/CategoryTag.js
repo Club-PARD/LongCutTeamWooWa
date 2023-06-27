@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 import { LiaCheckSolid } from "react-icons/lia";
 
 const CheckIcon = styled(LiaCheckSolid)`
@@ -24,7 +24,7 @@ const StyledTag = styled.div`
   border-radius: 100px;
 `;
 
-const ModalTag = ({ tag, onClick }) => {
+const CategoryTag = ({ tag, onClick }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -40,4 +40,4 @@ const ModalTag = ({ tag, onClick }) => {
   );
 };
 
-export default ModalTag;
+export default CategoryTag;
