@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useSpring, animated } from 'react-spring';
 
 import styled from 'styled-components';
 import { ReactComponent as TimelineDot } from '../../../assets/img/timeline_dot.svg';
