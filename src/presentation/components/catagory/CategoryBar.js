@@ -1,6 +1,6 @@
 import React from "react";
-import { Divider } from "../commons/Divider";
-import VerticalSpacing from "../commons/VerticalSpacing";
+import HashTagSelection from "./HashTagSelection";
+import { styled } from "styled-components";
 import CategoryTagSelection from "./CategoryTagSelection";
 
 const tags = [
@@ -16,11 +16,24 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
+const hashs = [
+  { hashName: "디스콰이엇", color: "#8560F6" },
+  { hashName: "네이버 블로그", color: "#90BC77" },
+  { hashName: "브런치", color: "#4386F7" },
+];
+
+const Div = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
 const CategoryBar = () => {
   return (
-    <div>
+    <Div>
       <CategoryTagSelection title={"Category"} categoryTagList={tags} />
-    </div>
+      <HashTagSelection hashTagList={hashs} />
+    </Div>
   );
 };
 
