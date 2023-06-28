@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import DateSelector from "../DateSelector";
 import { DataInputProvider } from "../../../service/providers/data_input_provider";
+import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
+import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 
 const HeaderContainer = styled.div`
   padding-top: 100px;
@@ -74,6 +76,63 @@ const Divider = styled.div`
   padding-top: 0px;
 `;
 
+const AddLinkButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  width: 136px;
+  height: 31px;
+  background-color: ${props => props.theme.color.primary300};
+  color: ${props => props.theme.color.surface};
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-size: ${props => props.theme.fontSizes.Subtitle2};
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.color.primary100};
+    color: ${props => props.theme.color.secondary900};
+  }
+`;
+
+const AddLinkIconImg = styled.img`
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+`;
+
+const AddExperience = styled.button`
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  width: 136px;
+  height: 31px;
+  background-color: ${props => props.theme.color.primary300};
+  color: ${props => props.theme.color.surface};
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-size: ${props => props.theme.fontSizes.Subtitle2};
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.color.primary100};
+    color: ${props => props.theme.color.secondary900};
+  }
+`;
+
+const AddExperienceIconImg = styled.img`
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+`;
 
 function Header() {
   const [activeButton, setActiveButton] = useState(1);
@@ -109,8 +168,15 @@ function Header() {
           </Button>
 
           <CustomDivider />
-
           <DateSelector />
+          <AddLinkButton>
+            <AddLinkIconImg src={AddLinkIcon} />
+            링크 추가하기
+          </AddLinkButton>
+          <AddExperience>
+            <AddExperienceIconImg src={AddExperienceIcon} />
+            경험 추가하기
+          </AddExperience>
         </ButtonContainer>
         <Divider />
       </HeaderContainer>
