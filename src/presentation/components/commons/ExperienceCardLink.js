@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 
 const CardBox = styled.div`
-    width: 162px;
-    height: auto;
-  background-color: #ffffff;
-  border-radius: 30px;
+  width: 184px;
+  height: auto;
+  background-color: ${props => props.theme.color.surface};
+  border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   display: flex;
@@ -21,17 +21,19 @@ const Tag = styled.div`
   border-radius: 150px;
   font-size: 14px;
   color: #333333;
+  justify-content: center;
+  align-items: center;
   width : fit-content; 
-  
 `;
 
 
 const TitleText = styled.p`
-  font-size: 18px;
-  font-weight: bold;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.subtitle2};
+  color: ${props => props.theme.color.blackHigh};
   width: 138px;
     height: auto;
-  color: #333333;
     margin-top : 15px ; 
     margin-bottom : 10px; 
 `;

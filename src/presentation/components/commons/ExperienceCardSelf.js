@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 
 const CardBox = styled.div`
-    width: 162px;
-    height: auto;
+  width: 162px;
+  height: auto;
   background-color: #ffffff;
   border-radius: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
