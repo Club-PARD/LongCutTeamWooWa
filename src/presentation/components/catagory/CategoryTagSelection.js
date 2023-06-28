@@ -121,7 +121,6 @@ const TagDiv = styled.div`
 const BarDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-top: 100px;
   margin-left: 77px;
   align-items: flex-start;
 `;
@@ -133,11 +132,11 @@ const TitleDiv = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.bold};
   line-height: 160%;
-  margin-bottom: 29px;
+  margin-bottom: 20px;
 `;
 
 const GearImg = styled.img`
-  width: 20px;
+  width: 16px;
 `;
 
 const EditButton = styled.button`
@@ -148,11 +147,11 @@ const EditButton = styled.button`
   background-color: transparent;
   border: none;
   color: var(--black-medium, #7a7a7a);
-  font-size: ${(props) => props.theme.fontSizes.Body2};
+  font-size: 12px;
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   line-height: 160%;
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const CategoryTagSelection = ({ title, categoryTagList, width }) => {
@@ -192,7 +191,7 @@ const CategoryTagSelection = ({ title, categoryTagList, width }) => {
       </TagDiv>
       <EditButton>
         <GearImg src={gearImg} />
-        &nbsp;&nbsp;카테고리 수정
+        &nbsp;카테고리 수정
       </EditButton>
     </BarDiv>
   );
