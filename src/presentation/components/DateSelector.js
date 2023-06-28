@@ -56,7 +56,7 @@ function DateSelector() {
 
   return (
     <Container style={{ flexWrap: "wrap" }}>
-      <Text>날짜입력</Text>
+      <Text>날짜</Text>
       <CustomDatePicker
         id="datepicker-id"
         name="date-demo"

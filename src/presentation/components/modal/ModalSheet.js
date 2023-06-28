@@ -101,8 +101,8 @@ const ModalSheet = ({ modalType }) => {
     <div
       className="modal-sheet"
       style={{
-        "--sheet-size": expanded ? "100%" : "500px",
-        "--max-width": "60%",
+        "--sheet-size": expanded ? "auto" : "500px",
+        "--max-width": "100%",
       }}
     >
       <ModalHeader
