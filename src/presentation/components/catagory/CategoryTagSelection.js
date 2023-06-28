@@ -121,7 +121,6 @@ const TagDiv = styled.div`
 const BarDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-left: 77px;
   align-items: flex-start;
 `;
 

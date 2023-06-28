@@ -6,8 +6,8 @@ import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 
 const HeaderContainer = styled.div`
-  padding-top: 100px;
-  padding-left: 300px;
+  padding-top: 39px;
+  padding-left: 43px;
 `;
 
 const Timeline = styled.div`

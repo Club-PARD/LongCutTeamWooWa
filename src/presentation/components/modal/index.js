@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import "./ModalLayout.css";
@@ -45,13 +44,6 @@ const ModalWrapper = styled.div`
 export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
   const modalRef = useRef();
 
-  const animation = useSpring({
-    config: {
-      duration: 250,
-    },
-    opacity: showModal ? 1 : 0,
-    transform: showModal ? `translateY(0%)` : `translateY(-100%)`,
-  });
 
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
@@ -80,7 +72,6 @@ export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
     <>
       {showModal ? (
         <Background onClick={closeModal} ref={modalRef}>
-          <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
               <DataInputProvider>
                 <ModalSheet modalType={modalType} />
@@ -90,7 +81,6 @@ export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
                 onClick={() => setShowModal((prev) => !prev)}
               /> */}
             </ModalWrapper>
-          </animated.div>
         </Background>
       ) : null}
     </>

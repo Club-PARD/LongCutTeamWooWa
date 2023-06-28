@@ -15,6 +15,7 @@ const StyledHash = styled.div`
   display: inline-block;
   padding: 4px 12px;
   border-radius: 5px;
+
 `;
 
 const HashTag = ({ hash, onClick }) => {
