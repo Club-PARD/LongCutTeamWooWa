@@ -110,8 +110,8 @@ const AddLinkButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${props => props.theme.color.primary100};
-    color: ${props => props.theme.color.secondary900};
+    background-color: ${props => props.theme.color.primary400};
+    color: ${props => props.theme.color.surface};
   }
 `;
 
@@ -139,8 +139,8 @@ const AddExperience = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${props => props.theme.color.primary300};
-    color: ${props => props.theme.color.secondary900};
+    background-color: ${props => props.theme.color.primary400};
+    color: ${props => props.theme.color.surface};
   }
 `;
 

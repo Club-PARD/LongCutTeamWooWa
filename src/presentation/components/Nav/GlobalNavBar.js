@@ -47,7 +47,8 @@ const SearchExperience = styled.div`
 const SearchIconImg = styled.img`
   width: 16px;
   height: 16px;
-  margin-right: 8px;
+  margin-left : 8px; 
+  margin-right: 10px;
 `;
 
 const SearchInput = styled.input`
