@@ -136,28 +136,23 @@ const TitleDiv = styled.div`
   margin-bottom: 29px;
 `;
 
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: #ccc;
-  margin-bottom: 10px;
+const GearImg = styled.img`
+  width: 20px;
 `;
-
-const GearImg = styled.img``;
 
 const EditButton = styled.button`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: transparent;
   border: none;
   color: var(--black-medium, #7a7a7a);
-  font-size: 10px;
+  font-size: ${(props) => props.theme.fontSizes.Body2};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   line-height: 160%;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-top: 14px;
+  margin-bottom: 14px;
 `;
 
 const CategoryTagSelection = ({ title, categoryTagList, width }) => {

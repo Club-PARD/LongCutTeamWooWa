@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { TestModal } from '../components/modal/TestModal';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { TestModal } from "../components/modal/TestModal";
 
 const Container = styled.div`
   display: flex;
@@ -24,15 +24,18 @@ function FakeHomePage() {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
-    setShowModal(showModal=>!showModal);
+    setShowModal((showModal) => !showModal);
   };
 
   return (
     <>
       <Container>
         <Button onClick={openModal}>I'm a modal</Button>
-        <TestModal showModal={showModal} setShowModal={setShowModal} />
-      
+        <TestModal
+          modalType={"add-free"}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </Container>
     </>
   );
