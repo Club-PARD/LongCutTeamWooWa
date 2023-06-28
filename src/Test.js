@@ -9,7 +9,7 @@ import { theme } from './styles/theme';
 // import ModalView from "./presentation/components/modal/ModalView";
 import ModalSheetBuilder from "./presentation/components/modal";
 import Hompage from "./presentation/pages/HomePage"
-import Timeline from "./presentation/components/timeline";
+import TimeLineFetch from "./presentation/components/timeline";
 
 const TestPage = () => {
     const snapshots = [
@@ -38,7 +38,7 @@ const TestPage = () => {
       ];
     return (
         <ThemeProvider theme={theme}>
-            {/* <Timeline snapshots={snapshots}/> */}
+            <TimeLineFetch/>
             {/* <ModalSheetBuilder modalType={"add-free"} /> */}
             <Hompage/>
         </ThemeProvider>

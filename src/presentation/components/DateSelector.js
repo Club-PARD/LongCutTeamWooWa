@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { DatePicker } from "@gsebdev/react-simple-datepicker";
 import { useUpdateDataInput } from "../../service/providers/data_input_provider";
+import firebase from 'firebase/compat/app';
 
 
 const Container = styled.div`
@@ -40,7 +41,14 @@ function DateSelector() {
   
   const onChangeCallback = (event) => {
     const { value } = event.target;
-    handleInputChange("date", value);
+    const parts = value.split("/"); // Split the date string into day, month, and year parts
+
+    // Create a new Date object using the year, month (subtract 1 because months are zero-based), and day
+    const date = new Date(parts[2], parts[0] - 1, parts[1]);
+
+    // Convert the date to a Firestore-compatible format
+    const firestoreDate = firebase.firestore.Timestamp.fromDate(date);
+    handleInputChange("date", firestoreDate);
   };
 
   const currentDate = new Date(); // 현재 날짜 정보 가져오기

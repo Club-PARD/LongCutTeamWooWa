@@ -16,6 +16,7 @@ import {
   useUpdateDataInput,
 } from "../../../service/providers/data_input_provider";
 import FirebaseService from "../../../service/firebase/FirebaseService";
+import postService from "../../../service/firebase/PostService";
 
 const tags = [
   { tagName: "도전정신", color: "#4386F7" },
@@ -44,12 +45,7 @@ const ModalSheet = ({ modalType }) => {
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
-      const documentData = { ...dataInput }; // Make a copy of dataInput if necessary
-      const collection = "post"; // Replace with your actual collection name
-      const docId = await FirebaseService.createDocument(
-        collection,
-        documentData
-      );
+      const docId = await postService.createPost("tlsgn", dataInput);
       console.log("Document created with ID:", docId);
     } catch (error) {
       console.error("Error creating document:", error);
