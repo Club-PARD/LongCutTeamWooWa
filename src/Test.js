@@ -38,9 +38,9 @@ const TestPage = () => {
       ];
     return (
         <ThemeProvider theme={theme}>
-            <Timeline snapshots={snapshots}/>
+            {/* <Timeline snapshots={snapshots}/> */}
             {/* <ModalSheetBuilder modalType={"add-free"} /> */}
-            {/* <Hompage/> */}
+            <Hompage/>
         </ThemeProvider>
         // <DisquiteCrawlerForm/>
     );
