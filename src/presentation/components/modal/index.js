@@ -1,19 +1,24 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { MdClose } from "react-icons/md";
-import "./ModalLayout.css";
+import {
+  DataInputProvider,
+  useDataInput,
+} from "../../../service/providers/data_input_provider";
 import ModalSheet from "./ModalSheet";
 import ModalView from "./ModalView";
-import { DataInputProvider } from "../../../service/providers/data_input_provider";
+import "./ModalLayout.css";
 
 const Background = styled.div`
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: ${({ isExpanded }) =>
+    isExpanded ? "#fff" : "rgba(0, 0, 0, 0.7)"};
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 0;
+  left: 0;
 `;
 
 const ModalWrapper = styled.div`
@@ -28,62 +33,36 @@ const ModalWrapper = styled.div`
   border-radius: 10px;
   width: fit-content;
   height: fit-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
-// const CloseModalButton = styled(MdClose)`
-//   cursor: pointer;
-//   position: absolute;
-//   top: 20px;
-//   right: 20px;
-//   width: 32px;
-//   height: 32px;
-//   padding: 0;
-//   z-index: 10;
-// `;
+const Div = ({ children }) => {
+  const dataInput = useDataInput();
+
+  return <Background isExpanded={dataInput.isExpanded}>{children}</Background>;
+};
 
 export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
-  const modalRef = useRef();
-
-
-  const closeModal = (e) => {
-    if (modalRef.current === e.target) {
-      setShowModal(false);
-    }
-  };
-
-  const keyPress = useCallback(
-    (e) => {
-      if (e.key === "Escape" && showModal) {
-        setShowModal(false);
-        console.log("I pressed");
-      }
-    },
-    [setShowModal, showModal]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyPress);
-    return () => document.removeEventListener("keydown", keyPress);
-  }, [keyPress]);
+  // const dataInput = useDataInput();
   if (modalType === "post") {
     return <ModalView />;
   }
+
   return (
-    <>
+    <DataInputProvider>
       {showModal ? (
-        <Background onClick={closeModal} ref={modalRef}>
+        <Div
+          children={
             <ModalWrapper showModal={showModal}>
-              <DataInputProvider>
-                <ModalSheet modalType={modalType} />
-              </DataInputProvider>
-              {/* <CloseModalButton
-                aria-label="Close modal"
-                onClick={() => setShowModal((prev) => !prev)}
-              /> */}
+              <ModalSheet modalType={modalType} />
             </ModalWrapper>
-        </Background>
+          }
+        />
       ) : null}
-    </>
+    </DataInputProvider>
   );
 };
 export default ModalSheetBuilder;
