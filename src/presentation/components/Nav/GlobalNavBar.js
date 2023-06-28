@@ -54,7 +54,7 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
-  color: ${props => props.theme.color.surface};
+  color: ${props => props.theme.color.blackHigh};
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-size: ${props => props.theme.fontSizes.Subtitle2};
   font-weight: ${props => props.theme.fontWeights.regular};
