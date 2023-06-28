@@ -13,27 +13,29 @@ const TestBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: gray; 
+  padding : 20px; 
+  margin-bottom : 300px; 
 `
 function HomePage() {
-  
+
   const tagValue = "태그";
   const titleValue = "경험card - 링크로 기록";
   const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.";
   const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
 
   return (
-  
+
     <div>
       <GlobalNavBar />
       <Header />
       {/* <DateRange /> */}
       <CategoryBuilder />
       <TestBox>
-      <ExperienceCardLink 
-            tag={tagValue} 
-            title={titleValue} 
-            summary={summaryValue} 
-            imgSrc={IMG}
+        <ExperienceCardSelf
+          tag={tagValue}
+          title={titleValue}
+          summary={summaryValue}
+          imgSrc={IMG}
         />
       </TestBox>
 

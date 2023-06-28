@@ -30,32 +30,32 @@ const Tag = styled.div`
 const TitleText = styled.p`
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.theme.fontWeights.semibold};
-  font-size: ${props => props.theme.fontSizes.subtitle2};
+  font-size: ${props => props.theme.fontSizes.Subtitle2};
   color: ${props => props.theme.color.blackHigh};
-  width: 138px;
-    height: auto;
-    margin-top : 15px ; 
-    margin-bottom : 10px; 
+  width: 146px;
+  height: auto;
+  margin-top : 15px ; 
+  margin-bottom : 10px; 
 `;
 
 const SummaryText = styled.p`
-    margin-top : 0;
-
-  font-weight: 400;
-font-size: 14px;
-line-height: 160%;
-  color: #666666;
+  font-family: ${props => props.theme.fontFamily.mainfont};
+  font-weight: ${props => props.theme.fontWeights.regular};
+  font-size: ${props => props.theme.fontSizes.Subtitle2};
+  color: ${props => props.theme.color.blackHigh};
+  margin-top : 0;
+  line-height: 160%;
 `;
 
 const LogoBox = styled.div`
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   margin-left: auto;
   margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margina-top : 20px; 
+  margina-top : 26px; 
 `;
 
 const Logo = styled.img`
