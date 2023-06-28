@@ -15,6 +15,7 @@ const GlobalContainer = styled.div`
 `;
 
 const Logo = styled.div`
+  margin-left : 70px; 
   display: flex;
   align-items: center;
 `;

@@ -21,19 +21,35 @@ const Timeline = styled.div`
   outline: none;
 `;
 
+const Container = styled.div`
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  justify-content: space-between;
+`
+
 const ButtonContainer = styled.div`
   display: flex;
-  padding-top: 20px;
+  margin : 0; 
   padding-bottom: 0px;
+`;
+const ButtonContainer2 = styled.div`
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  // padding-top: 20px;
+  padding-bottom: 0px;
+  margin-right :65px; 
 `;
 
 const Button = styled.button`
   margin-right: 10px;
-  padding: 8px 16px;
+  padding: 0px 15px;
   border-radius: 4px;
   background-color: transparent;
-  color: ${props => props.active ? props.theme.color.primary300 : props.theme.color.blackMedium};
+  color: ${props => props.active ? props.theme.color.primary300 : props.theme.color.blackHigh};
+  font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.active ? props.theme.fontWeights.bold : props.theme.fontWeights.normal};
+  font-size: ${props => props.theme.fontSizes.Subtitle2};
   border: none;
   outline: none;
   cursor: pointer;
@@ -80,7 +96,7 @@ const AddLinkButton = styled.button`
   display: flex;
   align-items: center;
   margin-right: 16px;
-  margin-top: 16px;
+  margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
   width: 136px;
@@ -109,7 +125,7 @@ const AddExperience = styled.button`
   display: flex;
   align-items: center;
   margin-right: 16px;
-  margin-top: 16px;
+  margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
   width: 136px;
@@ -123,7 +139,7 @@ const AddExperience = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${props => props.theme.color.primary100};
+    background-color: ${props => props.theme.color.primary300};
     color: ${props => props.theme.color.secondary900};
   }
 `;
@@ -145,39 +161,44 @@ function Header() {
     <DataInputProvider>
       <HeaderContainer>
         <Timeline>Timeline</Timeline>
-        <ButtonContainer>
-          <Button active={activeButton === 1} onClick={() => handleButtonClick(1)}>
-            1주일
-            <ButtonIndicator active={activeButton === 1} />
-          </Button>
-          <Button active={activeButton === 2} onClick={() => handleButtonClick(2)}>
-            7주일
-            <ButtonIndicator active={activeButton === 2} />
-          </Button>
-          <Button active={activeButton === 3} onClick={() => handleButtonClick(3)}>
-            7개월
-            <ButtonIndicator active={activeButton === 3} />
-          </Button>
-          <Button active={activeButton === 4} onClick={() => handleButtonClick(4)}>
-            전체
-            <ButtonIndicator active={activeButton === 4} />
-          </Button>
-          <Button active={activeButton === 5} onClick={() => handleButtonClick(5)}>
-            처음으로
-            <ButtonIndicator active={activeButton === 5} />
-          </Button>
+        <Container>
 
-          <CustomDivider />
-          <DateSelector />
-          <AddLinkButton>
-            <AddLinkIconImg src={AddLinkIcon} />
-            링크 추가하기
-          </AddLinkButton>
-          <AddExperience>
-            <AddExperienceIconImg src={AddExperienceIcon} />
-            경험 추가하기
-          </AddExperience>
-        </ButtonContainer>
+          <ButtonContainer>
+            <Button active={activeButton === 1} onClick={() => handleButtonClick(1)}>
+              일
+              <ButtonIndicator active={activeButton === 1} />
+            </Button>
+            <Button active={activeButton === 2} onClick={() => handleButtonClick(2)}>
+              주
+              <ButtonIndicator active={activeButton === 2} />
+            </Button>
+            <Button active={activeButton === 3} onClick={() => handleButtonClick(3)}>
+              월
+              <ButtonIndicator active={activeButton === 3} />
+            </Button>
+            <Button active={activeButton === 4} onClick={() => handleButtonClick(4)}>
+              년
+              <ButtonIndicator active={activeButton === 4} />
+            </Button>
+            <Button active={activeButton === 5} onClick={() => handleButtonClick(5)}>
+              전체
+              <ButtonIndicator active={activeButton === 5} />
+            </Button>
+
+            <CustomDivider />
+            <DateSelector />
+          </ButtonContainer>
+          <ButtonContainer2>
+            <AddLinkButton>
+              <AddLinkIconImg src={AddLinkIcon} />
+              링크 추가하기
+            </AddLinkButton>
+            <AddExperience>
+              <AddExperienceIconImg src={AddExperienceIcon} />
+              경험 추가하기
+            </AddExperience>
+          </ButtonContainer2>
+        </Container>
         <Divider />
       </HeaderContainer>
     </DataInputProvider>
