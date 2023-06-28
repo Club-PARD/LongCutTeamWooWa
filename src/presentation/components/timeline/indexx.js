@@ -39,6 +39,8 @@ const DotContainer = styled.div`
 `;
 
 const DotTimeWrapper = styled.div`
+
+
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -81,61 +83,45 @@ function formatDate(date) {
 }
 
 const Timeline = () => {
-  const timelineContainerRef = useRef(null);
-
   const [dotWidth, setDotWidth] = useState(0);
   const [activeDots, setActiveDots] = useState([]);
   const dotRefs = useRef([]);
 
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [lastPost, setLastPost] = useState(null);
 
-  
-  async function loadMoreHandle(direction){
+  const fetchPosts = async () => {
     setIsLoading(true);
 
-    const collectionRef = firebase.firestore().collection('posts');
-    let query = collectionRef
-      .where('userId', '==', 'tlsgn')
-      .where('date', '<=', lastPost.data().date)
-      .orderBy('date', 'desc')
-      .startAfter(lastPost);
-    const querySnapshot = await query.limit(10).get();
-    const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-  
-    setPosts((prevPosts) => [...prevPosts, ...fetchedPosts]);
-    setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
-    setIsLoading(false);
+    try {
+      const collectionRef = firebase.firestore().collection('posts');
+      let query = collectionRef.where('userId', '==', 'tlsgn').orderBy('date', 'desc');
 
-  }
-  
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsLoading(true);
-  
-      try {
-        const collectionRef = firebase.firestore().collection('posts');
-        let query = collectionRef.where('userId', '==', 'tlsgn').orderBy('date', 'desc');
-  
-        if (lastPost) {
-          query = query.startAfter(lastPost);
-        }
-        const querySnapshot = await query.limit(10).get();
-        const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-  
-        setPosts(fetchedPosts);
-        setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
+      if (lastPost) {
+        query = query.startAfter(lastPost);
       }
-  
-      setIsLoading(false);
-    };
-    
 
-    fetchPosts();
-  }, []);
+      const querySnapshot = await query.limit(10).get();
+
+      if (querySnapshot.docs.length === 0) {
+        setIsLoading(false);
+        return;
+      }
+
+      const fetchedPosts = querySnapshot.docs.map((doc) => ({
+        docId: doc.id,
+        ...doc.data(),
+      }));
+
+      setPosts((prevPosts) => [...prevPosts, ...fetchedPosts]);
+      setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const calculateDotWidth = () => {
@@ -163,6 +149,7 @@ const Timeline = () => {
       entries.forEach((entry) => {
         const { target, isIntersecting } = entry;
         const dotIndex = dotRefs.current.indexOf(target);
+
         if (isIntersecting) {
           setActiveDots((prevActiveDots) =>
             prevActiveDots.includes(dotIndex) ? prevActiveDots : [...prevActiveDots, dotIndex]
@@ -182,36 +169,35 @@ const Timeline = () => {
     return () => {
       observer.disconnect();
     };
-  }, [posts]);
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <TimelineContainer>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <HorizontalLines lineWidth={dotWidth * posts.length} />
-          {posts.map((post, index) => (
-            <DotContainer key={post.id} dotWidth={dotWidth}>
-              <DotTimeWrapper>
-                <Dot
-                  ref={(ref) => (dotRefs.current[index] = ref)}
-                  className={activeDots.includes(index) ? 'active' : ''}
-                />
-                <Time
-                  isAbove={index % 2 === 0}
-                  className={activeDots.includes(index) ? 'active' : ''}
-                >
-                  {formatDate(post.date.toDate())}
-                </Time>
-              </DotTimeWrapper>
-            </DotContainer>
-          ))}
-          {isLoading && <p>Loading more posts...</p>}
+      {isLoading && <p>Loading...</p>}
+      <HorizontalLines lineWidth={dotWidth * posts.length} />
+      {posts.map((post, index) => (
+        <DotContainer key={post.id} dotWidth={dotWidth}>
+          <DotTimeWrapper>
+            <Dot
+              ref={(ref) => (dotRefs.current[index] = ref)}
+              className={activeDots.includes(index) ? 'active' : ''}
+            />
+            <Time
+              isAbove={index % 2 === 0}
+              className={activeDots.includes(index) ? 'active' : ''}
+            >
+              {formatDate(post.date.toDate())}
+            </Time>
+          </DotTimeWrapper>
+        </DotContainer>
+      ))}
+      {isLoading && <p>Loading more posts...</p>}
       {!isLoading && lastPost && (
-        <button onClick={loadMoreHandle}>Load More</button>
-      )}
-        </>
+        <button onClick={fetchPosts}>Load More</button>
       )}
     </TimelineContainer>
   );
