@@ -6,6 +6,7 @@ import CloseIcon from "../../../assets/img/close_icon.svg";
 import ExpandIcon from "../../../assets/img/expand_icon.svg";
 import ReductionIcon from "../../../assets/img/reduction.svg";
 import PopUpBuilder from "../popup/PopUpBuilder";
+import { useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
 const ModalHeaderContainer = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -42,7 +43,7 @@ const PopUpContainer = styled.div`;
 `;
 
 
-function ModalHeader({ title, onExpandClick, isExpanded }) {
+function ModalHeader({ title }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -50,13 +51,21 @@ function ModalHeader({ title, onExpandClick, isExpanded }) {
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
+  };
+  const dataInput = useDataInput();
 
   return (
     <ModalHeaderContainer>
       <IconButton
-        iconImage={isExpanded ? ReductionIcon : ExpandIcon}
+        iconImage={dataInput.isExpanded ? ReductionIcon : ExpandIcon}
         size={"24px"}
-        onClick={onExpandClick}
+        onClick={() => {
+          const isExpanded = dataInput.isExpanded;
+          handleInputChange("isExpanded", !isExpanded);
+        }}
       />
       <ModalHeaderContainer>{title}</ModalHeaderContainer>
       <IconButton
