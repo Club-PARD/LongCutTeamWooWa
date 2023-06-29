@@ -5,6 +5,7 @@ import { DataInputProvider } from "../../../service/providers/data_input_provide
 import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 import ModalSheetBuilder from "../modal";
+import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 
 const HeaderContainer = styled.div`
   padding-top: 100px;
@@ -64,9 +65,9 @@ const Button = styled.button`
 
   &:hover {
     color: ${(props) =>
-      props.active
-        ? props.theme.color.primary300
-        : props.theme.color.primary300};
+    props.active
+      ? props.theme.color.primary300
+      : props.theme.color.primary300};
   }
 `;
 
@@ -155,13 +156,37 @@ const AddExperienceIconImg = styled.img`
   height: 12px;
   margin-right: 8px;
 `;
+const periodOption = {
+  "day": {
+    "displayName": "일",
+    "activationIndex": 1,
+  },
+  "week": {
+    "displayName": "주",
+    "activationIndex": 2,
+  },
+  "month": {
+    "displayName": "월",
+    "activationIndex": 3,
+  },
+  "year": {
+    "displayName": "년",
+    "activationIndex": 4,
+  },
+}
+
 
 function Header() {
   const [activeButton, setActiveButton] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const updateDataInput = useUpdateTimelineData();
+  const handleTimelineDataChange = (name, value) => {
+    updateDataInput(name, value);
+  };
 
-  const handleButtonClick = (buttonNumber) => {
-    setActiveButton(buttonNumber);
+  const handleButtonClick = (key, value) => {
+    setActiveButton(value.activationIndex);
+    handleTimelineDataChange("grouping", key);
   };
 
   const handleAddExperienceClick = () => {
@@ -174,34 +199,18 @@ function Header() {
         <Timeline>Timeline</Timeline>
         <Container>
           <ButtonContainer>
-            <Button
-              active={activeButton === 1}
-              onClick={() => handleButtonClick(1)}
-            >
-              일
-              <ButtonIndicator active={activeButton === 1} />
-            </Button>
-            <Button
-              active={activeButton === 2}
-              onClick={() => handleButtonClick(2)}
-            >
-              주
-              <ButtonIndicator active={activeButton === 2} />
-            </Button>
-            <Button
-              active={activeButton === 3}
-              onClick={() => handleButtonClick(3)}
-            >
-              월
-              <ButtonIndicator active={activeButton === 3} />
-            </Button>
-            <Button
-              active={activeButton === 4}
-              onClick={() => handleButtonClick(4)}
-            >
-              년
-              <ButtonIndicator active={activeButton === 4} />
-            </Button>
+            {
+              Object.entries(periodOption).map(([key, value]) => (
+                <Button
+                  key={key}
+                  active={activeButton === value.activationIndex}
+                  onClick={() => handleButtonClick(key, value)}
+                >
+                  {value.displayName}
+                  <ButtonIndicator active={activeButton === value.activationIndex} />
+                </Button>
+              ))
+            }
             <Button
               active={activeButton === 5}
               onClick={() => handleButtonClick(5)}

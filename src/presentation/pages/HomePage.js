@@ -42,9 +42,7 @@ function HomePage() {
           />
         </TestBox> */}
           <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-            <DataInputProvider> 
-              <Header />
-            </DataInputProvider>
+            <Header />
             <Timeline />
           </div>
         </div>

@@ -97,13 +97,13 @@ const TimelineDataBuilder = () => {
     case "day":
       return timelineData["postGroupByDay"];
     default:
-      console.log(timelineData["postGroupByDay"]);
       return timelineData["postGroupByDay"];
   }
 }
 
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
+  const timelineData = useTimelineData();
 
   const [dotWidth, setDotWidth] = useState(0);
   const [activeDots, setActiveDots] = useState([]);
@@ -234,16 +234,18 @@ const Timeline = () => {
     <TimelineContainer ref={timelineContainerRef}>
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
-        Object.entries(timelinePostData).map((entry, index) => (
-          <DotContainer key={entry[1].docId} dotWidth={dotWidth} ref={(ref) => (dotRefs.current[index] = ref)}>
-            <DotTimeWrapper>
-              <Dot className={activeDots.includes(index) ? 'active' : ''} />
-              <Time isAbove={index % 2 === 0} className={activeDots.includes(index) ? 'active' : ''}>
-                {entry[0]}
-              </Time>
-            </DotTimeWrapper>
-          </DotContainer>
-        )) 
+        Object.entries(timelinePostData).map((entry, index) =>{
+          return (
+            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} ref={(ref) => (dotRefs.current[index] = ref)}>
+              <DotTimeWrapper>
+                <Dot className={activeDots.includes(index) ? 'active' : ''} />
+                <Time isAbove={index % 2 === 0} className={activeDots.includes(index) ? 'active' : ''}>
+                  {entry[0]}
+                </Time>
+              </DotTimeWrapper>
+            </DotContainer>
+          )
+        } ) 
       }
     </TimelineContainer>
   );
