@@ -6,6 +6,7 @@ import Header from "../components/header/Header";
 import DateRange from "../components/DateRange";
 import ExperienceCardLink from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
+import Timeline from "../components/timeline/index";
 
 const TestBox = styled.div`
   width: 100%;
@@ -30,14 +31,14 @@ function HomePage() {
       {/* <DateRange /> */}
       <div style={{ display: "flex" }}>
         <CategoryBuilder />
-        <TestBox>
+        {/* <TestBox>
           <ExperienceCardSelf
             tag={tagValue}
             title={titleValue}
             summary={summaryValue}
             imgSrc={IMG}
           />
-        </TestBox>
+        </TestBox> */}
         <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
           <Header />
           <Timeline />

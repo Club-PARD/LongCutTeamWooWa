@@ -13,6 +13,7 @@ const TimelineContainer = styled.div`
   height: 500px;
   position: relative; /* Add relative positioning */
   margin-left: 18px;
+  margin-right: 18px;
 
   /* Remove scrollbar */
   scrollbar-width: none;
@@ -30,6 +31,7 @@ const HorizontalLines = styled.div`
   height: 2px;
   background-color: #ccc;
   transform: translateY(-50%); /* Adjust the vertical alignment */
+  z-index: -1;
 `;
 const DotContainer = styled.div`
   scroll-snap-align: center;
@@ -40,7 +42,7 @@ const DotContainer = styled.div`
 `;
 
 const DotTimeWrapper = styled.div`
-  z-index: 10;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,7 +86,6 @@ function formatDate(date) {
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
 
-
   const [dotWidth, setDotWidth] = useState(0);
   const [activeDots, setActiveDots] = useState([]);
   const dotRefs = useRef([]);
@@ -94,24 +95,12 @@ const Timeline = () => {
   const [firstPost, setFirstPost] = useState(null);
   const [lastPost, setLastPost] = useState(null);
 
-  // const handleScroll = () => {
-  //   if (
-  //     timelineContainerRef.current &&
-  //     timelineContainerRef.current.scrollLeft + timelineContainerRef.current.clientWidth >=
-  //       timelineContainerRef.current.scrollWidth
-  //   ) {
-  //     // Invoke the loadMoreData function here
-  //     loadMoreData();
-  //   }
-  // };
-
-  
   async function loadMoreHandle(direction) {
     setIsLoading(true);
-  
+
     const collectionRef = firebase.firestore().collection('posts').where('userId', '==', 'tlsgn');
     let query;
-  
+
     if (direction === 'next') {
       query = collectionRef
         .where('date', '<=', lastPost.data().date)
@@ -123,10 +112,10 @@ const Timeline = () => {
         .orderBy('date', 'desc')
         .endBefore(firstPost);
     }
-  
+
     const querySnapshot = await query.limit(10).get();
     const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-  
+
     if (direction === 'next') {
       setPosts((prevPosts) => [...prevPosts, ...fetchedPosts]);
       setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
@@ -134,42 +123,41 @@ const Timeline = () => {
       setPosts((prevPosts) => [...fetchedPosts, ...prevPosts]);
       setFirstPost(querySnapshot.docs[0]);
     }
-  
+
     setIsLoading(false);
   }
-  
-  
+
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
-  
+
       try {
         const dateStr = '06/09/2023';
         const [month, day, year] = dateStr.split('/');
         const givenDate = new Date(year, month - 1, day);
         const collectionRef = firebase.firestore().collection('posts');
         let query = collectionRef.where('userId', '==', 'tlsgn').orderBy('date', 'desc').where('date', ">=", firebase.firestore.Timestamp.fromDate(givenDate));
-  
+
         const querySnapshot = await query.limit(10).get();
         const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-  
+
         setPosts(fetchedPosts);
         setFirstPost(querySnapshot.docs[0]);
         setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
-  
+
       setIsLoading(false);
     };
-    
+
 
     fetchPosts();
   }, []);
 
   useEffect(() => {
     const calculateDotWidth = () => {
-      const containerWidth = window.innerWidth;
+      const containerWidth = timelineContainerRef.current.getBoundingClientRect().width;
       const dotCount = Math.min(posts.length, 7);
       const calculatedDotWidth = containerWidth / dotCount;
       setDotWidth(calculatedDotWidth);
@@ -214,40 +202,54 @@ const Timeline = () => {
     };
   }, [posts]);
 
+  /*
+  useEffect(()=> {
+    const handleScroll = () => {
+      const container = timelineContainerRef.current;
+      if (container.scrollLeft === 0 && firstPost) {
+        loadMoreHandle("previous");
+      }
+      if (container.scrollLeft + container.offsetWidth === container.scrollWidth && lastPost) {
+        loadMoreHandle("next");
+      }
+    };
+
+    if (timelineContainerRef.current) {
+      timelineContainerRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (timelineContainerRef.current) {
+        timelineContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [firstPost, lastPost])
+  */
   return (
-    
-    <TimelineContainer>
-      {isLoading && <p>Loading more posts...</p>}
+
+    <TimelineContainer ref={timelineContainerRef}>
       {!isLoading && firstPost && (
         <button onClick={() => loadMoreHandle('previous')}>Load More</button>
       )}
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-        
-          <HorizontalLines lineWidth={dotWidth * posts.length} />
-          {posts.map((post, index) => (
-            <DotContainer key={post.id} dotWidth={dotWidth}>
-              <DotTimeWrapper>
-                <Dot
-                  ref={(ref) => (dotRefs.current[index] = ref)}
-                  className={activeDots.includes(index) ? 'active' : ''}
-                />
-                <Time
-                  isAbove={index % 2 === 0}
-                  className={activeDots.includes(index) ? 'active' : ''}
-                >
-                  {formatDate(post.date.toDate())}
-                </Time>
-              </DotTimeWrapper>
-            </DotContainer>
-          ))}
-          {isLoading && <p>Loading more posts...</p>}
+      <HorizontalLines lineWidth={dotWidth * posts.length} />
+      {posts.map((post, index) => (
+        <DotContainer key={post.id} dotWidth={dotWidth}>
+          <DotTimeWrapper>
+            <Dot
+              ref={(ref) => (dotRefs.current[index] = ref)}
+              className={activeDots.includes(index) ? 'active' : ''}
+            />
+            <Time
+              isAbove={index % 2 === 0}
+              className={activeDots.includes(index) ? 'active' : ''}
+            >
+              {formatDate(post.date.toDate())}
+            </Time>
+          </DotTimeWrapper>
+        </DotContainer>
+      ))}
       {!isLoading && lastPost && (
         <button onClick={() => loadMoreHandle('next')}>Load More</button>
-      )}
-        </>
       )}
     </TimelineContainer>
   );
