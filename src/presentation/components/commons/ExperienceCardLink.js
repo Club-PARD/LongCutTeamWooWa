@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import DisquiteLogo from "--";
+import Logo_Disquiet from "../../../assets/img/LogoBig_Disquiet.svg";
+import LogoSmall_Disquiet from "../../../assets/img/이미지.png";
 
 const CardBox = styled.div`
   width: 184px;
@@ -84,32 +85,14 @@ const exampleData = {
   "userId": "tlsgn",
 
 }
-// const exampleCrawledData = {
-//   "add-free": null,
-//   "add-link": null,
-//   "summary": "summary 입니다",
-//   "crawled-website": "disquiet",
-//   "date": "06/25/2023",
-//   "selected-tags": [
-//     {
-//       "color": "#8560F6",
-//       "tagName": "리더십",
-//     },
-//     {
-//       "color": "#ED735D",
-//       "tagName": "협업",
-//     },
-//   ],
-//   "title": "제목11",
-//   "userId": "tlsgn",
 
-// }
-// function getWebsiteLog({websiteName}){
-//   switch(websiteName){
-//     case "disquiet":
-//       return DisquiteLogo;
-//   }
-// }
+
+function getWebsiteLog({websiteName}){
+  switch(websiteName){
+    case "disquiet":
+      return LogoSmall_Disquiet;
+  }
+}
 function ExperienceCardLink1({data }) {
   return (
     <CardBox>
@@ -119,7 +102,7 @@ function ExperienceCardLink1({data }) {
       <TitleText>{data["title"]}</TitleText>
       <SummaryText>{data["summary"]}</SummaryText>
       <LogoBox>
-          {/* <Logo src={getWebsiteLog(data["crawled-website"])} alt="이미지" /> */}
+          <Logo src={getWebsiteLog(data["crawled-website"])} alt="이미지" /> 
       </LogoBox>
     </CardBox>
   );
@@ -139,7 +122,7 @@ function ExperienceCardLink({ tag, title, summary, imgSrc }) {
   }
 
 
-export default ExperienceCardLink;
+export {ExperienceCardLink1};
 
 
 
