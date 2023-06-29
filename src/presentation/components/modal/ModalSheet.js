@@ -55,6 +55,8 @@ const ModalSheet = ({ modalType }) => {
   const modalTypeInfo = {
     "add-link": {
       title: "링크 추가하기",
+      width: "510px",
+      height: "357px",
       hasTitleInput: false,
       children: <LinkBox />,
       hasDatePicker: true,
@@ -65,6 +67,8 @@ const ModalSheet = ({ modalType }) => {
     },
     "add-free": {
       title: "경험 작성하기",
+      width: "510px",
+      height: "690px",
       hasTitleInput: true,
       children: <ModalWritingContent />,
       hasDatePicker: true,
@@ -75,6 +79,8 @@ const ModalSheet = ({ modalType }) => {
     },
     "add-template": {
       title: "경험 작성하기",
+      width: "510px",
+      height: "778px",
       hasTitleInput: true,
       children: <ModalTemplateContent />,
       hasDatePicker: true,
@@ -85,6 +91,8 @@ const ModalSheet = ({ modalType }) => {
     },
     post: {
       title: "경험 제목",
+      width: "510px",
+      height: "554px",
       hasTitleInput: false,
       hasDatePicker: false,
       hasTagSelection: false,
@@ -101,15 +109,12 @@ const ModalSheet = ({ modalType }) => {
     <div
       className="modal-sheet"
       style={{
-        "--sheet-size": expanded ? "auto" : "500px",
+        "--sheet-width": dataInput.isExpanded ? "1131px" : data["width"],
+        "--sheet-height": dataInput.isExpanded ? data["hight"] : data["hight"],
         "--max-width": "100%",
       }}
     >
-      <ModalHeader
-        title={data["title"]}
-        onExpandClick={handleExpandClick}
-        isExpanded={expanded}
-      />
+      <ModalHeader title={data["title"]} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (

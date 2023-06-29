@@ -63,7 +63,7 @@
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
   border-radius: 10px;
   border: 1px solid #CDCDCD;
-  width: var(--sheet-size);
+  width: var(--sheet-width);
   max-width: var(--max-width);
   height: var(--sheet-height);
   display: flex;

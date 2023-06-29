@@ -9,6 +9,7 @@ const HashDiv = styled.div`
   margin-top: 14px;
   margin-bottom: 14px;
   align-items: flex-start;
+  
   & > * + * {
     margin-top: 10px;
   }
@@ -17,7 +18,7 @@ const HashDiv = styled.div`
 const BarDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-left: 77px;
+  // margin-left: 77px;
   align-items: flex-start;
 `;
 

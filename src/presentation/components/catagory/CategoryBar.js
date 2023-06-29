@@ -25,7 +25,10 @@ const hashs = [
 const Div = styled.div`
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  padding-left: 77px;
+  padding-right: 23px;
+  border-right: 1px solid #ccc;
 `;
 
 const CategoryBar = () => {

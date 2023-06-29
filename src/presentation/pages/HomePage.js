@@ -51,18 +51,22 @@ function HomePage() {
 
     <div>
       <GlobalNavBar />
-      <Header />
       {/* <DateRange /> */}
-      <CategoryBuilder />
-      <TestBox>
-        {/* <ExperienceCardLink
-          tag={tagValue}
-          title={titleValue}
-          summary={summaryValue}
-          imgSrc={IMG}
-        /> */}
-      </TestBox>
-
+      <div style={{ display: "flex" }}>
+        <CategoryBuilder />
+        <TestBox>
+          <ExperienceCardSelf
+            tag={tagValue}
+            title={titleValue}
+            summary={summaryValue}
+            imgSrc={IMG}
+          />
+        </TestBox>
+        <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
+          <Header />
+          <Timeline />
+        </div>
+      </div>
     </div>
   );
 }
