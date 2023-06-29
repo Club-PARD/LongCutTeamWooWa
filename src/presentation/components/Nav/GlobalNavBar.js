@@ -11,7 +11,6 @@ const GlobalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // padding: 0 24px;
 `;
 
 const Logo = styled.div`
