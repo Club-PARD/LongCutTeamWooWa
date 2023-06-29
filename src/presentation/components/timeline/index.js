@@ -111,45 +111,11 @@ const Timeline = () => {
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstPost, setFirstPost] = useState(null);
-  const [lastPost, setLastPost] = useState(null);
 
   const updateDataInput = useUpdateTimelineData();
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
-
-  async function loadMoreHandle(direction) {
-    setIsLoading(true);
-
-    const collectionRef = firebase.firestore().collection('posts').where('userId', '==', 'tlsgn');
-    let query;
-
-    if (direction === 'next') {
-      query = collectionRef
-        .where('date', '<=', lastPost.data().date)
-        .orderBy('date', 'desc')
-        .startAfter(lastPost);
-    } else if (direction === 'previous') {
-      query = collectionRef
-        .where('date', '>=', firstPost.data().date)
-        .orderBy('date', 'desc')
-        .endBefore(firstPost);
-    }
-
-    const querySnapshot = await query.limit(10).get();
-    const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-
-    if (direction === 'next') {
-      setPosts((prevPosts) => [...prevPosts, ...fetchedPosts]);
-      setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
-    } else if (direction === 'previous') {
-      setPosts((prevPosts) => [...fetchedPosts, ...prevPosts]);
-      setFirstPost(querySnapshot.docs[0]);
-    }
-
-    setIsLoading(false);
-  }
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -163,8 +129,7 @@ const Timeline = () => {
         const collectionRef = firebase.firestore().collection('posts');
         let query = collectionRef
           .where('userId', '==', userId)
-          .orderBy('date', 'desc')
-          .where('date', ">=", firebase.firestore.Timestamp.fromDate(givenDate));
+          .orderBy('date', 'desc');
         const querySnapshot = await query.get();
         const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
         handleTimelineDataChange("postGroupByDay", groupDataByDay(fetchedPosts));
@@ -173,9 +138,6 @@ const Timeline = () => {
         handleTimelineDataChange("postGroupByYear", groupDataByYear(fetchedPosts));
         
         setPosts(fetchedPosts);
-        
-        setFirstPost(querySnapshot.docs[0]);
-        setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -269,11 +231,7 @@ const Timeline = () => {
  const timelinePostData = TimelineDataBuilder();
  const dataLength = Object.keys(timelinePostData).length;
   return (
-
     <TimelineContainer ref={timelineContainerRef}>
-      {!isLoading && firstPost && (
-        <button onClick={() => loadMoreHandle('previous')}>Load More</button>
-      )}
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
         Object.entries(timelinePostData).map((entry, index) => (
@@ -287,11 +245,6 @@ const Timeline = () => {
           </DotContainer>
         )) 
       }
-
-      
-      {!isLoading && lastPost && (
-        <button onClick={() => loadMoreHandle('next')}>Load More</button>
-      )}
     </TimelineContainer>
   );
 };

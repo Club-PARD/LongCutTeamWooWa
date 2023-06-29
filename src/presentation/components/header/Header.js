@@ -8,7 +8,8 @@ import ModalSheetBuilder from "../modal";
 
 const HeaderContainer = styled.div`
   padding-top: 100px;
-  padding-left: 300px;
+
+  margin-left: 61px;
 `;
 
 const Timeline = styled.div`
@@ -106,7 +107,6 @@ const AddLinkButton = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
-  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
@@ -135,7 +135,6 @@ const AddExperience = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
-  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
