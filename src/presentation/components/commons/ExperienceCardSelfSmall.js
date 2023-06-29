@@ -24,7 +24,6 @@ const Tag = styled.div`
   justify-content: center;
   align-items: center;
   width : fit-content; 
-  
 `;
 
 

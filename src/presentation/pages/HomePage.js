@@ -6,6 +6,7 @@ import Header from "../components/header/Header";
 import DateRange from "../components/DateRange";
 import ExperienceCardLink from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
+import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
 
 const TestBox = styled.div`
   width: 100%;
@@ -16,6 +17,29 @@ const TestBox = styled.div`
   padding : 20px; 
   margin-bottom : 300px; 
 `
+
+
+const exampleCrawledData = {
+  "add-free": null,
+  "add-link": null,
+  "summary": "summary 입니다",
+  "crawled-website": "disquiet",
+  "date": "06/25/2023",
+  "selected-tags": [
+    {
+      "color": "#8560F6",
+      "tagName": "리더십",
+    },
+    {
+      "color": "#ED735D",
+      "tagName": "협업",
+    },
+  ],
+  "title": "제목11",
+  "userId": "tlsgn",
+}
+
+
 function HomePage() {
 
   const tagValue = "태그";
@@ -31,12 +55,12 @@ function HomePage() {
       {/* <DateRange /> */}
       <CategoryBuilder />
       <TestBox>
-        <ExperienceCardSelf
+        {/* <ExperienceCardLink
           tag={tagValue}
           title={titleValue}
           summary={summaryValue}
           imgSrc={IMG}
-        />
+        /> */}
       </TestBox>
 
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+// import DisquiteLogo from "--";
 
 const CardBox = styled.div`
   width: 184px;
@@ -15,7 +15,7 @@ const CardBox = styled.div`
 `;
 
 const Tag = styled.div`
-  background-color: #f1f1f1;
+  background-color: ${props => props.backgroundColor};
   display: inline;
   padding: 4px 8px;
   border-radius: 150px;
@@ -65,6 +65,65 @@ const Logo = styled.img`
   border-radius: 50%;
 `;
 
+const exampleData = {
+  "add-free": null,
+  "add-link": "www.example.com",
+  "crawled-website": null,
+  "date": "06/25/2023",
+  "selected-tags": [
+    {
+      "color": "#8560F6",
+      "tagName": "리더십",
+    },
+    {
+      "color": "#ED735D",
+      "tagName": "협업",
+    },
+  ],
+  "title": "제목11",
+  "userId": "tlsgn",
+
+}
+// const exampleCrawledData = {
+//   "add-free": null,
+//   "add-link": null,
+//   "summary": "summary 입니다",
+//   "crawled-website": "disquiet",
+//   "date": "06/25/2023",
+//   "selected-tags": [
+//     {
+//       "color": "#8560F6",
+//       "tagName": "리더십",
+//     },
+//     {
+//       "color": "#ED735D",
+//       "tagName": "협업",
+//     },
+//   ],
+//   "title": "제목11",
+//   "userId": "tlsgn",
+
+// }
+// function getWebsiteLog({websiteName}){
+//   switch(websiteName){
+//     case "disquiet":
+//       return DisquiteLogo;
+//   }
+// }
+function ExperienceCardLink1({data }) {
+  return (
+    <CardBox>
+      {data["selected-tags"].map((tag) => {
+        return <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+      })}
+      <TitleText>{data["title"]}</TitleText>
+      <SummaryText>{data["summary"]}</SummaryText>
+      <LogoBox>
+          {/* <Logo src={getWebsiteLog(data["crawled-website"])} alt="이미지" /> */}
+      </LogoBox>
+    </CardBox>
+  );
+}
 
 function ExperienceCardLink({ tag, title, summary, imgSrc }) {
     return (
@@ -78,6 +137,7 @@ function ExperienceCardLink({ tag, title, summary, imgSrc }) {
       </CardBox>
     );
   }
+
 
 export default ExperienceCardLink;
 
