@@ -2,16 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import SubmitBtn from "../buttons/SubmitBtn";
 import CancelBtn from "../buttons/CancelBtn";
+import ExitModalBtn from "../buttons/ExitModalBtn";
 
 const PopUpContainer = styled.div`
   display: flex;
   width: 510px;
   height: 217px;
   border-radius: 10px;
+  background: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 `;
 const TextContainer = styled.div`
   display: flex;
@@ -53,8 +55,9 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, id, close}) {
+function PopUp({ imgSrc, text1, text2, id, close, modalClose }) {
 
+  
   return (
     <PopUpContainer>
       <img src={imgSrc} alt="PopUp-Icon" />
@@ -65,9 +68,9 @@ function PopUp({ imgSrc, text1, text2, id, close}) {
       </TextContainer>
       {id === 1 ? (
         <BtnCantainer>
-          <CancelBtn buttonText="취소" onClick={close} />
+          <CancelBtn buttonText="계속 작성하기" onClick={close} />
           <Space />
-          <SubmitBtn buttonText="나가기" />
+          <ExitModalBtn buttonText="나가기" onSubmit={modalClose} />
         </BtnCantainer>
       ) : (
         <SubmitBtn buttonText="확인" />

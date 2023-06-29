@@ -17,7 +17,19 @@ const ModalHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  
 `;
+
+const Background = styled.div`
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  `;
 
 const ModalExpandIcon = styled.img`
   width: 24px;
@@ -39,11 +51,11 @@ const PopUpContainer = styled.div`;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 99;
 `;
 
 
-function ModalHeader({ title }) {
+function ModalHeader({ title, modalClose}) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -74,9 +86,11 @@ function ModalHeader({ title }) {
         onClick={handlePopupOpen}
       />
       {isPopupOpen && (
+        <Background>
         <PopUpContainer>
-          <PopUpBuilder id={1} close={handlePopupClose} />
+          <PopUpBuilder id={1} close={handlePopupClose} modalClose={modalClose} />
         </PopUpContainer>
+        </Background>
       )}
     </ModalHeaderContainer>
   );

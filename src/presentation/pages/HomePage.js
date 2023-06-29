@@ -15,6 +15,8 @@ import ExperienceCardDot from "../components/commons/ExperienceCardDot";
 
 
 import Timeline from "../components/timeline/index";
+import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
+import { DataInputProvider } from "../../service/providers/data_input_provider";
 
 const TestBox = styled.div`
   width: 100%;
@@ -22,7 +24,6 @@ const TestBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: gray; 
-  padding : 20px; 
   margin-bottom : 300px; 
 `
 
@@ -56,6 +57,7 @@ function HomePage() {
     <div>
       <GlobalNavBar />
       {/* <DateRange /> */}
+<<<<<<< HEAD
       <div style={{ display: "flex" }}>
         <CategoryBuilder />
         <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
@@ -66,6 +68,25 @@ function HomePage() {
         <TestBox>
           <ExperienceCardDot data={exampleCrawledData}/>
         </TestBox>
+=======
+      <TimelineDataProvider>
+        <div style={{ display: "flex" }}>
+          <CategoryBuilder />
+          {/* <TestBox>
+          <ExperienceCardSelf
+            tag={tagValue}
+            title={titleValue}
+            summary={summaryValue}
+            imgSrc={IMG}
+          />
+        </TestBox> */}
+          <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
+            <Header />
+            <Timeline />
+          </div>
+        </div>
+      </TimelineDataProvider>
+>>>>>>> bb0e661c99e6033c6716fa45c13cf2f72cf00efa
     </div>
   );
 }
