@@ -31,16 +31,9 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
-const ModalSheet = ({ modalType, modalClose }) => {
-  const [expanded, setExpanded] = useState(false);
+const ModalSheet = ({ modalType }) => {
 
   const dataInput = useDataInput();
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  const onCloseClick = () => {};
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -114,7 +107,7 @@ const ModalSheet = ({ modalType, modalClose }) => {
         "--max-width": "100%",
       }}
     >
-      <ModalHeader title={data["title"]} modalClose={modalClose}  />
+      <ModalHeader title={data["title"]} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (

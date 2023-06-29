@@ -3,6 +3,10 @@ import styled from "styled-components";
 import SubmitBtn from "../buttons/SubmitBtn";
 import CancelBtn from "../buttons/CancelBtn";
 import ExitModalBtn from "../buttons/ExitModalBtn";
+import {
+  useDataInput,
+  useUpdateDataInput,
+} from "../../../service/providers/data_input_provider";
 
 const PopUpContainer = styled.div`
   display: flex;
@@ -55,9 +59,13 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, id, close, modalClose }) {
+function PopUp({ imgSrc, text1, text2, id, close }) {
+  const dataInput = useDataInput();
 
-  
+  const handleModalClose = () => {
+    dataInput.isModalOpen = false;
+    // console.log(dataInput.isModalOpen);
+  };
   return (
     <PopUpContainer>
       <img src={imgSrc} alt="PopUp-Icon" />
@@ -70,7 +78,7 @@ function PopUp({ imgSrc, text1, text2, id, close, modalClose }) {
         <BtnCantainer>
           <CancelBtn buttonText="계속 작성하기" onClick={close} />
           <Space />
-          <ExitModalBtn buttonText="나가기" onSubmit={modalClose} />
+          <ExitModalBtn buttonText="나가기" onClick={handleModalClose} />
         </BtnCantainer>
       ) : (
         <SubmitBtn buttonText="확인" />

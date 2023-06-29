@@ -5,6 +5,10 @@ import { DataInputProvider } from "../../../service/providers/data_input_provide
 import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 import ModalSheetBuilder from "../modal";
+import {
+  useDataInput,
+  useUpdateDataInput,
+} from "../../../service/providers/data_input_provider";
 
 const HeaderContainer = styled.div`
   padding-top: 100px;
@@ -159,15 +163,16 @@ const AddExperienceIconImg = styled.img`
 
 function Header() {
   const [activeButton, setActiveButton] = useState(1);
-  const [showModal, setShowModal] = useState(false);
 
   const handleButtonClick = (buttonNumber) => {
     setActiveButton(buttonNumber);
   };
 
-  const handleAddExperienceClick = () => {
-    setShowModal(showModal ? false : true);
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
   };
+  const dataInput = useDataInput();
 
   return (
     <DataInputProvider>
@@ -219,7 +224,13 @@ function Header() {
               <AddLinkIconImg src={AddLinkIcon} />
               링크 추가하기
             </AddLinkButton>
-            <AddExperience onClick={handleAddExperienceClick}>
+            <AddExperience
+              onClick={() => {
+                const isModalOpen = dataInput.isModalOpen;
+                handleInputChange("isModalOpen", !isModalOpen);
+                console.log(dataInput.isModalOpen);
+              }}
+            >
               <AddExperienceIconImg src={AddExperienceIcon} />
               경험 추가하기
             </AddExperience>
@@ -229,8 +240,7 @@ function Header() {
       </HeaderContainer>
       <ModalSheetBuilder
         modalType={"add-free"}
-        showModal={showModal}
-        setShowModal={handleAddExperienceClick}
+        isModalOpen={dataInput.isModalOpen}
       />
     </DataInputProvider>
   );

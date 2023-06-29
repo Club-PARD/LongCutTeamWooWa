@@ -31,21 +31,6 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   `;
 
-const ModalExpandIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const ModalHeaderContent = styled.div`
-  width: 100px;
-  height: 24px;
-  font-size: 100px;
-`;
-const ModalCloseIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
 const PopUpContainer = styled.div`;
   position: absolute;
   top: 50%;
@@ -55,7 +40,7 @@ const PopUpContainer = styled.div`;
 `;
 
 
-function ModalHeader({ title, modalClose}) {
+function ModalHeader({ title }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -88,7 +73,7 @@ function ModalHeader({ title, modalClose}) {
       {isPopupOpen && (
         <Background>
         <PopUpContainer>
-          <PopUpBuilder id={1} close={handlePopupClose} modalClose={modalClose} />
+          <PopUpBuilder id={1} close={handlePopupClose} />
         </PopUpContainer>
         </Background>
       )}
