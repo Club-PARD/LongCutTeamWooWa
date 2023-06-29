@@ -47,18 +47,20 @@ const Div = ({ children }) => {
 };
 
 export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
-  // const dataInput = useDataInput();
   if (modalType === "post") {
     return <ModalView />;
   }
+  const handleModalClose = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <DataInputProvider>
       {showModal ? (
         <Div
           children={
-            <ModalWrapper showModal={showModal}>
-              <ModalSheet modalType={modalType} />
+            <ModalWrapper>
+              <ModalSheet modalType={modalType} modalClose={handleModalClose} />
             </ModalWrapper>
           }
         />

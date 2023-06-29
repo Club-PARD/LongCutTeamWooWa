@@ -27,6 +27,7 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.3);
   `;
 
@@ -54,7 +55,7 @@ const PopUpContainer = styled.div`;
 `;
 
 
-function ModalHeader({ title }) {
+function ModalHeader({ title, modalClose}) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -87,7 +88,7 @@ function ModalHeader({ title }) {
       {isPopupOpen && (
         <Background>
         <PopUpContainer>
-          <PopUpBuilder id={1} close={handlePopupClose} />
+          <PopUpBuilder id={1} close={handlePopupClose} modalClose={modalClose} />
         </PopUpContainer>
         </Background>
       )}
