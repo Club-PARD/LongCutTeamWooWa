@@ -106,7 +106,6 @@ const AddLinkButton = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
-  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
@@ -135,7 +134,6 @@ const AddExperience = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
-  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
@@ -217,11 +215,17 @@ function Header() {
           <ButtonContainer2>
             <AddLinkButton>
               <AddLinkIconImg src={AddLinkIcon} />
-              링크 추가하기
+              <div styled={{display: "inline-block"}}>
+                링크 추가하기
+              </div>
+              
             </AddLinkButton>
             <AddExperience onClick={handleAddExperienceClick}>
               <AddExperienceIconImg src={AddExperienceIcon} />
+              <div styled={{display: "inline-block"}}>
               경험 추가하기
+              </div>
+              
             </AddExperience>
           </ButtonContainer2>
         </Container>
