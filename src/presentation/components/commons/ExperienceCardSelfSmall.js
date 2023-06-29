@@ -37,7 +37,7 @@ const TitleText = styled.p`
   margin-bottom: 0;
 `;
 
-function ExperienceCardSelfMiddle({ data }) {
+function ExperienceCardSelfSmall({ data }) {
     return (
         <CardBox>
             <div style={{ display: 'flex' }}>
@@ -55,4 +55,4 @@ function ExperienceCardSelfMiddle({ data }) {
     );
 }
 
-export default ExperienceCardSelfMiddle;
+export default ExperienceCardSelfSmall;
