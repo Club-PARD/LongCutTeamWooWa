@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Logo_Disquiet from "../../../assets/img/LogoBig_Disquiet.svg";
-import LogoSmall_Disquiet from "../../../assets/img/이미지.png";
+import LogoSmall_Disquiet from "../../../assets/img/Logo_Disquiet.png";
+import SearchIcon from "../../../assets/img/SearchIcon.svg";
 
 const CardBox = styled.div`
   width: 184px;
@@ -13,19 +14,21 @@ const CardBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-wrap: wrap; /* 변경된 부분 */
 `;
 
 const Tag = styled.div`
   background-color: ${props => props.backgroundColor};
-  display: inline;
+  display: flex; /* 변경된 부분 */
   padding: 4px 8px;
   border-radius: 150px;
-  font-size: 14px;
-  color: #333333;
+  font-size: 11px;
   justify-content: center;
   align-items: center;
-  width : fit-content; 
+  width : fit-content;
+  margin-right: 5px; 
 `;
+
 
 
 const TitleText = styled.p`
@@ -66,89 +69,48 @@ const Logo = styled.img`
   border-radius: 50%;
 `;
 
-const exampleData = {
-  "add-free": null,
-  "add-link": "www.example.com",
-  "crawled-website": null,
-  "date": "06/25/2023",
-  "selected-tags": [
-    {
-      "color": "#8560F6",
-      "tagName": "리더십",
-    },
-    {
-      "color": "#ED735D",
-      "tagName": "협업",
-    },
-  ],
-  "title": "제목11",
-  "userId": "tlsgn",
 
-}
+const ASearchIcon = styled.img`
+  width: 16px;
+  height: 16px;
+`;
 
+function getWebsiteLog( websiteName ) {
+  if (websiteName == null ) {
+    console.log("받은 문자열 값이 없습니다.");
+    return null;
+  }
 
-function getWebsiteLog({websiteName}){
-  switch(websiteName){
+  switch (websiteName) {
     case "disquiet":
       return LogoSmall_Disquiet;
+    default:
+      console.log("알 수 없는 문자열 값:", websiteName);
+      return null;
   }
 }
-function ExperienceCardLink1({data }) {
+
+function ExperienceCardLink({ data }) {
+  const websiteName = data["crawled-website"];
+  console.log(websiteName);
+
   return (
-    <CardBox>
-      {data["selected-tags"].map((tag) => {
-        return <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-      })}
+    <CardBox> 
+      <div style={{ display: 'flex' }}>
+        {data["selected-tags"].map((tag) => (
+          <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+        ))}
+      </div>
       <TitleText>{data["title"]}</TitleText>
       <SummaryText>{data["summary"]}</SummaryText>
       <LogoBox>
-          <Logo src={getWebsiteLog(data["crawled-website"])} alt="이미지" /> 
+        <Logo src={getWebsiteLog(websiteName)} alt="이미지" />
       </LogoBox>
     </CardBox>
   );
 }
 
-function ExperienceCardLink({ tag, title, summary, imgSrc }) {
-    return (
-      <CardBox>
-        <Tag>{tag}</Tag>
-        <TitleText>{title}</TitleText>
-        <SummaryText>{summary}</SummaryText>
-        <LogoBox>
-            <Logo src={imgSrc} alt="이미지" />
-        </LogoBox>
-      </CardBox>
-    );
-  }
+
+export {ExperienceCardLink};
 
 
-export {ExperienceCardLink1};
-
-
-
-// import React from "react";
-// import styled from "styled-components";
-// // import PopUp from "./presentation/components/popup/PopUp";
-// // import save_icon from "./assets/img/popup_save.svg";
-// // import DateSelector from "./presentation/components/DateSelector";
-// import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
-
-// const TestPage = () => {
-//     const tagValue = "태그";
-//     const titleValue = "경험card - 링크로 기록";
-//     const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.";
-//     const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
-  
-//     return (
-//       <div>
-//         <ExperienceCardLink 
-//             tag={tagValue} 
-//             title={titleValue} 
-//             summary={summaryValue} 
-//             imgSrc={IMG}
-//         />
-//       </div>
-//     );
-// }
-
-// export default TestPage;
