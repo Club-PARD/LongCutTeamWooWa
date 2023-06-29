@@ -29,6 +29,7 @@ const Div = styled.div`
   padding-left: 77px;
   padding-right: 23px;
   border-right: 1px solid #ccc;
+  width: 170px;
 `;
 
 const CategoryBar = () => {
