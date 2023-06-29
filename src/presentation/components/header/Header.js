@@ -5,14 +5,9 @@ import { DataInputProvider } from "../../../service/providers/data_input_provide
 import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 import ModalSheetBuilder from "../modal";
-
-import {
-  useDataInput,
-  useUpdateDataInput,
-} from "../../../service/providers/data_input_provider";
+import { useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
-
 
 const HeaderContainer = styled.div`
   padding-top: 100px;
@@ -72,9 +67,9 @@ const Button = styled.button`
 
   &:hover {
     color: ${(props) =>
-    props.active
-      ? props.theme.color.primary300
-      : props.theme.color.primary300};
+      props.active
+        ? props.theme.color.primary300
+        : props.theme.color.primary300};
   }
 `;
 
@@ -164,44 +159,37 @@ const AddExperienceIconImg = styled.img`
   margin-right: 8px;
 `;
 const periodOption = {
-  "day": {
-    "displayName": "일",
-    "activationIndex": 1,
+  day: {
+    displayName: "일",
+    activationIndex: 1,
   },
-  "week": {
-    "displayName": "주",
-    "activationIndex": 2,
+  week: {
+    displayName: "주",
+    activationIndex: 2,
   },
-  "month": {
-    "displayName": "월",
-    "activationIndex": 3,
+  month: {
+    displayName: "월",
+    activationIndex: 3,
   },
-  "year": {
-    "displayName": "년",
-    "activationIndex": 4,
+  year: {
+    displayName: "년",
+    activationIndex: 4,
   },
-}
-
+};
 
 function Header() {
   const [activeButton, setActiveButton] = useState(1);
 
-  const [showModal, setShowModal] = useState(false);
   const updateDataInput = useUpdateTimelineData();
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
-
 
   const handleButtonClick = (key, value) => {
     setActiveButton(value.activationIndex);
     handleTimelineDataChange("grouping", key);
   };
 
-  const updateDataInput = useUpdateDataInput();
-  const handleInputChange = (name, value) => {
-    updateDataInput(name, value);
-  };
   const dataInput = useDataInput();
 
   return (
@@ -210,18 +198,18 @@ function Header() {
         <Timeline>Timeline</Timeline>
         <Container>
           <ButtonContainer>
-            {
-              Object.entries(periodOption).map(([key, value]) => (
-                <Button
-                  key={key}
+            {Object.entries(periodOption).map(([key, value]) => (
+              <Button
+                key={key}
+                active={activeButton === value.activationIndex}
+                onClick={() => handleButtonClick(key, value)}
+              >
+                {value.displayName}
+                <ButtonIndicator
                   active={activeButton === value.activationIndex}
-                  onClick={() => handleButtonClick(key, value)}
-                >
-                  {value.displayName}
-                  <ButtonIndicator active={activeButton === value.activationIndex} />
-                </Button>
-              ))
-            }
+                />
+              </Button>
+            ))}
             <Button
               active={activeButton === 5}
               onClick={() => handleButtonClick(5)}
@@ -242,7 +230,7 @@ function Header() {
               onClick={() => {
                 const isModalOpen = dataInput.isModalOpen;
                 handleInputChange("isModalOpen", !isModalOpen);
-                console.log(dataInput.isModalOpen);
+               
               }}
             >
               <AddExperienceIconImg src={AddExperienceIcon} />
