@@ -60,9 +60,9 @@
   display: flex;
 }
 .modal-sheet {
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03);
+  /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.03); */
   border-radius: 10px;
-  border: 1px solid #CDCDCD;
+  border: 1px solid #fff;
   width: var(--sheet-width);
   max-width: var(--max-width);
   height: var(--sheet-height);
