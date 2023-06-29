@@ -22,7 +22,8 @@ const TestBox = styled.div`
 const exampleCrawledData = {
   "add-free": null,
   "add-link": null,
-  "tag-is" : null, 
+  "tag-is" : true, // 링크작성 : 테그 유무에 따라 로고 vs 테그 보여지는거 달라짐. -> "코드 추가 완료"
+  "img-is" : true, // 직접작성일 때, 이미지 유무에 따라 summary 길이 달라져야함. -> "코드 추가 작성필요."
   "summary": "summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다",
   "crawled-website": "disquiet",
   "date": "06/25/2023",
@@ -37,16 +38,16 @@ const exampleCrawledData = {
     },
   ],
   "title": "경험card - 링크로 기록",
-  "userId": "tlsgn",
+  "userId": "jshooni",
+  "imgSrc": "https://img.seoul.co.kr//img/upload/2023/03/19/SSC_20230319153307.jpg", //직접작성(제일큰거)일 때, img 주소 
 }
-
 
 function HomePage() {
 
   return (
     <div>
       <GlobalNavBar />
-      {/* <DateRange /> */}
+      <DateRange />
       <div style={{ display: "flex" }}>
         <CategoryBuilder />
         <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
@@ -55,7 +56,7 @@ function HomePage() {
         </div>
       </div>
         <TestBox>
-          <ExperienceCardLink data={exampleCrawledData}/>
+          <ExperienceCardSelf data={exampleCrawledData}/>
         </TestBox>
     </div>
   );

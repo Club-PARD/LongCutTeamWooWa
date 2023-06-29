@@ -32,7 +32,7 @@ const SpeechBubbleBottom = styled.div`
 const Tag = styled.div`
   background-color: ${props => props.backgroundColor};
   display: flex; /* 변경된 부분 */
-  padding: 4px 8px;
+  padding: 2px 8px;
   border-radius: 150px;
   font-size: 11px;
   justify-content: center;
