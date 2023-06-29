@@ -24,7 +24,7 @@ const TimelineDataProvider = ({ children }) => {
 };
 
 // Custom hook to access the updateDataInput function
-const useUpdateDataInput = () => useContext(TimelineContext)[0];
+const useUpdateTimelineData = () => useContext(TimelineContext)[0];
 
 // Custom hook to access the inputData state
 const useTimelineData = () => {
@@ -32,4 +32,4 @@ const useTimelineData = () => {
   return inputData;
 };
 
-export { TimelineDataProvider, useUpdateDataInput, useTimelineData };
+export { TimelineDataProvider, useUpdateTimelineData, useTimelineData };

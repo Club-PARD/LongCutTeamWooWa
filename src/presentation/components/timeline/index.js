@@ -4,6 +4,8 @@ import firebase from 'firebase/compat/app';
 import styled from 'styled-components';
 import { ReactComponent as TimelineDot } from '../../../assets/img/timeline_dot.svg';
 import postService from '../../../service/firebase/PostService';
+import { groupDataByDay, groupDataByMonth, groupDataByWeek, groupDataByYear } from './grouping_functions';
+import { useTimelineData, useUpdateTimelineData } from '../../../service/providers/timeline_data_provider';
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -83,6 +85,23 @@ function formatDate(date) {
   return `${month}/${day}/${year}`;
 }
 
+const TimelineDataBuilder = () => {
+  const timelineData = useTimelineData();
+  switch(timelineData["grouping"]){
+    case "year":
+      return timelineData["postGroupByYear"];
+    case "month":
+      return timelineData["postGroupByMonth"];
+    case "week":
+      return timelineData["postGroupByWeek"];
+    case "day":
+      return timelineData["postGroupByDay"];
+    default:
+      console.log(timelineData["postGroupByDay"]);
+      return timelineData["postGroupByDay"];
+  }
+}
+
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
 
@@ -94,6 +113,11 @@ const Timeline = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [firstPost, setFirstPost] = useState(null);
   const [lastPost, setLastPost] = useState(null);
+
+  const updateDataInput = useUpdateTimelineData();
+  const handleTimelineDataChange = (name, value) => {
+    updateDataInput(name, value);
+  };
 
   async function loadMoreHandle(direction) {
     setIsLoading(true);
@@ -130,18 +154,26 @@ const Timeline = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
-
-      try {
+      
+      try{
         const dateStr = '06/09/2023';
+        const userId = 'tlsgn';
         const [month, day, year] = dateStr.split('/');
         const givenDate = new Date(year, month - 1, day);
         const collectionRef = firebase.firestore().collection('posts');
-        let query = collectionRef.where('userId', '==', 'tlsgn').orderBy('date', 'desc').where('date', ">=", firebase.firestore.Timestamp.fromDate(givenDate));
-
-        const querySnapshot = await query.limit(10).get();
+        let query = collectionRef
+          .where('userId', '==', userId)
+          .orderBy('date', 'desc')
+          .where('date', ">=", firebase.firestore.Timestamp.fromDate(givenDate));
+        const querySnapshot = await query.get();
         const fetchedPosts = querySnapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
-
+        handleTimelineDataChange("postGroupByDay", groupDataByDay(fetchedPosts));
+        handleTimelineDataChange("postGroupByWeek", groupDataByWeek(fetchedPosts));
+        handleTimelineDataChange("postGroupByMonth", groupDataByMonth(fetchedPosts));
+        handleTimelineDataChange("postGroupByYear", groupDataByYear(fetchedPosts));
+        
         setPosts(fetchedPosts);
+        
         setFirstPost(querySnapshot.docs[0]);
         setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
       } catch (error) {
@@ -155,7 +187,12 @@ const Timeline = () => {
     fetchPosts();
   }, []);
 
+
   useEffect(() => {
+    if (!posts || !timelineContainerRef.current) {
+      return; // Exit early if posts or timelineContainerRef.current is not available
+    }
+
     const calculateDotWidth = () => {
       const containerWidth = timelineContainerRef.current.getBoundingClientRect().width;
       const dotCount = Math.min(posts.length, 7);
@@ -168,7 +205,7 @@ const Timeline = () => {
     return () => {
       window.removeEventListener('resize', calculateDotWidth);
     };
-  }, [posts]);
+  }, [posts, timelineContainerRef.current]);
 
   useEffect(() => {
     const options = {
@@ -225,29 +262,33 @@ const Timeline = () => {
     };
   }, [firstPost, lastPost])
   */
+
+  if (isLoading) {
+    return null; // Render a loading state or return null while the data is being fetched
+  }
+ const timelinePostData = TimelineDataBuilder();
+ const dataLength = Object.keys(timelinePostData).length;
   return (
 
     <TimelineContainer ref={timelineContainerRef}>
       {!isLoading && firstPost && (
         <button onClick={() => loadMoreHandle('previous')}>Load More</button>
       )}
-      <HorizontalLines lineWidth={dotWidth * posts.length} />
-      {posts.map((post, index) => (
-        <DotContainer key={post.id} dotWidth={dotWidth}>
-          <DotTimeWrapper>
-            <Dot
-              ref={(ref) => (dotRefs.current[index] = ref)}
-              className={activeDots.includes(index) ? 'active' : ''}
-            />
-            <Time
-              isAbove={index % 2 === 0}
-              className={activeDots.includes(index) ? 'active' : ''}
-            >
-              {formatDate(post.date.toDate())}
-            </Time>
-          </DotTimeWrapper>
-        </DotContainer>
-      ))}
+      <HorizontalLines lineWidth={dotWidth * dataLength} />
+      { 
+        Object.entries(timelinePostData).map((entry, index) => (
+          <DotContainer key={entry[1].docId} dotWidth={dotWidth} ref={(ref) => (dotRefs.current[index] = ref)}>
+            <DotTimeWrapper>
+              <Dot className={activeDots.includes(index) ? 'active' : ''} />
+              <Time isAbove={index % 2 === 0} className={activeDots.includes(index) ? 'active' : ''}>
+                {entry[0]}
+              </Time>
+            </DotTimeWrapper>
+          </DotContainer>
+        )) 
+      }
+
+      
       {!isLoading && lastPost && (
         <button onClick={() => loadMoreHandle('next')}>Load More</button>
       )}

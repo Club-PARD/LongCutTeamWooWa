@@ -1,6 +1,6 @@
 import HashTag from "./HashTag";
 import React, { useState } from "react";
-import { useUpdateDataInput } from "../../../service/providers/timeline_data_provider";
+import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { styled } from "styled-components";
 
 const HashDiv = styled.div`
@@ -30,7 +30,7 @@ const Divider = styled.div`
 
 const HashTagSelection = ({ hashTagList }) => {
   const [selectedHashs, setSelectedHashs] = useState([]);
-  const updateDataInput = useUpdateDataInput();
+  const updateDataInput = useUpdateTimelineData();
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
   };
