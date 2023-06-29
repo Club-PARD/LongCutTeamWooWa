@@ -22,6 +22,7 @@ const TestBox = styled.div`
 const exampleCrawledData = {
   "add-free": null,
   "add-link": null,
+  "tag-is" : null, 
   "summary": "summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다summary 입니다",
   "crawled-website": "disquiet",
   "date": "06/25/2023",

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Logo_Disquiet from "../../../assets/img/LogoBig_Disquiet.svg";
+import BigLogo from "../../../assets/img/LogoBig_Disquiet.svg";
 import LogoSmall_Disquiet from "../../../assets/img/Logo_Disquiet.png";
-import SearchIcon from "../../../assets/img/SearchIcon.svg";
+
 
 const CardBox = styled.div`
   width: 184px;
@@ -15,6 +15,18 @@ const CardBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap; /* 변경된 부분 */
+  position: relative; /* 추가된 부분 */
+`;
+
+const SpeechBubbleBottom = styled.div`
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background-color: ${props => props.theme.color.surface};
+  transform: rotate(45deg);
+  bottom: -5px;
+  left: 50%;
+  margin-left: -10px;
 `;
 
 const Tag = styled.div`
@@ -70,9 +82,10 @@ const Logo = styled.img`
 `;
 
 
-const ASearchIcon = styled.img`
-  width: 16px;
-  height: 16px;
+const BigLogoContainer = styled.img`
+  width: 58px;
+  height: 11px;
+  margin-bottom : 5px; 
 `;
 
 function getWebsiteLog( websiteName ) {
@@ -96,16 +109,21 @@ function ExperienceCardLink({ data }) {
 
   return (
     <CardBox> 
-      <div style={{ display: 'flex' }}>
-        {data["selected-tags"].map((tag) => (
-          <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-        ))}
-      </div>
+      {data["tag-is"] === null ? (
+        <BigLogoContainer src={BigLogo} alt="logo img" />
+      ) : (
+        <div style={{ display: 'flex' }}>
+          {data["selected-tags"].map((tag) => (
+            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+          ))}
+        </div>
+      )}
       <TitleText>{data["title"]}</TitleText>
       <SummaryText>{data["summary"]}</SummaryText>
       <LogoBox>
         <Logo src={getWebsiteLog(websiteName)} alt="이미지" />
       </LogoBox>
+      <SpeechBubbleBottom /> {/* 추가된 부분 */}
     </CardBox>
   );
 }
