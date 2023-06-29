@@ -8,6 +8,7 @@ import ExperienceCardLink from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
 import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
+import { DataInputProvider } from "../../service/providers/data_input_provider";
 
 const TestBox = styled.div`
   width: 100%;
@@ -41,7 +42,9 @@ function HomePage() {
           />
         </TestBox> */}
           <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-            <Header />
+            <DataInputProvider> 
+              <Header />
+            </DataInputProvider>
             <Timeline />
           </div>
         </div>

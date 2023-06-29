@@ -7,8 +7,8 @@ import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 import ModalSheetBuilder from "../modal";
 
 const HeaderContainer = styled.div`
-  padding-top: 39px;
-  padding-left: 43px;
+  padding-top: 100px;
+  padding-left: 300px;
 `;
 
 const Timeline = styled.div`
@@ -106,6 +106,7 @@ const AddLinkButton = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
+  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
@@ -134,6 +135,7 @@ const AddExperience = styled.button`
   margin-top: 15px;
   padding: 8px 16px;
   border-radius: 40px;
+  width: 136px;
   height: 31px;
   background-color: ${(props) => props.theme.color.primary300};
   color: ${(props) => props.theme.color.surface};
@@ -164,7 +166,7 @@ function Header() {
   };
 
   const handleAddExperienceClick = () => {
-    setShowModal(true);
+    setShowModal(showModal ? false : true);
   };
 
   return (
@@ -215,17 +217,11 @@ function Header() {
           <ButtonContainer2>
             <AddLinkButton>
               <AddLinkIconImg src={AddLinkIcon} />
-              <div styled={{display: "inline-block"}}>
-                링크 추가하기
-              </div>
-              
+              링크 추가하기
             </AddLinkButton>
             <AddExperience onClick={handleAddExperienceClick}>
               <AddExperienceIconImg src={AddExperienceIcon} />
-              <div styled={{display: "inline-block"}}>
               경험 추가하기
-              </div>
-              
             </AddExperience>
           </ButtonContainer2>
         </Container>
@@ -234,7 +230,7 @@ function Header() {
       <ModalSheetBuilder
         modalType={"add-free"}
         showModal={showModal}
-        setShowModal={setShowModal}
+        setShowModal={handleAddExperienceClick}
       />
     </DataInputProvider>
   );
