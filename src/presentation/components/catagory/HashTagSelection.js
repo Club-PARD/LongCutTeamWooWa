@@ -1,6 +1,6 @@
 import HashTag from "./HashTag";
 import React, { useState } from "react";
-import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import { useUpdateDataInput } from "../../../service/providers/timeline_data_provider";
 import { styled } from "styled-components";
 
 const HashDiv = styled.div`

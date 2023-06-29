@@ -7,6 +7,7 @@ import DateRange from "../components/DateRange";
 import ExperienceCardLink from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
 import Timeline from "../components/timeline/index";
+import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 
 const TestBox = styled.div`
   width: 100%;
@@ -14,7 +15,6 @@ const TestBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: gray; 
-  padding : 20px; 
   margin-bottom : 300px; 
 `
 function HomePage() {
@@ -29,9 +29,10 @@ function HomePage() {
     <div>
       <GlobalNavBar />
       {/* <DateRange /> */}
-      <div style={{ display: "flex" }}>
-        <CategoryBuilder />
-        {/* <TestBox>
+      <TimelineDataProvider>
+        <div style={{ display: "flex" }}>
+          <CategoryBuilder />
+          {/* <TestBox>
           <ExperienceCardSelf
             tag={tagValue}
             title={titleValue}
@@ -39,11 +40,12 @@ function HomePage() {
             imgSrc={IMG}
           />
         </TestBox> */}
-        <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-          <Header />
-          <Timeline />
+          <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
+            <Header />
+            <Timeline />
+          </div>
         </div>
-      </div>
+      </TimelineDataProvider>
     </div>
   );
 }
