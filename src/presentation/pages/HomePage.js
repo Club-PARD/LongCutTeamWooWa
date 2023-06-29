@@ -31,8 +31,8 @@ const TestBox = styled.div`
 const exampleCrawledData = {
   "add-free": null,
   "add-link": null,
-  "tag-is" : null, // 링크작성 : 테그 유무에 따라 로고 vs 테그 보여지는거 달라짐. -> "코드 추가 완료"
-  "img-is" : true, // 직접작성일 때, 이미지 유무에 따라 summary 길이 달라져야함. -> "코드 추가 작성필요."
+  "tag-is": null, // 링크작성 : 테그 유무에 따라 로고 vs 테그 보여지는거 달라짐. -> "코드 추가 완료"
+  "img-is": true, // 직접작성일 때, 이미지 유무에 따라 summary 길이 달라져야함. -> "코드 추가 작성필요."
   "summary": "summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. ",
   "crawled-website": "disquiet",
   "date": "06/25/2023",
@@ -57,36 +57,18 @@ function HomePage() {
     <div>
       <GlobalNavBar />
       {/* <DateRange /> */}
-<<<<<<< HEAD
-      <div style={{ display: "flex" }}>
-        <CategoryBuilder />
-        <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-          <Header />
-          <Timeline />
-        </div>
-      </div>
-        <TestBox>
-          <ExperienceCardDot data={exampleCrawledData}/>
-        </TestBox>
-=======
       <TimelineDataProvider>
         <div style={{ display: "flex" }}>
           <CategoryBuilder />
-          {/* <TestBox>
-          <ExperienceCardSelf
-            tag={tagValue}
-            title={titleValue}
-            summary={summaryValue}
-            imgSrc={IMG}
-          />
-        </TestBox> */}
           <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
             <Header />
             <Timeline />
           </div>
         </div>
       </TimelineDataProvider>
->>>>>>> bb0e661c99e6033c6716fa45c13cf2f72cf00efa
+      <TestBox>
+        <ExperienceCardDot data={exampleCrawledData} />
+      </TestBox>
     </div>
   );
 }
