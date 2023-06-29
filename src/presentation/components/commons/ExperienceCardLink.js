@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import BigLogo from "../../../assets/img/LogoBig_Disquiet.svg";
+import LogoSmall_Disquiet from "../../../assets/img/Logo_Disquiet.png";
 
 
 const CardBox = styled.div`
@@ -12,19 +14,34 @@ const CardBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-wrap: wrap; /* 변경된 부분 */
+  position: relative; /* 추가된 부분 */
+`;
+
+const SpeechBubbleBottom = styled.div`
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background-color: ${props => props.theme.color.surface};
+  transform: rotate(45deg);
+  bottom: -5px;
+  left: 50%;
+  margin-left: -10px;
 `;
 
 const Tag = styled.div`
-  background-color: #f1f1f1;
-  display: inline;
-  padding: 4px 8px;
+  background-color: ${props => props.backgroundColor};
+  color : white; 
+  display: flex; /* 변경된 부분 */
+  padding: 2px 8px;
   border-radius: 150px;
-  font-size: 14px;
-  color: #333333;
+  font-size: 11px;
   justify-content: center;
   align-items: center;
-  width : fit-content; 
+  width : fit-content;
+  margin-right: 5px; 
 `;
+
 
 
 const TitleText = styled.p`
@@ -66,46 +83,53 @@ const Logo = styled.img`
 `;
 
 
-function ExperienceCardLink({ tag, title, summary, imgSrc }) {
-    return (
-      <CardBox>
-        <Tag>{tag}</Tag>
-        <TitleText>{title}</TitleText>
-        <SummaryText>{summary}</SummaryText>
-        <LogoBox>
-            <Logo src={imgSrc} alt="이미지" />
-        </LogoBox>
-      </CardBox>
-    );
+const BigLogoContainer = styled.img`
+  width: 58px;
+  height: 11px;
+  margin-bottom : 5px; 
+`;
+
+function getWebsiteLog( websiteName ) {
+  if (websiteName == null ) {
+    console.log("받은 문자열 값이 없습니다.");
+    return null;
   }
 
-export default ExperienceCardLink;
+  switch (websiteName) {
+    case "disquiet":
+      return LogoSmall_Disquiet;
+    default:
+      console.log("알 수 없는 문자열 값:", websiteName);
+      return null;
+  }
+}
+
+function ExperienceCardLink({ data }) {
+  const websiteName = data["crawled-website"];
+  console.log(websiteName);
+
+  return (
+    <CardBox> 
+      {data["tag-is"] === null ? (
+        <BigLogoContainer src={BigLogo} alt="logo img" />
+      ) : (
+        <div style={{ display: 'flex' }}>
+          {data["selected-tags"].map((tag) => (
+            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+          ))}
+        </div>
+      )}
+      <TitleText>{data["title"]}</TitleText>
+      <SummaryText>{data["summary"]}</SummaryText>
+      <LogoBox>
+        <Logo src={getWebsiteLog(websiteName)} alt="이미지" />
+      </LogoBox>
+      <SpeechBubbleBottom /> {/* 추가된 부분 */}
+    </CardBox>
+  );
+}
 
 
+export {ExperienceCardLink};
 
-// import React from "react";
-// import styled from "styled-components";
-// // import PopUp from "./presentation/components/popup/PopUp";
-// // import save_icon from "./assets/img/popup_save.svg";
-// // import DateSelector from "./presentation/components/DateSelector";
-// import ExperienceCardLink from "./presentation/components/commons/ExperienceCardLink";
 
-// const TestPage = () => {
-//     const tagValue = "태그";
-//     const titleValue = "경험card - 링크로 기록";
-//     const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.";
-//     const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
-  
-//     return (
-//       <div>
-//         <ExperienceCardLink 
-//             tag={tagValue} 
-//             title={titleValue} 
-//             summary={summaryValue} 
-//             imgSrc={IMG}
-//         />
-//       </div>
-//     );
-// }
-
-// export default TestPage;

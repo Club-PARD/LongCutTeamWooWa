@@ -2,7 +2,7 @@ import CategoryTag from "./CategoryTag";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import gearImg from "../../../assets/img/gear.svg";
-import { useUpdateDataInput } from "../../../service/providers/timeline_data_provider";
+import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 
 const TagDiv = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const EditButton = styled.button`
 
 const CategoryTagSelection = ({ title, categoryTagList, width }) => {
   const [selectedTags, setSelectedTags] = useState([]);
-  const updateDataInput = useUpdateDataInput();
+  const updateDataInput = useUpdateTimelineData();
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
   };

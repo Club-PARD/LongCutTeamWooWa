@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import BigLogo from "../../../assets/img/LogoBig_Disquiet.svg";
 
 const CardBox = styled.div`
   width: 184px;
@@ -33,18 +34,29 @@ const TitleText = styled.p`
   font-size: ${props => props.theme.fontSizes.Subtitle2};
   width: 100%;
   height: auto;
-  margin-top: 8px;
+  margin-top: 9px;
   margin-bottom: 0;
+`;
+
+const BigLogoContainer = styled.img`
+  width: 58px;
+  height: 11px;
+  margin-bottom : 0px; 
+  margin-top : 2px;
 `;
 
 function ExperienceCardSelfMiddle({ data }) {
     return (
         <CardBox>
-            <div style={{ display: 'flex' }}>
-                {data["selected-tags"].map((tag) => (
-                    <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-                ))}
-            </div>
+            {data["tag-is"] === null ? (
+                <BigLogoContainer src={BigLogo} alt="logo img" />
+            ) : (
+                <div style={{ display: 'flex' }}>
+                    {data["selected-tags"].map((tag) => (
+                        <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+                    ))}
+                </div>
+            )}
             <TitleText>
                 {data["title"].length > 19
                     ? `${data["title"].slice(0, 18)}   ...`

@@ -4,8 +4,16 @@ import CategoryBuilder from "../components/catagory";
 import GlobalNavBar from "../components/Nav/GlobalNavBar";
 import Header from "../components/header/Header";
 import DateRange from "../components/DateRange";
-import ExperienceCardLink from "../components/commons/ExperienceCardLink";
+import { ExperienceCardLink } from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
+import ExperienceCardSelfMiddle from "../components/commons/ExperienceCardSelfMiddle";
+import ExperienceCardLinkMiddle from "../components/commons/ExperienceCardLinkMiddle";
+import ExperienceCardLinkSmall from "../components/commons/ExperienceCardLinkSmall";
+import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
+import ExperienceCardDot from "../components/commons/ExperienceCardDot";
+
+
+
 import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 import { DataInputProvider } from "../../service/providers/data_input_provider";
@@ -18,38 +26,51 @@ const TestBox = styled.div`
   background-color: gray; 
   margin-bottom : 300px; 
 `
+
+
+const exampleCrawledData = {
+  "add-free": null,
+  "add-link": null,
+  "tag-is": null, // 링크작성 : 테그 유무에 따라 로고 vs 테그 보여지는거 달라짐. -> "코드 추가 완료"
+  "img-is": true, // 직접작성일 때, 이미지 유무에 따라 summary 길이 달라져야함. -> "코드 추가 작성필요."
+  "summary": "summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. summary 입니다. ",
+  "crawled-website": "disquiet",
+  "date": "06/25/2023",
+  "selected-tags": [
+    {
+      "color": "#8560F6",
+      "tagName": "리더십",
+    },
+    {
+      "color": "#ED735D",
+      "tagName": "협업",
+    },
+  ],
+  "title": "경험card - 링크로 기록경험card - 링크로 기록경험card",
+  "userId": "jshooni",
+  "imgSrc": "https://img.seoul.co.kr//img/upload/2023/03/19/SSC_20230319153307.jpg", //직접작성(제일큰거)일 때, img 주소 
+}
+
 function HomePage() {
 
-  const tagValue = "태그";
-  const titleValue = "경험card - 링크로 기록";
-  const summaryValue = "요약 내용입니다. 요약내용입니다. 요약내용입니다. 요약내용입니다 요약내용입니다.요약내용입니다.요약내용입니다.";
-  const IMG = "https://assets.disquiet.io/images/product/thumbnail/33a20baaee7cde30da7a06f262c77972c6ae5821c04823ebfa41864b2e3ea4bc";
-
   return (
-
     <div>
       <GlobalNavBar />
       {/* <DateRange /> */}
       <TimelineDataProvider>
         <div style={{ display: "flex" }}>
           <CategoryBuilder />
-          {/* <TestBox>
-          <ExperienceCardSelf
-            tag={tagValue}
-            title={titleValue}
-            summary={summaryValue}
-            imgSrc={IMG}
-          />
-        </TestBox> */}
           <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-            <DataInputProvider> 
-              <Header />
-            </DataInputProvider>
+            <Header />
             <Timeline />
           </div>
         </div>
       </TimelineDataProvider>
+      <TestBox>
+        <ExperienceCardDot data={exampleCrawledData} />
+      </TestBox>
     </div>
   );
 }
+
 export default HomePage;
