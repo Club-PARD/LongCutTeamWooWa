@@ -6,7 +6,7 @@ import Header from "../components/header/Header";
 import DateRange from "../components/DateRange";
 import ExperienceCardLink from "../components/commons/ExperienceCardLink";
 import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
-import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
+import Timeline from "../components/timeline/index";
 
 const TestBox = styled.div`
   width: 100%;
@@ -54,6 +54,11 @@ function HomePage() {
       {/* <DateRange /> */}
       <div style={{ display: "flex" }}>
         <CategoryBuilder />
+        <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
+          <Header />
+          <Timeline />
+        </div>
+      </div>
         <TestBox>
           <ExperienceCardSelf
             tag={tagValue}
@@ -62,11 +67,6 @@ function HomePage() {
             imgSrc={IMG}
           />
         </TestBox>
-        <div style={{ display: "flex", flexDirection: 'column', width: "100%", overflowX: 'hidden', }}>
-          <Header />
-          <Timeline />
-        </div>
-      </div>
     </div>
   );
 }

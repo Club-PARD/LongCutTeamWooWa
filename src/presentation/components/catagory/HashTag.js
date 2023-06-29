@@ -11,7 +11,7 @@ const StyledHash = styled.div`
     props.isClicked
       ? `${props.theme.fontWeights.bold}`
       : `${props.theme.fontWeights.semibold}`};
-  border: "transparent";
+  border: transparent;
   display: inline-block;
   padding: 4px 12px;
   border-radius: 5px;
