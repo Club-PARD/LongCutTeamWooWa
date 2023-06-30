@@ -184,6 +184,17 @@ function Header() {
   const [activeButton, setActiveButton] = useState(1);
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("add-free");
+
+  const handleSetModalType = () => {
+    if(modalType === "add-free"){
+      setModalType("add-template");
+    }
+    else{
+      setModalType("add-free");
+    }
+  };
+
 
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
@@ -240,7 +251,8 @@ function Header() {
         <Divider />
       </HeaderContainer>
       <ModalSheetBuilder
-        modalType={"add-free"}
+        modalType={modalType}
+        handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
       />

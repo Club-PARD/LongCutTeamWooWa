@@ -31,7 +31,7 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
-const ModalSheet = ({ modalType, handleModalOpen }) => {
+const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
   const dataInput = useDataInput();
 
   // Function to handle button click and collect the input data
@@ -71,8 +71,8 @@ const ModalSheet = ({ modalType, handleModalOpen }) => {
     },
     "add-template": {
       title: "경험 작성하기",
-      width: "510px",
-      height: "778px",
+      width: "550px",
+      height: "690px",
       hasTitleInput: true,
       children: <ModalTemplateContent />,
       hasDatePicker: true,
@@ -111,7 +111,7 @@ const ModalSheet = ({ modalType, handleModalOpen }) => {
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
         <>
-          <InputTitle />
+          <InputTitle handleSetModalType={handleSetModalType}  />
           <VerticalSpacing height={13.9} />
         </>
       ) : (
