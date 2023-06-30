@@ -36,6 +36,8 @@ const TitleText = styled.p`
   height: auto;
   margin-top: 9px;
   margin-bottom: 0;
+  display: inline-block;
+  overflow: clip;
 `;
 
 const BigLogoContainer = styled.img`
@@ -58,9 +60,7 @@ function ExperienceCardLinkSmall({ data }) {
                 </div>
             )}
             <TitleText>
-                {data["title"].length > 19
-                    ? `${data["title"].slice(0, 18)}   ...`
-                    : data["title"]}
+                {data["title"]}
             </TitleText>
 
         </CardBox>

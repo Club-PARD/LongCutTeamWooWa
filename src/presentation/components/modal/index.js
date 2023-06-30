@@ -46,7 +46,12 @@ const Div = ({ children }) => {
   return <Background isExpanded={dataInput.isExpanded}>{children}</Background>;
 };
 
-export const ModalSheetBuilder = ({ modalType, isModalOpen }) => {
+export const ModalSheetBuilder = ({
+  modalType,
+  handleSetModalType,
+  isModalOpen,
+  handleModalOpen,
+}) => {
   if (modalType === "post") {
     return <ModalView />;
   }
@@ -57,7 +62,11 @@ export const ModalSheetBuilder = ({ modalType, isModalOpen }) => {
         <Div
           children={
             <ModalWrapper>
-              <ModalSheet modalType={modalType} />
+              <ModalSheet
+                modalType={modalType}
+                handleSetModalType={handleSetModalType}
+                handleModalOpen={handleModalOpen}
+              />
             </ModalWrapper>
           }
         />

@@ -59,13 +59,13 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, id, close }) {
+function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen }) {
   const dataInput = useDataInput();
-
-  const handleModalClose = () => {
-    dataInput.isModalOpen = false;
-    // console.log(dataInput.isModalOpen);
+  const handleExitModal = () => {
+    handleModalOpen();
+    dataInput.isExpanded = false;
   };
+
   return (
     <PopUpContainer>
       <img src={imgSrc} alt="PopUp-Icon" />
@@ -78,7 +78,7 @@ function PopUp({ imgSrc, text1, text2, id, close }) {
         <BtnCantainer>
           <CancelBtn buttonText="계속 작성하기" onClick={close} />
           <Space />
-          <ExitModalBtn buttonText="나가기" onClick={handleModalClose} />
+          <ExitModalBtn buttonText="나가기" onClick={handleExitModal} />
         </BtnCantainer>
       ) : (
         <SubmitBtn buttonText="확인" />

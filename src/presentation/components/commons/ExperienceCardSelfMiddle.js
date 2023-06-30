@@ -2,16 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const CardBox = styled.div`
-  width: 184px;
+  
   height: 118px;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 11px;
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
-  padding-top: 14px;
 `;
 
 const Tag = styled.div`
@@ -32,7 +31,6 @@ const TitleText = styled.p`
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.Subtitle2};
-  width: 138px;
   height: auto;
   margin-top: 11px;
   margin-bottom: 0;
@@ -50,17 +48,19 @@ const SummaryText = styled.p`
 function ExperienceCardSelfMiddle({ data }) {
   return (
     <CardBox>
-      <div style={{ display: 'flex' }}>
-        {data["selected-tags"].map((tag) => (
-          <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-        ))}
-      </div>
-      <TitleText>{data["title"]}</TitleText>
-      <SummaryText>
-        {data["summary"].length > 40
+      <div>
+        <div style={{ display: 'flex', overflow: "clip" }}>
+          {data["selected-tags"].map((tag) => (
+            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+          ))}
+        </div>
+        <TitleText>{data["title"]}</TitleText>
+        <SummaryText>
+          {/* {data["summary"].length > 40
           ? `${data["summary"].slice(0, 43)}  ...`
-          : data["summary"]}
-      </SummaryText>
+          : data["summary"]} */}
+        </SummaryText>
+      </div>
     </CardBox>
   );
 }

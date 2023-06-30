@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const CardBox = styled.div`
-  width: 184px;
+
   height: auto;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
@@ -89,17 +89,19 @@ function ExperienceCardSelf({ data }) {
 
   return (
     <CardBox>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', overflow: "clip" }}>
         {data["selected-tags"].map((tag) => (
           <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
         ))}
       </div>
       <TitleText>{data["title"]}</TitleText>
       <SummaryText>{data["summary"]}</SummaryText>
-      <ImgBox>
-        <Img src={imgSource} alt="이미지" />
-      </ImgBox>
-      <SpeechBubbleBottom/>
+      {imgSource && 
+        <ImgBox>
+          <Img src={imgSource} alt="이미지" />
+        </ImgBox>
+      }
+      <SpeechBubbleBottom />
     </CardBox>
   );
 }

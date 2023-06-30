@@ -6,6 +6,10 @@ import { ReactComponent as TimelineDot } from '../../../assets/img/timeline_dot.
 import postService from '../../../service/firebase/PostService';
 import { groupDataByDay, groupDataByMonth, groupDataByWeek, groupDataByYear } from './grouping_functions';
 import { useTimelineData, useUpdateTimelineData } from '../../../service/providers/timeline_data_provider';
+import CardWrapper from './CardWrapper';
+
+import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
+
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -53,14 +57,9 @@ const DotTimeWrapper = styled.div`
 `;
 
 const Dot = styled(TimelineDot)`
-  width: 0px;
-  height: 0px;
-  transition: width 0.6s ease, height 0.6s ease;
-
-  &.active {
-    width: 50px;
-    height: 50px;
-  }
+  width: 50px;
+  height: 50px;
+  
 `;
 
 const Time = styled.div`
@@ -69,12 +68,6 @@ const Time = styled.div`
   white-space: nowrap;
   margin-top: ${({ isAbove }) => (isAbove ? '-60px' : '60px')};
 
-  opacity: 0;
-  transition: opacity 0.6s ease;
-
-  &.active {
-    opacity: 1;
-  }
 `;
 
 function formatDate(date) {
@@ -101,13 +94,24 @@ const TimelineDataBuilder = () => {
   }
 }
 
+const CardSizeBuilder = (size) => {
+  console.log("got: " + size);
+  if(size <= 1){
+    return lxSize;
+  } else if(size <= 2){
+    return largeSize;
+  } else if(size <= 4){
+    return mediumSize;
+  } else{
+    return smallSize;
+  }
+}
+
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
   const timelineData = useTimelineData();
 
   const [dotWidth, setDotWidth] = useState(0);
-  const [activeDots, setActiveDots] = useState([]);
-  const dotRefs = useRef([]);
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -169,64 +173,8 @@ const Timeline = () => {
     };
   }, [posts, timelineContainerRef.current]);
 
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    };
-
-    const handleIntersection = (entries) => {
-      entries.forEach((entry) => {
-        const { target, isIntersecting } = entry;
-        const dotIndex = dotRefs.current.indexOf(target);
-        if (isIntersecting) {
-          setActiveDots((prevActiveDots) =>
-            prevActiveDots.includes(dotIndex) ? prevActiveDots : [...prevActiveDots, dotIndex]
-          );
-        } else {
-          setActiveDots((prevActiveDots) => prevActiveDots.filter((index) => index !== dotIndex));
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, options);
-
-    dotRefs.current.forEach((dotRef) => {
-      observer.observe(dotRef);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [posts]);
-
-  /*
-  useEffect(()=> {
-    const handleScroll = () => {
-      const container = timelineContainerRef.current;
-      if (container.scrollLeft === 0 && firstPost) {
-        loadMoreHandle("previous");
-      }
-      if (container.scrollLeft + container.offsetWidth === container.scrollWidth && lastPost) {
-        loadMoreHandle("next");
-      }
-    };
-
-    if (timelineContainerRef.current) {
-      timelineContainerRef.current.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (timelineContainerRef.current) {
-        timelineContainerRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [firstPost, lastPost])
-  */
-
   if (isLoading) {
-    return null; // Render a loading state or return null while the data is being fetched
+    return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
  const timelinePostData = TimelineDataBuilder();
  const dataLength = Object.keys(timelinePostData).length;
@@ -235,13 +183,16 @@ const Timeline = () => {
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
         Object.entries(timelinePostData).map((entry, index) =>{
+          const cardSize = Object.entries(entry[1]).length;
+          console.log(entry[1]);
           return (
-            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} ref={(ref) => (dotRefs.current[index] = ref)}>
+            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
               <DotTimeWrapper>
-                <Dot className={activeDots.includes(index) ? 'active' : ''} />
-                <Time isAbove={index % 2 === 0} className={activeDots.includes(index) ? 'active' : ''}>
+                <Dot />
+                <Time isAbove={index % 2 === 0} >
                   {entry[0]}
                 </Time>
+                <CardWrapper mode={CardSizeBuilder(cardSize)} isAbove={index % 2 !== 0} postDataList={entry[1]}/>
               </DotTimeWrapper>
             </DotContainer>
           )
