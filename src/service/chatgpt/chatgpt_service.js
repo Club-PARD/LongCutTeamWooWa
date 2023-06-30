@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const apiKey = 'YOUR_API_KEY';
+import api_key from './api_key';
 const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
 const systemPromt = [
@@ -9,12 +8,12 @@ const systemPromt = [
 ];
 
 const requestSummarize = ({maxNumLetter, targetMessage}) => {
+
     const maxNumLetterPrompt = `Nscote that the summarized text should be under ${maxNumLetter} number of letters`;
     
     systemPromt.add(maxNumLetterPrompt);
 
     const messages = systemPromt.map((prompt) => ({ role: 'system', content: prompt }));
-
     const userMessage = { role: 'user', content: targetMessage };
     messages.unshift(userMessage);
 
@@ -27,7 +26,7 @@ const generateChatResponse = async (messages) => {
       messages: messages,
     }, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${api_key}`,
         'Content-Type': 'application/json',
       },
     });
