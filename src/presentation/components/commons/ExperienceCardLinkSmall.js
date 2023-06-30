@@ -48,23 +48,25 @@ const BigLogoContainer = styled.img`
 `;
 
 function ExperienceCardLinkSmall({ data }) {
-    return (
-        <CardBox>
-            {data["tag-is"] === null ? (
-                <BigLogoContainer src={BigLogo} alt="logo img" />
-            ) : (
-                <div style={{ display: 'flex' }}>
-                    {data["selected-tags"].map((tag) => (
-                        <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-                    ))}
-                </div>
-            )}
-            <TitleText>
-                {data["title"]}
-            </TitleText>
+  const tags = data["selected-tags"];
 
-        </CardBox>
-    );
+  return (
+    <CardBox>
+      {data["tag-is"] === null ? (
+        <BigLogoContainer src={BigLogo} alt="logo img" />
+      ) : (tags &&
+        <div style={{ display: 'flex' }}>
+          {tags.map((tag) => (
+            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+          ))}
+        </div>
+      )}
+      <TitleText>
+        {data["title"]}
+      </TitleText>
+
+    </CardBox>
+  );
 }
 
 export default ExperienceCardLinkSmall;

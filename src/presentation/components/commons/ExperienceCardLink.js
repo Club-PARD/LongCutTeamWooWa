@@ -89,8 +89,8 @@ const BigLogoContainer = styled.img`
   margin-bottom : 5px; 
 `;
 
-function getWebsiteLog( websiteName ) {
-  if (websiteName == null ) {
+function getWebsiteLog(websiteName) {
+  if (websiteName == null) {
     console.log("받은 문자열 값이 없습니다.");
     return null;
   }
@@ -106,15 +106,15 @@ function getWebsiteLog( websiteName ) {
 
 function ExperienceCardLink({ data }) {
   const websiteName = data["crawled-website"];
-  console.log(websiteName);
+  const tags = data["selected-tags"];
 
   return (
-    <CardBox> 
+    <CardBox>
       {data["tag-is"] === null ? (
         <BigLogoContainer src={BigLogo} alt="logo img" />
-      ) : (
+      ) : (tags &&
         <div style={{ display: 'flex' }}>
-          {data["selected-tags"].map((tag) => (
+          {tags.map((tag) => (
             <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
           ))}
         </div>
@@ -130,6 +130,6 @@ function ExperienceCardLink({ data }) {
 }
 
 
-export {ExperienceCardLink};
+export { ExperienceCardLink };
 
 

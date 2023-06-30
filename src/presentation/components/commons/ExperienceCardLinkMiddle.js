@@ -55,13 +55,14 @@ const BigLogoContainer = styled.img`
 `;
 
 function ExperienceCardLinkMiddle({ data }) {
+  const tags = data["selected-tags"];
   return (
     <CardBox>
       {data["tag-is"] === null ? (
         <BigLogoContainer src={BigLogo} alt="logo img" />
-      ) : (
+      ) : (tags &&
         <div style={{ display: 'flex' }}>
-          {data["selected-tags"].map((tag) => (
+          {tags.map((tag) => (
             <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
           ))}
         </div>
