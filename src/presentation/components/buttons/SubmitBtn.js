@@ -26,7 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function SubmitBtn({onSubmit, buttonText }) {
+function SubmitBtn({ onSubmit, buttonText }) {
   const [open, setOpen] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
@@ -40,7 +40,7 @@ function SubmitBtn({onSubmit, buttonText }) {
   }
 
   const handleClick = async () => {
-    if(isBusy) return;
+    if (isBusy) return;
 
     setIsBusy(true);
     console.log("hi");
@@ -68,9 +68,7 @@ function SubmitBtn({onSubmit, buttonText }) {
             <Alert
               onClose={handleClose}
               severity="success"
-              sx={{ width: "100%",
-                    backgroundColor: "#7AAA8F", }}
-              
+              sx={{ width: "100%", backgroundColor: "#7AAA8F" }}
             >
               기록이 완료되었습니다.
             </Alert>
@@ -82,4 +80,3 @@ function SubmitBtn({onSubmit, buttonText }) {
 }
 
 export default SubmitBtn;
-

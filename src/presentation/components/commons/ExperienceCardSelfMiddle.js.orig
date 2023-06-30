@@ -46,6 +46,17 @@ const SummaryText = styled.p`
 `;
 
 function ExperienceCardSelfMiddle({ data }) {
+<<<<<<< HEAD
+  // console.log(data);
+  return (
+    <CardBox>
+      <div>
+        {/* <div style={{ display: 'flex', overflow: "clip" }}>
+          {data["selected-tags"].map((tag) => (
+            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+          ))}
+        </div> */}
+=======
   const tags = data["selected-tags"];
   return (
     <CardBox>
@@ -55,6 +66,7 @@ function ExperienceCardSelfMiddle({ data }) {
             <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
           ))}
         </div>}
+>>>>>>> 6d4f95d58a8621b70cdc70f3896195c689c690b4
         <TitleText>{data["title"]}</TitleText>
         <SummaryText>
           {/* {data["summary"].length > 40
