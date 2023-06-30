@@ -17,7 +17,7 @@ const BtnText = styled.div`
 
 const BtnDiv = styled.button`
   padding: 4px 12px;
-  background: ${(props) => props.theme.color.primary300};
+  background: ${(props) => (props.disabled ? 'grey' : props.theme.color.primary300)};
   border: 1px solid #cdcdcd;
   border-radius: 100px;
 `;
@@ -31,6 +31,13 @@ function SubmitBtn({onSubmit, buttonText }) {
   const [isBusy, setIsBusy] = React.useState(false);
 
   const dataInput = useDataInput();
+
+  const checkValidity = () => {
+    console.log(dataInput["selected-tags"]);
+    return dataInput["title"] && 
+    (dataInput["selected-tags"] && Object.entries(dataInput["selected-tags"]).length < 3 && Object.entries(dataInput["selected-tags"]).length > 0) && 
+    ((dataInput["add-template-1"] && dataInput["add-template-2"]) || dataInput["add-free"]);
+  }
 
   const handleClick = async () => {
     if(isBusy) return;
@@ -52,9 +59,7 @@ function SubmitBtn({onSubmit, buttonText }) {
 
   return (
     <>
-      <BtnDiv className={(dataInput["title"] && 
-    (dataInput["selected-tags"] && Object.entries(dataInput["selected-tags"]).length < 3) && 
-    ((dataInput["add-template-1"] && dataInput["add-template-2"]) || dataInput["add-free"])) ? "enable" : "disabled"} onClick={!isBusy ? handleClick : () => {}}>
+      <BtnDiv onClick={!isBusy ? handleClick : () => {}} disabled={!checkValidity()}> 
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
       {buttonText === "기록하기" && (
