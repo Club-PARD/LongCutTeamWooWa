@@ -8,12 +8,12 @@ const systemPromt = [
 ];
 
 const requestSummarize = ({maxNumLetter, targetMessage}) => {
+
     const maxNumLetterPrompt = `Nscote that the summarized text should be under ${maxNumLetter} number of letters`;
     
     systemPromt.add(maxNumLetterPrompt);
 
     const messages = systemPromt.map((prompt) => ({ role: 'system', content: prompt }));
-
     const userMessage = { role: 'user', content: targetMessage };
     messages.unshift(userMessage);
 

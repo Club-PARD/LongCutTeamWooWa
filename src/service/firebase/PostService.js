@@ -1,3 +1,4 @@
+import { requestSummarize } from '../chatgpt/chatgpt_service';
 import FirebaseService from './FirebaseService';
 import firebase from 'firebase/compat/app';
 
@@ -51,17 +52,22 @@ class PostService {
     // Create a post
     async createPost(userId, postData) {
         try {
+            const targetMessageList = [];
             if(postData["add-free"]){
-                
+                targetMessageList.add(postData["add-free"]);
             }
             if(postData["add-template-1"]){
-                
+                targetMessageList.add(postData["add-template-1"]);
             }
             if(postData["add-template-2"]){
-                
+                targetMessageList.add(postData["add-template-2"]);
             }
+            const flattenedMessage = targetMessageList.join(" ");
+
+            const summarizedText = await requestSummarize(20, flattenedMessage);
             // Combine the userId with the post data
             const post = {
+                'summary': summarizedText,
                 'userId': userId,
                 ...postData,
             };
