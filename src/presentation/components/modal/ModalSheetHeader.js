@@ -6,7 +6,10 @@ import CloseIcon from "../../../assets/img/close_icon.svg";
 import ExpandIcon from "../../../assets/img/expand_icon.svg";
 import ReductionIcon from "../../../assets/img/reduction.svg";
 import PopUpBuilder from "../popup/PopUpBuilder";
-import { useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import {
+  useDataInput,
+  useUpdateDataInput,
+} from "../../../service/providers/data_input_provider";
 
 const ModalHeaderContainer = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -17,7 +20,6 @@ const ModalHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  
 `;
 
 const Background = styled.div`
@@ -29,24 +31,9 @@ const Background = styled.div`
   height: 100%;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.3);
-  `;
-
-const ModalExpandIcon = styled.img`
-  width: 24px;
-  height: 24px;
 `;
 
-const ModalHeaderContent = styled.div`
-  width: 100px;
-  height: 24px;
-  font-size: 100px;
-`;
-const ModalCloseIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const PopUpContainer = styled.div`;
+const PopUpContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -54,8 +41,7 @@ const PopUpContainer = styled.div`;
   z-index: 99;
 `;
 
-
-function ModalHeader({ title, modalClose}) {
+function ModalHeader({ title, handleModalOpen }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -87,9 +73,13 @@ function ModalHeader({ title, modalClose}) {
       />
       {isPopupOpen && (
         <Background>
-        <PopUpContainer>
-          <PopUpBuilder id={1} close={handlePopupClose} modalClose={modalClose} />
-        </PopUpContainer>
+          <PopUpContainer>
+            <PopUpBuilder
+              id={1}
+              close={handlePopupClose}
+              handleModalOpen={handleModalOpen}
+            />
+          </PopUpContainer>
         </Background>
       )}
     </ModalHeaderContainer>
@@ -97,4 +87,3 @@ function ModalHeader({ title, modalClose}) {
 }
 
 export default ModalHeader;
-

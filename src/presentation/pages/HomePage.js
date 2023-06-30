@@ -10,12 +10,12 @@ import ExperienceCardSelfMiddle from "../components/commons/ExperienceCardSelfMi
 import ExperienceCardLinkMiddle from "../components/commons/ExperienceCardLinkMiddle";
 import ExperienceCardLinkSmall from "../components/commons/ExperienceCardLinkSmall";
 import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
-
-
-
 import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 import { DataInputProvider } from "../../service/providers/data_input_provider";
+
+import ListModal from "../components/postListItem";
+
 
 const TestBox = styled.div`
   width: 100%;
@@ -66,7 +66,8 @@ function HomePage() {
         </div>
       </TimelineDataProvider>
       <TestBox>
-        <ExperienceCardLinkSmall data={exampleCrawledData} />
+        {/* <ExperienceCardLink data={exampleCrawledData} /> */}
+        <ListModal/>  
       </TestBox>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   DataInputProvider,
@@ -46,26 +46,30 @@ const Div = ({ children }) => {
   return <Background isExpanded={dataInput.isExpanded}>{children}</Background>;
 };
 
-export const ModalSheetBuilder = ({ modalType, showModal, setShowModal }) => {
+export const ModalSheetBuilder = ({
+  modalType,
+  isModalOpen,
+  handleModalOpen,
+}) => {
   if (modalType === "post") {
     return <ModalView />;
   }
-  const handleModalClose = () => {
-    setShowModal(!showModal);
-  };
 
   return (
-    <DataInputProvider>
-      {showModal ? (
+    <>
+      {isModalOpen ? (
         <Div
           children={
             <ModalWrapper>
-              <ModalSheet modalType={modalType} modalClose={handleModalClose} />
+              <ModalSheet
+                modalType={modalType}
+                handleModalOpen={handleModalOpen}
+              />
             </ModalWrapper>
           }
         />
       ) : null}
-    </DataInputProvider>
+    </>
   );
 };
 export default ModalSheetBuilder;

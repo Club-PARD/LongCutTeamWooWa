@@ -54,7 +54,7 @@ const BigLogoContainer = styled.img`
   margin-top : 2px;
 `;
 
-function ExperienceCardSelfMiddle({ data }) {
+function ExperienceCardLinkMiddle({ data }) {
   return (
     <CardBox>
       {data["tag-is"] === null ? (
@@ -76,4 +76,4 @@ function ExperienceCardSelfMiddle({ data }) {
   );
 }
 
-export default ExperienceCardSelfMiddle;
+export default ExperienceCardLinkMiddle;

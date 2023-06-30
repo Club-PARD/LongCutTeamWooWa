@@ -24,7 +24,7 @@ const popup_db = [
   },
 ];
 
-function PopUpBuilder({ id, close, modalClose }) {
+function PopUpBuilder({ id, close, handleModalOpen }) {
   const popup_data = popup_db.filter((value) => value["id"] === id);
   if (!popup_data.length > 0) return;
 
@@ -36,7 +36,7 @@ function PopUpBuilder({ id, close, modalClose }) {
       text2={data["body"]}
       id={data["id"]}
       close={close}
-      modalClose={modalClose}
+      handleModalOpen={handleModalOpen}
     />
   );
 }

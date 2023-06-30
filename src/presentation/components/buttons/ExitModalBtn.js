@@ -19,11 +19,11 @@ const BtnDiv = styled.button`
 `;
 
 
-function ExitModalBtn({onSubmit, buttonText }) {
+function ExitModalBtn({ onClick, buttonText }) {
   
   return (
     <>
-      <BtnDiv onClick={onSubmit}>
+      <BtnDiv  onClick={onClick}>
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
     
