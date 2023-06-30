@@ -3,6 +3,7 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useDataInput } from "../../../service/providers/data_input_provider";
 
 const BtnText = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -29,6 +30,8 @@ function SubmitBtn({onSubmit, buttonText }) {
   const [open, setOpen] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
+  const dataInput = useDataInput();
+
   const handleClick = async () => {
     if(isBusy) return;
 
@@ -49,7 +52,9 @@ function SubmitBtn({onSubmit, buttonText }) {
 
   return (
     <>
-      <BtnDiv onClick={!isBusy ? handleClick : () => {}}>
+      <BtnDiv className={(dataInput["title"] && 
+    (dataInput["selected-tags"] && Object.entries(dataInput["selected-tags"]).length < 3) && 
+    ((dataInput["add-template-1"] && dataInput["add-template-2"]) || dataInput["add-free"])) ? "enable" : "disabled"} onClick={!isBusy ? handleClick : () => {}}>
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
       {buttonText === "기록하기" && (

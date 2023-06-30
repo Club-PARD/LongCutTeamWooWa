@@ -38,13 +38,14 @@ const TitleText = styled.p`
 `;
 
 function ExperienceCardSelfSmall({ data }) {
+  const tags = data["selected-tags"];
   return (
     <CardBox>
-      <div style={{ display: 'flex', overflow: "clip" }}>
-        {data["selected-tags"].map((tag) => (
+      {tags && <div style={{ display: 'flex', overflow: "clip" }}>
+        {tags.map((tag) => (
           <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
         ))}
-      </div>
+      </div>}
       <TitleText>
         {data["title"].length > 19
           ? `${data["title"].slice(0, 18)}   ...`
