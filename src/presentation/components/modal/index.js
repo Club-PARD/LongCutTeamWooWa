@@ -48,6 +48,7 @@ const Div = ({ children }) => {
 
 export const ModalSheetBuilder = ({
   modalType,
+  handleSetModalType,
   isModalOpen,
   handleModalOpen,
 }) => {
@@ -63,6 +64,7 @@ export const ModalSheetBuilder = ({
             <ModalWrapper>
               <ModalSheet
                 modalType={modalType}
+                handleSetModalType={handleSetModalType}
                 handleModalOpen={handleModalOpen}
               />
             </ModalWrapper>

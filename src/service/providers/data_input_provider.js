@@ -9,6 +9,7 @@ const DataInputProvider = ({ children }) => {
 
   // Function to update the inputData state
   const updateDataInput = (name, value) => {
+   
     setInputData((prevData) => ({
       ...prevData,
       [name]: value,
