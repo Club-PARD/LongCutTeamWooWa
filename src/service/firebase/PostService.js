@@ -51,6 +51,15 @@ class PostService {
     // Create a post
     async createPost(userId, postData) {
         try {
+            if(postData["add-free"]){
+                
+            }
+            if(postData["add-template-1"]){
+                
+            }
+            if(postData["add-template-2"]){
+                
+            }
             // Combine the userId with the post data
             const post = {
                 'userId': userId,

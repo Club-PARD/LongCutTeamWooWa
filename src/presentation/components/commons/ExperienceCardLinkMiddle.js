@@ -68,9 +68,9 @@ function ExperienceCardLinkMiddle({ data }) {
       )}
       <TitleText>{data["title"]}</TitleText>
       <SummaryText>
-        {data["summary"].length > 44
+        {/* {data["summary"].length > 44
           ? `${data["summary"].slice(0, 43)}  ...`
-          : data["summary"]}
+          : data["summary"]} */}
       </SummaryText>
     </CardBox>
   );

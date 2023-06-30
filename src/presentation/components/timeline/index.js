@@ -6,6 +6,10 @@ import { ReactComponent as TimelineDot } from '../../../assets/img/timeline_dot.
 import postService from '../../../service/firebase/PostService';
 import { groupDataByDay, groupDataByMonth, groupDataByWeek, groupDataByYear } from './grouping_functions';
 import { useTimelineData, useUpdateTimelineData } from '../../../service/providers/timeline_data_provider';
+import CardWrapper from './CardWrapper';
+
+import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
+
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -90,6 +94,19 @@ const TimelineDataBuilder = () => {
   }
 }
 
+const CardSizeBuilder = (size) => {
+  console.log("got: " + size);
+  if(size <= 1){
+    return lxSize;
+  } else if(size <= 2){
+    return largeSize;
+  } else if(size <= 4){
+    return mediumSize;
+  } else{
+    return smallSize;
+  }
+}
+
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
   const timelineData = useTimelineData();
@@ -157,7 +174,7 @@ const Timeline = () => {
   }, [posts, timelineContainerRef.current]);
 
   if (isLoading) {
-    return null; // Render a loading state or return null while the data is being fetched
+    return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
  const timelinePostData = TimelineDataBuilder();
  const dataLength = Object.keys(timelinePostData).length;
@@ -166,6 +183,7 @@ const Timeline = () => {
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
         Object.entries(timelinePostData).map((entry, index) =>{
+          const cardSize = Object.entries(entry[1]).length;
           console.log(entry[1]);
           return (
             <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
@@ -174,6 +192,7 @@ const Timeline = () => {
                 <Time isAbove={index % 2 === 0} >
                   {entry[0]}
                 </Time>
+                <CardWrapper mode={CardSizeBuilder(cardSize)} isAbove={index % 2 !== 0} postDataList={entry[1]}/>
               </DotTimeWrapper>
             </DotContainer>
           )

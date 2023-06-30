@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const CardBox = styled.div`
-  width: 184px;
+  
   height: 38px;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 11px;
   display: flex;
   flex-direction: column;
 //   justify-content: space-between;
@@ -38,21 +38,21 @@ const TitleText = styled.p`
 `;
 
 function ExperienceCardSelfSmall({ data }) {
-    return (
-        <CardBox>
-            <div style={{ display: 'flex' }}>
-                {data["selected-tags"].map((tag) => (
-                    <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-                ))}
-            </div>
-            <TitleText>
-                {data["title"].length > 19
-                    ? `${data["title"].slice(0, 18)}   ...`
-                    : data["title"]}
-            </TitleText>
+  return (
+    <CardBox>
+      <div style={{ display: 'flex', overflow: "clip" }}>
+        {data["selected-tags"].map((tag) => (
+          <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
+        ))}
+      </div>
+      <TitleText>
+        {data["title"].length > 19
+          ? `${data["title"].slice(0, 18)}   ...`
+          : data["title"]}
+      </TitleText>
 
-        </CardBox>
-    );
+    </CardBox>
+  );
 }
 
 export default ExperienceCardSelfSmall;
