@@ -31,8 +31,7 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
-const ModalSheet = ({ modalType }) => {
-
+const ModalSheet = ({ modalType, handleModalOpen }) => {
   const dataInput = useDataInput();
 
   // Function to handle button click and collect the input data
@@ -107,7 +106,7 @@ const ModalSheet = ({ modalType }) => {
         "--max-width": "100%",
       }}
     >
-      <ModalHeader title={data["title"]} />
+      <ModalHeader title={data["title"]} handleModalOpen={handleModalOpen} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
