@@ -10,7 +10,6 @@ import ExperienceCardSelfMiddle from "../components/commons/ExperienceCardSelfMi
 import ExperienceCardLinkMiddle from "../components/commons/ExperienceCardLinkMiddle";
 import ExperienceCardLinkSmall from "../components/commons/ExperienceCardLinkSmall";
 import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
-import ExperienceCardDot from "../components/commons/ExperienceCardDot";
 
 
 
@@ -67,7 +66,7 @@ function HomePage() {
         </div>
       </TimelineDataProvider>
       <TestBox>
-        <ExperienceCardDot data={exampleCrawledData} />
+        <ExperienceCardLinkSmall data={exampleCrawledData} />
       </TestBox>
     </div>
   );

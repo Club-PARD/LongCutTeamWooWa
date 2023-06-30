@@ -53,14 +53,9 @@ const DotTimeWrapper = styled.div`
 `;
 
 const Dot = styled(TimelineDot)`
-  width: 0px;
-  height: 0px;
-  transition: width 0.6s ease, height 0.6s ease;
-
-  &.active {
-    width: 50px;
-    height: 50px;
-  }
+  width: 50px;
+  height: 50px;
+  
 `;
 
 const Time = styled.div`
@@ -69,12 +64,6 @@ const Time = styled.div`
   white-space: nowrap;
   margin-top: ${({ isAbove }) => (isAbove ? '-60px' : '60px')};
 
-  opacity: 0;
-  transition: opacity 0.6s ease;
-
-  &.active {
-    opacity: 1;
-  }
 `;
 
 function formatDate(date) {
@@ -106,8 +95,6 @@ const Timeline = () => {
   const timelineData = useTimelineData();
 
   const [dotWidth, setDotWidth] = useState(0);
-  const [activeDots, setActiveDots] = useState([]);
-  const dotRefs = useRef([]);
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -169,62 +156,6 @@ const Timeline = () => {
     };
   }, [posts, timelineContainerRef.current]);
 
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    };
-
-    const handleIntersection = (entries) => {
-      entries.forEach((entry) => {
-        const { target, isIntersecting } = entry;
-        const dotIndex = dotRefs.current.indexOf(target);
-        if (isIntersecting) {
-          setActiveDots((prevActiveDots) =>
-            prevActiveDots.includes(dotIndex) ? prevActiveDots : [...prevActiveDots, dotIndex]
-          );
-        } else {
-          setActiveDots((prevActiveDots) => prevActiveDots.filter((index) => index !== dotIndex));
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, options);
-
-    dotRefs.current.forEach((dotRef) => {
-      observer.observe(dotRef);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [posts]);
-
-  /*
-  useEffect(()=> {
-    const handleScroll = () => {
-      const container = timelineContainerRef.current;
-      if (container.scrollLeft === 0 && firstPost) {
-        loadMoreHandle("previous");
-      }
-      if (container.scrollLeft + container.offsetWidth === container.scrollWidth && lastPost) {
-        loadMoreHandle("next");
-      }
-    };
-
-    if (timelineContainerRef.current) {
-      timelineContainerRef.current.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (timelineContainerRef.current) {
-        timelineContainerRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [firstPost, lastPost])
-  */
-
   if (isLoading) {
     return null; // Render a loading state or return null while the data is being fetched
   }
@@ -235,11 +166,12 @@ const Timeline = () => {
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
         Object.entries(timelinePostData).map((entry, index) =>{
+          console.log(entry[1]);
           return (
-            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} ref={(ref) => (dotRefs.current[index] = ref)}>
+            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
               <DotTimeWrapper>
-                <Dot className={activeDots.includes(index) ? 'active' : ''} />
-                <Time isAbove={index % 2 === 0} className={activeDots.includes(index) ? 'active' : ''}>
+                <Dot />
+                <Time isAbove={index % 2 === 0} >
                   {entry[0]}
                 </Time>
               </DotTimeWrapper>
