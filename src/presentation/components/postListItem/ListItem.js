@@ -16,29 +16,17 @@ const ListItemContainer = styled.div`
   position: relative;
 `;
 
-const CheckIconContainer = styled.div`
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const CheckIcon = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
 const TiteDateContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 0px;
   padding-bottom: 0px;
+`;
+
+const CheckboxIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -149,9 +137,26 @@ const TagItem = styled.div`
   cursor: pointer;
 `;
 
-function ListItem({ item, data }) {
+const CheckIconContainer = styled.div`
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+const CheckIcon = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+function ListItem({ item, data, onItemSelect }) {
   const [selectedTags, setSelectedTags] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleTagClick = (tagId) => {
     if (selectedTags.includes(tagId)) {
@@ -163,14 +168,10 @@ function ListItem({ item, data }) {
     }
   };
 
-  const handleCheckIconClick = () => {
-    setIsChecked(!isChecked);
-  };
-
   return (
     <ListItemContainer>
-      <CheckIconContainer onClick={handleCheckIconClick}>
-        <CheckIcon src={isChecked ? Icon_checked : Icon_checkDefault} alt="Check Icon" />
+      <CheckIconContainer>
+        <CheckIcon src={Icon_checkDefault} alt="Check Icon" />
       </CheckIconContainer>
       <TiteDateContainer>
         <Title>{item.title}</Title>
@@ -182,38 +183,37 @@ function ListItem({ item, data }) {
             <TagLabel>태그 : </TagLabel>
             {selectedTags.length > 0 && (
               <TagListContainer>
-                {selectedTags.map((tagId) => {
-                  const tag = data.tags.find((tag) => tag.id === tagId);
-                  return (
-                    <TagItem
-                      key={tag.id}
-                      isSelected={true}
-                      backgroundColor={tag.color}
-                      onClick={() => handleTagClick(tag.id)}
-                    >
-                      {tag.name}
-                    </TagItem>
-                  );
-                })}
+                {data.tags.map((tag) => (
+                  <TagItem
+                    key={tag.id}
+                    isSelected={selectedTags.includes(tag.id)}
+                    backgroundColor={tag.color}
+                    onClick={() => handleTagClick(tag.id)}
+                  >
+                    {tag.name}
+                  </TagItem>
+                ))}
               </TagListContainer>
             )}
             <DropdownArrow>▼</DropdownArrow>
           </DropdownButton>
-          <DropdownContent>
-            <TagListTitle>태그선택</TagListTitle>
-            <TagListContainer>
-              {data.tags.map((tag) => (
-                <TagItem
-                  key={tag.id}
-                  isSelected={selectedTags.includes(tag.id)}
-                  backgroundColor={tag.color}
-                  onClick={() => handleTagClick(tag.id)}
-                >
-                  {tag.name}
-                </TagItem>
-              ))}
-            </TagListContainer>
-          </DropdownContent>
+          {selectedTags.length > 0 && (
+            <DropdownContent>
+              <TagListTitle>태그선택</TagListTitle>
+              <TagListContainer>
+                {data.tags.map((tag) => (
+                  <TagItem
+                    key={tag.id}
+                    isSelected={selectedTags.includes(tag.id)}
+                    backgroundColor={tag.color}
+                    onClick={() => handleTagClick(tag.id)}
+                  >
+                    {tag.name}
+                  </TagItem>
+                ))}
+              </TagListContainer>
+            </DropdownContent>
+          )}
         </DropdownContainer>
       </TagContainer>
     </ListItemContainer>
