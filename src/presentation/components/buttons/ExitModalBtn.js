@@ -23,7 +23,7 @@ function ExitModalBtn({ onClick, buttonText }) {
   
   return (
     <>
-      <BtnDiv  onClick={onClick}>
+      <BtnDiv  onClick={onClick} >
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
     
