@@ -111,7 +111,7 @@ const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
         <>
-          <InputTitle handleSetModalType={handleSetModalType}  />
+          <InputTitle modalType={modalType} handleSetModalType={handleSetModalType}  />
           <VerticalSpacing height={13.9} />
         </>
       ) : (
