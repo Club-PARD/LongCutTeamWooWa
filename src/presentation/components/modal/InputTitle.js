@@ -21,6 +21,17 @@ const ImgBtn = styled.button`
   cursor: pointer;
 `;
 
+const TempBtn = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
 const Img1 = styled.img``;
 
 const Img2 = styled.img``;
@@ -66,10 +77,10 @@ function InputTitle({ handleSetModalType }) {
           <Img1 src={img1} />
           <TextDiv>이미지</TextDiv>
         </ImgBtn>
-        <ImgBtn onClick={handleSetModalType}>
+        <TempBtn onClick={handleSetModalType}>
           <Img2 src={img2} />
           <TextDiv >템플릿</TextDiv>
-        </ImgBtn>
+        </TempBtn>
       </div>
     </Div>
   );

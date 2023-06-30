@@ -187,17 +187,20 @@ function Header() {
   const [modalType, setModalType] = useState("add-free");
 
   const handleSetModalType = () => {
-    if(modalType === "add-free"){
+    if (modalType === "add-free") {
       setModalType("add-template");
-    }
-    else{
+    } else {
       setModalType("add-free");
     }
   };
 
+  const ResetModalType = () => {
+    setModalType("add-free");
+  };
 
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
+    ResetModalType();
   };
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
