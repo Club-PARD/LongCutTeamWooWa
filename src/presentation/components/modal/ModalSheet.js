@@ -31,6 +31,8 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
+
+
 const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
   const dataInput = useDataInput();
 
