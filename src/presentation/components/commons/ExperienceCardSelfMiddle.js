@@ -24,7 +24,7 @@ const Tag = styled.div`
   align-items: center;
   width: fit-content;
   margin-right: 5px;
-  maring-bottom : 0px; 
+  margin-bottom : 0px; 
 `;
 
 const TitleText = styled.p`
@@ -46,14 +46,15 @@ const SummaryText = styled.p`
 `;
 
 function ExperienceCardSelfMiddle({ data }) {
+  // console.log(data);
   return (
     <CardBox>
       <div>
-        <div style={{ display: 'flex', overflow: "clip" }}>
+        {/* <div style={{ display: 'flex', overflow: "clip" }}>
           {data["selected-tags"].map((tag) => (
             <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
           ))}
-        </div>
+        </div> */}
         <TitleText>{data["title"]}</TitleText>
         <SummaryText>
           {/* {data["summary"].length > 40
