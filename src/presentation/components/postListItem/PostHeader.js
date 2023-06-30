@@ -26,26 +26,28 @@ const UserId = styled.div`
   font-size: ${props => props.theme.fontSizes.Subtitle1};
   color: ${props => props.theme.color.blackHigh};
 `
-const Close_icon = styled.button`
-  width : 15px; 
-  height : 15px; 
-  margin-right : 10px; 
-`
+
+const CloseButton = styled(IconButton)`
+  margin-right: 100px !important;
+  margin-left: auto;
+`;
 
 function PostHeader({ data }) {
   
+  // 확인필요 **********************************************************
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
+  // 확인필요 **********************************************************
 
   return (
     <HeaderContainer>
       <HeaderIcon src={Logo_Disquiet} alt="로고이미지" />
       <UserId>{data["userId"]}</UserId>
-      <IconButton
+      <CloseButton
         iconImage={CloseIcon}
-        size={"24px"}
+        size={"16px"}
         onClick={handlePopupClose}
       />
     </HeaderContainer>
