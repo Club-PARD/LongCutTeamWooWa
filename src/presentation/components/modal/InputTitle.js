@@ -1,14 +1,10 @@
-import styled from "styled-components";
-
-import img1 from "../../../assets/img/이미지.png";
-import img2 from "../../../assets/img/템플릿.png";
+import styled, { css } from "styled-components";
+import img1 from "../../../assets/img/image.svg";
+import img2 from "../../../assets/img/template.svg";
+import img2_1 from "../../../assets/img/activeTemplate.svg";
 import InputTextField from "../commons/InputTextField";
-import React, { useEffect } from "react";
-import {
-  UseDataInput,
-  useDataInput,
-  useUpdateDataInput,
-} from "../../../service/providers/data_input_provider";
+import React from "react";
+import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
 const ImgBtn = styled.button`
   display: flex;
@@ -34,7 +30,13 @@ const TempBtn = styled.button`
 
 const Img1 = styled.img``;
 
-const Img2 = styled.img``;
+const Img2 = styled.img`
+${({ modalType }) =>
+modalType === "add-template" &&
+css`
+  content: url(${img2_1});
+`};
+`;
 
 const Div = styled.div`
   display: flex;
@@ -49,6 +51,12 @@ const TextDiv = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: ${(props) => props.theme.color.blackHigh};
+  ${({ modalType }) =>
+modalType === "add-template" &&
+css`
+font-weight: ${(props) => props.theme.fontWeights.semibold};
+  color: black;
+`};
   font-style: normal;
   white-space: nowrap;
   height: 22px;
@@ -56,14 +64,11 @@ const TextDiv = styled.div`
   text-align: center;
 `;
 
-function InputTitle({ handleSetModalType }) {
-
-
+function InputTitle({ modalType, handleSetModalType }) {
   const updateDataInput = useUpdateDataInput();
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
   };
-  
 
   return (
     <Div>
@@ -78,8 +83,8 @@ function InputTitle({ handleSetModalType }) {
           <TextDiv>이미지</TextDiv>
         </ImgBtn>
         <TempBtn onClick={handleSetModalType}>
-          <Img2 src={img2} />
-          <TextDiv >템플릿</TextDiv>
+          <Img2 src={img2} modalType={modalType} />
+          <TextDiv modalType={modalType}>템플릿</TextDiv>
         </TempBtn>
       </div>
     </Div>
