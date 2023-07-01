@@ -59,8 +59,22 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen, handleSetModalType }) {
+function PopUp({
+  imgSrc,
+  text1,
+  text2,
+  id,
+  close,
+  handleModalOpen,
+  handleSetModalType,
+}) {
   const dataInput = useDataInput();
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (value) => {
+    updateDataInput("add-free", value);
+    updateDataInput("add-template-1", value);
+    updateDataInput("add-template-2", value);
+  };
   const handleExitModal = () => {
     handleModalOpen();
     dataInput.isExpanded = false;
@@ -88,6 +102,7 @@ function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen, handleSetModa
             onClick={() => {
               handleSetModalType();
               close();
+              handleInputChange(null);
             }}
           />
         </BtnCantainer>
