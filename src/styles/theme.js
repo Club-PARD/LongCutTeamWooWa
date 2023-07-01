@@ -29,7 +29,7 @@ export const theme = {
     primary050: '#e1faf2',
     primary100: '#b6f3de',
     primary200:'#7febc8',
-    primary300: '#11e3b2', 
+    primary300: '#272727', 
     primary400: '#00db9f', 
     primary500: '#00d28e',
     primary600: '#00c181',

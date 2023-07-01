@@ -16,7 +16,7 @@ const ListItemContainer = styled.div`
   position: relative;
 `;
 
-const TiteDateContainer = styled.div`
+const TitleDateContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 0px;
@@ -94,7 +94,10 @@ const DropdownContent = styled.div`
   border: 1px solid var(--disabled-1, #ababab);
   background: var(--surface-white, #fff);
   padding: 5px;
+  display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
+
+
 
 const TagLabel = styled.span`
   margin-right: 5px;
@@ -157,6 +160,7 @@ const CheckIcon = styled.img`
 
 function ListItem({ item, data, onItemSelect, isSelected }) {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleTagClick = (tagId) => {
     if (selectedTags.includes(tagId)) {
@@ -168,6 +172,11 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
     }
   };
 
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  
+
   return (
     <ListItemContainer>
       <CheckIconContainer onClick={() => onItemSelect(item.id, !isSelected)}>
@@ -176,13 +185,13 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
           alt="Check Icon"
         />
       </CheckIconContainer>
-      <TiteDateContainer>
+      <TitleDateContainer>
         <Title>{item.title}</Title>
         <Date>{item.date}</Date>
-      </TiteDateContainer>
+      </TitleDateContainer>
       <TagContainer>
         <DropdownContainer>
-          <DropdownButton>
+          <DropdownButton onClick={handleDropdownToggle}>
             <TagLabel>태그 : </TagLabel>
             {selectedTags.length > 0 && (
               <TagListContainer>
@@ -201,7 +210,7 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
             <DropdownArrow>▼</DropdownArrow>
           </DropdownButton>
           {selectedTags.length > 0 && (
-            <DropdownContent>
+            <DropdownContent isOpen={isDropdownOpen}>
               <TagListTitle>태그선택</TagListTitle>
               <TagListContainer>
                 {data.tags.map((tag) => (

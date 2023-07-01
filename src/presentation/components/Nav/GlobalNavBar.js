@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LogoImage from "../../../assets/img/LogoImg.svg";
+import LogoText from "../../../assets/img/LogoText.svg";
 import UserProfile from "../../../assets/img/UserProfileExample.svg";
 import SearchIcon from "../../../assets/img/SearchIcon.svg";
 
@@ -25,18 +26,16 @@ const LogoImg = styled.img`
   margin-right: 8px;
 `;
 
-const LogoText = styled.div`
-  font-family: Mont;
-  font-weight: ${props => props.theme.fontWeights.heavy};
-  font-size: 20px;
-  color: #F8F5F0;
+const LogoTextImg = styled.img`
+  width: 64px;
+  height: 41px;
 `;
 
 const SearchExperience = styled.div`
   display: flex;
   align-items: center;
   margin-right: 16px;
-  margin-left: 25px;
+  margin-left: 80px;
   padding: 8px;
   border-radius: 40px;
   flex-shrink: 0;
@@ -55,12 +54,14 @@ const SearchInput = styled.input`
   outline: none;
   background-color: transparent;
   color: ${props => props.theme.color.blackHigh};
+  // color: var(--disabled-1, #ABABAB);
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-size: ${props => props.theme.fontSizes.Subtitle2};
-  font-weight: ${props => props.theme.fontWeights.regular};
+  // font-weight: ${props => props.theme.fontWeights.regular};
+  font-weight: 500;
   
   &::placeholder {
-    color: ${props => props.theme.color.blackHigh};
+    color: var(--disabled-1, #ABABAB);
   }
 `;
 
@@ -127,7 +128,7 @@ const GlobalNavBar = () => {
     <GlobalContainer>
       <Logo>
         <LogoImg src={LogoImage} />
-        <LogoText>Archiving</LogoText>
+        <LogoTextImg src={LogoText} />
         <SearchExperience>
           <SearchIconImg src={SearchIcon} />
           <SearchInput type="text" placeholder="내 경험 검색하기" />
