@@ -27,7 +27,16 @@ const Tag = styled.div`
   width: fit-content;
   margin-right: 5px;
 `;
-
+const LineTag = styled.div`
+  width: 25px;
+  height: 2px; 
+  background-color: ${props => props.backgroundColor};
+  display: flex; /* 변경된 부분 */
+  justify-content: center;
+  margin-top : 3px; 
+  margin-right : 1px; 
+  margin-bottom: 5px; 
+`;
 const TitleText = styled.p`
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.theme.fontWeights.semibold};
@@ -68,6 +77,13 @@ function ExperienceCardLinkMiddle({ data }) {
         </div>
       )}
       <TitleText>{data["title"]}</TitleText>
+      {data["tag-is"] !== null && (tags &&
+        <div style={{ display: 'flex' }}>
+          {tags.map((tag) => (
+            <LineTag backgroundColor={tag["color"]}></LineTag>
+          ))}
+        </div>
+      )}
       <SummaryText>
         {/* {data["summary"].length > 44
           ? `${data["summary"].slice(0, 43)}  ...`

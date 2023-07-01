@@ -87,7 +87,7 @@ function HomePage() {
         </TimelineDataProvider>
       </BackgroundContainer>
       <TestBox>
-        <ExperienceCardSelf data={exampleCrawledData} />
+        <ExperienceCardLinkMiddle data={exampleCrawledData} />
         <ListModal />
       </TestBox>
     </div>
