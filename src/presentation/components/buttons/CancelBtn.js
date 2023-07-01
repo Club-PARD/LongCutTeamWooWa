@@ -16,6 +16,7 @@ const BtnDiv = styled.button`
   background: ${props => props.theme.color.disabled2};
   border: 1px solid #CDCDCD;
   border-radius: 100px;
+  cursor: pointer;
 `;
 
 function CancelBtn({ buttonText, onClick }) {

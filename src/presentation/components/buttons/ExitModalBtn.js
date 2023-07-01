@@ -16,6 +16,7 @@ const BtnDiv = styled.button`
   background: ${(props) => props.theme.color.primary300};
   border: 1px solid #cdcdcd;
   border-radius: 100px;
+  cursor: pointer;
 `;
 
 

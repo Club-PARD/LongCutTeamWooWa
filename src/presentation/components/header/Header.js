@@ -185,7 +185,7 @@ function Header() {
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("add-free");
-
+  
   const handleSetModalType = () => {
     if (modalType === "add-free") {
       setModalType("add-template");
