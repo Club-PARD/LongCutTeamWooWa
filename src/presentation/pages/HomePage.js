@@ -6,16 +6,9 @@ import BackgroundImg from "../../assets/img/MainBackground.svg";
 import CategoryBuilder from "../components/catagory";
 import GlobalNavBar from "../components/Nav/GlobalNavBar";
 import Header from "../components/header/Header";
-import DateRange from "../components/DateRange";
-import { ExperienceCardLink } from "../components/commons/ExperienceCardLink";
-import ExperienceCardSelf from "../components/commons/ExperienceCardSelf";
-import ExperienceCardSelfMiddle from "../components/commons/ExperienceCardSelfMiddle";
 import ExperienceCardLinkMiddle from "../components/commons/ExperienceCardLinkMiddle";
-import ExperienceCardLinkSmall from "../components/commons/ExperienceCardLinkSmall";
-import ExperienceCardSelfSmall from "../components/commons/ExperienceCardSelfSmall";
 import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
-import { DataInputProvider } from "../../service/providers/data_input_provider";
 
 import ListModal from "../components/postListItem";
 

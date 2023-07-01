@@ -1,40 +1,42 @@
-import axios from 'axios';
 import api_key from './api_key';
-const apiUrl = 'https://api.openai.com/v1/chat/completions';
+import { Configuration, OpenAIApi } from 'openai';
 
-const systemPromt = [
-    "I am going to provide a text and I want you to summarize the given text.",
-    "Note that the summarized text will be used as a summrized content of a post before reading whole the content. So the people should be able to assume what the post is about."
+const configuration = new Configuration({
+  apiKey: api_key,
+});
+
+delete configuration.baseOptions.headers['User-Agent'];
+
+const openai = new OpenAIApi(configuration);
+
+const systemPrompt = [
+  "I am going to provide a text and I want you to summarize the given text.",
+  "Note that the summarized text will be used as a summarized content of a post before reading the whole content. So people should be able to assume what the post is about.",
+  "Note that you should answer in the same language that the user role used",
 ];
 
-const requestSummarize = ({maxNumLetter, targetMessage}) => {
+const requestSummarize = async (maxNumLetter, targetMessage) => {
+  const maxNumLetterPrompt = `Note that the summarized text should be under ${maxNumLetter} number of letters`;
+  const targetSystemPrompt = [...systemPrompt, maxNumLetterPrompt];
 
-    const maxNumLetterPrompt = `Nscote that the summarized text should be under ${maxNumLetter} number of letters`;
-    
-    const targetSystemPromt = [
-      maxNumLetterPrompt,
-      ...systemPromt
-    ]
+  let messages = targetSystemPrompt.map((prompt) => ({ role: 'system', content: prompt }));
+  const userMessage = { role: 'user', content: targetMessage };
 
-    const messages = targetSystemPromt.map((prompt) => ({ role: 'system', content: prompt }));
-    const userMessage = { role: 'user', content: targetMessage };
-    messages.unshift(userMessage);
+  messages = [...messages, userMessage];
 
-    return generateChatResponse(messages);
-}
+
+  return generateChatResponse(messages);
+};
 
 const generateChatResponse = async (messages) => {
   try {
-    const response = await axios.post(apiUrl, {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
       messages: messages,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${api_key}`,
-        'Content-Type': 'application/json',
-      },
     });
-
+    console.log(response);
     const chatResponse = response.data.choices[0].message.content;
+    console.log(chatResponse);
     return chatResponse;
   } catch (error) {
     console.error('Error generating chat response:', error);
@@ -42,4 +44,4 @@ const generateChatResponse = async (messages) => {
   }
 };
 
-export {requestSummarize, generateChatResponse};
+export { requestSummarize, generateChatResponse };

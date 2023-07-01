@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   position: absolute;
   font-size: 12px;
   white-space: nowrap;
-  ${({ isAbove }) => (isAbove ? 'bottom: 60%;' : 'top: 60%;')}
+  ${({ isAbove }) => (isAbove ? 'bottom: 60%;' : 'top: 60%;')};
 `;
 
 
