@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import BackgroundImg from "../../assets/img/MainBackground.svg";
+import BackgroundImg from "../../assets/img/MainBackground.png";
 
 import CategoryBuilder from "../components/catagory";
 import GlobalNavBar from "../components/Nav/GlobalNavBar";
@@ -31,6 +31,7 @@ const Background = styled.img`
   width: 100%;
   height: 100%;
   position: absolute;
+  opacity: 80%;
   top: 0;
   left: 0;
   z-index: -1;
