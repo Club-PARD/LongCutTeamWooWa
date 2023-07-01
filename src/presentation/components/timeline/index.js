@@ -95,7 +95,6 @@ const TimelineDataBuilder = () => {
 }
 
 const CardSizeBuilder = (size) => {
-  console.log("got: " + size);
   if(size <= 1){
     return lxSize;
   } else if(size <= 2){
@@ -184,7 +183,6 @@ const Timeline = () => {
       { 
         Object.entries(timelinePostData).map((entry, index) =>{
           const cardSize = Object.entries(entry[1]).length;
-          console.log(entry[1]);
           return (
             <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
               <DotTimeWrapper>

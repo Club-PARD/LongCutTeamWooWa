@@ -52,15 +52,24 @@ class PostService {
     // Create a post
     async createPost(userId, postData) {
         try {
-            const targetMessageList = [];
+            let targetMessageList = [];
             if(postData["add-free"]){
-                targetMessageList.add(postData["add-free"]);
+                targetMessageList = [
+                    postData["add-free"],
+                    ...targetMessageList
+                ]
             }
             if(postData["add-template-1"]){
-                targetMessageList.add(postData["add-template-1"]);
+                targetMessageList = [
+                    postData["add-template-1"],
+                    ...targetMessageList
+                ]
             }
             if(postData["add-template-2"]){
-                targetMessageList.add(postData["add-template-2"]);
+                targetMessageList = [
+                    postData["add-template-2"],
+                    ...targetMessageList
+                ]
             }
             const flattenedMessage = targetMessageList.join(" ");
 
