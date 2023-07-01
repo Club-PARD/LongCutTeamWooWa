@@ -19,9 +19,9 @@ const HeaderContainer = styled.div`
 `;
 
 const Timeline = styled.div`
-  font-family: Mont;
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.heavy};
-  font-size: ${(props) => props.theme.fontSizes.Header5};
+  font-size: ${(props) => props.theme.fontSizes.Header4};
   color: ${(props) => props.theme.color.blackHigh};
   font-style: normal;
   line-height: 38px;

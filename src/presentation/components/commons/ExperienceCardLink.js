@@ -40,6 +40,17 @@ const Tag = styled.div`
   align-items: center;
   width : fit-content;
   margin-right: 5px; 
+  margin-bottom : 0px; 
+`;
+const LineTag = styled.div`
+  width: 25px;
+  height: 2px; 
+  background-color: ${props => props.backgroundColor};
+  display: flex; /* 변경된 부분 */
+  justify-content: center;
+  margin-top : 0px; 
+  margin-right : 1px; 
+  margin-bottom: 5px; 
 `;
 
 
@@ -51,8 +62,8 @@ const TitleText = styled.p`
   color: ${props => props.theme.color.blackHigh};
   width: 146px;
   height: auto;
-  margin-top : 15px ; 
-  margin-bottom : 10px; 
+  margin-top : 10px ; 
+  margin-bottom : 5px; 
 `;
 
 const SummaryText = styled.p`
@@ -120,6 +131,13 @@ function ExperienceCardLink({ data }) {
         </div>
       )}
       <TitleText>{data["title"]}</TitleText>
+      {data["tag-is"] !== null && (tags &&
+        <div style={{ display: 'flex' }}>
+          {tags.map((tag) => (
+            <LineTag backgroundColor={tag["color"]}></LineTag>
+          ))}
+        </div>
+      )}
       <SummaryText>{data["summary"]}</SummaryText>
       <LogoBox>
         <Logo src={getWebsiteLog(websiteName)} alt="이미지" />
