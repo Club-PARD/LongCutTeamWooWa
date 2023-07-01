@@ -29,8 +29,8 @@ export const theme = {
     primary050: '#e1faf2',
     primary100: '#b6f3de',
     primary200:'#7febc8',
-    primary300: '#272727', 
-    primary400: '#00db9f', 
+    primary300: '#272727', // 메인컬러 바뀌었습니다. 
+    primary400: 'gray', // 임시로 해놓을게요. _승훈.
     primary500: '#00d28e',
     primary600: '#00c181',
     primary700: '#00ad72',

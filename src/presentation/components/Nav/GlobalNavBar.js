@@ -68,7 +68,7 @@ const SearchInput = styled.input`
 const NavButtons = styled.div`
   display: flex;
   align-items: center;
-  padding-right: 80px; 
+  padding-right: 70px; 
 `;
 
 const TimelineButton = styled.button`
@@ -114,6 +114,7 @@ const ProfileImg = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 8px;
+  border-radius: 50%; 
 `;
 
 const ProfileName = styled.div`
@@ -135,8 +136,8 @@ const GlobalNavBar = () => {
         </SearchExperience>
       </Logo>
       <NavButtons>
-        <TimelineButton>타임라인</TimelineButton>
-        <ListButton>글 리스트</ListButton>
+        {/* <TimelineButton>타임라인</TimelineButton>
+        <ListButton>글 리스트</ListButton> */}
         
         <Profile>
           <ProfileImg src={UserProfile} />
