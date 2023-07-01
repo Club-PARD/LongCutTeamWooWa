@@ -24,12 +24,7 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
     handleInputChange("selected-tags", updatedTags);
   };
 
-  const handleAddButtonClick = () => {
-    // Handle add button click event
-    console.log("Add button clicked");
-    // You can perform any desired actions when the add button is clicked
-  };
-
+ 
   return (
     <div className="tag-chips-container">
       {title != null ? <div className="chip-title">{title}</div> : <></>}
