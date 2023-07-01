@@ -139,7 +139,7 @@ const TagItem = styled.div`
 
 const CheckIconContainer = styled.div`
   position: absolute;
-  left: -30px;
+  left: -37px;
   top: 50%;
   transform: translateY(-50%);
   width: 24px;
@@ -155,7 +155,7 @@ const CheckIcon = styled.img`
   height: 100%;
 `;
 
-function ListItem({ item, data, onItemSelect }) {
+function ListItem({ item, data, onItemSelect, isSelected }) {
   const [selectedTags, setSelectedTags] = useState([]);
 
   const handleTagClick = (tagId) => {
@@ -170,8 +170,11 @@ function ListItem({ item, data, onItemSelect }) {
 
   return (
     <ListItemContainer>
-      <CheckIconContainer>
-        <CheckIcon src={Icon_checkDefault} alt="Check Icon" />
+      <CheckIconContainer onClick={() => onItemSelect(item.id, !isSelected)}>
+        <CheckIcon
+          src={isSelected ? Icon_checked : Icon_checkDefault}
+          alt="Check Icon"
+        />
       </CheckIconContainer>
       <TiteDateContainer>
         <Title>{item.title}</Title>
