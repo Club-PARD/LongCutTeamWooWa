@@ -93,7 +93,7 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 21px;
+  margin-top : 13.5px;
   margin-left : 10px;
 `
 
