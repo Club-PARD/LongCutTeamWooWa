@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const SelectAllButton = styled.button`
-    margin-left : 18px; 
+  margin-left : 18px; 
   margin-bottom: 10px;
   background: transparent;
   border: none;
@@ -21,6 +21,7 @@ const SelectAllButton = styled.button`
   font-family: Pretendard;
   font-weight: 600;
   line-height: 160%;
+  cursor: pointer; 
 `;
 
 

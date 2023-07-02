@@ -13,7 +13,7 @@ import { useUpdateTimelineData } from "../../../service/providers/timeline_data_
 import { is } from "@react-spring/shared";
 
 const HeaderContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 40px;
 
   margin-left: 61px;
 `;
@@ -27,11 +27,12 @@ const Timeline = styled.div`
   line-height: 38px;
   border: none;
   outline: none;
+  padding-bottom: 0px;
 `;
 
 const Container = styled.div`
   display: flex;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 0px;
   justify-content: space-between;
 `;
@@ -45,7 +46,7 @@ const ButtonContainer2 = styled.div`
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   // padding-top: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 10px;
   margin-right: 65px;
 `;
 
@@ -93,9 +94,15 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
+<<<<<<< HEAD
   margin-top: 21px;
   margin-left: 10px;
 `;
+=======
+  margin-top : 18px;
+  margin-left : 10px;
+`
+>>>>>>> 443b18499b096e109c96763561d6e019c4de6832
 
 const CustomDivider = styled.div`
   width: 2px;

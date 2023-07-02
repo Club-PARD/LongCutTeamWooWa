@@ -48,9 +48,10 @@ const ButtonText = styled.span`
   color: ${(props) => props.theme.color.blackHigh};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
-  // font-weight : ${(props) => props.theme.fontWeights.semibold};
+  font-weight : ${(props) => props.theme.fontWeights.regular};
   margin-left: 6px;
   margin-right: 6px;
+  opacity: 80%;
 `;
 const FirstButton = styled(TransparentButton)`
   right: 180px;
@@ -59,14 +60,16 @@ const LastButton = styled(TransparentButton)`
   right: 67px;
 `;
 const FirstIcon = styled.img`
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   margin-top: 1px;
+  opacity: 80%;
 `;
 const LastIcon = styled.img`
-  width: 18px;
-  height: 16px;
-  margin-bottom: 1px;
+  width: 12px;
+  height: 12px;
+  margin-bottom: 0px;
+  opacity: 80%;
 `;
 
 
@@ -103,7 +106,7 @@ const DotTimeWrapper = styled.div`
 const Dot = styled(TimelineDot)`
   width: 50px;
   height: 50px;
-  
+
 `;
 
 const Time = styled.div`

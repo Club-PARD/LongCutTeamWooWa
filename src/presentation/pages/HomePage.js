@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import AlertTitle from "@mui/material/AlertTitle";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import Alert from "@mui/material/Alert";
 import BackgroundImg from "../../assets/img/MainBackground.png";
 
 import CategoryBuilder from "../components/catagory";
@@ -14,6 +14,7 @@ import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 
 import ListModal from "../components/postListItem";
+import { fontSize } from "@mui/system";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -64,9 +65,6 @@ const exampleCrawledData = {
   imgSrc:
     "https://img.seoul.co.kr//img/upload/2023/03/19/SSC_20230319153307.jpg", //직접작성(제일큰거)일 때, img 주소
 };
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 function HomePage() {
   const [open, setOpen] = React.useState(false);
@@ -110,17 +108,45 @@ function HomePage() {
         <ExperienceCardLinkMiddle data={exampleCrawledData} />
         <ListModal />
       </TestBox>
-      <Stack spacing={2} sx={{ width: "100%" }}>
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            This is a success message!
-          </Alert>
-        </Snackbar>
-      </Stack>
+      <Snackbar
+  anchorOrigin={{
+    vertical: "bottom",
+    horizontal: "center",
+  }}
+  open={open}
+  autoHideDuration={3000}
+  onClose={handleClose}
+>
+  <Alert
+    action={null}
+    onClose={null}
+    severity="success"
+    sx={{
+      paddingLeft: "20px",
+      paddingRight: "25px",
+      borderRadius: "30.332px", 
+      width: "100%",
+      backgroundColor: "#272727",
+      "& .MuiAlert-icon": {
+        color: "rgba(17, 227, 178, 1)",
+      },
+      "& .MuiAlert-message": {
+        color: "#FFF",
+        fontSize: "20px",
+        fontFamily: "Pretendard",
+        fontStyle: "normal",
+        fontWeight: "700",
+        lineHeight: "160%",
+      },
+      "& .MuiAlert-icon svg": {
+        fontSize: "2rem",
+      },
+    }}
+  >
+    클릭하거나 그래그하여 대표 이미지를 업로드하세요
+  </Alert>
+</Snackbar>
+
     </div>
   );
 }
