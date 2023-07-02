@@ -8,6 +8,8 @@ import { groupDataByDay, groupDataByMonth, groupDataByWeek, groupDataByYear } fr
 import { useTimelineData, useUpdateTimelineData } from '../../../service/providers/timeline_data_provider';
 import CardWrapper from './CardWrapper';
 
+import { List } from 'immutable';
+
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
 
 
@@ -80,18 +82,45 @@ function formatDate(date) {
 
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
+  let targetData;
   switch(timelineData["grouping"]){
     case "year":
-      return timelineData["postGroupByYear"];
+      targetData = timelineData["postGroupByYear"];
+      break;
     case "month":
-      return timelineData["postGroupByMonth"];
+      targetData = timelineData["postGroupByMonth"];
+      break;
     case "week":
-      return timelineData["postGroupByWeek"];
+      targetData = timelineData["postGroupByWeek"];
+      break;
     case "day":
-      return timelineData["postGroupByDay"];
+      targetData = timelineData["postGroupByDay"];
+      break;
     default:
-      return timelineData["postGroupByDay"];
+      targetData = timelineData["postGroupByDay"];
+      break;
   }
+  targetData = Object.entries(targetData);
+
+  if(timelineData['selected-tags'] && timelineData['selected-tags'][0]){
+    const selectedTags = timelineData['selected-tags'];
+
+    const filteredData = targetData.filter((element) => {
+      return element[1].some((item) => {
+        if (item['selected-tags']) {
+          return selectedTags.every((tag) => {
+            return item['selected-tags'].some((itemTag) => {
+              return itemTag.tagName === tag.tagName && itemTag.color === tag.color;
+            });
+          });
+        }
+        return false;
+      });
+    });
+    return filteredData;
+  }
+  
+  return targetData;
 }
 
 const CardSizeBuilder = (size) => {
@@ -119,6 +148,10 @@ const Timeline = () => {
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
+
+  const timelinePostData = TimelineDataBuilder();
+  const dataLength = timelinePostData.length;
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -160,8 +193,8 @@ const Timeline = () => {
 
     const calculateDotWidth = () => {
       const containerWidth = timelineContainerRef.current.getBoundingClientRect().width;
-      const dotCount = Math.min(posts.length, 7);
-      const calculatedDotWidth = containerWidth / dotCount;
+      const dotCount = Math.min(dataLength, 7);
+      const calculatedDotWidth = containerWidth / (dotCount);
       setDotWidth(calculatedDotWidth);
     };
 
@@ -170,18 +203,59 @@ const Timeline = () => {
     return () => {
       window.removeEventListener('resize', calculateDotWidth);
     };
-  }, [posts, timelineContainerRef.current]);
+  }, [timelinePostData, timelineContainerRef.current]);
 
   if (isLoading) {
     return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
- const timelinePostData = TimelineDataBuilder();
- const dataLength = Object.keys(timelinePostData).length;
+ 
+
+ const buttonOnClick = (mode) => {
+  const timelineContainer = timelineContainerRef.current;
+  const targetDate = '06/07/2023'; // Target date to navigate to
+  let targetIndex;
+
+  switch(mode){
+    case 'end':
+      targetIndex = dataLength-1;
+      break;
+    case 'start':
+      targetIndex = 0;
+      break;
+    case 'date':
+      targetIndex = timelinePostData.findIndex((item) => item[0] <= targetDate);
+      console.log(targetIndex);
+      break;
+    default:
+      return; //Do nothing
+  }
+
+  // Calculate the position of the target date on the timeline
+  const targetPosition = targetIndex * dotWidth;
+  
+  // Scroll to the target position on the timeline
+  timelineContainer.scrollTo({
+    left: targetPosition,
+    behavior: 'smooth' // Optional, for smooth scrolling effect
+  });
+}
+
   return (
+    <>
+    <button onClick={() => buttonOnClick('start')} style={{ position: 'absolute', right: "350px"}}>
+        첫 기록
+      </button>
+      <button onClick={() => buttonOnClick('end')} style={{ position: 'absolute', right: "60px"}}>
+        마지막 기록
+      </button>
+      <button onClick={() => buttonOnClick('date')} style={{ position: 'absolute', right: "180px"}}>
+        06/07/2023로 이동
+      </button>
     <TimelineContainer ref={timelineContainerRef}>
+      
       <HorizontalLines lineWidth={dotWidth * dataLength} />
       { 
-        Object.entries(timelinePostData).map((entry, index) =>{
+        timelinePostData.map((entry, index) => {
           const cardSize = Object.entries(entry[1]).length;
           return (
             <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
@@ -197,6 +271,7 @@ const Timeline = () => {
         } ) 
       }
     </TimelineContainer>
+    </>
   );
 };
 

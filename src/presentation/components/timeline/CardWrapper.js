@@ -13,8 +13,6 @@ const Wrapper = styled.div`
   ${({ isAbove }) => (isAbove ? 'bottom: 60%;' : 'top: 60%;')};
 `;
 
-
-
 const gapList = {
   [lxSize]: "0px",
   [largeSize]: "14px",
