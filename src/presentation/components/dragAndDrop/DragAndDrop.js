@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import { Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import useFilePreview from './hooks/useFilePreview';
 
+=======
+import { Upload, Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import useFilePreview from "./hooks/useFilePreview";
+//주석주석확인
+>>>>>>> 952cb120e280ae9b0fd00af365234b3771611d65
 const { Dragger } = Upload;
 
 const DragAndDrop = ({ addFile, removeFile }) => {
