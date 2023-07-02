@@ -17,6 +17,8 @@ import {
 } from "../../../service/providers/data_input_provider";
 import FirebaseService from "../../../service/firebase/FirebaseService";
 import postService from "../../../service/firebase/PostService";
+import storageService from "../../../service/firebase/storageService";
+import useFileSelection from "../dragAndDrop/hooks/useFileSelection";
 
 const tags = [
   { tagName: "도전정신", color: "#4386F7" },
@@ -35,12 +37,28 @@ const tags = [
 
 const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
   const dataInput = useDataInput();
+  const [selectedFile] = useFileSelection();
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
-      const docId = await postService.createPost("tlsgn", dataInput);
+      const userId = "tlsgn"; // User ID
+      const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
+      if(selectedFile){
+        // todo: upload "selectedFile" into storage
+        // Upload selectedFile to Firebase Storage\
+        const postId = docId; // Post ID (same as the created document ID)
+        const file = selectedFile; // The selected file to upload
+        const downloadUrl = await storageService.uploadPostImage(userId, postId, file);
+        console.log("Image uploaded successfully:", downloadUrl);
+
+         // Update the Firestore document with the download URL
+        const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
+        await postService.updatePost(postId, userId, updateData);
+        console.log("Document updated with imageURL successfully!");
+      }
+
     } catch (error) {
       console.error("Error creating document:", error);
     }
