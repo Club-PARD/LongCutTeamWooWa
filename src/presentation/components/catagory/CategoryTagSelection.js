@@ -24,29 +24,30 @@ const BarDiv = styled.div`
 const TitleDiv = styled.div`
   color: var(--black-high, #272727);
   text-align: center;
-  font-size: ${(props) => props.theme.fontSizes.Body1};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.bold};
+  font-weight: ${(props) => props.theme.fontWeights.heavy};
+  font-size: 23px; 
   line-height: 160%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
-const GearImg = styled.img`
-  width: 16px;
-`;
+// const GearImg = styled.img`
+//   width: 16px;
+// `;
 
 const EditButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
+  // display: flex;
+  // flex-direction: row;
+  // align-items: flex-start;
+  // justify-content: center;
+  // color: var(--black-medium, #7a7a7a);
+  // font-size: 12px;
+  // font-family: ${(props) => props.theme.fontFamily.mainfont};
+  // line-height: 160%;
+  // margin-top: 10px;
+
   background-color: transparent;
   border: none;
-  color: var(--black-medium, #7a7a7a);
-  font-size: 12px;
-  font-family: ${(props) => props.theme.fontFamily.mainfont};
-  line-height: 160%;
-  margin-top: 10px;
   margin-bottom: 10px;
 `;
 
@@ -86,8 +87,8 @@ const CategoryTagSelection = ({ title, categoryTagList, width }) => {
         ))}
       </TagDiv>
       <EditButton>
-        <GearImg src={gearImg} />
-        &nbsp;카테고리 수정
+        {/* <GearImg src={gearImg} />
+        &nbsp;카테고리 수정 */}
       </EditButton>
     </BarDiv>
   );

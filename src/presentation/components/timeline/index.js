@@ -106,7 +106,7 @@ const DotTimeWrapper = styled.div`
 const Dot = styled(TimelineDot)`
   width: 50px;
   height: 50px;
-  
+
 `;
 
 const Time = styled.div`
