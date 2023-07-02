@@ -34,6 +34,7 @@ const Container = styled.div`
   display: flex;
   padding-top: 0px;
   padding-bottom: 0px;
+  margin-bottom: 0px;
   justify-content: space-between;
 `;
 
@@ -99,9 +100,9 @@ const SelectDateText = styled.div`
 `
 
 const CustomDivider = styled.div`
-  width: 2px;
+  width: 1px;
   height: 30px;
-  background-color: #eaeaea;
+  background-color: #ccc;
   margin: 0 10px;
   margin-right: 30px;
 
@@ -110,7 +111,7 @@ const CustomDivider = styled.div`
 
 const Divider = styled.div`
   height: 1px;
-  background-color: #eaeaea;
+  background-color:#ccc;
   top: 0;
   width: 100%;
   margin-top: 0px;

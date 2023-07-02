@@ -86,7 +86,6 @@ function HomePage() {
       <BackgroundContainer>
         <Background src={BackgroundImg} />
         <GlobalNavBar />
-        {/* <DateRange /> */}
         <TimelineDataProvider>
           <div style={{ display: "flex" }}>
             <CategoryBuilder />
