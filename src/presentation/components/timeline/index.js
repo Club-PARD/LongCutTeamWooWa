@@ -191,11 +191,7 @@ const Timeline = () => {
     updateDataInput(name, value);
   };
 
-<<<<<<< HEAD
   const timelinePostData = TimelineDataBuilder();
-=======
-
->>>>>>> b633fc2f59c33bd85504c53feb9ad4dd575e3a4f
 
   useEffect(() => {
     const fetchPosts = async () => {
