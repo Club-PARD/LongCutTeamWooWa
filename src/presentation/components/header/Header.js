@@ -13,7 +13,7 @@ import { useUpdateTimelineData } from "../../../service/providers/timeline_data_
 import { is } from "@react-spring/shared";
 
 const HeaderContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 40px;
 
   margin-left: 61px;
 `;
@@ -27,11 +27,12 @@ const Timeline = styled.div`
   line-height: 38px;
   border: none;
   outline: none;
+  padding-bottom: 0px;
 `;
 
 const Container = styled.div`
   display: flex;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 0px;
   justify-content: space-between;
 `;

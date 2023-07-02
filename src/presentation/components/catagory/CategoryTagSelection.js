@@ -18,6 +18,7 @@ const BarDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+
 `;
 
 const TitleDiv = styled.div`
