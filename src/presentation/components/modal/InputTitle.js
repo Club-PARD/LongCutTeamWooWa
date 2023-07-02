@@ -21,7 +21,7 @@ function InputTitle({ modalType, handleSetModalType }) {
   };
   const dataInput = useDataInput();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [addFile, removeFile, selectedFile] = useFileSelection();
+  const [selectedFile, addFile, removeFile] = useFileSelection();
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
