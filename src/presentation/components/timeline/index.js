@@ -191,7 +191,7 @@ const Timeline = () => {
     updateDataInput(name, value);
   };
 
-
+  const timelinePostData = TimelineDataBuilder();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -223,8 +223,6 @@ const Timeline = () => {
 
     fetchPosts();
   }, []);
-
-  const timelinePostData = TimelineDataBuilder();
 
   useEffect(() => {
     if (!timelinePostData || !timelineContainerRef.current) {
