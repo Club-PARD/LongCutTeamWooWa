@@ -1,10 +1,10 @@
-import { Upload } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import useFilePreview from './hooks/useFilePreview';
+import { Upload, Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import useFilePreview from "./hooks/useFilePreview";
 
 const { Dragger } = Upload;
 
-const DragAndDrop = ({ addFile, removeFile }) => {
+const DragAndDrop = ({ addFile, removeFile, handleSubmit }) => {
   const [handlePreview, previewContent] = useFilePreview();
 
   const beforeUploadHandler = (file) => {
@@ -15,7 +15,8 @@ const DragAndDrop = ({ addFile, removeFile }) => {
   return (
     <>
       <Dragger
-        multiple={true}
+        maxCount={1}
+        multiple={false}
         onRemove={removeFile}
         showUploadList={true}
         listType="picture-card"
@@ -31,6 +32,9 @@ const DragAndDrop = ({ addFile, removeFile }) => {
         </p>
       </Dragger>
       {previewContent}
+      <Button type="primary" onClick={handleSubmit}>
+        Submit
+      </Button>
     </>
   );
 };
