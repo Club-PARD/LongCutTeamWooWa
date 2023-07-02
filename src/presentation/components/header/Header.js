@@ -93,16 +93,16 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 21px;
-  margin-left : 10px;
-`
+  margin-top: 21px;
+  margin-left: 10px;
+`;
 
 const CustomDivider = styled.div`
   width: 2px;
   height: 30px;
   background-color: #eaeaea;
   margin: 0 10px;
-  margin-right : 30px;
+  margin-right: 30px;
 
   align-self: center;
 `;
@@ -190,12 +190,12 @@ const periodOption = {
   },
 };
 
-function Header() {
+function Header({ handleSnack }) {
   const [activeButton, setActiveButton] = useState(1);
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("add-free");
-  
+
   const handleSetModalType = () => {
     if (modalType === "add-free") {
       setModalType("add-template");
@@ -249,9 +249,7 @@ function Header() {
             </Button>
 
             {/* <CustomDivider /> */}
-            <SelectDateText>
-              날짜이동
-            </SelectDateText>
+            <SelectDateText>날짜이동</SelectDateText>
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
@@ -266,9 +264,9 @@ function Header() {
           </ButtonContainer2>
         </Container>
         <Divider />
-
       </HeaderContainer>
       <ModalSheetBuilder
+        handleSnack={handleSnack}
         modalType={modalType}
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
