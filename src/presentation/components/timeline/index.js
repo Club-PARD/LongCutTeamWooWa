@@ -12,6 +12,10 @@ import { List } from 'immutable';
 
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
 
+import GoToFirstIcon from '../../../assets/img/GoToFirstIcon.svg';
+import GotoLastIcon from '../../../assets/img/GotoLastIcon.svg';
+import GoToDateIcon from '../../../assets/img/GoToDateIcon.svg';
+
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -30,6 +34,44 @@ const TimelineContainer = styled.div`
     display: none;
   }
 `;
+
+const TransparentButton = styled.button`
+  position: fixed;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  display: inline-flex;
+  margin-top: 10px;
+`;
+const ButtonText = styled.span`
+  color: ${(props) => props.theme.color.blackHigh};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle2};
+  // font-weight : ${(props) => props.theme.fontWeights.semibold};
+  margin-left: 6px;
+  margin-right: 6px;
+`;
+const FirstButton = styled(TransparentButton)`
+  right: 180px;
+`;
+const LastButton = styled(TransparentButton)`
+  right: 67px;
+`;
+const FirstIcon = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+`;
+const LastIcon = styled.img`
+  width: 18px;
+  height: 16px;
+  margin-bottom: 1px;
+`;
+
+
+
+
 
 const HorizontalLines = styled.div`
   position: absolute; /* Use absolute positioning */
@@ -83,7 +125,7 @@ function formatDate(date) {
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
   let targetData;
-  switch(timelineData["grouping"]){
+  switch (timelineData["grouping"]) {
     case "year":
       targetData = timelineData["postGroupByYear"];
       break;
@@ -100,11 +142,11 @@ const TimelineDataBuilder = () => {
       targetData = timelineData["postGroupByDay"];
       break;
   }
-  if(!targetData) return [];
-  
+  if (!targetData) return [];
+
   targetData = Object.entries(targetData);
 
-  if(timelineData['selected-tags'] && timelineData['selected-tags'][0]){
+  if (timelineData['selected-tags'] && timelineData['selected-tags'][0]) {
     const selectedTags = timelineData['selected-tags'];
 
     const filteredData = targetData.filter((element) => {
@@ -121,18 +163,18 @@ const TimelineDataBuilder = () => {
     });
     return filteredData;
   }
-  
+
   return targetData;
 }
 
 const CardSizeBuilder = (size) => {
-  if(size <= 1){
+  if (size <= 1) {
     return lxSize;
-  } else if(size <= 2){
+  } else if (size <= 2) {
     return largeSize;
-  } else if(size <= 4){
+  } else if (size <= 4) {
     return mediumSize;
-  } else{
+  } else {
     return smallSize;
   }
 }
@@ -149,13 +191,13 @@ const Timeline = () => {
     updateDataInput(name, value);
   };
 
-  
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
-      
-      try{
+
+      try {
         const dateStr = '06/09/2023';
         const userId = 'tlsgn';
         const [month, day, year] = dateStr.split('/');
@@ -170,7 +212,7 @@ const Timeline = () => {
         handleTimelineDataChange("postGroupByWeek", groupDataByWeek(fetchedPosts));
         handleTimelineDataChange("postGroupByMonth", groupDataByMonth(fetchedPosts));
         handleTimelineDataChange("postGroupByYear", groupDataByYear(fetchedPosts));
-        
+
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -207,70 +249,72 @@ const Timeline = () => {
     return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
 
-  
+
   const dataLength = timelinePostData.length;
 
- const buttonOnClick = (mode) => {
-  const timelineContainer = timelineContainerRef.current;
-  const targetDate = '06/07/2023'; // Target date to navigate to
-  let targetIndex;
+  const buttonOnClick = (mode) => {
+    const timelineContainer = timelineContainerRef.current;
+    const targetDate = '06/07/2023'; // Target date to navigate to
+    let targetIndex;
 
-  switch(mode){
-    case 'end':
-      targetIndex = dataLength-1;
-      break;
-    case 'start':
-      targetIndex = 0;
-      break;
-    case 'date':
-      targetIndex = timelinePostData.findIndex((item) => item[0] <= targetDate);
-      console.log(targetIndex);
-      break;
-    default:
-      return; //Do nothing
+    switch (mode) {
+      case 'end':
+        targetIndex = dataLength - 1;
+        break;
+      case 'start':
+        targetIndex = 0;
+        break;
+      case 'date':
+        targetIndex = timelinePostData.findIndex((item) => item[0] <= targetDate);
+        console.log(targetIndex);
+        break;
+      default:
+        return; //Do nothing
+    }
+
+    // Calculate the position of the target date on the timeline
+    const targetPosition = targetIndex * dotWidth;
+
+    // Scroll to the target position on the timeline
+    timelineContainer.scrollTo({
+      left: targetPosition,
+      behavior: 'smooth' // Optional, for smooth scrolling effect
+    });
   }
-
-  // Calculate the position of the target date on the timeline
-  const targetPosition = targetIndex * dotWidth;
-  
-  // Scroll to the target position on the timeline
-  timelineContainer.scrollTo({
-    left: targetPosition,
-    behavior: 'smooth' // Optional, for smooth scrolling effect
-  });
-}
 
   return (
     <>
-    <button onClick={() => buttonOnClick('start')} style={{ position: 'absolute', right: "350px"}}>
-        첫 기록
-      </button>
-      <button onClick={() => buttonOnClick('end')} style={{ position: 'absolute', right: "60px"}}>
-        마지막 기록
-      </button>
-      <button onClick={() => buttonOnClick('date')} style={{ position: 'absolute', right: "180px"}}>
-        06/07/2023로 이동
-      </button>
-    <TimelineContainer ref={timelineContainerRef}>
-      
-      <HorizontalLines lineWidth={dotWidth * dataLength} />
-      { 
-        timelinePostData.map((entry, index) => {
-          const cardSize = Object.entries(entry[1]).length;
-          return (
-            <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
-              <DotTimeWrapper>
-                <Dot />
-                <Time isAbove={index % 2 === 0} >
-                  {entry[0]}
-                </Time>
-                <CardWrapper mode={CardSizeBuilder(cardSize)} isAbove={index % 2 !== 0} postDataList={entry[1]}/>
-              </DotTimeWrapper>
-            </DotContainer>
-          )
-        } ) 
-      }
-    </TimelineContainer>
+      <TimelineContainer ref={timelineContainerRef}>
+        <FirstButton onClick={() => buttonOnClick('start')}>
+          <FirstIcon src={GoToFirstIcon} alt="GoToFirstIcon" />
+          <ButtonText>첫 기록</ButtonText>
+        </FirstButton>
+        <LastButton onClick={() => buttonOnClick('end')}>
+          <ButtonText>마지막 기록</ButtonText>
+          <LastIcon src={GotoLastIcon} alt="GotoLastIcon" />
+        </LastButton>
+        {/* <DateButton onClick={() => buttonOnClick('date')}>
+          <DateIcon src={GoToDateIcon} alt="GoToDateIcon" />
+          <ButtonText>06/07/2023로 이동</ButtonText>
+        </DateButton> */}
+        <HorizontalLines lineWidth={dotWidth * dataLength} />
+        {
+          timelinePostData.map((entry, index) => {
+            const cardSize = Object.entries(entry[1]).length;
+            return (
+              <DotContainer key={entry[1][0].docId} dotWidth={dotWidth} >
+                <DotTimeWrapper>
+                  <Dot />
+                  <Time isAbove={index % 2 === 0} >
+                    {entry[0]}
+                  </Time>
+                  <CardWrapper mode={CardSizeBuilder(cardSize)} isAbove={index % 2 !== 0} postDataList={entry[1]} />
+                </DotTimeWrapper>
+              </DotContainer>
+            )
+          })
+        }
+      </TimelineContainer>
     </>
   );
 };

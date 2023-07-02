@@ -8,7 +8,7 @@ import firebase from 'firebase/compat/app';
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: white;
+  background-color: transparent;
   height : 100%; 
   justify-content: space-between;
   align-items: center; /* 수정된 부분 */
@@ -29,7 +29,7 @@ const CustomDatePicker = styled(DatePicker)`
   /* 스타일 속성을 여기에 추가 */
   /* 예시: 배경색과 테두리 스타일 지정 */
   background-color: yellow;
-  border: 1px solid #000000;
+  // border: 1px solid #000000;
 `;
 
 function DateSelector() {
@@ -56,7 +56,7 @@ function DateSelector() {
 
   return (
     <Container style={{ flexWrap: "wrap" }}>
-      <Text>날짜</Text>
+      {/* <Text>날짜</Text> */}
       <CustomDatePicker
         id="datepicker-id"
         name="date-demo"
