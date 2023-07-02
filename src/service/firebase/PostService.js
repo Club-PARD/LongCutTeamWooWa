@@ -52,6 +52,7 @@ class PostService {
     // Create a post
     async createPost(userId, postData) {
         try {
+            console.log(postData);
             let targetMessageList = [];
             if(postData["add-free"]){
                 targetMessageList = [
@@ -72,7 +73,8 @@ class PostService {
                 ]
             }
             const flattenedMessage = targetMessageList.join(" ");
-
+            console.log(targetMessageList);
+            console.log(flattenedMessage);
             const summarizedText = await requestSummarize(20, flattenedMessage);
             // Combine the userId with the post data
             const post = {
@@ -82,7 +84,6 @@ class PostService {
             };
 
             // Specify the collection where the posts are stored
-
 
             // Create the post document using the FirebaseService
             const postId = await this.firebaseService.createDocument(collection, post);

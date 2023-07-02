@@ -59,8 +59,22 @@ const SecondText = styled.p`
   margin-top: 8px;
 `;
 
-function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen }) {
+function PopUp({
+  imgSrc,
+  text1,
+  text2,
+  id,
+  close,
+  handleModalOpen,
+  handleSetModalType,
+}) {
   const dataInput = useDataInput();
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (value) => {
+    updateDataInput("add-free", value);
+    updateDataInput("add-template-1", value);
+    updateDataInput("add-template-2", value);
+  };
   const handleExitModal = () => {
     handleModalOpen();
     dataInput.isExpanded = false;
@@ -69,7 +83,6 @@ function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen }) {
   return (
     <PopUpContainer>
       <img src={imgSrc} alt="PopUp-Icon" />
-
       <TextContainer>
         <FirstText>{text1}</FirstText>
         <SecondText>{text2}</SecondText>
@@ -79,6 +92,31 @@ function PopUp({ imgSrc, text1, text2, id, close, handleModalOpen }) {
           <CancelBtn buttonText="계속 작성하기" onClick={close} />
           <Space />
           <ExitModalBtn buttonText="나가기" onClick={handleExitModal} />
+        </BtnCantainer>
+      ) : id === 3 ? (
+        <BtnCantainer>
+          <CancelBtn buttonText="돌아가기" onClick={close} />
+          <Space />
+          <ExitModalBtn
+            buttonText="템플릿 보기"
+            onClick={() => {
+              handleSetModalType();
+              close();
+              handleInputChange(null);
+            }}
+          />
+        </BtnCantainer>
+      ) : id === 4 ? (
+        <BtnCantainer>
+          <CancelBtn buttonText="돌아가기" onClick={close} />
+          <Space />
+          <ExitModalBtn
+            buttonText="자유작성하기"
+            onClick={() => {
+              handleSetModalType();
+              close();
+            }}
+          />
         </BtnCantainer>
       ) : (
         <SubmitBtn buttonText="확인" />

@@ -13,7 +13,6 @@ const TimelineDataProvider = ({ children }) => {
       ...prevData,
       [name]: value,
     }));
-    console.log(inputData);
   };
 
   return (

@@ -22,9 +22,21 @@ const popup_db = [
     body: "입력하신 링크를 다시 한 번 확인해주세요.",
     image: Error,
   },
+  {
+    id: 3,
+    title: "템플릿으로 입력하시겠어요?",
+    body: "작성하던 기록은 삭제되어 다시 볼 수 없어요.",
+    image: Close,
+  },
+  {
+    id: 4,
+    title: "자유로운 형식으로 입력하시겠어요?",
+    body: "작성하던 기록은 삭제되어 다시 볼 수 없어요.",
+    image: Close,
+  },
 ];
 
-function PopUpBuilder({ id, close, handleModalOpen }) {
+function PopUpBuilder({ id, close, handleModalOpen, handleSetModalType }) {
   const popup_data = popup_db.filter((value) => value["id"] === id);
   if (!popup_data.length > 0) return;
 
@@ -37,6 +49,7 @@ function PopUpBuilder({ id, close, handleModalOpen }) {
       id={data["id"]}
       close={close}
       handleModalOpen={handleModalOpen}
+      handleSetModalType={handleSetModalType}
     />
   );
 }

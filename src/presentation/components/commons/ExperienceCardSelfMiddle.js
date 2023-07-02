@@ -53,6 +53,7 @@ const SummaryText = styled.p`
   color: ${props => props.theme.color.blackHigh};
   margin-top: 3px;
   line-height: 160%;
+  max-width: inherit;
 `;
 
 function ExperienceCardSelfMiddle({ data }) {
@@ -73,11 +74,11 @@ function ExperienceCardSelfMiddle({ data }) {
             ))}
           </div>
         )}
-        <SummaryText>
-          {/* {data["summary"].length > 40
+        {data["summary"] && <SummaryText>
+          {data["summary"].length > 40
           ? `${data["summary"].slice(0, 43)}  ...`
-          : data["summary"]} */}
-        </SummaryText>
+          : data["summary"]}
+        </SummaryText>}
       </div>
     </CardBox>
   );
