@@ -143,7 +143,7 @@ function HomePage() {
       },
     }}
   >
-    클릭하거나 그래그하여 대표 이미지를 업로드하세요
+    기록이 저장되었습니다!
   </Alert>
 </Snackbar>
 

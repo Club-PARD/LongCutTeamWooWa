@@ -94,15 +94,9 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-<<<<<<< HEAD
-  margin-top: 21px;
-  margin-left: 10px;
-`;
-=======
   margin-top : 18px;
   margin-left : 10px;
 `
->>>>>>> 443b18499b096e109c96763561d6e019c4de6832
 
 const CustomDivider = styled.div`
   width: 2px;
