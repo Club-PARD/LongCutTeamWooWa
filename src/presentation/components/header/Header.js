@@ -60,8 +60,8 @@ const Button = styled.button`
   font-weight: ${(props) =>
     props.active
       ? props.theme.fontWeights.bold
-      : props.theme.fontWeights.normal};
-  font-size: ${(props) => props.theme.fontSizes.Subtitle2};
+      : props.theme.fontWeights.regular};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   border: none;
   outline: none;
   cursor: pointer;
@@ -88,11 +88,21 @@ const ButtonIndicator = styled.div`
   transition: transform 0.2s ease-in-out;
 `;
 
+const SelectDateText = styled.div`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle1};
+  color: ${(props) => props.theme.color.primary300};
+  margin-top : 21px;
+  margin-left : 10px;
+`
+
 const CustomDivider = styled.div`
   width: 2px;
   height: 30px;
   background-color: #eaeaea;
   margin: 0 10px;
+  margin-right : 30px;
 
   align-self: center;
 `;
@@ -238,7 +248,10 @@ function Header() {
               <ButtonIndicator active={activeButton === 5} />
             </Button>
 
-            <CustomDivider />
+            {/* <CustomDivider /> */}
+            <SelectDateText>
+              날짜이동
+            </SelectDateText>
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
@@ -253,6 +266,7 @@ function Header() {
           </ButtonContainer2>
         </Container>
         <Divider />
+
       </HeaderContainer>
       <ModalSheetBuilder
         modalType={modalType}
