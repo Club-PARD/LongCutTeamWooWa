@@ -101,7 +101,7 @@ const TimelineDataBuilder = () => {
       break;
   }
   if(!targetData) return [];
-  
+
   targetData = Object.entries(targetData);
 
   if(timelineData['selected-tags'] && timelineData['selected-tags'][0]){
@@ -149,7 +149,7 @@ const Timeline = () => {
     updateDataInput(name, value);
   };
 
-  
+  const timelinePostData = TimelineDataBuilder();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -181,8 +181,6 @@ const Timeline = () => {
 
     fetchPosts();
   }, []);
-
-  const timelinePostData = TimelineDataBuilder();
 
   useEffect(() => {
     if (!timelinePostData || !timelineContainerRef.current) {
