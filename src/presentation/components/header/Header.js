@@ -45,7 +45,7 @@ const ButtonContainer2 = styled.div`
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   // padding-top: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 10px;
   margin-right: 65px;
 `;
 
@@ -93,7 +93,7 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 13.5px;
+  margin-top : 18px;
   margin-left : 10px;
 `
 
