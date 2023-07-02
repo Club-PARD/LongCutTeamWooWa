@@ -89,8 +89,8 @@ const ButtonIndicator = styled.div`
 `;
 
 const CustomDivider = styled.div`
-  width: 1px;
-  height: 35px;
+  width: 2px;
+  height: 30px;
   background-color: #eaeaea;
   margin: 0 10px;
 
@@ -229,6 +229,7 @@ function Header() {
                 />
               </Button>
             ))}
+            <CustomDivider />
             <Button
               active={activeButton === 5}
               onClick={() => handleButtonClick(5)}
