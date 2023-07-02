@@ -100,6 +100,8 @@ const TimelineDataBuilder = () => {
       targetData = timelineData["postGroupByDay"];
       break;
   }
+  if(!targetData) return [];
+  
   targetData = Object.entries(targetData);
 
   if(timelineData['selected-tags'] && timelineData['selected-tags'][0]){
@@ -137,11 +139,9 @@ const CardSizeBuilder = (size) => {
 
 const Timeline = () => {
   const timelineContainerRef = useRef(null);
-  const timelineData = useTimelineData();
 
   const [dotWidth, setDotWidth] = useState(0);
 
-  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const updateDataInput = useUpdateTimelineData();
@@ -149,9 +149,7 @@ const Timeline = () => {
     updateDataInput(name, value);
   };
 
-  const timelinePostData = TimelineDataBuilder();
-  const dataLength = timelinePostData.length;
-
+  
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -173,7 +171,6 @@ const Timeline = () => {
         handleTimelineDataChange("postGroupByMonth", groupDataByMonth(fetchedPosts));
         handleTimelineDataChange("postGroupByYear", groupDataByYear(fetchedPosts));
         
-        setPosts(fetchedPosts);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -185,9 +182,10 @@ const Timeline = () => {
     fetchPosts();
   }, []);
 
+  const timelinePostData = TimelineDataBuilder();
 
   useEffect(() => {
-    if (!posts || !timelineContainerRef.current) {
+    if (!timelinePostData || !timelineContainerRef.current) {
       return; // Exit early if posts or timelineContainerRef.current is not available
     }
 
@@ -208,7 +206,9 @@ const Timeline = () => {
   if (isLoading) {
     return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
- 
+
+  
+  const dataLength = timelinePostData.length;
 
  const buttonOnClick = (mode) => {
   const timelineContainer = timelineContainerRef.current;
