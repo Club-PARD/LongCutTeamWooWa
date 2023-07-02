@@ -4,7 +4,10 @@ import img2 from "../../../assets/img/template.svg";
 import img2_1 from "../../../assets/img/activeTemplate.svg";
 import InputTextField from "../commons/InputTextField";
 import PopUpBuilder from "../popup/PopUpBuilder";
-import React, {useState} from "react";
+import DragAndDrop from "../dragAndDrop/DragAndDrop";
+import { Button, Card } from 'antd';
+import React, { useState } from "react";
+import useFileSelection from '../dragAndDrop/hooks/useFileSelection.js';
 import {
   useUpdateDataInput,
   useDataInput,
@@ -17,12 +20,24 @@ function InputTitle({ modalType, handleSetModalType }) {
   };
   const dataInput = useDataInput();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [addFile, removeFile] = useFileSelection();
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
+  const [isDragAndDropOpen, setIsDragAndDropOpen] = useState(false);
+  const handleImgBtnClick = () => {
+    setIsDragAndDropOpen(true);
+  };
+  const handleBackgroundClick = () => {
+    setIsDragAndDropOpen(false);
+  };
+  const handleDragAndDropClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <Div>
       <InputTextField
@@ -31,7 +46,7 @@ function InputTitle({ modalType, handleSetModalType }) {
         fontsize={24}
       />
       <div style={{ display: "flex", gap: "10px" }}>
-        <ImgBtn>
+        <ImgBtn onClick={handleImgBtnClick}>
           <Img1 src={img1} />
           <TextDiv>이미지</TextDiv>
         </ImgBtn>
@@ -58,6 +73,18 @@ function InputTitle({ modalType, handleSetModalType }) {
             />
           </PopUpContainer>
         </Background>
+      )}
+      {isDragAndDropOpen && (
+        <Background2 onClick={handleBackgroundClick}>
+          <DragNDropContainer onClick={handleDragAndDropClick}>
+            <Card
+              style={{ margin: "auto", width: "50%" }}
+              actions={[<Button type="primary">Submit</Button>]}
+            >
+              <DragAndDrop addFile={addFile} removeFile={removeFile} />
+            </Card>
+          </DragNDropContainer>
+        </Background2>
       )}
     </Div>
   );
@@ -133,10 +160,30 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
+const Background2 = styled.div`
+  margin: 1%;
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3px);
+`;
+
 const PopUpContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
+`;
+const DragNDropContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 `;
