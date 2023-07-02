@@ -5,9 +5,9 @@ import img2_1 from "../../../assets/img/activeTemplate.svg";
 import InputTextField from "../commons/InputTextField";
 import PopUpBuilder from "../popup/PopUpBuilder";
 import DragAndDrop from "../dragAndDrop/DragAndDrop";
-import { Button, Card } from 'antd';
+import { Card } from "antd";
 import React, { useState } from "react";
-import useFileSelection from '../dragAndDrop/hooks/useFileSelection.js';
+import useFileSelection from "../dragAndDrop/hooks/useFileSelection.js";
 import {
   useUpdateDataInput,
   useDataInput,
@@ -15,12 +15,13 @@ import {
 
 function InputTitle({ modalType, handleSetModalType }) {
   const updateDataInput = useUpdateDataInput();
+
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
   };
   const dataInput = useDataInput();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [addFile, removeFile] = useFileSelection();
+  const [selectedFile, addFile, removeFile] = useFileSelection();
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
@@ -36,6 +37,16 @@ function InputTitle({ modalType, handleSetModalType }) {
   };
   const handleDragAndDropClick = (event) => {
     event.stopPropagation();
+  };
+
+  const handleSubmit = () => {
+    if (selectedFile) {
+      console.log(
+        `파일 "${selectedFile.name}"이(가) 성공적으로 제출되었습니다!`
+      );
+    } else {
+      console.log("파일이 선택되지 않았습니다!");
+    }
   };
 
   return (
@@ -77,11 +88,12 @@ function InputTitle({ modalType, handleSetModalType }) {
       {isDragAndDropOpen && (
         <Background2 onClick={handleBackgroundClick}>
           <DragNDropContainer onClick={handleDragAndDropClick}>
-            <Card
-              style={{ margin: "auto", width: "50%" }}
-              actions={[<Button type="primary">Submit</Button>]}
-            >
-              <DragAndDrop addFile={addFile} removeFile={removeFile} />
+            <Card style={{ margin: "auto" }}>
+              <DragAndDrop
+                addFile={addFile}
+                removeFile={removeFile}
+                handleSubmit={handleSubmit} //여기서 handleSubmit 함수 전달
+              />
             </Card>
           </DragNDropContainer>
         </Background2>
