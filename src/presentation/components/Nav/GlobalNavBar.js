@@ -36,7 +36,7 @@ const SearchExperience = styled.div`
   align-items: center;
   margin-right: 16px;
   margin-left: 80px;
-  padding: 8px;
+  padding: 5px;
   border-radius: 40px;
   flex-shrink: 0;
   background-color: ${props => props.theme.color.searchBackground};
