@@ -49,7 +49,6 @@ const ModalSheet = ({
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
       if(selectedFile){
-        // todo: upload "selectedFile" into storage
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
         const file = selectedFile; // The selected file to upload

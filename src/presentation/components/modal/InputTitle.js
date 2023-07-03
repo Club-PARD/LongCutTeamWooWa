@@ -47,6 +47,7 @@ function InputTitle({ modalType, handleSetModalType }) {
     } else {
       console.log("파일이 선택되지 않았습니다!");
     }
+    setIsDragAndDropOpen(false);
   };
 
   return (
@@ -173,7 +174,7 @@ const Background = styled.div`
 `;
 
 const Background2 = styled.div`
-  margin: 1%;
+
   position: fixed;
   z-index: 30;
   top: 0;
