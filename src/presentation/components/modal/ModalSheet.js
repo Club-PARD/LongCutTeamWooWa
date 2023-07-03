@@ -48,19 +48,22 @@ const ModalSheet = ({
       const userId = "tlsgn"; // User ID
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
-      if(selectedFile){
+      if (selectedFile) {
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
         const file = selectedFile; // The selected file to upload
-        const downloadUrl = await storageService.uploadPostImage(userId, postId, file);
+        const downloadUrl = await storageService.uploadPostImage(
+          userId,
+          postId,
+          file
+        );
         console.log("Image uploaded successfully:", downloadUrl);
 
-         // Update the Firestore document with the download URL
+        // Update the Firestore document with the download URL
         const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
         await postService.updatePost(postId, userId, updateData);
         console.log("Document updated with imageURL successfully!");
       }
-
     } catch (error) {
       console.error("Error creating document:", error);
     }
@@ -76,7 +79,12 @@ const ModalSheet = ({
       hasDatePicker: true,
       hasTagSelection: true,
       Button: (
-        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+        <SubmitBtn
+          buttonText={"기록하기"}
+          handleSnack={handleSnack}
+          handleModalOpen={handleModalOpen}
+          onSubmit={handleSubmitBtnClick}
+        />
       ),
     },
     "add-free": {
