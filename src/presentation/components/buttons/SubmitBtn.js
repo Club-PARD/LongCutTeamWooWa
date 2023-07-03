@@ -17,28 +17,35 @@ const BtnText = styled.div`
 
 const BtnDiv = styled.button`
   padding: 4px 12px;
-  background: ${(props) => (props.disabled ? 'grey' : props.theme.color.primary300)};
+  background: ${(props) =>
+    props.disabled ? "grey" : props.theme.color.primary300};
   border: 1px solid #cdcdcd;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-function SubmitBtn({ onSubmit, buttonText }) {
+function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText }) {
   const [open, setOpen] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
   const dataInput = useDataInput();
 
+  const handleClose = () => {
+    handleModalOpen();
+    handleSnack();
+  };
+
   const checkValidity = () => {
     console.log(dataInput["selected-tags"]);
-    return dataInput["title"] && 
-    (dataInput["selected-tags"] && Object.entries(dataInput["selected-tags"]).length < 3 && Object.entries(dataInput["selected-tags"]).length > 0) && 
-    ((dataInput["add-template-1"] && dataInput["add-template-2"]) || dataInput["add-free"]);
-  }
+    return (
+      dataInput["title"] &&
+      dataInput["selected-tags"] &&
+      Object.entries(dataInput["selected-tags"]).length < 3 &&
+      Object.entries(dataInput["selected-tags"]).length > 0 &&
+      ((dataInput["add-template-1"] && dataInput["add-template-2"]) ||
+        dataInput["add-free"])
+    );
+  };
 
   const handleClick = async () => {
     if (isBusy) return;
@@ -48,34 +55,17 @@ function SubmitBtn({ onSubmit, buttonText }) {
     await onSubmit();
     setOpen(true);
     setIsBusy(false);
-  };
-
-  const handleClose = (_event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
+    if (buttonText === "기록하기") handleClose();
   };
 
   return (
     <>
-      <BtnDiv onClick={!isBusy ? handleClick : () => {}} disabled={!checkValidity()}> 
+      <BtnDiv
+        onClick={!isBusy ? handleClick : () => {}}
+        disabled={!checkValidity()}
+      >
         <BtnText>{buttonText}</BtnText>
       </BtnDiv>
-      {buttonText === "기록하기" && (
-        <Stack spacing={2} sx={{ width: "100%" }}>
-          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              sx={{ width: "100%", backgroundColor: "#7AAA8F" }}
-            >
-              기록이 완료되었습니다.
-            </Alert>
-          </Snackbar>
-        </Stack>
-      )}
     </>
   );
 }

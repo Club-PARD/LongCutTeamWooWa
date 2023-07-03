@@ -33,9 +33,12 @@ const tags = [
   { tagName: "신체적", color: "#4386F7" },
 ];
 
-
-
-const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
+const ModalSheet = ({
+  modalType,
+  handleSnack,
+  handleModalOpen,
+  handleSetModalType,
+}) => {
   const dataInput = useDataInput();
   const [selectedFile] = useFileSelection();
 
@@ -85,7 +88,12 @@ const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
       hasDatePicker: true,
       hasTagSelection: true,
       Button: (
-        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+        <SubmitBtn
+          buttonText={"기록하기"}
+          handleSnack={handleSnack}
+          handleModalOpen={handleModalOpen}
+          onSubmit={handleSubmitBtnClick}
+        />
       ),
     },
     "add-template": {
@@ -97,7 +105,12 @@ const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
       hasDatePicker: true,
       hasTagSelection: true,
       Button: (
-        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+        <SubmitBtn
+          buttonText={"기록하기"}
+          handleSnack={handleSnack}
+          handleModalOpen={handleModalOpen}
+          onSubmit={handleSubmitBtnClick}
+        />
       ),
     },
     post: {
@@ -130,7 +143,10 @@ const ModalSheet = ({ modalType, handleModalOpen, handleSetModalType }) => {
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
         <>
-          <InputTitle modalType={modalType} handleSetModalType={handleSetModalType}  />
+          <InputTitle
+            modalType={modalType}
+            handleSetModalType={handleSetModalType}
+          />
           <VerticalSpacing height={13.9} />
         </>
       ) : (

@@ -16,7 +16,8 @@ export const theme = {
 
   },
   fontWeights: {
-    regular: 300,
+    light : 300,
+    regular: 400,
     semibold: 600,
     bold: 700,
     heavy : 900,
@@ -30,8 +31,8 @@ export const theme = {
     primary100: '#b6f3de',
     primary200:'#7febc8',
     primary300: '#272727', // 메인컬러 바뀌었습니다. 
-    primary400: 'gray', // 임시로 해놓을게요. _승훈.
-    primary500: '#00d28e',
+    primary400: '#7A7A7A', // 임시로 해놓을게요. _승훈.
+    primary500: '#CDCDCD', // 경험작성하기 호버되었을때. 
     primary600: '#00c181',
     primary700: '#00ad72',
     primary800: '#009b64',

@@ -13,7 +13,7 @@ import { useUpdateTimelineData } from "../../../service/providers/timeline_data_
 import { is } from "@react-spring/shared";
 
 const HeaderContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 40px;
 
   margin-left: 61px;
 `;
@@ -27,12 +27,14 @@ const Timeline = styled.div`
   line-height: 38px;
   border: none;
   outline: none;
+  padding-bottom: 0px;
 `;
 
 const Container = styled.div`
   display: flex;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 0px;
+  margin-bottom: 0px;
   justify-content: space-between;
 `;
 
@@ -45,7 +47,7 @@ const ButtonContainer2 = styled.div`
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   // padding-top: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 10px;
   margin-right: 65px;
 `;
 
@@ -93,23 +95,23 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 21px;
+  margin-top : 18px;
   margin-left : 10px;
 `
 
 const CustomDivider = styled.div`
-  width: 2px;
+  width: 1px;
   height: 30px;
-  background-color: #eaeaea;
+  background-color: #ccc;
   margin: 0 10px;
-  margin-right : 30px;
+  margin-right: 30px;
 
   align-self: center;
 `;
 
 const Divider = styled.div`
   height: 1px;
-  background-color: #eaeaea;
+  background-color:#ccc;
   top: 0;
   width: 100%;
   margin-top: 0px;
@@ -190,12 +192,12 @@ const periodOption = {
   },
 };
 
-function Header() {
+function Header({ handleSnack }) {
   const [activeButton, setActiveButton] = useState(1);
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("add-free");
-  
+
   const handleSetModalType = () => {
     if (modalType === "add-free") {
       setModalType("add-template");
@@ -249,9 +251,7 @@ function Header() {
             </Button>
 
             {/* <CustomDivider /> */}
-            <SelectDateText>
-              날짜이동
-            </SelectDateText>
+            <SelectDateText>날짜이동</SelectDateText>
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
@@ -266,9 +266,9 @@ function Header() {
           </ButtonContainer2>
         </Container>
         <Divider />
-
       </HeaderContainer>
       <ModalSheetBuilder
+        handleSnack={handleSnack}
         modalType={modalType}
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
