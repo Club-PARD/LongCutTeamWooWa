@@ -107,27 +107,28 @@ const DotTimeWrapper = styled.div`
 `;
 
 const brightenAnimation = keyframes`
-  0% { opacity: 0.5; }
+  0% { opacity: 0.7; }
   50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  100% { opacity: 0.7; }
 `;
 
 const darkenAnimation = keyframes`
   0% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.7; }
   100% { opacity: 1; }
 `;
 
 const scaleAnimation = keyframes`
   0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 `;
 
 const Dot = styled(TimelineDot)`
   width: 50px;
   height: 50px;
-  animation: ${brightenAnimation} 2s linear infinite, ${scaleAnimation} 2s linear infinite;
+  animation: ${brightenAnimation} 2s linear infinite,
+    ${scaleAnimation} 2s linear infinite;
 
   &:hover {
     animation: ${darkenAnimation} 2s linear infinite;
