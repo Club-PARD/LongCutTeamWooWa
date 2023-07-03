@@ -7,6 +7,7 @@ import {
 import ModalSheet from "./ModalSheet";
 import ModalView from "./ModalView";
 import "./ModalLayout.css";
+import { ImageInputProvider } from "../../../service/providers/image_input_provider";
 
 const Div = ({ children }) => {
   const dataInput = useDataInput();
@@ -31,12 +32,14 @@ export const ModalSheetBuilder = ({
         <Div
           children={
             <ModalWrapper>
-              <ModalSheet
-                handleSnack={handleSnack}
-                modalType={modalType}
-                handleSetModalType={handleSetModalType}
-                handleModalOpen={handleModalOpen}
-              />
+              <ImageInputProvider>
+                <ModalSheet
+                  handleSnack={handleSnack}
+                  modalType={modalType}
+                  handleSetModalType={handleSetModalType}
+                  handleModalOpen={handleModalOpen}
+                />
+              </ImageInputProvider>
             </ModalWrapper>
           }
         />

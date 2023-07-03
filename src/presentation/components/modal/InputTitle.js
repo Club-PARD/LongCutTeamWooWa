@@ -4,10 +4,7 @@ import img2 from "../../../assets/img/template.svg";
 import img2_1 from "../../../assets/img/activeTemplate.svg";
 import InputTextField from "../commons/InputTextField";
 import PopUpBuilder from "../popup/PopUpBuilder";
-import DragAndDrop from "../dragAndDrop/DragAndDrop";
-import { Card } from "antd";
 import React, { useState } from "react";
-import useFileSelection from "../dragAndDrop/hooks/useFileSelection.js";
 import {
   useUpdateDataInput,
   useDataInput,
@@ -20,34 +17,15 @@ function InputTitle({ modalType, handleSetModalType }) {
     updateDataInput(name, value);
   };
   const dataInput = useDataInput();
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedFile, addFile, removeFile] = useFileSelection();
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
-  const [isDragAndDropOpen, setIsDragAndDropOpen] = useState(false);
   const handleImgBtnClick = () => {
-    setIsDragAndDropOpen(true);
-  };
-  const handleBackgroundClick = () => {
-    setIsDragAndDropOpen(false);
-  };
-  const handleDragAndDropClick = (event) => {
-    event.stopPropagation();
-  };
-
-  const handleSubmit = () => {
-    if (selectedFile) {
-      console.log(
-        `파일 "${selectedFile.name}"이(가) 성공적으로 제출되었습니다!`
-      );
-    } else {
-      console.log("파일이 선택되지 않았습니다!");
-    }
-    setIsDragAndDropOpen(false);
   };
 
   return (
@@ -85,19 +63,6 @@ function InputTitle({ modalType, handleSetModalType }) {
             />
           </PopUpContainer>
         </Background>
-      )}
-      {isDragAndDropOpen && (
-        <Background2 onClick={handleBackgroundClick}>
-          <DragNDropContainer onClick={handleDragAndDropClick}>
-            <Card style={{ margin: "auto" }}>
-              <DragAndDrop
-                addFile={addFile}
-                removeFile={removeFile}
-                handleSubmit={handleSubmit} //여기서 handleSubmit 함수 전달
-              />
-            </Card>
-          </DragNDropContainer>
-        </Background2>
       )}
     </Div>
   );

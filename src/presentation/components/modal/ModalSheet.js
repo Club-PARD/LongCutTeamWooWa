@@ -1,5 +1,5 @@
 import "./ModalLayout.css";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import firebase from 'firebase/compat/app';
 
 
@@ -20,7 +20,7 @@ import {
 import FirebaseService from "../../../service/firebase/FirebaseService";
 import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
-import useFileSelection from "../dragAndDrop/hooks/useFileSelection";
+import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
 
 const tags = [
   { tagName: "도전정신", color: "#4386F7" },
@@ -42,7 +42,9 @@ const ModalSheet = ({
   handleSetModalType,
 }) => {
   const dataInput = useDataInput();
-  const [selectedFile, removeFile] = useFileSelection();
+  const imageInput = useImageInput();
+  const imageUpdateHandler = useUpdateImageInput();
+
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -51,11 +53,11 @@ const ModalSheet = ({
       if(!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
-      if(selectedFile){
-        console.log(selectedFile)
+      if(imageInput){
+        console.log(imageInput)
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
-        const file = selectedFile; // The selected file to upload
+        const file = imageInput; // The selected file to upload
         const downloadUrl = await storageService.uploadPostImage(userId, postId, file);
         console.log("Image uploaded successfully:", downloadUrl);
 
@@ -64,7 +66,7 @@ const ModalSheet = ({
         await postService.updatePost(postId, userId, updateData);
         console.log("Document updated with imageURL successfully!");
 
-        removeFile();
+        imageUpdateHandler("image", null);
       }
 
     } catch (error) {
