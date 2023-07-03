@@ -174,7 +174,7 @@ const Background = styled.div`
 `;
 
 const Background2 = styled.div`
-  margin: 1%;
+
   position: fixed;
   z-index: 30;
   top: 0;
