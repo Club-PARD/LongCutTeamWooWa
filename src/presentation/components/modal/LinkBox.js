@@ -135,26 +135,33 @@ function LinkBox() {
   const [isValidUrl, setIsValidUrl] = useState(true);
 
   const handleInputChange = (event) => {
-    const inputValue = event.target.value;
+    let inputValue = event.target.value || "";
+  
+    if (!inputValue && event.clipboardData) {
+      const clipboardText = event.clipboardData.getData("text/plain");
+      inputValue = clipboardText || "";
+    }
+  
     setLink(inputValue);
-
+  
     if (inputValue.trim() === "") {
       setIsValidUrl(true);
     } else {
       const urlRegex = new RegExp(
         "^(https?:\\/\\/)?" +
-          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
-          "((\\d{1,3}\\.){3}\\d{1,3}))" +
-          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
-          "(\\?[;&a-z\\d%_.~+=-]*)?" +
-          "(\\#[-a-z\\d_]*)?$",
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
+        "((\\d{1,3}\\.){3}\\d{1,3}))" +
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+        "(\\?[;&a-z\\d%_.~+=-]*)?" +
+        "(\\#[-a-z\\d_]*)?$",
         "i"
       );
       setIsValidUrl(urlRegex.test(inputValue));
     }
+  
     updateDataInputHandler("add-link");
   };
-
+  
   const updateDataInputHandler = (name) => {
     updateDataInput(name, link);
   };
@@ -168,6 +175,7 @@ function LinkBox() {
           placeholder="링크 삽입하기"
           value={link}
           onChange={handleInputChange}
+          onPaste={handleInputChange}
         />
         <Img1 src={img1} />
       </InputDiv>
