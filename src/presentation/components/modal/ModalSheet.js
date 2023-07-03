@@ -86,7 +86,7 @@ const ModalSheet = ({
       hasTagSelection: true,
       Button: (
         <SubmitBtn
-          buttonText={"기록하기"}
+          buttonText={"추가하기"}
           handleSnack={handleSnack}
           handleModalOpen={handleModalOpen}
           onSubmit={handleSubmitBtnClick}
@@ -152,7 +152,7 @@ const ModalSheet = ({
         "--max-width": "100%",
       }}
     >
-      <ModalHeader title={data["title"]} handleModalOpen={handleModalOpen} />
+      <ModalHeader modalType={modalType} title={data["title"]} handleModalOpen={handleModalOpen} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (
