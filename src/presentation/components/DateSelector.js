@@ -49,34 +49,23 @@ function DateSelector() {
     updateDataInput(name, value);
   };
 
-  const onChangeCallback = (event) => {
-    const { value } = event.target;
-    const parts = value.split("/"); // Split the date string into day, month, and year parts
-
-    // Create a new Date object using the year, month (subtract 1 because months are zero-based), and day
-    const date = new Date(parts[2], parts[0] - 1, parts[1]);
+  const onChangeCallback = (date) => {
 
     // Convert the date to a Firestore-compatible format
     const firestoreDate = firebase.firestore.Timestamp.fromDate(date);
     handleInputChange("date", firestoreDate);
   };
 
-  const currentDate = new Date(); // 현재 날짜 정보 가져오기
-  const currentDateString = currentDate.toLocaleDateString(); // 현재 날짜를 문자열로 변환
-
   return (
     <Container style={{ flexWrap: "wrap" }}>
       {/* <Text>날짜</Text> */}
       <CustomDatePicker
-        // dateFormat="yyyy/MM/dd"
-        // id="datepicker-id"
-        // name="date-demo"
-        // onChange={onChangeCallback}
-        // value={currentDateString}
-        // className="react-simple-datepicker-popup"
         locale={ko}
         selected={startDate}
-			  onChange={(date) => setStartDate(date)}
+			  onChange={(date) => {
+          onChangeCallback(date)
+          setStartDate(date)
+        }}
 			  dateFormat="yyyy.MM.dd"
       />
       <DateIconImg src={DateIcon} alt="DateIcon" />
