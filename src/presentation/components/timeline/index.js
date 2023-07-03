@@ -44,6 +44,7 @@ const TimelineContainer = styled.div`
 
 const TransparentButton = styled.button`
   position: fixed;
+  z-index : 900;
   background-color: transparent;
   border: none;
   cursor: pointer;
