@@ -1,5 +1,7 @@
 import "./ModalLayout.css";
 import React, { useContext, useState } from "react";
+import firebase from 'firebase/compat/app';
+
 
 import { Divider, DashedDivider } from "../commons/Divider";
 import ModalHeader from "./ModalSheetHeader";
@@ -40,15 +42,17 @@ const ModalSheet = ({
   handleSetModalType,
 }) => {
   const dataInput = useDataInput();
-  const [selectedFile] = useFileSelection();
+  const [selectedFile, removeFile] = useFileSelection();
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
       const userId = "tlsgn"; // User ID
+      if(!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
       if(selectedFile){
+        console.log(selectedFile)
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
         const file = selectedFile; // The selected file to upload
@@ -59,6 +63,8 @@ const ModalSheet = ({
         const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
         await postService.updatePost(postId, userId, updateData);
         console.log("Document updated with imageURL successfully!");
+
+        removeFile();
       }
 
     } catch (error) {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 const CardBox = styled.div`
+width: 184px;
 
   height: auto;
   background-color: ${props => props.theme.color.surface};
@@ -59,8 +60,6 @@ const TitleText = styled.p`
   height: auto;
   margin-top : 15px ; 
   margin-bottom : 10px; 
-  marigin-left : 10px;
-  marigin-right : 3px;
 `;
 
 const SummaryText = styled.p`
@@ -70,9 +69,10 @@ const SummaryText = styled.p`
   color: ${props => props.theme.color.blackHigh};
   line-height: 160%;
   
-  width: 100%;
-  margin-top : 0px ; 
+  margin-top : 0px; 
   margin-bottom : 0px; 
+
+  
 `;
 
 const ImgBox = styled.div`

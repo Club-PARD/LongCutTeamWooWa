@@ -5,6 +5,7 @@ const useFileSelection = () => {
   
     const addFile = (file) => {
       setSelectedFile(file);
+      console.log(file);
     };
   
     const removeFile = () => {

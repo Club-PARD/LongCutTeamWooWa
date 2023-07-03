@@ -29,7 +29,7 @@ const TimelineContainer = styled.div`
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   width: 100%;
-  height: 500px;
+  height: 100%;
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;

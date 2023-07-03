@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const CardBox = styled.div`
-  
+
   height: 118px;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
