@@ -211,6 +211,8 @@ const CardSizeBuilder = (size) => {
 };
 
 const Timeline = () => {
+  const [selectedDotData, setSelectedDotData] = useState(null);
+  
   const timelineContainerRef = useRef(null);
 
   const [dotWidth, setDotWidth] = useState(0);
@@ -326,6 +328,7 @@ const Timeline = () => {
     });
   };
 
+
   return (
     <>
       <TimelineContainer ref={timelineContainerRef}>
@@ -350,6 +353,7 @@ const Timeline = () => {
                 <Dot />
                 <Time isAbove={index % 2 === 0}>{entry[0]}</Time>
                 <CardWrapper
+                  setSelectedDotData = {setSelectedDotData}
                   mode={CardSizeBuilder(cardSize)}
                   isAbove={index % 2 !== 0}
                   postDataList={entry[1]}

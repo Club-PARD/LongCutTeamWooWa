@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const CardBox = styled.div`
-width: 184px;
+  width: 184px;
 
   height: auto;
   background-color: ${props => props.theme.color.surface};

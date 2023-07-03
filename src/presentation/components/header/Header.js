@@ -170,9 +170,9 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 18px;
-  margin-left : 10px;
-`
+  margin-top: 18px;
+  margin-left: 10px;
+`;
 
 const CustomDivider = styled.div`
   width: 1px;
@@ -186,7 +186,7 @@ const CustomDivider = styled.div`
 
 const Divider = styled.div`
   height: 1px;
-  background-color:#ccc;
+  background-color: #ccc;
   top: 0;
   width: 100%;
   margin-top: 0px;
@@ -219,7 +219,7 @@ const AddLinkIconImg = styled.img`
   width: 12px;
   height: 12px;
   margin-right: 8px;
-  color : black; 
+  color: black;
 `;
 
 const AddExperience = styled.button`
@@ -230,7 +230,7 @@ const AddExperience = styled.button`
   padding: 8px 16px;
   border-radius: 40px;
   height: 31px;
-  background-color: transparent; 
+  background-color: transparent;
   color: ${(props) => props.theme.color.blackHigh};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
@@ -291,6 +291,12 @@ function Header({ handleSnack }) {
     setIsModalOpen(!isModalOpen);
     ResetModalType();
   };
+
+  const handleLinkModalOpen = () => {
+    setModalType("add-link");
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
@@ -350,7 +356,7 @@ function Header({ handleSnack }) {
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
-            <AddLinkButton>
+            <AddLinkButton onClick={handleLinkModalOpen}>
               <AddLinkIconImg src={AddLinkIcon} />
               링크 추가하기
             </AddLinkButton>
@@ -368,6 +374,13 @@ function Header({ handleSnack }) {
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
+      />
+      <ModalSheetBuilder
+       handleSnack={handleSnack}
+       modalType={modalType}
+       handleSetModalType={handleSetModalType}
+       isModalOpen={isModalOpen}
+       handleModalOpen={handleModalOpen}
       />
     </DataInputProvider>
   );

@@ -38,12 +38,16 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText }) {
   const checkValidity = () => {
     console.log(dataInput["selected-tags"]);
     return (
-      dataInput["title"] &&
-      dataInput["selected-tags"] &&
-      Object.entries(dataInput["selected-tags"]).length < 3 &&
-      Object.entries(dataInput["selected-tags"]).length > 0 &&
-      ((dataInput["add-template-1"] && dataInput["add-template-2"]) ||
-        dataInput["add-free"])
+      (dataInput["title"] &&
+        dataInput["selected-tags"] &&
+        Object.entries(dataInput["selected-tags"]).length < 3 &&
+        Object.entries(dataInput["selected-tags"]).length > 0 &&
+        ((dataInput["add-template-1"] && dataInput["add-template-2"]) ||
+          dataInput["add-free"])) ||
+      (dataInput["selected-tags"] &&
+        Object.entries(dataInput["selected-tags"]).length < 3 &&
+        Object.entries(dataInput["selected-tags"]).length > 0 &&
+        dataInput["add-link"])
     );
   };
 

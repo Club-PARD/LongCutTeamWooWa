@@ -20,11 +20,13 @@ const gapList = {
   [smallSize]: "5px",
 };
 
-const CardWrapper = ({isAbove, mode, postDataList }) => {
+const CardWrapper = ({isAbove, mode, postDataList, setSelectedDotData }) => {
+  
+
   const renderCards = () => {
     switch (mode) {
       case lxSize:
-        return postDataList.map((post) => <ExperienceCardSelf data={post} />);
+        return postDataList.map((post) => <div onClick={setSelectedDotData(post)}><ExperienceCardSelf data={post} /></div>);
       case largeSize:
         return postDataList.map((post) => <ExperienceCardSelfMiddle data={post} />);
       case mediumSize:
