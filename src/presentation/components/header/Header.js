@@ -144,6 +144,7 @@ const AddLinkIconImg = styled.img`
   width: 12px;
   height: 12px;
   margin-right: 8px;
+  color : black; 
 `;
 
 const AddExperience = styled.button`
@@ -154,17 +155,18 @@ const AddExperience = styled.button`
   padding: 8px 16px;
   border-radius: 40px;
   height: 31px;
-  background-color: ${(props) => props.theme.color.primary300};
-  color: ${(props) => props.theme.color.surface};
+  background-color: transparent; 
+  color: ${(props) => props.theme.color.blackHigh};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
   border: none;
   outline: none;
   cursor: pointer;
+  border: 1.148px solid var(--black-high, #272727);
 
   &:hover {
-    background-color: ${(props) => props.theme.color.primary400};
-    color: ${(props) => props.theme.color.surface};
+    background-color: ${(props) => props.theme.color.primary500};
+    color: ${(props) => props.theme.color.blackHigh};
   }
 `;
 
