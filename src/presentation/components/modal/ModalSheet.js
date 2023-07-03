@@ -61,14 +61,13 @@ const ModalSheet = ({
         const downloadUrl = await storageService.uploadPostImage(userId, postId, file);
         console.log("Image uploaded successfully:", downloadUrl);
 
-         // Update the Firestore document with the download URL
+        // Update the Firestore document with the download URL
         const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
         await postService.updatePost(postId, userId, updateData);
         console.log("Document updated with imageURL successfully!");
 
         imageUpdateHandler("image", null);
       }
-
     } catch (error) {
       console.error("Error creating document:", error);
     }
@@ -84,7 +83,12 @@ const ModalSheet = ({
       hasDatePicker: true,
       hasTagSelection: true,
       Button: (
-        <SubmitBtn buttonText={"기록하기"} onSubmit={handleSubmitBtnClick} />
+        <SubmitBtn
+          buttonText={"추가하기"}
+          handleSnack={handleSnack}
+          handleModalOpen={handleModalOpen}
+          onSubmit={handleSubmitBtnClick}
+        />
       ),
     },
     "add-free": {
@@ -146,7 +150,7 @@ const ModalSheet = ({
         "--max-width": "100%",
       }}
     >
-      <ModalHeader title={data["title"]} handleModalOpen={handleModalOpen} />
+      <ModalHeader modalType={modalType} title={data["title"]} handleModalOpen={handleModalOpen} />
       <Divider />
       <VerticalSpacing height={25} />
       {data["hasTitleInput"] ? (

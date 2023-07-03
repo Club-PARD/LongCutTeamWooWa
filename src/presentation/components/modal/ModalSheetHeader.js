@@ -41,7 +41,7 @@ const PopUpContainer = styled.div`
   z-index: 99;
 `;
 
-function ModalHeader({ title, handleModalOpen }) {
+function ModalHeader({ modalType, title, handleModalOpen }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
@@ -54,6 +54,14 @@ function ModalHeader({ title, handleModalOpen }) {
     updateDataInput(name, value);
   };
   const dataInput = useDataInput();
+
+  const handleCloseIconClick = () => {
+    if (modalType === "add-link") {
+      handleModalOpen();
+    } else {
+      handlePopupOpen();
+    }
+  };
 
   return (
     <ModalHeaderContainer>
@@ -69,7 +77,7 @@ function ModalHeader({ title, handleModalOpen }) {
       <IconButton
         iconImage={CloseIcon}
         size={"24px"}
-        onClick={handlePopupOpen}
+        onClick={handleCloseIconClick}
       />
       {isPopupOpen && (
         <Background>

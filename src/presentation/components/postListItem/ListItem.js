@@ -94,9 +94,8 @@ const DropdownContent = styled.div`
   border: 1px solid var(--disabled-1, #ababab);
   background: var(--surface-white, #fff);
   padding: 5px;
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+  display: ${(props) => (props.isOpen ? "block" : "none")}; // 수정된 부분
 `;
-
 
 
 const TagLabel = styled.span`
