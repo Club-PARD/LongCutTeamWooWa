@@ -4,7 +4,7 @@ import BigLogo from "../../../assets/img/LogoBig_Disquiet.svg";
 
 const CardBox = styled.div`
   width: 184px;
-  height: 109px;
+  height: auto;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -85,9 +85,9 @@ function ExperienceCardLinkMiddle({ data }) {
         </div>
       )}
       <SummaryText>
-        {/* {data["summary"].length > 44
+        {data["summary"].length > 44
           ? `${data["summary"].slice(0, 43)}  ...`
-          : data["summary"]} */}
+          : data["summary"]}
       </SummaryText>
     </CardBox>
   );
