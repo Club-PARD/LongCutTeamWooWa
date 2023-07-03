@@ -59,7 +59,7 @@ const ButtonText = styled.span`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   margin-left: 6px;
   margin-right: 6px;
-  opacity: 80%;
+
 `;
 const FirstButton = styled(TransparentButton)`
   right: 180px;

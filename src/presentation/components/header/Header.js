@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import DateSelector from "../DateSelector";
 import {
   DataInputProvider,
@@ -8,13 +8,14 @@ import {
 } from "../../../service/providers/data_input_provider";
 import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
+import InfoIcon from "../../../assets/img/InfoIcon.svg";
 import ModalSheetBuilder from "../modal";
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { is } from "@react-spring/shared";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
-
+  position: relative; /* 추가된 부분 */
   margin-left: 61px;
 `;
 
@@ -29,6 +30,80 @@ const Timeline = styled.div`
   outline: none;
   padding-bottom: 0px;
 `;
+
+const TimeLineInfoBoxContainer = styled.div`
+  display : flex; 
+`;
+const InformationIcon = styled.img`
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+  margin-top: 14px;
+  color: black;
+  cursor: pointer;
+
+  &:hover + ${InformationBox} {
+    opacity: 0.93;
+  }
+`;
+
+const InformationBox = styled.div`
+  width: 331px;
+  height: 86px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: 10px; 
+  background-color: ${(props) => props.theme.color.blackHigh};
+  color: ${(props) => props.theme.color.surface};
+  position: absolute;
+  z-index: 10;
+  margin-left : 100px; 
+  top: 75px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  ::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 50.1px;
+    border-style: solid;
+    border-width: 6px;
+    border-color: transparent transparent ${(props) =>
+      props.theme.color.blackHigh} transparent;
+  }
+
+  ${({ isHovered }) =>
+    isHovered &&
+    css`
+      opacity: 0.93;
+    `}
+`;
+
+const TipTextTitle = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  color: ${(props) => props.theme.color.surface};
+  font-size: 10px; 
+  margin-left : 15px;
+  margin-top: 4px;
+`
+const TipText = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  color: ${(props) => props.theme.color.surface};
+  font-size: 10px; 
+  margin-left : 15px;
+  line-height: 160%;
+  margin-top: 0px;
+`
 
 const Container = styled.div`
   display: flex;
@@ -72,9 +147,9 @@ const Button = styled.button`
 
   &:hover {
     color: ${(props) =>
-      props.active
-        ? props.theme.color.primary300
-        : props.theme.color.primary300};
+    props.active
+      ? props.theme.color.primary300
+      : props.theme.color.primary300};
   }
 `;
 
@@ -225,10 +300,28 @@ function Header({ handleSnack }) {
     handleTimelineDataChange("grouping", key);
   };
 
+  const [isIconHovered, setIsIconHovered] = useState(false);
+
   return (
     <DataInputProvider>
       <HeaderContainer>
-        <Timeline>Timeline</Timeline>
+        <TimeLineInfoBoxContainer>
+          <Timeline>Timeline</Timeline>
+          <InformationIcon
+            src={InfoIcon}
+            onMouseEnter={() => setIsIconHovered(true)}
+            onMouseLeave={() => setIsIconHovered(false)}
+            isHovered={isIconHovered}
+          />
+        </TimeLineInfoBoxContainer>
+        <InformationBox>
+          <TipTextTitle>Quik Tip</TipTextTitle>
+          <TipText>
+            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수 있습니다. <br />
+            • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수 있습니다.<br />
+            • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수 있습니다.
+          </TipText>
+        </InformationBox>
         <Container>
           <ButtonContainer>
             {Object.entries(periodOption).map(([key, value]) => (
