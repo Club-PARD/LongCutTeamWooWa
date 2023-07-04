@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import React from "react";
 import SingleScrollView from "../commons/SingleScrollView";
-import ModalContainer from "./ModalContainer";
-import ModalTagSelection from "./ModalTagSelection";
-import Img1 from "../../../assets/img/edit.svg";
-import { DataInputProvider } from "../../../service/providers/data_input_provider";
 import ExitModalBtn from "../buttons/ExitModalBtn";
 import { DashedDivider } from "../commons/Divider";
-
-const tags = ["협업", "성취감"];
+import moment from "moment";
 
 const ModalDiv = styled.div`
   display: flex;
@@ -134,7 +129,13 @@ const Content = styled.div`
 function ModalView({ postDotData, handleDotClick }) {
   const tags = postDotData["selected-tags"];
   const imgURL = postDotData.imageURL;
-  console.log(postDotData["selected-tags"].tagName);
+  const timestamp = postDotData.date;
+  const date = timestamp ? timestamp.toDate() : null;
+
+  let formattedDate = null;
+  if (date) {
+    formattedDate = moment(date).format("YYYY년 M월 D일");
+  }
   return (
     <ModalDiv>
       <HeaderDiv>
@@ -149,7 +150,7 @@ function ModalView({ postDotData, handleDotClick }) {
           ))}
         </div>
       )}
-      <DateDiv>{postDotData.date}</DateDiv>
+      <DateDiv>{formattedDate}</DateDiv>
       <SingleScrollView
         height={400}
         children={
