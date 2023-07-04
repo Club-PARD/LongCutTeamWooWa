@@ -85,6 +85,7 @@ const Title = styled.div`
   color: ${(props) => props.theme.color.blackHigh};
   font-style: normal;
   line-height: 22px;
+  margin-top : 20px; 
 `;
 
 const Div = styled.div`
@@ -179,7 +180,7 @@ function LinkBox() {
         />
         <Img1 src={img1} />
       </InputDiv>
-      <VerticalSpacing height={8} />
+      <VerticalSpacing height={20} />
       {!isValidUrl && <WarningText>유효하지 않은 링크입니다.</WarningText>}
     </Div>
   );

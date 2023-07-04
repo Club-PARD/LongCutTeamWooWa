@@ -38,7 +38,7 @@ const Timeline = styled.div`
 
 const InfoBoxImg = styled.img`
   width : 14px;
-  heigth : 14px; 
+  height : 14px; 
   cursor : pointer; 
   margin-left : 13px; 
   margin-top : 5px;
@@ -355,7 +355,6 @@ function Header({ handleSnack }) {
               <ButtonIndicator active={activeButton === 5} />
             </Button>
 
-            {/* <CustomDivider /> */}
             <SelectDateText>날짜이동</SelectDateText>
             <DateSelector />
           </ButtonContainer>

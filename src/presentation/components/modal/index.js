@@ -54,7 +54,7 @@ const Background = styled.div`
   height: 100%;
   z-index: 10;
   background: ${({ isExpanded }) =>
-    isExpanded ? "#fff" : "rgba(0, 0, 0, 0.7)"};
+    isExpanded ? "#fff" : "rgba(0, 0, 0, 0.5)"};
   position: fixed;
   display: flex;
   justify-content: center;
@@ -64,7 +64,6 @@ const Background = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  // box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
   display: flex;

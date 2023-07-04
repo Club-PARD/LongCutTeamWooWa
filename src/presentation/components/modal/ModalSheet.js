@@ -53,10 +53,10 @@ const ModalSheet = ({
   const handleSubmitBtnClick = async () => {
     try {
       const userId = "tlsgn"; // User ID
-      if(!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
+      if (!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
-      if(imageInput){
+      if (imageInput) {
         console.log(imageInput)
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
@@ -84,7 +84,7 @@ const ModalSheet = ({
       title: "링크 추가하기",
       width: "510px",
       height: "357px",
-      IDvsLinkButton : true,
+      IDvsLinkButton: true,
       hasTitleInput: false,
       children: isIDvsLinkActive ? <IDBox /> : <LinkBox />,
       hasDatePicker: !isIDvsLinkActive,
@@ -147,8 +147,8 @@ const ModalSheet = ({
 
   const data = modalTypeInfo[modalType];
   if (data === null) return <></>;
-  
 
+  
   return (
     <div
       className="modal-sheet"
@@ -174,30 +174,42 @@ const ModalSheet = ({
       )}
       {data["IDvsLinkButton"] != null ? (
         <>
-          <IDvsLinkButton
-            isActive={isIDvsLinkActive}
-            handleClick={handleIDvsLinkButtonClick}
-          />
-          <VerticalSpacing height={25} />
+          <div style={{ justifyContent: "center", display: "flex" }}>
+            <IDvsLinkButton
+              isActive={isIDvsLinkActive}
+              handleClick={handleIDvsLinkButtonClick}
+            />
+            <VerticalSpacing height={25} />
+          </div>
         </>
       ) : (
         <></>
       )}
-      {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
-      
-      
+      {imageInput && <img style={{ maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
+
+
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>
           <Divider />
-          <VerticalSpacing height={14} />
-          <DateSelector />
-          <VerticalSpacing height={14} />
+          <VerticalSpacing height={15} />
+          <div style= {{display: "flex", }}>
+            <p style = {
+              {fontSize: "14px",
+                fontWeight: 600,
+                marginRight : "10px",
+                marginLeft : "10px", 
+                marginTop: "8px"
+              }
+            }>날짜 입력</p>
+            <DateSelector />
+          </div>
+          <VerticalSpacing height={7} />
         </>
       ) : (
         <></>
       )}
-      {data["hasTagSelection"] != null && !isIDvsLinkActive ? (
+      {data["hasTagSelection"] ? (
         <>
           <Divider />
           <VerticalSpacing height={14} />
