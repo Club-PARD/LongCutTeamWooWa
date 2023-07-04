@@ -14,6 +14,7 @@ const Title = styled.div`
 color: var(--black-medium, #7A7A7A);
   font-style: normal;
   line-height: 22px;
+  margin-top : 20px; 
 `;
 
 const Div = styled.div`
@@ -71,7 +72,7 @@ const DisquietText = styled.p`
 font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
-`
+`;
 const ServiceTextContent = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.regular};

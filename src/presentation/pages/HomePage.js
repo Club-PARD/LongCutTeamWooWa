@@ -103,12 +103,7 @@ function HomePage() {
           </div>
         </TimelineDataProvider>
       </BackgroundContainer>
-      <TestBox>
-        {/* <ExperienceCardLinkMiddle data={exampleCrawledData} />
-        <ListModal /> */}
-        {/* <LinkBox/> */}
-        {/* <LoginPage/> */}
-      </TestBox>
+      
       <Snackbar
   anchorOrigin={{
     vertical: "bottom",

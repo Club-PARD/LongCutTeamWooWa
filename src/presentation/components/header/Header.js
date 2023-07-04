@@ -355,7 +355,6 @@ function Header({ handleSnack }) {
               <ButtonIndicator active={activeButton === 5} />
             </Button>
 
-            {/* <CustomDivider /> */}
             <SelectDateText>날짜이동</SelectDateText>
             <DateSelector />
           </ButtonContainer>
