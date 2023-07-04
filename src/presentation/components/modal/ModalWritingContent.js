@@ -6,8 +6,11 @@ import { UseDataInput, useUpdateDataInput } from "../../../service/providers/dat
 const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 300px;
-  padding: 0px 11px;
+  height: 300px;
+  padding-top: 0px;
+  padding-left: 11px;
+  padding-right: 5px;
+  padding-bottom: 15px;  
 `;
 
 const ModalWritingContent = () => {
