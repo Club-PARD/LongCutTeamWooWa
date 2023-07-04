@@ -16,6 +16,8 @@ import { TimelineDataProvider } from "../../service/providers/timeline_data_prov
 import ListModal from "../components/postListItem";
 import { fontSize } from "@mui/system";
 
+import LinkBox from "../components/modal/LinkBox";
+
 const BackgroundContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -104,8 +106,9 @@ function HomePage() {
         </TimelineDataProvider>
       </BackgroundContainer>
       <TestBox>
-        <ExperienceCardLinkMiddle data={exampleCrawledData} />
-        <ListModal />
+        {/* <ExperienceCardLinkMiddle data={exampleCrawledData} />
+        <ListModal /> */}
+        <LinkBox/>
       </TestBox>
       <Snackbar
   anchorOrigin={{

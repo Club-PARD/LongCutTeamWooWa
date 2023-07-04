@@ -34,18 +34,6 @@ const Timeline = styled.div`
 const TimeLineInfoBoxContainer = styled.div`
   display : flex; 
 `;
-const InformationIcon = styled.img`
-  width: 15px;
-  height: 15px;
-  margin-left: 8px;
-  margin-top: 14px;
-  color: black;
-  cursor: pointer;
-
-  &:hover + ${InformationBox} {
-    opacity: 0.93;
-  }
-`;
 
 const InformationBox = styled.div`
   width: 331px;
@@ -86,6 +74,19 @@ const InformationBox = styled.div`
       opacity: 0.93;
     `}
 `;
+const InformationIcon = styled.img`
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+  margin-top: 14px;
+  color: black;
+  cursor: pointer;
+
+  &:hover + ${InformationBox} {
+    opacity: 0.93;
+  }
+`;
+
 
 const TipTextTitle = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -170,9 +171,9 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top: 18px;
-  margin-left: 10px;
-`;
+  margin-top : 18px;
+  margin-left : 10px;
+`
 
 const CustomDivider = styled.div`
   width: 1px;
@@ -186,7 +187,7 @@ const CustomDivider = styled.div`
 
 const Divider = styled.div`
   height: 1px;
-  background-color: #ccc;
+  background-color:#ccc;
   top: 0;
   width: 100%;
   margin-top: 0px;
@@ -219,7 +220,7 @@ const AddLinkIconImg = styled.img`
   width: 12px;
   height: 12px;
   margin-right: 8px;
-  color: black;
+  color : black; 
 `;
 
 const AddExperience = styled.button`
@@ -230,7 +231,7 @@ const AddExperience = styled.button`
   padding: 8px 16px;
   border-radius: 40px;
   height: 31px;
-  background-color: transparent;
+  background-color: transparent; 
   color: ${(props) => props.theme.color.blackHigh};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
@@ -291,12 +292,6 @@ function Header({ handleSnack }) {
     setIsModalOpen(!isModalOpen);
     ResetModalType();
   };
-
-  const handleLinkModalOpen = () => {
-    setModalType("add-link");
-    setIsModalOpen(!isModalOpen);
-  };
-
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
@@ -356,7 +351,7 @@ function Header({ handleSnack }) {
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
-            <AddLinkButton onClick={handleLinkModalOpen}>
+            <AddLinkButton>
               <AddLinkIconImg src={AddLinkIcon} />
               링크 추가하기
             </AddLinkButton>
@@ -374,13 +369,6 @@ function Header({ handleSnack }) {
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
-      />
-      <ModalSheetBuilder
-       handleSnack={handleSnack}
-       modalType={modalType}
-       handleSetModalType={handleSetModalType}
-       isModalOpen={isModalOpen}
-       handleModalOpen={handleModalOpen}
       />
     </DataInputProvider>
   );
