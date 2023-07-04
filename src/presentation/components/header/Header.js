@@ -42,33 +42,56 @@ const InfoBoxImg = styled.img`
   cursor : pointer; 
   margin-left : 13px; 
   margin-top : 5px;
+  border-radius: 50%;
 `
 
 const TipContaioner = styled.div`
-  z-index: 10;
   position: absolute;
-  width: 331px;
-  height: 86px;
+  z-index: 10;
+  width: 341px;
+  height: 90px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.color.blackHigh};
-  margin-left: 50px;
-  margin-top: 25px;
-  display: ${(props) => (props.show ? "block" : "none")};
+  margin-left: 55px;
+  top: 6.5px;
+  opacity: ${(props) => props.show ? "0.95" : "0"};
+  transition: opacity 0.2s ease-in-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 90px;
+    left: 30.8%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid ${(props) => props.theme.color.blackHigh};
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+
 `;
+
+
+
 
 const TipTitle = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.semibold};
-  font-size: 10px;
+  font-size: 11px;
   color: ${(props) => props.theme.color.surface};
   margin-left : 15px; 
+  margin-bottom : 4px; 
 `
 const TipContent = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.regular};
-  font-size: 10px;
+  font-size: 11px;
   color: ${(props) => props.theme.color.surface};
+  margin-top : 0px; 
   margin-left : 15px; 
+  line-height:160%; 
 `
 
 
