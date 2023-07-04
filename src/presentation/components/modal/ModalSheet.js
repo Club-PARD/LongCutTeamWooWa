@@ -17,7 +17,6 @@ import {
   useDataInput,
   useUpdateDataInput,
 } from "../../../service/providers/data_input_provider";
-import FirebaseService from "../../../service/firebase/FirebaseService";
 import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
 import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
@@ -44,7 +43,6 @@ const ModalSheet = ({
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
-
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -164,6 +162,7 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
+      {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>

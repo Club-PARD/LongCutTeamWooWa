@@ -4,7 +4,7 @@ import { format, startOfDay, getWeek} from "date-fns";
 const groupDataByDay = (data) => {
   const groupedData = {};
 
-  for (const [index, value] of data.entries()) {
+  for (const [, value] of data.entries()) {
     const date = startOfDay(value.date.toDate());
     
     const formattedDate = format(date, "MM/dd/yyyy");
@@ -23,7 +23,7 @@ const groupDataByDay = (data) => {
 const groupDataByWeek = (data) => {
   const groupedData = {};
 
-  for (const [index, value] of data.entries()) {
+  for (const [, value] of data.entries()) {
     const date = value.date.toDate();
     const week = getWeek(date);
 
@@ -41,7 +41,7 @@ const groupDataByWeek = (data) => {
 const groupDataByMonth = (data) => {
   const groupedData = {};
 
-  for (const [index, value] of data.entries()) {
+  for (const [, value] of data.entries()) {
     const date = value.date.toDate();
     const formattedMonth = format(date, "MM/yyyy");
 
@@ -59,7 +59,7 @@ const groupDataByMonth = (data) => {
 const groupDataByYear = (data) => {
   const groupedData = {};
 
-  for (const [index, value] of data.entries()) {
+  for (const [, value] of data.entries()) {
     const date = value.date.toDate();
     const formattedYear = format(date, "yyyy");
 

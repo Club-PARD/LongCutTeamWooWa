@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React  from "react";
 import styled from "styled-components";
-import Stack from "@mui/material/Stack";
-import AlertTitle from "@mui/material/AlertTitle";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import BackgroundImg from "../../assets/img/MainBackground.png";
@@ -14,7 +12,8 @@ import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 
 import ListModal from "../components/postListItem";
-import { fontSize } from "@mui/system";
+
+import LinkBox from "../components/modal/LinkBox";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -104,8 +103,9 @@ function HomePage() {
         </TimelineDataProvider>
       </BackgroundContainer>
       <TestBox>
-        <ExperienceCardLinkMiddle data={exampleCrawledData} />
-        <ListModal />
+        {/* <ExperienceCardLinkMiddle data={exampleCrawledData} />
+        <ListModal /> */}
+        <LinkBox/>
       </TestBox>
       <Snackbar
   anchorOrigin={{

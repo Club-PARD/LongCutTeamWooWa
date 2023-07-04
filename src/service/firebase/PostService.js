@@ -13,7 +13,10 @@ class PostService {
     }
 
     async verifyPostOwnership(postId, userId) {
-        const post = await this.getPost(postId);
+        const post = await this.getPost(postId, userId);
+        console.log(post);
+        console.log(post.userId);
+        console.log(userId);
         return post && post.userId === userId;
     }
 
@@ -52,7 +55,6 @@ class PostService {
     // Create a post
     async createPost(userId, postData) {
         try {
-            console.log(postData);
             let targetMessageList = [];
             if(postData["add-free"]){
                 targetMessageList = [
@@ -73,12 +75,15 @@ class PostService {
                 ]
             }
             const flattenedMessage = targetMessageList.join(" ");
-            console.log(targetMessageList);
-            console.log(flattenedMessage);
-            const summarizedText = await requestSummarize(20, flattenedMessage);
+            
+            let summarizedText = null;
+            if(flattenedMessage.length > 20){
+                summarizedText = await requestSummarize(20, flattenedMessage);
+            }
+            
             // Combine the userId with the post data
             const post = {
-                'summary': summarizedText,
+                'summary': summarizedText ?? flattenedMessage,
                 'userId': userId,
                 ...postData,
             };
