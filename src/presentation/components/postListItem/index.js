@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from 'axios';
+
 import PostHeader from "./PostHeader";
 import { Divider } from "@mui/material";
 import ExplainModal from "./ExplainModal";
@@ -114,13 +116,42 @@ const exampleCrawledData = {
   ],
 };
 
-function ListModal() {
+function ListModal({disquiteId}) {
+  const [crawledData, setCrawledData] = useState([]);
+
+  const addMetaData = () => {
+    const updatedData = {
+      userId: disquiteId,
+      items: [...crawledData],
+    };
+    setCrawledData(updatedData);
+  }
+
+  const fetchCrawledData = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/crawl', { disquite_id: disquiteId });
+      setCrawledData(response.data);
+      addMetaData();
+      console.log(crawledData);
+    } catch (error) {
+      console.log('Error:', error);
+      // Handle the error condition
+    }
+  };
+  
+
+  // request data to the crawler
+  useEffect(()=>{
+    fetchCrawledData();
+    
+  }, []);
+
   return (
     <ModalContainer>
-      <PostHeader data={exampleCrawledData} />
+      <PostHeader data={crawledData} />
       <Divider />
-      <ExplainModal data={exampleCrawledData} />
-      <ListContainer data={exampleCrawledData} />
+      <ExplainModal data={crawledData} />
+      {/* <ListContainer data={crawledData} /> */}
     </ModalContainer>
   );
 }

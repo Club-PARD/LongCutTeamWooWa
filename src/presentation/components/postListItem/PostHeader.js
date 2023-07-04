@@ -44,7 +44,7 @@ function PostHeader({ data }) {
   return (
     <HeaderContainer>
       <HeaderIcon src={Logo_Disquiet} alt="로고이미지" />
-      <UserId>{data["userId"]}</UserId>
+      <UserId>{data["userId"] ?? "no id found"}</UserId>
       <CloseButton
         iconImage={CloseIcon}
         size={"16px"}
