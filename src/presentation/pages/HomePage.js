@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React  from "react";
 import styled from "styled-components";
-import Stack from "@mui/material/Stack";
-import AlertTitle from "@mui/material/AlertTitle";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import BackgroundImg from "../../assets/img/MainBackground.png";
@@ -14,7 +12,6 @@ import Timeline from "../components/timeline/index";
 import { TimelineDataProvider } from "../../service/providers/timeline_data_provider";
 
 import ListModal from "../components/postListItem";
-import { fontSize } from "@mui/system";
 
 const BackgroundContainer = styled.div`
   width: 100%;

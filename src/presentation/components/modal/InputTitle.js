@@ -4,19 +4,27 @@ import img2 from "../../../assets/img/template.svg";
 import img2_1 from "../../../assets/img/activeTemplate.svg";
 import InputTextField from "../commons/InputTextField";
 import PopUpBuilder from "../popup/PopUpBuilder";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   useUpdateDataInput,
   useDataInput,
 } from "../../../service/providers/data_input_provider";
+import { useUpdateImageInput } from "../../../service/providers/image_input_provider";
 
 function InputTitle({ modalType, handleSetModalType }) {
-  const updateDataInput = useUpdateDataInput();
+  const fileInputRef = useRef(null);
 
+  const updateDataInput = useUpdateDataInput();
   const handleInputChange = (name, value) => {
     updateDataInput(name, value);
   };
   const dataInput = useDataInput();
+
+  const updateImageInput = useUpdateImageInput();
+  const handleImageInputChange = (event) => {
+    const file = event.target.files[0];
+    updateImageInput("image", file);
+  };
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handlePopupOpen = () => {
@@ -26,6 +34,7 @@ function InputTitle({ modalType, handleSetModalType }) {
     setIsPopupOpen(false);
   };
   const handleImgBtnClick = () => {
+    fileInputRef.current.click();
   };
 
   return (
@@ -37,6 +46,13 @@ function InputTitle({ modalType, handleSetModalType }) {
       />
       <div style={{ display: "flex", gap: "10px" }}>
         <ImgBtn onClick={handleImgBtnClick}>
+            <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageInputChange}
+            ref={fileInputRef}
+            style={{ display: "none" }}
+          />
           <Img1 src={img1} />
           <TextDiv>이미지</TextDiv>
         </ImgBtn>
