@@ -6,11 +6,11 @@ import ExperienceCardSelf from "../commons/ExperienceCardSelf";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: ${({ isAbove }) => (isAbove ? 'column-reverse' : 'column')};
+  flex-direction: ${({ isAbove }) => (isAbove ? "column-reverse" : "column")};
   position: absolute;
   font-size: 12px;
   white-space: nowrap;
-  ${({ isAbove }) => (isAbove ? 'bottom: 60%;' : 'top: 60%;')};
+  ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
 `;
 
 const gapList = {
@@ -20,25 +20,62 @@ const gapList = {
   [smallSize]: "5px",
 };
 
-const CardWrapper = ({isAbove, mode, postDataList, setSelectedDotData }) => {
-  
-
+const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick }) => {
   const renderCards = () => {
     switch (mode) {
       case lxSize:
-        return postDataList.map((post) => <div onClick={setSelectedDotData(post)}><ExperienceCardSelf data={post} /></div>);
+        return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
+            <ExperienceCardSelf data={post} />
+          </div>
+        ));
       case largeSize:
-        return postDataList.map((post) => <ExperienceCardSelfMiddle data={post} />);
+        return postDataList.map((post) => (
+          <div onClick={() => {
+            handleDotClick();
+            setPostData(post);
+          }}>
+          <ExperienceCardSelfMiddle data={post} />
+          </div>
+        ));
       case mediumSize:
-        return postDataList.map((post) => <ExperienceCardSelfSmall data={post} />);
+        return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
+          <ExperienceCardSelfSmall data={post} />
+          </div>
+        ));
       case smallSize:
-        return postDataList.map((post) => <ExperienceCardSelfSmall data={post} />);
+        return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
+          <ExperienceCardSelfSmall data={post} />
+          </div>
+        ));
       default:
-        return postDataList.map((post) => <ExperienceCardSelfSmall data={post} />);
+        return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
+          <ExperienceCardSelfSmall data={post} />
+          </div>
+        ));
     }
   };
 
-  return <Wrapper isAbove={isAbove} style={{ gap: gapList[mode] ?? "0px" }}>{renderCards()}</Wrapper>;
+  return (
+    <Wrapper isAbove={isAbove} style={{ gap: gapList[mode] ?? "0px" }}>
+      {renderCards()}
+    </Wrapper>
+  );
 };
 
 export default CardWrapper;

@@ -22,9 +22,9 @@ export const ModalSheetBuilder = ({
   isModalOpen,
   handleModalOpen,
 }) => {
-  if (modalType === "post") {
-    return <ModalView />;
-  }
+  // if (modalType === "post") {
+  //   return <ModalView postDotData={postDotData} />;
+  // }
 
   return (
     <>

@@ -7,6 +7,7 @@ import ExpandIcon from "../../../assets/img/expand_icon.svg";
 import ReductionIcon from "../../../assets/img/reduction.svg";
 import PopUpBuilder from "../popup/PopUpBuilder";
 import {
+  DataInputProvider,
   useDataInput,
   useUpdateDataInput,
 } from "../../../service/providers/data_input_provider";
@@ -64,6 +65,7 @@ function ModalHeader({ modalType, title, handleModalOpen }) {
   };
 
   return (
+   
     <ModalHeaderContainer>
       <IconButton
         iconImage={dataInput.isExpanded ? ReductionIcon : ExpandIcon}
@@ -91,6 +93,7 @@ function ModalHeader({ modalType, title, handleModalOpen }) {
         </Background>
       )}
     </ModalHeaderContainer>
+  
   );
 }
 

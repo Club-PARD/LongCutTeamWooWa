@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const CardBox = styled.div`
-
+  width: 184px;
   height: 118px;
+  height: auto;
   background-color: ${props => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 11px;
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
 `;
 
 const Tag = styled.div`
@@ -24,17 +24,18 @@ const Tag = styled.div`
   align-items: center;
   width: fit-content;
   margin-right: 5px;
-  margin-bottom : 0px; 
+  margin-bottom: 0px;
 `;
+
 const LineTag = styled.div`
   width: 25px;
-  height: 2px; 
+  height: 2px;
   background-color: ${props => props.backgroundColor};
-  display: flex; /* 변경된 부분 */
+  display: flex;
   justify-content: center;
-  margin-top : 3px; 
-  margin-right : 1px; 
-  margin-bottom: 5px; 
+  margin-top: 3px;
+  margin-right: 1px;
+  margin-bottom: 5px;
 `;
 
 const TitleText = styled.p`
@@ -43,7 +44,12 @@ const TitleText = styled.p`
   font-size: ${props => props.theme.fontSizes.Subtitle2};
   height: auto;
   margin-top: 11px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const SummaryText = styled.p`
@@ -61,24 +67,28 @@ function ExperienceCardSelfMiddle({ data }) {
   return (
     <CardBox>
       <div>
-        {tags && <div style={{ display: 'flex', overflow: "clip" }}>
-          {tags.map((tag) => (
-            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-          ))}
-        </div>}
-        <TitleText>{data["title"]}</TitleText>
-        {data["tag-is"] !== null && (tags &&
-          <div style={{ display: 'flex' }}>
+        {tags && (
+          <div style={{ display: "flex", overflow: "clip" }}>
             {tags.map((tag) => (
-              <LineTag backgroundColor={tag["color"]}></LineTag>
+              <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
             ))}
           </div>
         )}
-        {data["summary"] && <SummaryText>
-          {data["summary"].length > 40
-          ? `${data["summary"].slice(0, 43)}  ...`
-          : data["summary"]}
-        </SummaryText>}
+        <TitleText>{data["title"]}</TitleText>
+        {data["tag-is"] !== null && tags && (
+          <div style={{ display: "flex" }}>
+            {tags.map((tag) => (
+              <LineTag backgroundColor={tag["color"]} />
+            ))}
+          </div>
+        )}
+        {data["summary"] && (
+          <SummaryText>
+            {data["summary"].length > 40
+              ? `${data["summary"].slice(0, 43)}  ...`
+              : data["summary"]}
+          </SummaryText>
+        )}
       </div>
     </CardBox>
   );

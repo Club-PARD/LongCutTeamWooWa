@@ -13,6 +13,8 @@ import SubmitBtn from "../buttons/SubmitBtn";
 import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
+import IDvsLinkButton from "./IDvsLinkButton";
+import IDBox from "./IDBox";
 import {
   useDataInput,
   useUpdateDataInput,
@@ -21,17 +23,17 @@ import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
 import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
 
+
 const tags = [
-  { tagName: "도전정신", color: "#4386F7" },
-  { tagName: "성취감", color: "#F0935F" },
-  { tagName: "동기부여", color: "#90BC77" },
-  { tagName: "학습", color: "#77BCAB" },
-  { tagName: "자기존중", color: "#ED735D" },
-  { tagName: "문제 해결 능력", color: "#F673A2" },
-  { tagName: "협업", color: "#ED735D" },
-  { tagName: "리더십", color: "#8560F6" },
-  { tagName: "커뮤니케이션", color: "#FFCF55" },
-  { tagName: "신체적", color: "#4386F7" },
+  { tagName: "인사이트", color: "#4386F7" },
+  { tagName: "여행", color: "#F0935F" },
+  { tagName: "친구", color: "#90BC77" },
+  { tagName: "업무", color: "#77BCAB" },
+  { tagName: "학업", color: "#F673A2" },
+  { tagName: "회고", color: "#ED735D" },
+  { tagName: "연애", color: "#8560F6" },
+  { tagName: "추억", color: "#FFCF55" },
+  { tagName: "기타", color: "#4386F7" },
 ];
 
 const ModalSheet = ({
@@ -43,6 +45,9 @@ const ModalSheet = ({
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
+  const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true);// 추가한부분.
+
+
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -70,16 +75,20 @@ const ModalSheet = ({
       console.error("Error creating document:", error);
     }
   };
+  const handleIDvsLinkButtonClick = () => {
+    setIsIDvsLinkActive(!isIDvsLinkActive);
+  }; // 추가한부분. 
 
   const modalTypeInfo = {
     "add-link": {
       title: "링크 추가하기",
       width: "510px",
       height: "357px",
+      IDvsLinkButton : true,
       hasTitleInput: false,
-      children: <LinkBox />,
-      hasDatePicker: true,
-      hasTagSelection: true,
+      children: isIDvsLinkActive ? <IDBox /> : <LinkBox />,
+      hasDatePicker: !isIDvsLinkActive,
+      hasTagSelection: !isIDvsLinkActive,
       Button: (
         <SubmitBtn
           buttonText={"추가하기"}
@@ -138,6 +147,7 @@ const ModalSheet = ({
 
   const data = modalTypeInfo[modalType];
   if (data === null) return <></>;
+  
 
   return (
     <div
@@ -162,7 +172,20 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
+      {data["IDvsLinkButton"] != null ? (
+        <>
+          <IDvsLinkButton
+            isActive={isIDvsLinkActive}
+            handleClick={handleIDvsLinkButtonClick}
+          />
+          <VerticalSpacing height={25} />
+        </>
+      ) : (
+        <></>
+      )}
       {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
+      
+      
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>
@@ -174,7 +197,7 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-      {data["hasTagSelection"] != null ? (
+      {data["hasTagSelection"] != null && !isIDvsLinkActive ? (
         <>
           <Divider />
           <VerticalSpacing height={14} />

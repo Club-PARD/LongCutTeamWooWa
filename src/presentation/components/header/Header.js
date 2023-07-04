@@ -11,12 +11,17 @@ import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
 import ModalSheetBuilder from "../modal";
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { is } from "@react-spring/shared";
+import InfoIcon from "../../../assets/img/InfoIcon.svg";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
 
   margin-left: 61px;
 `;
+
+const TimelineContainer = styled.div`
+  display : flex; 
+`
 
 const Timeline = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -29,6 +34,68 @@ const Timeline = styled.div`
   outline: none;
   padding-bottom: 0px;
 `;
+
+
+const InfoBoxImg = styled.img`
+  width : 14px;
+  heigth : 14px; 
+  cursor : pointer; 
+  margin-left : 13px; 
+  margin-top : 5px;
+  border-radius: 50%;
+`
+
+const TipContaioner = styled.div`
+  position: absolute;
+  z-index: 10;
+  width: 341px;
+  height: 90px;
+  border-radius: 15px;
+  background-color: ${(props) => props.theme.color.blackHigh};
+  margin-left: 55px;
+  top: 6.5px;
+  opacity: ${(props) => props.show ? "0.95" : "0"};
+  transition: opacity 0.2s ease-in-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 90px;
+    left: 30.8%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid ${(props) => props.theme.color.blackHigh};
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+
+`;
+
+
+
+
+const TipTitle = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-size: 11px;
+  color: ${(props) => props.theme.color.surface};
+  margin-left : 15px; 
+  margin-bottom : 4px; 
+`
+const TipContent = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: 11px;
+  color: ${(props) => props.theme.color.surface};
+  margin-top : 0px; 
+  margin-left : 15px; 
+  line-height:160%; 
+`
+
+
+
 
 const Container = styled.div`
   display: flex;
@@ -72,9 +139,9 @@ const Button = styled.button`
 
   &:hover {
     color: ${(props) =>
-      props.active
-        ? props.theme.color.primary300
-        : props.theme.color.primary300};
+    props.active
+      ? props.theme.color.primary300
+      : props.theme.color.primary300};
   }
 `;
 
@@ -230,11 +297,41 @@ function Header({ handleSnack }) {
     setActiveButton(value.activationIndex);
     handleTimelineDataChange("grouping", key);
   };
+  const [showTip, setShowTip] = useState(false);
+
+  // InfoBoxImg에 마우스가 올라갔을 때
+  const handleMouseEnter = () => {
+    setShowTip(true);
+  };
+
+  // InfoBoxImg에서 마우스가 벗어났을 때
+  const handleMouseLeave = () => {
+    setShowTip(false);
+  };
 
   return (
     <DataInputProvider>
       <HeaderContainer>
-        <Timeline>Timeline</Timeline>
+        <TipContaioner show={showTip}>
+          <TipTitle>
+            Quick Tip
+          </TipTitle>
+          <TipContent>
+            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수 있습니다.<br />
+            • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수 있습니다.<br />
+            • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수 있습니다.
+          </TipContent>
+        </TipContaioner>
+        <TimelineContainer>
+          <Timeline>Timeline</Timeline>
+          <InfoBoxImg
+            src={InfoIcon}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        </TimelineContainer>
+
+
         <Container>
           <ButtonContainer>
             {Object.entries(periodOption).map(([key, value]) => (
@@ -283,11 +380,11 @@ function Header({ handleSnack }) {
         handleModalOpen={handleModalOpen}
       />
       <ModalSheetBuilder
-       handleSnack={handleSnack}
-       modalType={modalType}
-       handleSetModalType={handleSetModalType}
-       isModalOpen={isModalOpen}
-       handleModalOpen={handleModalOpen}
+        handleSnack={handleSnack}
+        modalType={modalType}
+        handleSetModalType={handleSetModalType}
+        isModalOpen={isModalOpen}
+        handleModalOpen={handleModalOpen}
       />
     </DataInputProvider>
   );

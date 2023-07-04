@@ -13,6 +13,9 @@ import { TimelineDataProvider } from "../../service/providers/timeline_data_prov
 
 import ListModal from "../components/postListItem";
 
+import LinkBox from "../components/modal/LinkBox";
+import LoginPage from "./LoginPage";
+
 const BackgroundContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -101,8 +104,10 @@ function HomePage() {
         </TimelineDataProvider>
       </BackgroundContainer>
       <TestBox>
-        <ExperienceCardLinkMiddle data={exampleCrawledData} />
-        <ListModal />
+        {/* <ExperienceCardLinkMiddle data={exampleCrawledData} />
+        <ListModal /> */}
+        {/* <LinkBox/> */}
+        {/* <LoginPage/> */}
       </TestBox>
       <Snackbar
   anchorOrigin={{
