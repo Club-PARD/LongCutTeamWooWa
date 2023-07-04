@@ -12,6 +12,7 @@ import ModalSheetBuilder from "../modal";
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { is } from "@react-spring/shared";
 import InfoIcon from "../../../assets/img/InfoIcon.svg";
+import { da } from "date-fns/locale";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
@@ -378,13 +379,13 @@ function Header({ handleSnack }) {
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
       />
-      <ModalSheetBuilder
+      {/* <ModalSheetBuilder
         handleSnack={handleSnack}
         modalType={modalType}
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
-      />
+      /> */}
     </DataInputProvider>
   );
 }

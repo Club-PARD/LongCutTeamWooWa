@@ -44,6 +44,7 @@ const PopUpContainer = styled.div`
 
 function ModalHeader({ modalType, title, handleModalOpen }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const handlePopupOpen = () => {
     setIsPopupOpen(true);
   };
@@ -59,6 +60,7 @@ function ModalHeader({ modalType, title, handleModalOpen }) {
   const handleCloseIconClick = () => {
     if (modalType === "add-link") {
       handleModalOpen();
+      handleInputChange("isExpanded", false);
     } else {
       handlePopupOpen();
     }
