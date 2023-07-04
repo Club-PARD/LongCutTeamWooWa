@@ -142,7 +142,7 @@ const TagItem = styled.div`
 
 const CheckIconContainer = styled.div`
   position: absolute;
-  left: -37px;
+  left: -66px;
   top: 50%;
   transform: translateY(-50%);
   width: 24px;
@@ -158,18 +158,31 @@ const CheckIcon = styled.img`
   height: 100%;
 `;
 
-function ListItem({ item, data, onItemSelect, isSelected }) {
-  const [selectedTags, setSelectedTags] = useState([]);
+function ListItem({ item, data, onItemSelect, isSelected, setSelectedTags, selectedTags }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const addItemTags = (itemKey, tags) => {
+    setSelectedTags((prevTags) => ({
+      ...prevTags,
+      [itemKey]: tags,
+    }));
+  };
+
   const handleTagClick = (tagId) => {
-    if (selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.filter((tag) => tag !== tagId));
+    let tags;
+    if (selectedTags[item.id] !== undefined ? selectedTags[item.id].includes(tagId) : false) {
+      tags = selectedTags[item.id].filter((tag) => tag !== tagId);
     } else {
-      if (selectedTags.length < 2) {
-        setSelectedTags([...selectedTags, tagId]);
+      if (selectedTags[item.id] !== undefined ? selectedTags[item.id].length < 2 : true) {
+        if(selectedTags[item.id] === undefined){
+          tags = [tagId];
+        }else{
+          tags = [...selectedTags[item.id], tagId];
+        }
+        
       }
     }
+    addItemTags(item.id, tags);
   };
 
   const handleDropdownToggle = () => {
@@ -193,17 +206,17 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
       <TagContainer>
         <DropdownContainer>
           <DropdownButton onClick={handleDropdownToggle}>
-            <TagLabel>태그 : </TagLabel>
+            <TagLabel>태그 : </TagLabel> 
             
               <TagListContainer>
                 {data.tags.map((tag) => (
-                  <TagItem style={{display: selectedTags.includes(tag.id) ? "block" : "none"}}
+                  <TagItem style={{display: selectedTags[item.id] !== undefined ? selectedTags[item.id].includes(tag.id) ? "block" : "none" : "none" }}
                     key={tag.id}
-                    isSelected={selectedTags.includes(tag.id)}
+                    isSelected={selectedTags[item.id] !== undefined ? selectedTags[item.id].includes(tag.id) : false}
                     backgroundColor={tag.color}
                     onClick={() => handleTagClick(tag.id)}
                   >
-                    {tag.name}
+                  {tag.tagName}
                   </TagItem>
                 ))}
               </TagListContainer>
@@ -217,11 +230,11 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
                 {data.tags.map((tag) => (
                   <TagItem
                     key={tag.id}
-                    isSelected={selectedTags.includes(tag.id)}
+                    isSelected={selectedTags[item.id] !== undefined ? selectedTags[item.id].includes(tag.id) : false}
                     backgroundColor={tag.color}
                     onClick={() => handleTagClick(tag.id)}
                   >
-                    {tag.name}
+                    <>{tag.tagName}</>
                   </TagItem>
                 ))}
               </TagListContainer>

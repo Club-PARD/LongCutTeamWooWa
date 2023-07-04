@@ -96,7 +96,6 @@ const Img = styled.img`
 
 function ExperienceCardSelf({ data }) {
   const imgSource = data["imageURL"];
-  console.log(imgSource);
   const tags = data["selected-tags"];
   return (
     <CardBox>
