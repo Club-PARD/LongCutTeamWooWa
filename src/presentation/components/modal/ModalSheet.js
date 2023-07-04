@@ -13,6 +13,8 @@ import SubmitBtn from "../buttons/SubmitBtn";
 import ModalTemplateContent from "./ModalTemplateContent";
 import ModalWritingContent from "./ModalWritingContent";
 import LinkBox from "./LinkBox";
+import IDvsLinkButton from "./IDvsLinkButton";
+import IDBox from "./IDBox";
 import {
   useDataInput,
   useUpdateDataInput,
@@ -20,6 +22,7 @@ import {
 import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
 import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
+
 
 const tags = [
   { tagName: "도전정신", color: "#4386F7" },
@@ -43,6 +46,7 @@ const ModalSheet = ({
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
+
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -76,8 +80,9 @@ const ModalSheet = ({
       title: "링크 추가하기",
       width: "510px",
       height: "357px",
+      IDvsLinkButton : true,
       hasTitleInput: false,
-      children: <LinkBox />,
+      children: <IDBox />,
       hasDatePicker: true,
       hasTagSelection: true,
       Button: (
@@ -163,6 +168,17 @@ const ModalSheet = ({
         <></>
       )}
       {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
+      
+      {data["IDvsLinkButton"] != null ? (
+        <>
+          {/* <VerticalSpacing height={14} /> */}
+          <IDvsLinkButton/>
+          <VerticalSpacing height={14} />
+          <Divider />
+        </>
+      ) : (
+        <></>
+      )}
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>
