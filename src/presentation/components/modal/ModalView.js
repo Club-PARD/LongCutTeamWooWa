@@ -155,13 +155,20 @@ function ModalView({ postDotData, handleDotClick }) {
         height={400}
         children={
           <ContentDiv>
-            {imgURL ? (
-              <ImgDiv src={imgURL} />
-            ) : (
-              <></>
-            )}
+            {imgURL ? <ImgDiv src={imgURL} /> : <></>}
 
-            <Content>{postDotData["add-free"]}</Content>
+            <Content>
+              {postDotData["add-free"] !== null ? (
+                <>{postDotData["add-free"]}</>
+              ) : postDotData["add-link"] !== null ? (
+                <>{postDotData["add-link"]}</>
+              ) : (
+                <>
+                  {postDotData["add-template-1"]}
+                  {postDotData["add-template-2"]}
+                </>
+              )}
+            </Content>
           </ContentDiv>
         }
       />

@@ -34,19 +34,39 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
         ));
       case largeSize:
         return postDataList.map((post) => (
+          <div onClick={() => {
+            handleDotClick();
+            setPostData(post);
+          }}>
           <ExperienceCardSelfMiddle data={post} />
+          </div>
         ));
       case mediumSize:
         return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
           <ExperienceCardSelfSmall data={post} />
+          </div>
         ));
       case smallSize:
         return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
           <ExperienceCardSelfSmall data={post} />
+          </div>
         ));
       default:
         return postDataList.map((post) => (
+          <div onClick={() => {
+              handleDotClick();
+              setPostData(post);
+            }}>
           <ExperienceCardSelfSmall data={post} />
+          </div>
         ));
     }
   };
