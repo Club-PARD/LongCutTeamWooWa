@@ -15,13 +15,13 @@ import {
 } from "../../../service/providers/timeline_data_provider";
 import CardWrapper from "./CardWrapper";
 
-
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
 
 import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 import ModalView from "../modal/ModalView";
+
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -58,7 +58,6 @@ const ButtonText = styled.span`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   margin-left: 6px;
   margin-right: 6px;
-
 `;
 const FirstButton = styled(TransparentButton)`
   right: 180px;
@@ -355,7 +354,7 @@ const Timeline = () => {
                 <Dot />
                 <Time isAbove={index % 2 === 0}>{entry[0]}</Time>
                 <CardWrapper
-                  setPostData = {setSelectedDotData}
+                  setPostData={setSelectedDotData}
                   handleDotClick={handleDotClick}
                   mode={CardSizeBuilder(cardSize)}
                   isAbove={index % 2 !== 0}
@@ -366,7 +365,10 @@ const Timeline = () => {
           );
         })}
       </TimelineContainer>
-      {isCardCliked && <ModalView postDotData={selectedDotData} />}
+      {isCardCliked && 
+          <ModalView postDotData={selectedDotData} handleDotClick={handleDotClick}/>
+       
+      }
     </>
   );
 };
