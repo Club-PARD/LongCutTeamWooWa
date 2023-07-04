@@ -31,7 +31,7 @@ export const ModalSheetBuilder = ({
       {isModalOpen ? (
         <Div
           children={
-            <ModalWrapper>``
+            <ModalWrapper>
               <ImageInputProvider>
                 <ModalSheet
                   handleSnack={handleSnack}
