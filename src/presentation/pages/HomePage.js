@@ -105,7 +105,7 @@ function HomePage() {
       <TestBox>
         {/* <ExperienceCardLinkMiddle data={exampleCrawledData} />
         <ListModal /> */}
-        <LinkBox/>
+        {/* <LinkBox/> */}
       </TestBox>
       <Snackbar
   anchorOrigin={{

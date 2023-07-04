@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import DateSelector from "../DateSelector";
 import {
   DataInputProvider,
@@ -8,16 +8,20 @@ import {
 } from "../../../service/providers/data_input_provider";
 import AddExperienceIcon from "../../../assets/img/AddExperienceIcon.svg";
 import AddLinkIcon from "../../../assets/img/AddLinkIcon.svg";
-import InfoIcon from "../../../assets/img/InfoIcon.svg";
 import ModalSheetBuilder from "../modal";
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { is } from "@react-spring/shared";
+import InfoIcon from "../../../assets/img/InfoIcon.svg";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
-  position: relative; /* 추가된 부분 */
+
   margin-left: 61px;
 `;
+
+const TimelineContainer = styled.div`
+  display : flex; 
+`
 
 const Timeline = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -31,80 +35,44 @@ const Timeline = styled.div`
   padding-bottom: 0px;
 `;
 
-// const TimeLineInfoBoxContainer = styled.div`
-//   display : flex; 
-// `;
 
-// const InformationBox = styled.div`
-//   width: 331px;
-//   height: 86px;
-//   flex-shrink: 0;
-//   border-radius: 15px;
-//   font-family: ${(props) => props.theme.fontFamily.mainfont};
-//   font-weight: ${(props) => props.theme.fontWeights.regular};
-//   font-size: 10px; 
-//   background-color: ${(props) => props.theme.color.blackHigh};
-//   color: ${(props) => props.theme.color.surface};
-//   position: absolute;
-//   z-index: 10;
-//   margin-left : 100px; 
-//   top: 75px; 
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 8px;
-//   border: none;
-//   opacity: 0;
-//   transition: opacity 0.3s ease-in-out;
+const InfoBoxImg = styled.img`
+  width : 14px;
+  heigth : 14px; 
+  cursor : pointer; 
+  margin-left : 13px; 
+  margin-top : 5px;
+`
 
-//   ::before {
-//     content: "";
-//     position: absolute;
-//     top: -12px;
-//     left: 50.1px;
-//     border-style: solid;
-//     border-width: 6px;
-//     border-color: transparent transparent ${(props) =>
-//       props.theme.color.blackHigh} transparent;
-//   }
+const TipContaioner = styled.div`
+  z-index: 10;
+  position: absolute;
+  width: 331px;
+  height: 86px;
+  border-radius: 15px;
+  background-color: ${(props) => props.theme.color.blackHigh};
+  margin-left: 50px;
+  margin-top: 25px;
+  display: ${(props) => (props.show ? "block" : "none")};
+`;
 
-//   ${({ isHovered }) =>
-//     isHovered &&
-//     css`
-//       opacity: 0.93;
-//     `}
-// `;
-// const InformationIcon = styled.img`
-//   width: 15px;
-//   height: 15px;
-//   margin-left: 8px;
-//   margin-top: 14px;
-//   color: black;
-//   cursor: pointer;
-
-//   &:hover + ${InformationBox} {
-//     opacity: 0.93;
-//   }
-// `;
+const TipTitle = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-size: 10px;
+  color: ${(props) => props.theme.color.surface};
+  margin-left : 15px; 
+`
+const TipContent = styled.p`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: 10px;
+  color: ${(props) => props.theme.color.surface};
+  margin-left : 15px; 
+`
 
 
-// const TipTextTitle = styled.p`
-//   font-family: ${(props) => props.theme.fontFamily.mainfont};
-//   font-weight: ${(props) => props.theme.fontWeights.semibold};
-//   color: ${(props) => props.theme.color.surface};
-//   font-size: 10px; 
-//   margin-left : 15px;
-//   margin-top: 4px;
-// `
-// const TipText = styled.p`
-//   font-family: ${(props) => props.theme.fontFamily.mainfont};
-//   font-weight: ${(props) => props.theme.fontWeights.regular};
-//   color: ${(props) => props.theme.color.surface};
-//   font-size: 10px; 
-//   margin-left : 15px;
-//   line-height: 160%;
-//   margin-top: 0px;
-// `
+
 
 const Container = styled.div`
   display: flex;
@@ -171,9 +139,9 @@ const SelectDateText = styled.div`
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle1};
   color: ${(props) => props.theme.color.primary300};
-  margin-top : 18px;
-  margin-left : 10px;
-`
+  margin-top: 18px;
+  margin-left: 10px;
+`;
 
 const CustomDivider = styled.div`
   width: 1px;
@@ -187,7 +155,7 @@ const CustomDivider = styled.div`
 
 const Divider = styled.div`
   height: 1px;
-  background-color:#ccc;
+  background-color: #ccc;
   top: 0;
   width: 100%;
   margin-top: 0px;
@@ -220,7 +188,7 @@ const AddLinkIconImg = styled.img`
   width: 12px;
   height: 12px;
   margin-right: 8px;
-  color : black; 
+  color: black;
 `;
 
 const AddExperience = styled.button`
@@ -231,7 +199,7 @@ const AddExperience = styled.button`
   padding: 8px 16px;
   border-radius: 40px;
   height: 31px;
-  background-color: transparent; 
+  background-color: transparent;
   color: ${(props) => props.theme.color.blackHigh};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
@@ -292,6 +260,12 @@ function Header({ handleSnack }) {
     setIsModalOpen(!isModalOpen);
     ResetModalType();
   };
+
+  const handleLinkModalOpen = () => {
+    setModalType("add-link");
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handleTimelineDataChange = (name, value) => {
     updateDataInput(name, value);
   };
@@ -300,29 +274,41 @@ function Header({ handleSnack }) {
     setActiveButton(value.activationIndex);
     handleTimelineDataChange("grouping", key);
   };
+  const [showTip, setShowTip] = useState(false);
 
-  const [isIconHovered, setIsIconHovered] = useState(false);
+  // InfoBoxImg에 마우스가 올라갔을 때
+  const handleMouseEnter = () => {
+    setShowTip(true);
+  };
+
+  // InfoBoxImg에서 마우스가 벗어났을 때
+  const handleMouseLeave = () => {
+    setShowTip(false);
+  };
 
   return (
     <DataInputProvider>
       <HeaderContainer>
-        {/* <TimeLineInfoBoxContainer>
-          <Timeline>Timeline</Timeline>
-          <InformationIcon
-            src={InfoIcon}
-            onMouseEnter={() => setIsIconHovered(true)}
-            onMouseLeave={() => setIsIconHovered(false)}
-            isHovered={isIconHovered}
-          />
-        </TimeLineInfoBoxContainer>
-        <InformationBox>
-          <TipTextTitle>Quik Tip</TipTextTitle>
-          <TipText>
-            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수 있습니다. <br />
+        <TipContaioner show={showTip}>
+          <TipTitle>
+            Quick Tip
+          </TipTitle>
+          <TipContent>
+            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수 있습니다.<br />
             • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수 있습니다.<br />
             • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수 있습니다.
-          </TipText>
-        </InformationBox> */}
+          </TipContent>
+        </TipContaioner>
+        <TimelineContainer>
+          <Timeline>Timeline</Timeline>
+          <InfoBoxImg
+            src={InfoIcon}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        </TimelineContainer>
+
+
         <Container>
           <ButtonContainer>
             {Object.entries(periodOption).map(([key, value]) => (
@@ -351,7 +337,7 @@ function Header({ handleSnack }) {
             <DateSelector />
           </ButtonContainer>
           <ButtonContainer2>
-            <AddLinkButton>
+            <AddLinkButton onClick={handleLinkModalOpen}>
               <AddLinkIconImg src={AddLinkIcon} />
               링크 추가하기
             </AddLinkButton>
@@ -363,6 +349,13 @@ function Header({ handleSnack }) {
         </Container>
         <Divider />
       </HeaderContainer>
+      <ModalSheetBuilder
+        handleSnack={handleSnack}
+        modalType={modalType}
+        handleSetModalType={handleSetModalType}
+        isModalOpen={isModalOpen}
+        handleModalOpen={handleModalOpen}
+      />
       <ModalSheetBuilder
         handleSnack={handleSnack}
         modalType={modalType}
