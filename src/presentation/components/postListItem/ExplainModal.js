@@ -34,7 +34,7 @@ function ExplainModal({ data }) {
   return (
     <Container>
         <FirstExplain>
-            jshooni님의 디스콰이엇 계정에서 불러온 글입니다.
+            {data["userId"] ?? "no id found"}님의 디스콰이엇 계정에서 불러온 글입니다.
         </FirstExplain>
         <SecondExplain>
             아크박스 목록에 추가할 글을 선택하세요!

@@ -94,7 +94,8 @@ const DropdownContent = styled.div`
   border: 1px solid var(--disabled-1, #ababab);
   background: var(--surface-white, #fff);
   padding: 5px;
-  display: ${(props) => (props.isOpen ? "block" : "none")}; // 수정된 부분
+  display: "block";// 수정된 부분
+  z-index: 2;
 `;
 
 
@@ -172,6 +173,7 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
   };
 
   const handleDropdownToggle = () => {
+    console.log("click!")
     setIsDropdownOpen(!isDropdownOpen);
   };
   
@@ -192,10 +194,10 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
         <DropdownContainer>
           <DropdownButton onClick={handleDropdownToggle}>
             <TagLabel>태그 : </TagLabel>
-            {selectedTags.length > 0 && (
+            
               <TagListContainer>
                 {data.tags.map((tag) => (
-                  <TagItem
+                  <TagItem style={{display: selectedTags.includes(tag.id) ? "block" : "none"}}
                     key={tag.id}
                     isSelected={selectedTags.includes(tag.id)}
                     backgroundColor={tag.color}
@@ -205,11 +207,11 @@ function ListItem({ item, data, onItemSelect, isSelected }) {
                   </TagItem>
                 ))}
               </TagListContainer>
-            )}
+            
             <DropdownArrow>▼</DropdownArrow>
           </DropdownButton>
-          {selectedTags.length > 0 && (
-            <DropdownContent isOpen={isDropdownOpen}>
+          {isDropdownOpen && (
+            <DropdownContent >
               <TagListTitle>태그선택</TagListTitle>
               <TagListContainer>
                 {data.tags.map((tag) => (
