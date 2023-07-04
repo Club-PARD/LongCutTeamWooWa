@@ -98,17 +98,18 @@ const Content = styled.div`
   margin-bottom: 19px;
 `;
 
-function ModalView() {
+function ModalView({postDotData}) {
+  console.log(postDotData.title);
   const isImageUploaded = false; // Set this value based on whether an image is uploaded or not
 
   return (
     <ModalContainer
-      title={"경험 제목"}
+      title={postDotData.title}
       children={
         <Div1>
           <DivRow>
             <ModalTagSelection modalTagList={tags} hasButton={false} />
-            <DateDiv>2022년 12월 15일</DateDiv>
+            <DateDiv>123123</DateDiv>
           </DivRow>
           <SingleScrollView
             height={400}
