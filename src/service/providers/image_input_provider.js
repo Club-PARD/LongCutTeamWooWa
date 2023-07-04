@@ -7,31 +7,10 @@ const ImageInputContext = createContext();
 const ImageInputProvider = ({ children }) => {
   const [previewImage, setPreviewImage] = useState(null);
 
-  const getBase64Representation = (file) =>
-  new Promise((resolve, reject) => {
-    if (!(file instanceof Blob)) {
-      reject(new Error("Invalid file object"));
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64Representation(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-  };
-
   // Function to update the inputData state
   const updateImageInput = (name, value) => {
     if(name === "image"){
-      console.log(typeof(value));
-      handlePreview(value);
+      setPreviewImage(value);
     }
   };
 

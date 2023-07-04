@@ -3,7 +3,6 @@ import firebase from "firebase/compat/app";
 import { keyframes } from "styled-components";
 import styled from "styled-components";
 import { ReactComponent as TimelineDot } from "../../../assets/img/timeline_dot.svg";
-import postService from "../../../service/firebase/PostService";
 import {
   groupDataByDay,
   groupDataByMonth,
@@ -16,13 +15,11 @@ import {
 } from "../../../service/providers/timeline_data_provider";
 import CardWrapper from "./CardWrapper";
 
-import { List } from "immutable";
 
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
 
 import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
-import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 
 const TimelineContainer = styled.div`
   display: flex;
