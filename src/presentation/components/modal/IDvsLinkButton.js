@@ -34,24 +34,24 @@ const Button = styled.button`
 
 `;
 
-function IDvsLinkButton() {
-  const [activeButton, setActiveButton] = useState("ID");
+function IDvsLinkButton({isActive, handleClick}) {
+//   const [activeButton, setActiveButton] = useState("ID");
 
-  const handleClick = (button) => {
-    setActiveButton(button);
-  };
+//   const handleClick = (button) => {
+//     setActiveButton(button);
+//   };
 
   return (
     <ButtonContainer>
       <Button
-        isActive={activeButton === "ID"}
-        onClick={() => handleClick("ID")}
+        isActive={isActive}
+        onClick={() => handleClick(false)}
       >
         ID로 불러오기
       </Button>
       <Button
-        isActive={activeButton === "Link"}
-        onClick={() => handleClick("Link")}
+        isActive={!isActive}
+        onClick={() => handleClick(true)}
       >
         개별 링크로 불러오기
       </Button>

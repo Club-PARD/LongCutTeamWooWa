@@ -46,6 +46,8 @@ const ModalSheet = ({
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
+  const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true);// 추가한부분.
+
 
 
   // Function to handle button click and collect the input data
@@ -74,6 +76,9 @@ const ModalSheet = ({
       console.error("Error creating document:", error);
     }
   };
+  const handleIDvsLinkButtonClick = () => {
+    setIsIDvsLinkActive(!isIDvsLinkActive);
+  }; // 추가한부분. 
 
   const modalTypeInfo = {
     "add-link": {
@@ -82,9 +87,9 @@ const ModalSheet = ({
       height: "357px",
       IDvsLinkButton : true,
       hasTitleInput: false,
-      children: <IDBox />,
-      hasDatePicker: true,
-      hasTagSelection: true,
+      children: isIDvsLinkActive ? <IDBox /> : <LinkBox />,
+      hasDatePicker: !isIDvsLinkActive,
+      hasTagSelection: !isIDvsLinkActive,
       Button: (
         <SubmitBtn
           buttonText={"추가하기"}
@@ -143,6 +148,7 @@ const ModalSheet = ({
 
   const data = modalTypeInfo[modalType];
   if (data === null) return <></>;
+  
 
   return (
     <div
@@ -167,18 +173,20 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-      {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
-      
       {data["IDvsLinkButton"] != null ? (
         <>
-          {/* <VerticalSpacing height={14} /> */}
-          <IDvsLinkButton/>
-          <VerticalSpacing height={14} />
-          <Divider />
+          <IDvsLinkButton
+            isActive={isIDvsLinkActive}
+            handleClick={handleIDvsLinkButtonClick}
+          />
+          <VerticalSpacing height={25} />
         </>
       ) : (
         <></>
       )}
+      {imageInput && <img style={{  maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
+      
+      
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>
@@ -190,7 +198,7 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-      {data["hasTagSelection"] != null ? (
+      {data["hasTagSelection"] != null && !isIDvsLinkActive ? (
         <>
           <Divider />
           <VerticalSpacing height={14} />
