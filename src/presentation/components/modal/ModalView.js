@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React from "react";
 import SingleScrollView from "../commons/SingleScrollView";
-import ExitModalBtn from "../buttons/ExitModalBtn";
 import { DashedDivider } from "../commons/Divider";
 import moment from "moment";
 import CloseIcon from "../../../assets/img/close_icon.svg";
 import IconButton from "../buttons/IconBtn";
+import { margin } from "@mui/system";
 
 function ModalView({ postDotData, handleDotClick }) {
   const tags = postDotData["selected-tags"];
@@ -19,46 +19,55 @@ function ModalView({ postDotData, handleDotClick }) {
   }
   return (
     <BackgroundDiv>
-    <ModalDiv>
-      <HeaderDiv>
-        <TitleDiv>{postDotData.title}</TitleDiv>
-        <IconButton
-          iconImage={CloseIcon}
-          size={"20px"}
-          onClick={handleDotClick}
-        />
-      </HeaderDiv>
-      <DashedDivider />
-      {tags && (
-        <div style={{ display: "flex" }}>
-          {tags.map((tag) => (
-            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-          ))}
-        </div>
-      )}
-      <DateDiv>{formattedDate}</DateDiv>
-      <SingleScrollView
-        height={400}
-        children={
-          <ContentDiv>
-            {imgURL ? <ImgDiv src={imgURL} /> : <></>}
+      <ModalDiv>
+        <HeaderDiv>
+          <TitleDiv>{postDotData.title}</TitleDiv>
+          <IconButton
+            iconImage={CloseIcon}
+            size={"20px"}
+            onClick={handleDotClick}
+          />
+        </HeaderDiv>
+        <DashedDivider dashSize={"2.5px"} />
+        {tags && (
+          <div style={{ display: "flex" }}>
+            {tags.map((tag) => (
+              <Tag
+                backgroundColor={tag["color"]}
+                style={{
+                  marginRight: "12px",
+                  marginTop: "25px",
+                  marginBottom: "25px",
+                }}
+              >
+                {tag["tagName"]}
+              </Tag>
+            ))}
+          </div>
+        )}
+        <DateDiv>{formattedDate}</DateDiv>
+        <SingleScrollView
+          height={400}
+          children={
+            <ContentDiv>
+              {imgURL ? <ImgDiv src={imgURL} /> : <></>}
 
-            <Content>
-              {postDotData["add-free"] !== null ? (
-                <>{postDotData["add-free"]}</>
-              ) : postDotData["add-link"] !== null ? (
-                <>{postDotData["add-link"]}</>
-              ) : (
-                <>
-                  {postDotData["add-template-1"]}
-                  {postDotData["add-template-2"]}
-                </>
-              )}
-            </Content>
-          </ContentDiv>
-        }
-      />
-    </ModalDiv>
+              <Content>
+                {postDotData["add-free"] !== null ? (
+                  <>{postDotData["add-free"]}</>
+                ) : postDotData["add-link"] !== null ? (
+                  <>{postDotData["add-link"]}</>
+                ) : (
+                  <>
+                    {postDotData["add-template-1"]}
+                    {postDotData["add-template-2"]}
+                  </>
+                )}
+              </Content>
+            </ContentDiv>
+          }
+        />
+      </ModalDiv>
     </BackgroundDiv>
   );
 }
@@ -68,19 +77,22 @@ export default ModalView;
 const BackgroundDiv = styled.div`
   position: fixed;
   z-index: 10;
-  top: 0; 
+  top: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-
-  `;
+`;
 
 const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 25px;
+  padding-bottom: 40px;
   z-index: 20;
   width: 510px;
   height: 554px;
@@ -99,17 +111,19 @@ const TitleDiv = styled.div`
   flex-direction: column;
   color: var(--black-high, #272727);
   text-align: center;
-  font-size: ${(props) => props.theme.fontSizes.Body1};
+  font-size: ${(props) => props.theme.fontSizes.Header6};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-style: normal;
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
   line-height: 160%;
+  padding-right: 10px;
   margin: auto;
 `;
 
 const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
+  padding-bottom: 8px;
   width: auto;
   height: auto;
   justify-content: space-between;
@@ -140,30 +154,29 @@ const Tag = styled.div`
 
 const DateDiv = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: ${(props) => props.theme.color.blackMedium};
   line-height: 22px;
   display: flex;
   align-items: start;
+  margin-bottom: 10px;
 `;
 
 const ImgDiv = styled.img`
-  width: auto;
-  height: auto;
-  border-radius: 3px;
-  margin-bottom: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 80%; 
+  max-height: 350px; 
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 14px;
 `;
 
 const Content = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: ${(props) => props.theme.color.blackHigh};
   font-style: normal;
   line-height: 22px;
-  margin-bottom: 19px;
+  width: 80%;
 `;
