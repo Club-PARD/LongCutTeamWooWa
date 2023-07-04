@@ -31,80 +31,80 @@ const Timeline = styled.div`
   padding-bottom: 0px;
 `;
 
-const TimeLineInfoBoxContainer = styled.div`
-  display : flex; 
-`;
+// const TimeLineInfoBoxContainer = styled.div`
+//   display : flex; 
+// `;
 
-const InformationBox = styled.div`
-  width: 331px;
-  height: 86px;
-  flex-shrink: 0;
-  border-radius: 15px;
-  font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
-  font-size: 10px; 
-  background-color: ${(props) => props.theme.color.blackHigh};
-  color: ${(props) => props.theme.color.surface};
-  position: absolute;
-  z-index: 10;
-  margin-left : 100px; 
-  top: 75px; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px;
-  border: none;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+// const InformationBox = styled.div`
+//   width: 331px;
+//   height: 86px;
+//   flex-shrink: 0;
+//   border-radius: 15px;
+//   font-family: ${(props) => props.theme.fontFamily.mainfont};
+//   font-weight: ${(props) => props.theme.fontWeights.regular};
+//   font-size: 10px; 
+//   background-color: ${(props) => props.theme.color.blackHigh};
+//   color: ${(props) => props.theme.color.surface};
+//   position: absolute;
+//   z-index: 10;
+//   margin-left : 100px; 
+//   top: 75px; 
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 8px;
+//   border: none;
+//   opacity: 0;
+//   transition: opacity 0.3s ease-in-out;
 
-  ::before {
-    content: "";
-    position: absolute;
-    top: -12px;
-    left: 50.1px;
-    border-style: solid;
-    border-width: 6px;
-    border-color: transparent transparent ${(props) =>
-      props.theme.color.blackHigh} transparent;
-  }
+//   ::before {
+//     content: "";
+//     position: absolute;
+//     top: -12px;
+//     left: 50.1px;
+//     border-style: solid;
+//     border-width: 6px;
+//     border-color: transparent transparent ${(props) =>
+//       props.theme.color.blackHigh} transparent;
+//   }
 
-  ${({ isHovered }) =>
-    isHovered &&
-    css`
-      opacity: 0.93;
-    `}
-`;
-const InformationIcon = styled.img`
-  width: 15px;
-  height: 15px;
-  margin-left: 8px;
-  margin-top: 14px;
-  color: black;
-  cursor: pointer;
+//   ${({ isHovered }) =>
+//     isHovered &&
+//     css`
+//       opacity: 0.93;
+//     `}
+// `;
+// const InformationIcon = styled.img`
+//   width: 15px;
+//   height: 15px;
+//   margin-left: 8px;
+//   margin-top: 14px;
+//   color: black;
+//   cursor: pointer;
 
-  &:hover + ${InformationBox} {
-    opacity: 0.93;
-  }
-`;
+//   &:hover + ${InformationBox} {
+//     opacity: 0.93;
+//   }
+// `;
 
 
-const TipTextTitle = styled.p`
-  font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
-  color: ${(props) => props.theme.color.surface};
-  font-size: 10px; 
-  margin-left : 15px;
-  margin-top: 4px;
-`
-const TipText = styled.p`
-  font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
-  color: ${(props) => props.theme.color.surface};
-  font-size: 10px; 
-  margin-left : 15px;
-  line-height: 160%;
-  margin-top: 0px;
-`
+// const TipTextTitle = styled.p`
+//   font-family: ${(props) => props.theme.fontFamily.mainfont};
+//   font-weight: ${(props) => props.theme.fontWeights.semibold};
+//   color: ${(props) => props.theme.color.surface};
+//   font-size: 10px; 
+//   margin-left : 15px;
+//   margin-top: 4px;
+// `
+// const TipText = styled.p`
+//   font-family: ${(props) => props.theme.fontFamily.mainfont};
+//   font-weight: ${(props) => props.theme.fontWeights.regular};
+//   color: ${(props) => props.theme.color.surface};
+//   font-size: 10px; 
+//   margin-left : 15px;
+//   line-height: 160%;
+//   margin-top: 0px;
+// `
 
 const Container = styled.div`
   display: flex;
@@ -306,7 +306,7 @@ function Header({ handleSnack }) {
   return (
     <DataInputProvider>
       <HeaderContainer>
-        <TimeLineInfoBoxContainer>
+        {/* <TimeLineInfoBoxContainer>
           <Timeline>Timeline</Timeline>
           <InformationIcon
             src={InfoIcon}
@@ -322,7 +322,7 @@ function Header({ handleSnack }) {
             • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수 있습니다.<br />
             • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수 있습니다.
           </TipText>
-        </InformationBox>
+        </InformationBox> */}
         <Container>
           <ButtonContainer>
             {Object.entries(periodOption).map(([key, value]) => (
