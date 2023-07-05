@@ -31,7 +31,7 @@ const TimelineContainer = styled.div`
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;
-
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   /* Remove scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
