@@ -15,6 +15,7 @@ import ListModal from "../components/postListItem";
 
 import LinkBox from "../components/modal/LinkBox";
 import LoginPage from "./LoginPage";
+import { DataInputProvider } from "../../service/providers/data_input_provider";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -97,7 +98,9 @@ function HomePage() {
                 overflowX: "hidden",
               }}
             >
-              <Header handleSnack={handleSnack} />
+              <DataInputProvider>
+                <Header handleSnack={handleSnack} />
+              </DataInputProvider>
               <Timeline />
             </div>
           </div>

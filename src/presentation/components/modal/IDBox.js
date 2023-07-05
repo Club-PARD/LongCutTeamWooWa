@@ -83,6 +83,12 @@ const ServiceTextContent = styled.p`
 `;
 
 function IDBox() {
+  const updateDataInput = useUpdateDataInput();
+  const handler = (event) => {
+    const {value} = event.target;
+    console.log(value);
+    updateDataInput("disquite-id", value);
+  }
   return (
     <Div>
       <Title>나의 경험이 기록된 서비스의 ID를 입력하고 불러오세요!</Title>
@@ -96,7 +102,7 @@ function IDBox() {
       </ServiceDiv>
       <VerticalSpacing height={3} />
       <InputDiv>
-        <Input placeholder="ID를 입력하세요!" />
+        <Input placeholder="ID를 입력하세요!" onBlur={handler}/>
       </InputDiv>
       <VerticalSpacing height={8} />
     </Div>

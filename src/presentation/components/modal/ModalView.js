@@ -1,13 +1,109 @@
 import styled from "styled-components";
 import React from "react";
 import SingleScrollView from "../commons/SingleScrollView";
-import ExitModalBtn from "../buttons/ExitModalBtn";
 import { DashedDivider } from "../commons/Divider";
 import moment from "moment";
+import CloseIcon from "../../../assets/img/close_icon.svg";
+import IconButton from "../buttons/IconBtn";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import { grey } from "@mui/material/colors";
+
+function ModalView({ postDotData, handleDotClick }) {
+  const tags = postDotData["selected-tags"];
+  const imgURL = postDotData.imageURL;
+  const timestamp = postDotData.date;
+  const date = timestamp ? timestamp.toDate() : null;
+
+  let formattedDate = null;
+  if (date) {
+    formattedDate = moment(date).format("YYYY년 M월 D일");
+  }
+  return (
+    <BackgroundDiv>
+      <ModalDiv>
+        <HeaderDiv>
+          <TitleDiv>{postDotData.title}</TitleDiv>
+          <IconButton
+            iconImage={CloseIcon}
+            size={"20px"}
+            onClick={handleDotClick}
+          />
+        </HeaderDiv>
+        <DashedDivider dashSize={"2.5px"} />
+        {tags && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingTop: "20px",
+              paddingBottom: "12px",
+            }}
+          >
+            {tags.map((tag) => (
+              <Tag
+                backgroundColor={tag["color"]}
+                style={{
+                  marginRight: "12px",
+                }}
+              >
+                {tag["tagName"]}
+              </Tag>
+            ))}
+            <div style={{ marginLeft: "auto" }}>
+              <DeleteIcon color="disabled" sx={{ fontSize: 35 }} />
+            </div>
+          </div>
+        )}
+        <DateDiv>{formattedDate}</DateDiv>
+        <SingleScrollView
+          height={400}
+          children={
+            <ContentDiv>
+              {imgURL ? <ImgDiv src={imgURL} /> : <></>}
+
+              <Content>
+                {postDotData["add-free"] !== null ? (
+                  <>{postDotData["add-free"]}</>
+                ) : postDotData["add-link"] !== null ? (
+                  <>{postDotData["add-link"]}</>
+                ) : (
+                  <>
+                    {postDotData["add-template-1"]}
+                    {postDotData["add-template-2"]}
+                  </>
+                )}
+              </Content>
+            </ContentDiv>
+          }
+        />
+      </ModalDiv>
+    </BackgroundDiv>
+  );
+}
+
+export default ModalView;
+
+const BackgroundDiv = styled.div`
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
 const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 25px;
+  padding-bottom: 40px;
   z-index: 20;
   width: 510px;
   height: 554px;
@@ -26,16 +122,21 @@ const TitleDiv = styled.div`
   flex-direction: column;
   color: var(--black-high, #272727);
   text-align: center;
-  font-size: ${(props) => props.theme.fontSizes.Body1};
+  font-size: ${(props) => props.theme.fontSizes.Header6};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-style: normal;
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
   line-height: 160%;
+  padding-right: 10px;
+  margin: auto;
 `;
 
 const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
+  padding-bottom: 8px;
+  width: auto;
+  height: auto;
   justify-content: space-between;
   align-items: center;
 `;
@@ -48,132 +149,46 @@ const ContentDiv = styled.div`
 
 const Tag = styled.div`
   background-color: ${(props) => props.backgroundColor};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-size: ${(props) => props.theme.fontSizes.Body2};
   color: white;
   display: flex;
-  padding: 2px 8px;
-  border-radius: 150px;
-  font-size: 11px;
+  height: 15px;
+  border-radius: 100px;
   justify-content: center;
   align-items: center;
   width: fit-content;
-  margin-right: 5px;
-  margin-bottom: 0px;
+  display: flex;
+  padding: 5px 17px 5px 17px;
+  gap: 10px;
 `;
 
 const DateDiv = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: ${(props) => props.theme.color.blackMedium};
   line-height: 22px;
   display: flex;
   align-items: start;
-  /* text-align: right; */
+  margin-bottom: 10px;
 `;
 
 const ImgDiv = styled.img`
-  width: auto;
-  height: auto;
-  border-radius: 3px;
-  margin-bottom: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const EditButton = styled.button`
-  width: 104px;
-  height: 35px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10.8571px;
-  gap: 10.86px;
-  border-radius: 602.571px;
-  font-family: ${(props) => props.theme.fontFamily.mainfont};
-
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  color: ${(props) => props.theme.color.primary400};
-  background-color: transparent;
-  border: none;
-  margin-left: auto;
-  margin-top: 18px;
-
-  &:hover {
-    background-color: transparent;
-    color: #cdcdcd;
-  }
-
-  &:active,
-  &:focus {
-    background-color: transparent;
-    color: #cdcdcd;
-    outline: none;
-  }
+  max-width: 80%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 14px;
 `;
 
 const Content = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: ${(props) => props.theme.color.blackHigh};
   font-style: normal;
   line-height: 22px;
-  margin-bottom: 19px;
+  width: 80%;
 `;
-
-function ModalView({ postDotData, handleDotClick }) {
-  const tags = postDotData["selected-tags"];
-  const imgURL = postDotData.imageURL;
-  const timestamp = postDotData.date;
-  const date = timestamp ? timestamp.toDate() : null;
-
-  let formattedDate = null;
-  if (date) {
-    formattedDate = moment(date).format("YYYY년 M월 D일");
-  }
-  return (
-    <ModalDiv>
-      <HeaderDiv>
-        <TitleDiv>{postDotData.title}</TitleDiv>
-        <ExitModalBtn onClick={handleDotClick} />
-      </HeaderDiv>
-      <DashedDivider />
-      {tags && (
-        <div style={{ display: "flex" }}>
-          {tags.map((tag) => (
-            <Tag backgroundColor={tag["color"]}>{tag["tagName"]}</Tag>
-          ))}
-        </div>
-      )}
-      <DateDiv>{formattedDate}</DateDiv>
-      <SingleScrollView
-        height={400}
-        children={
-          <ContentDiv>
-            {imgURL ? <ImgDiv src={imgURL} /> : <></>}
-
-            <Content>
-              {postDotData["add-free"] !== null ? (
-                <>{postDotData["add-free"]}</>
-              ) : postDotData["add-link"] !== null ? (
-                <>{postDotData["add-link"]}</>
-              ) : (
-                <>
-                  {postDotData["add-template-1"]}
-                  {postDotData["add-template-2"]}
-                </>
-              )}
-            </Content>
-          </ContentDiv>
-        }
-      />
-    </ModalDiv>
-  );
-}
-
-export default ModalView;

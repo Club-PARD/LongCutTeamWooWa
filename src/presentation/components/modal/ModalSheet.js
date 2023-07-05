@@ -41,13 +41,29 @@ const ModalSheet = ({
   handleSnack,
   handleModalOpen,
   handleSetModalType,
+  handleListDialog,
 }) => {
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
   const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true);// 추가한부분.
 
+  const handleLinkBoxSubmitBtnClick = async () => {
+    try {
+      const userId = "tlsgn";
+      if (!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
+      const docId = await postService.createPost(userId, dataInput);
+      handleModalOpen();
+      handleSnack();
+    } catch (error) {
+      console.error("Error creating document:", error);
+    }
+  }
 
+  const handleIdBoxSubmitBtnClick = async () => {
+    handleListDialog();
+    handleModalOpen();
+  }
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
@@ -92,9 +108,10 @@ const ModalSheet = ({
       Button: (
         <SubmitBtn
           buttonText={"추가하기"}
+          alwaysValid={true}
           handleSnack={handleSnack}
           handleModalOpen={handleModalOpen}
-          onSubmit={handleSubmitBtnClick}
+          onSubmit={isIDvsLinkActive ? handleIdBoxSubmitBtnClick : handleLinkBoxSubmitBtnClick}
         />
       ),
     },
@@ -148,7 +165,7 @@ const ModalSheet = ({
   const data = modalTypeInfo[modalType];
   if (data === null) return <></>;
 
-  
+
   return (
     <div
       className="modal-sheet"
@@ -193,12 +210,13 @@ const ModalSheet = ({
         <>
           <Divider />
           <VerticalSpacing height={15} />
-          <div style= {{display: "flex", }}>
-            <p style = {
-              {fontSize: "14px",
+          <div style={{ display: "flex", }}>
+            <p style={
+              {
+                fontSize: "14px",
                 fontWeight: 600,
-                marginRight : "10px",
-                marginLeft : "10px", 
+                marginRight: "10px",
+                marginLeft: "10px",
                 marginTop: "8px"
               }
             }>날짜 입력</p>
@@ -232,6 +250,7 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
+      
     </div>
   );
 };

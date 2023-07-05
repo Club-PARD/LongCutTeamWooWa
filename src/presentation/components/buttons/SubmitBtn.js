@@ -24,7 +24,7 @@ const BtnDiv = styled.button`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
-function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText }) {
+function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysValid }) {
   const [open, setOpen] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
@@ -37,7 +37,7 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText }) {
 
   const checkValidity = () => {
     console.log(dataInput["selected-tags"]);
-    return (
+    return alwaysValid ?? (
       (dataInput["title"] &&
         dataInput["selected-tags"] &&
         Object.entries(dataInput["selected-tags"]).length < 3 &&
@@ -55,7 +55,6 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText }) {
     if (isBusy) return;
 
     setIsBusy(true);
-    console.log("hi");
     await onSubmit();
     setOpen(true);
     setIsBusy(false);

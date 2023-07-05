@@ -6,9 +6,9 @@ import Icon_checked from "../../../assets/img/Icon_checked.svg";
 
 const Container = styled.div`
   width: 100%;
-  height: 450px;
+  height: 500px;
   overflow: auto;
-  background-color: gray;
+  background-color: white;
 `;
 
 const SelectAllButton = styled.button`
@@ -25,13 +25,7 @@ const SelectAllButton = styled.button`
 `;
 
 
-const SelectAllIcon = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-`;
-
-function ListContainer({ data }) {
+function ListContainer({ data, setSelectedTags, selectedTags }) {
   const [selectedItems, setSelectedItems] = useState([]);
 //   const [selectAllIcon, setSelectAllIcon] = useState(Icon_checkDefault);
 
@@ -54,22 +48,29 @@ function ListContainer({ data }) {
     }
   };
 
+  console.log(data);
+
   return (
-    <Container>
-      <SelectAllButton onClick={handleSelectAll}>
+    <>
+    <SelectAllButton onClick={handleSelectAll}>
         {/* <SelectAllIcon src={selectAllIcon} alt="Check Icon" /> */}
         {selectedItems.length === data.items.length ? "전체해제" : "전체선택"}
       </SelectAllButton>
+    <Container>
+      
       {data.items.map((item) => (
         <ListItem
           key={item.id}
           item={item}
           data={data}
+          setSelectedTags ={setSelectedTags}
+          selectedTags={selectedTags}
           onItemSelect={handleItemSelect}
           isSelected={selectedItems.includes(item.id)}
         />
       ))}
     </Container>
+    </>
   );
 }
 
