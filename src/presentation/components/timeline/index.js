@@ -212,7 +212,7 @@ const CardSizeBuilder = (size) => {
   }
 };
 
-const Timeline = () => {
+const Timeline = ({rerender, setRerender}) => {
   const [selectedDotData, setSelectedDotData] = useState(null);
   const [isCardCliked, setIsCardCliked] = useState(false);
   const handleDotClick = () => {
@@ -277,7 +277,8 @@ const Timeline = () => {
 
     fetchPosts();
     setIsPostDeleted(false);
-  }, [isPostDeleted]);
+    setRerender(false);
+  }, [isPostDeleted, rerender]);
 
   const handlePostDelete = () => {
     setIsPostDeleted(true);

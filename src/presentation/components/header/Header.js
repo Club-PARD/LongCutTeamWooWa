@@ -266,7 +266,7 @@ function Header({ handleSnack }) {
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("add-free");
-
+  const updateData = useUpdateDataInput();
   const dataInput = useDataInput();
   const [isDalogOpen, setIsDalogOpen] = useState(false);
 
@@ -289,6 +289,13 @@ function Header({ handleSnack }) {
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
     ResetModalType();
+    updateData("title", null);
+    updateData("selected-tags", null);
+    updateData("add-template-1", null);
+    updateData("add-template-2", null);
+    updateData("add-free", null);
+    updateData("add-link", null);
+    updateData("isExpanded", false);
   };
 
   const handleLinkModalOpen = () => {
