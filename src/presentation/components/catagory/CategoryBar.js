@@ -4,21 +4,21 @@ import { styled } from "styled-components";
 import CategoryTagSelection from "./CategoryTagSelection";
 
 const tags = [
-  { tagName: "인사이트", color: "#4386F7" },
-  { tagName: "여행", color: "#F0935F" },
-  { tagName: "친구", color: "#90BC77" },
-  { tagName: "업무", color: "#77BCAB" },
+  { tagName: "나", color: "#4386F7" },
+  { tagName: "우리", color: "#F0935F" },
+  { tagName: "너", color: "#90BC77" },
+  { tagName: "일", color: "#77BCAB" },
   { tagName: "학업", color: "#F673A2" },
-  { tagName: "회고", color: "#ED735D" },
+  { tagName: "운동", color: "#ED735D" },
   { tagName: "연애", color: "#8560F6" },
-  { tagName: "추억", color: "#FFCF55" },
+  { tagName: "여행", color: "#FFCF55" },
   { tagName: "기타", color: "#4386F7" },
 ];
 
 const hashs = [
   { hashName: "디스콰이엇", color: "#8560F6" },
-  { hashName: "네이버 블로그", color: "#90BC77" },
-  { hashName: "브런치", color: "#4386F7" },
+  { hashName: "삭제해주세요", color: "#90BC77" },
+  { hashName: "삭제해주세요", color: "#4386F7" },
 ];
 
 const Div = styled.div`
