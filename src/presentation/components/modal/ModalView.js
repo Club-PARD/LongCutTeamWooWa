@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 import SingleScrollView from "../commons/SingleScrollView";
 import { DashedDivider } from "../commons/Divider";
 import moment from "moment";
@@ -7,13 +6,64 @@ import CloseIcon from "../../../assets/img/close_icon.svg";
 import IconButton from "../buttons/IconBtn";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import postService from "../../../service/firebase/PostService";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const api_key = '8f36c262357dcd59a33a305878142997';
+
+function URLPreview({ url }) {
+  const [previewData, setPreviewData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPreviewData = async () => {
+      try {
+        const response = await axios.get(`https://api.linkpreview.net/?key=${api_key}&q=${encodeURIComponent(url)}`);
+        setPreviewData(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+        // Handle the error condition
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPreviewData();
+  }, [url]);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!previewData) {
+    return <div>미리보기 지원되지 않음</div>;
+  }
+
+  return (
+    <>
+    <div style={{height: '5000px', /* Set the desired maximum height for the container */
+        overflowY: 'auto',}}>
+      <h2>{previewData.title}</h2>
+      <p>{previewData.description}</p>
+      <img style={{width: "100%"}} src={previewData.image} alt="Preview" />
+    </div>
+    <a href={url}
+    target="_blank"
+    rel="noopener noreferrer">
+  Disquite으로 이동!</a>
+  </>
+  );
+}
+
 
 function ModalView({ postDotData, handleDotClick, onDelete }) {
   const tags = postDotData["selected-tags"];
   const imgURL = postDotData.imageURL;
+  const link = postDotData.url;
   const timestamp = postDotData.date;
   const date = timestamp ? timestamp.toDate() : null;
+  const [previewData, setPreviewData] = useState(null);
+  
 
   let formattedDate = null;
   if (date) {
@@ -70,6 +120,8 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
           </div>
         )}
         <DateDiv>{formattedDate}</DateDiv>
+        <URLPreview url={link}/>
+        
         <SingleScrollView
           height={400}
           children={
