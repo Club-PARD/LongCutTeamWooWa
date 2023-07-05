@@ -41,7 +41,7 @@ const InfoBoxImg = styled.img`
   width : 14px;
   height : 14px; 
   cursor : pointer; 
-  z-index: 1000;
+  z-index: 9;
   margin-left : 12px; 
   margin-top : 15px;
   border-radius: 50%;
@@ -49,7 +49,7 @@ const InfoBoxImg = styled.img`
 
 const TipContaioner = styled.div`
   position: absolute;
-  z-index: 900;
+  z-index: 8;
   width: 341px;
   height: 90px;
   border-radius: 15px;
