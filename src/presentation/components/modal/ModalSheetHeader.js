@@ -20,7 +20,8 @@ const ModalHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
 `;
 
 const Background = styled.div`

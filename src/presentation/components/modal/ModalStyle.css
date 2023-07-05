@@ -68,5 +68,8 @@
   height: var(--sheet-height);
   display: flex;
   flex-direction: column;
-  padding: 28px;
+  padding-left: 28px;
+  padding-right: 28px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }

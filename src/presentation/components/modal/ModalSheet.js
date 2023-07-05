@@ -1,7 +1,6 @@
 import "./ModalLayout.css";
 import React, { useContext, useEffect, useState } from "react";
-import firebase from 'firebase/compat/app';
-
+import firebase from "firebase/compat/app";
 
 import { Divider, DashedDivider } from "../commons/Divider";
 import ModalHeader from "./ModalSheetHeader";
@@ -21,9 +20,11 @@ import {
 } from "../../../service/providers/data_input_provider";
 import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
-import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
+import {
+  useImageInput,
+  useUpdateImageInput,
+} from "../../../service/providers/image_input_provider";
 import { tags } from "../../../constants/tags";
-
 
 const ModalSheet = ({
   modalType,
@@ -35,38 +36,44 @@ const ModalSheet = ({
   const dataInput = useDataInput();
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
-  const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true);// 추가한부분.
+  const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true); // 추가한부분.
 
   const handleLinkBoxSubmitBtnClick = async () => {
     try {
       const userId = "tlsgn";
-      if (!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
+      if (!dataInput["date"])
+        dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
       handleModalOpen();
       handleSnack();
     } catch (error) {
       console.error("Error creating document:", error);
     }
-  }
+  };
 
   const handleIdBoxSubmitBtnClick = async () => {
     handleListDialog();
     handleModalOpen();
-  }
+  };
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
       const userId = "tlsgn"; // User ID
-      if (!dataInput["date"]) dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
+      if (!dataInput["date"])
+        dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
       console.log("Document created with ID:", docId);
       if (imageInput) {
-        console.log(imageInput)
+        console.log(imageInput);
         // Upload selectedFile to Firebase Storage\
         const postId = docId; // Post ID (same as the created document ID)
         const file = imageInput; // The selected file to upload
-        const downloadUrl = await storageService.uploadPostImage(userId, postId, file);
+        const downloadUrl = await storageService.uploadPostImage(
+          userId,
+          postId,
+          file
+        );
         console.log("Image uploaded successfully:", downloadUrl);
 
         // Update the Firestore document with the download URL
@@ -82,7 +89,7 @@ const ModalSheet = ({
   };
   const handleIDvsLinkButtonClick = () => {
     setIsIDvsLinkActive(!isIDvsLinkActive);
-  }; // 추가한부분. 
+  }; // 추가한부분.
 
   const modalTypeInfo = {
     "add-link": {
@@ -100,7 +107,11 @@ const ModalSheet = ({
           alwaysValid={true}
           handleSnack={handleSnack}
           handleModalOpen={handleModalOpen}
-          onSubmit={isIDvsLinkActive ? handleIdBoxSubmitBtnClick : handleLinkBoxSubmitBtnClick}
+          onSubmit={
+            isIDvsLinkActive
+              ? handleIdBoxSubmitBtnClick
+              : handleLinkBoxSubmitBtnClick
+          }
         />
       ),
     },
@@ -154,7 +165,6 @@ const ModalSheet = ({
   const data = modalTypeInfo[modalType];
   if (data === null) return <></>;
 
-
   return (
     <div
       className="modal-sheet"
@@ -164,9 +174,13 @@ const ModalSheet = ({
         "--max-width": "100%",
       }}
     >
-      <ModalHeader modalType={modalType} title={data["title"]} handleModalOpen={handleModalOpen} />
+      <ModalHeader
+        modalType={modalType}
+        title={data["title"]}
+        handleModalOpen={handleModalOpen}
+      />
       <Divider />
-      <VerticalSpacing height={25} />
+      <VerticalSpacing height={15} />
       {data["hasTitleInput"] ? (
         <>
           <InputTitle
@@ -191,24 +205,39 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-      {imageInput && <img style={{ maxHeight: "100px", width: "auto" }} src={URL.createObjectURL(imageInput)} alt="Preview" />}
-
+      {imageInput && (
+        <img
+          style={{
+            // maxWidth: "30%",
+            width: "auto",
+            maxHeight: "100px",
+            // objectFit: "fill",
+            objectFit: "contain",
+            borderRadius: "10px",
+            marginBottom: "3px",
+          }}
+          src={URL.createObjectURL(imageInput)}
+          alt="Preview"
+        />
+      )}
 
       {data["children"]}
       {data["hasDatePicker"] ? (
         <>
           <Divider />
           <VerticalSpacing height={15} />
-          <div style={{ display: "flex", }}>
-            <p style={
-              {
+          <div style={{ display: "flex" }}>
+            <p
+              style={{
                 fontSize: "14px",
                 fontWeight: 600,
                 marginRight: "10px",
                 marginLeft: "10px",
-                marginTop: "8px"
-              }
-            }>날짜 입력</p>
+                marginTop: "8px",
+              }}
+            >
+              날짜 입력
+            </p>
             <DateSelector />
           </div>
           <VerticalSpacing height={7} />
@@ -239,7 +268,6 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-      
     </div>
   );
 };
