@@ -33,7 +33,10 @@ const TitleText = styled.p`
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.Subtitle2};
   width: 100%;
-  height: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-top: 8px;
   margin-bottom: 0;
 `;
@@ -48,9 +51,7 @@ function ExperienceCardSelfSmall({ data }) {
         ))}
       </div>}
       <TitleText>
-        {data["title"].length > 19
-          ? `${data["title"].slice(0, 13)}   ...`
-          : data["title"]}
+        {data["title"]}
       </TitleText>
 
     </CardBox>

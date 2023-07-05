@@ -44,7 +44,7 @@ height: 80%;
 
 const GoogleButton = styled.div`
 width : 343px;
-heigth : 54px;
+height : 54px;
 background-color : blue; 
 color : white; 
 border-radius: 15px;
@@ -67,8 +67,6 @@ const LoginPage = () => {
           <GoogleButton>
             GoogleButton
           </GoogleButton>
-
-
       </BackgroundContainer>
     </div>
 

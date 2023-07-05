@@ -42,14 +42,15 @@ const TitleText = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
-  height: auto;
   margin-top: 11px;
   margin-bottom: 5px;
+
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+
 `;
 
 const SummaryText = styled.p`
@@ -59,7 +60,11 @@ const SummaryText = styled.p`
   color: ${(props) => props.theme.color.blackHigh};
   margin-top: 3px;
   line-height: 160%;
-  max-width: inherit;
+  height: 100%;
+  max-height: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 function ExperienceCardSelfMiddle({ data }) {
@@ -75,9 +80,7 @@ function ExperienceCardSelfMiddle({ data }) {
           </div>
         )}
         <TitleText>
-          {data["title"].length > 19
-            ? `${data["title"].slice(0, 13)}   ...`
-            : data["title"]}
+          {data["title"]}
         </TitleText>
         {data["tag-is"] !== null && tags && (
           <div style={{ display: "flex" }}>
@@ -88,9 +91,7 @@ function ExperienceCardSelfMiddle({ data }) {
         )}
         {data["summary"] && (
           <SummaryText>
-            {data["summary"].length > 40
-              ? `${data["summary"].slice(0, 43)}  ...`
-              : data["summary"]}
+            {data["summary"]}
           </SummaryText>
         )}
       </div>

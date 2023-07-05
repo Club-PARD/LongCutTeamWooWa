@@ -2,24 +2,8 @@ import React from "react";
 import HashTagSelection from "./HashTagSelection";
 import { styled } from "styled-components";
 import CategoryTagSelection from "./CategoryTagSelection";
+import { tags, hashs } from "../../../constants/tags";
 
-const tags = [
-  { tagName: "나", color: "#4386F7" },
-  { tagName: "우리", color: "#F0935F" },
-  { tagName: "너", color: "#90BC77" },
-  { tagName: "일", color: "#77BCAB" },
-  { tagName: "학업", color: "#F673A2" },
-  { tagName: "운동", color: "#ED735D" },
-  { tagName: "연애", color: "#8560F6" },
-  { tagName: "여행", color: "#FFCF55" },
-  { tagName: "기타", color: "#4386F7" },
-];
-
-const hashs = [
-  { hashName: "디스콰이엇", color: "#8560F6" },
-  { hashName: "삭제해주세요", color: "#90BC77" },
-  { hashName: "삭제해주세요", color: "#4386F7" },
-];
 
 const Div = styled.div`
   display: inline-flex;
