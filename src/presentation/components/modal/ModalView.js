@@ -5,9 +5,11 @@ import { DashedDivider } from "../commons/Divider";
 import moment from "moment";
 import CloseIcon from "../../../assets/img/close_icon.svg";
 import IconButton from "../buttons/IconBtn";
-import { margin } from "@mui/system";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import postService from "../../../service/firebase/PostService";
+import { useState } from "react";
 
-function ModalView({ postDotData, handleDotClick }) {
+function ModalView({ postDotData, handleDotClick, onDelete }) {
   const tags = postDotData["selected-tags"];
   const imgURL = postDotData.imageURL;
   const timestamp = postDotData.date;
@@ -17,6 +19,13 @@ function ModalView({ postDotData, handleDotClick }) {
   if (date) {
     formattedDate = moment(date).format("YYYY년 M월 D일");
   }
+  const handlePostDelete = () => {
+    const userId = "tlsgn";
+    postService.deletePost(postDotData.docId, userId);
+    onDelete();
+    handleDotClick();
+  };
+
   return (
     <BackgroundDiv>
       <ModalDiv>
@@ -30,19 +39,33 @@ function ModalView({ postDotData, handleDotClick }) {
         </HeaderDiv>
         <DashedDivider dashSize={"2.5px"} />
         {tags && (
-          <div style={{ display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingTop: "20px",
+              paddingBottom: "12px",
+            }}
+          >
             {tags.map((tag) => (
               <Tag
                 backgroundColor={tag["color"]}
                 style={{
                   marginRight: "12px",
-                  marginTop: "25px",
-                  marginBottom: "25px",
                 }}
               >
                 {tag["tagName"]}
               </Tag>
             ))}
+            <div style={{ marginLeft: "auto" }}>
+              <DeleteIcon
+                color="disabled"
+                sx={{ fontSize: 35 }}
+                onClick={handlePostDelete}
+              />
+            </div>
           </div>
         )}
         <DateDiv>{formattedDate}</DateDiv>
@@ -143,6 +166,7 @@ const Tag = styled.div`
   font-size: ${(props) => props.theme.fontSizes.Body2};
   color: white;
   display: flex;
+  height: 15px;
   border-radius: 100px;
   justify-content: center;
   align-items: center;
@@ -164,8 +188,8 @@ const DateDiv = styled.div`
 `;
 
 const ImgDiv = styled.img`
-  max-width: 80%; 
-  max-height: 350px; 
+  max-width: 80%;
+  max-height: 350px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 14px;

@@ -22,7 +22,6 @@ import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 import ModalView from "../modal/ModalView";
 
-
 const TimelineContainer = styled.div`
   display: flex;
   overflow-x: scroll;
@@ -217,6 +216,8 @@ const Timeline = () => {
 
   const timelineContainerRef = useRef(null);
 
+  const [isPostDeleted, setIsPostDeleted] = useState(false);
+
   const [dotWidth, setDotWidth] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -270,7 +271,11 @@ const Timeline = () => {
     };
 
     fetchPosts();
-  }, []);
+  }, [isPostDeleted]);
+
+  const handlePostDelete = () => {
+    setIsPostDeleted(true);
+  };
 
   useEffect(() => {
     if (!timelinePostData || !timelineContainerRef.current) {
@@ -365,10 +370,13 @@ const Timeline = () => {
           );
         })}
       </TimelineContainer>
-      {isCardCliked && 
-          <ModalView postDotData={selectedDotData} handleDotClick={handleDotClick}/>
-       
-      }
+      {isCardCliked && (
+        <ModalView
+          postDotData={selectedDotData}
+          handleDotClick={handleDotClick}
+          onDelete={handlePostDelete}
+        />
+      )}
     </>
   );
 };

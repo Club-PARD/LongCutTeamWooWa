@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import { keyframes } from "styled-components";
+
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -35,12 +37,6 @@ const Button = styled.button`
 `;
 
 function IDvsLinkButton({isActive, handleClick}) {
-//   const [activeButton, setActiveButton] = useState("ID");
-
-//   const handleClick = (button) => {
-//     setActiveButton(button);
-//   };
-
   return (
     <ButtonContainer>
       <Button
