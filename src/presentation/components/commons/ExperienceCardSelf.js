@@ -12,21 +12,31 @@ const CardBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
+
+  &:after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: ${(props) => props.theme.color.surface};
+    transform: rotate(45deg);
+    ${(props) => (props.isAbove ? "bottom: -10px;" : "top: -10px;")}
+    left: 50%;
+    margin-left: -10px;
+  }
 `;
 
-const SpeechBubbleBottom = styled.div`
-  position: absolute;
-  width: 20px;
-  height: 15px;
-  background-color: ${(props) => props.theme.color.surface};
-  transform: rotate(45deg);
-  ${(props) => (props.isAbove ?  "bottom: -5px;" : "top: -5px;")}
-  left: 50%;
-  margin-left: -10px;
-`;
-
-
-
+// const SpeechBubbleBottom = styled.div`
+//   position: absolute;
+//   width: 20px;
+//   height: 15px;
+//   background-color: ${(props) => props.theme.color.surface};
+//   transform: rotate(45deg);
+//   ${(props) => (props.isAbove ? "bottom: -5px;" : "top: -5px;")}
+//   left: 50%;
+//   margin-left: -10px;
+// `;
 
 const Tag = styled.div`
   background-color: ${(props) => props.backgroundColor};
@@ -82,13 +92,16 @@ const SummaryText = styled.p`
 `;
 
 const ImgBox = styled.div`
-  width: 100%;
+  width: 90%;
   height: 0;
   padding-bottom: 50%;
-  position: relative;
+  position: absolute;
+  top: 55%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   overflow: hidden;
-  border-radius: 5px;
-  margin-top: 8px;
+  border-radius: 8px;
 `;
 
 const Img = styled.img`
@@ -102,7 +115,7 @@ function ExperienceCardSelf({ data, isAbove }) {
   const imgSource = data["imageURL"];
   const tags = data["selected-tags"];
   return (
-    <CardBox>
+    <CardBox isAbove={isAbove}>
       {tags && (
         <div style={{ display: "flex", overflow: "clip" }}>
           {tags.map((tag) => (
@@ -110,9 +123,7 @@ function ExperienceCardSelf({ data, isAbove }) {
           ))}
         </div>
       )}
-      <TitleText>
-        {data["title"]}
-      </TitleText>
+      <TitleText>{data["title"]}</TitleText>
       {data["tag-is"] !== null && tags && (
         <div style={{ display: "flex" }}>
           {tags.map((tag) => (
@@ -126,7 +137,6 @@ function ExperienceCardSelf({ data, isAbove }) {
           <Img src={imgSource} alt="이미지" />
         </ImgBox>
       )}
-      <SpeechBubbleBottom isAbove={isAbove} />
     </CardBox>
   );
 }
