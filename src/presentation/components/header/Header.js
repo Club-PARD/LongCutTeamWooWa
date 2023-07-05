@@ -17,7 +17,6 @@ import { da } from "date-fns/locale";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
-
   margin-left: 61px;
 `;
 
@@ -42,21 +41,22 @@ const InfoBoxImg = styled.img`
   width : 14px;
   height : 14px; 
   cursor : pointer; 
-  margin-left : 13px; 
-  margin-top : 5px;
+  z-index: 1000;
+  margin-left : 12px; 
+  margin-top : 15px;
   border-radius: 50%;
 `
 
 const TipContaioner = styled.div`
   position: absolute;
-  z-index: 10;
+  z-index: 900;
   width: 341px;
   height: 90px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.color.blackHigh};
   margin-left: 55px;
   top: 6.5px;
-  opacity: ${(props) => props.show ? "0.95" : "0"};
+  opacity: ${(props) => (props.show ? "0.95" : "0")};
   transition: opacity 0.2s ease-in-out;
 
   &::after {
@@ -72,9 +72,7 @@ const TipContaioner = styled.div`
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
   }
-
 `;
-
 
 
 
