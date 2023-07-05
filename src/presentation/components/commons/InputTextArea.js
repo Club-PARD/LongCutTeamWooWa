@@ -35,7 +35,7 @@ const TextArea = styled.textarea`
   /* overflow: hidden; 스크롤 가능하게 하려면 주석처리 해야함 */
 `;
 
-const InputTextArea = React.memo(({ placeholder, fontsize, onChange }) => {
+const InputTextArea = ({ placeholder, fontsize, onChange }) => {
   const handleInputHeight = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = `${event.target.scrollHeight}px`;
@@ -50,7 +50,6 @@ const InputTextArea = React.memo(({ placeholder, fontsize, onChange }) => {
       onInput={handleInputHeight}
     />
   );
-});
+};
 
 export default InputTextArea;
-
