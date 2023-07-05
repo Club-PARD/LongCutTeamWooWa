@@ -5,7 +5,7 @@ const CardBox = styled.div`
   width: 184px;
   height: 118px;
   height: auto;
-  background-color: ${props => props.theme.color.surface};
+  background-color: ${(props) => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 11px;
@@ -14,7 +14,7 @@ const CardBox = styled.div`
 `;
 
 const Tag = styled.div`
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
   color: white;
   display: flex;
   padding: 1px 8px;
@@ -30,7 +30,7 @@ const Tag = styled.div`
 const LineTag = styled.div`
   width: 25px;
   height: 2px;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
   display: flex;
   justify-content: center;
   margin-top: 3px;
@@ -39,9 +39,9 @@ const LineTag = styled.div`
 `;
 
 const TitleText = styled.p`
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-weight: ${props => props.theme.fontWeights.semibold};
-  font-size: ${props => props.theme.fontSizes.Subtitle2};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle2};
   height: auto;
   margin-top: 11px;
   margin-bottom: 5px;
@@ -53,10 +53,10 @@ const TitleText = styled.p`
 `;
 
 const SummaryText = styled.p`
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-weight: ${props => props.theme.fontWeights.regular};
-  font-size: ${props => props.theme.fontSizes.Subtitle2};
-  color: ${props => props.theme.color.blackHigh};
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle2};
+  color: ${(props) => props.theme.color.blackHigh};
   margin-top: 3px;
   line-height: 160%;
   max-width: inherit;
@@ -74,7 +74,11 @@ function ExperienceCardSelfMiddle({ data }) {
             ))}
           </div>
         )}
-        <TitleText>{data["title"]}</TitleText>
+        <TitleText>
+          {data["title"].length > 19
+            ? `${data["title"].slice(0, 13)}   ...`
+            : data["title"]}
+        </TitleText>
         {data["tag-is"] !== null && tags && (
           <div style={{ display: "flex" }}>
             {tags.map((tag) => (

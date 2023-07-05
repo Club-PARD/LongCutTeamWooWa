@@ -49,7 +49,7 @@ function ExperienceCardSelfSmall({ data }) {
       </div>}
       <TitleText>
         {data["title"].length > 19
-          ? `${data["title"].slice(0, 18)}   ...`
+          ? `${data["title"].slice(0, 13)}   ...`
           : data["title"]}
       </TitleText>
 
