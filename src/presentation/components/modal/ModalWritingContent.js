@@ -2,6 +2,8 @@ import InputTextArea from "../commons/InputTextArea";
 import styled from "styled-components";
 import SingleScrollView from "../commons/SingleScrollView";
 import { UseDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import { debounce } from "lodash";
+import React from "react";
 
 const ContentDiv = styled.div`
   display: flex;
@@ -16,9 +18,12 @@ const ContentDiv = styled.div`
 const ModalWritingContent = () => {
 
   const updateDataInput = useUpdateDataInput();
-  const handleInputChange = (value) => {
-    updateDataInput("add-free", value);
-  };
+  const handleInputChange = React.useCallback(
+    debounce((value) => {
+      updateDataInput("add-free", value);
+    }, 200),
+    [updateDataInput]
+  );
 
   return (
     <SingleScrollView
