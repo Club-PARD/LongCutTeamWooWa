@@ -15,7 +15,7 @@ const CardBox = styled.div`
 
   &:after {
     content: "";
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -94,6 +94,7 @@ const SummaryText = styled.p`
 const ImgBox = styled.div`
   width: 90%;
   height: 0;
+  z-index: 2;
   padding-bottom: 50%;
   position: absolute;
   top: 55%;
