@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from 'axios';
+import firebase from "firebase/compat/app";
+
 
 import PostHeader from "./PostHeader";
 import { Divider } from "@mui/material";
@@ -71,11 +73,12 @@ function ListModal({disquiteId, closeModal}) {
         disquite_id: disquiteId ?? "owen",
       });
       addMetaData(response.data);
+      setIsLoading(false);
     } catch (error) {
       console.log("Error:", error);
       // Handle the error condition
     } finally {
-      setIsLoading(false);
+      
     }
   };
   
@@ -88,22 +91,28 @@ function ListModal({disquiteId, closeModal}) {
   const handleSubmit = () => {
     const items = crawledData.items;
     const result = items.map((item, index) => {
+      const dateRowForm = item.date;
+      const [month, day, year] = dateRowForm.split("/");
+      const dateForm = new Date(year, month - 1, day);
+      item.date = firebase.firestore.Timestamp.fromDate(dateForm);
+      
       if(selectedTags[item.id] === undefined){
         return {
           ...item,
           "selected-tags": [{ tagName: "디스콰이엇", color: "#8560F6" },], // Add an empty "selected-tags" property to each item
         };
       } else{
+        const filteredTags = tags.filter((tag) => selectedTags[item.id].includes(tag.id));
         return {
           ...item,
-          "selected-tags": [...selectedTags[item.id], { tagName: "디스콰이엇", color: "#8560F6" },], // Add an empty "selected-tags" property to each item
+          "selected-tags": [...filteredTags, { tagName: "디스콰이엇", color: "#8560F6" },], // Add an empty "selected-tags" property to each item
         };
       }
     });
     const userId = "tlsgn";
     result.forEach((element) => {
       console.log(element);
-      //postService.createPost(userId, element);
+      postService.createPost(userId, element);
     });
   }
 
@@ -116,11 +125,11 @@ function ListModal({disquiteId, closeModal}) {
       zIndex: '5',
       }}>
     <ModalContainer>
-      <PostHeader data={crawledData} closeModal={closeModal} />
+      <PostHeader userId={disquiteId} closeModal={closeModal} />
       <Divider />
-      <ExplainModal data={crawledData} />
-      {/* {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>} */}
-      <SubmitButton onClick={handleSubmit}>제출하기</SubmitButton>
+      <ExplainModal userId={disquiteId} isLoading={isLoading} />
+      {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>}
+      <SubmitButton onClick={handleSubmit}>추가하기</SubmitButton>
     </ModalContainer>
     </div>
     </Background>

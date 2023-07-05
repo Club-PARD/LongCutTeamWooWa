@@ -32,13 +32,13 @@ const CloseButton = styled(IconButton)`
   margin-left: auto;
 `;
 
-function PostHeader({ data, closeModal }) {
+function PostHeader({ userId, closeModal }) {
   
 
   return (
     <HeaderContainer>
       <HeaderIcon src={Logo_Disquiet} alt="로고이미지" />
-      <UserId>{data["userId"] ?? "no id found"}</UserId>
+      <UserId>{userId ?? "no id found"}</UserId>
       <CloseButton
         iconImage={CloseIcon}
         size={"16px"}

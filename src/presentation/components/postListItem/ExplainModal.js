@@ -28,12 +28,13 @@ const SecondExplain = styled.div`
   margin-top : 10px; 
 `
 
-function ExplainModal({ data }) {
+function ExplainModal({ userId , isLoading}) {
 
   return (
     <Container>
         <FirstExplain>
-            {data["userId"] ?? "no id found"}님의 디스콰이엇 계정에서 불러온 글입니다.
+
+            {userId ?? "no id found"}님의 디스콰이엇 계정에서 {isLoading ? "글을 불러오는 중입니다.." : "불러온 글입니다."}
         </FirstExplain>
         <SecondExplain>
             아크박스 목록에 추가할 글을 선택하세요!
