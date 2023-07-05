@@ -6,9 +6,10 @@ import moment from "moment";
 import CloseIcon from "../../../assets/img/close_icon.svg";
 import IconButton from "../buttons/IconBtn";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import { grey } from "@mui/material/colors";
+import postService from "../../../service/firebase/PostService";
+import { useState } from "react";
 
-function ModalView({ postDotData, handleDotClick }) {
+function ModalView({ postDotData, handleDotClick, onDelete }) {
   const tags = postDotData["selected-tags"];
   const imgURL = postDotData.imageURL;
   const timestamp = postDotData.date;
@@ -18,6 +19,13 @@ function ModalView({ postDotData, handleDotClick }) {
   if (date) {
     formattedDate = moment(date).format("YYYY년 M월 D일");
   }
+  const handlePostDelete = () => {
+    const userId = "tlsgn";
+    postService.deletePost(postDotData.docId, userId);
+    onDelete();
+    handleDotClick();
+  };
+
   return (
     <BackgroundDiv>
       <ModalDiv>
@@ -52,7 +60,11 @@ function ModalView({ postDotData, handleDotClick }) {
               </Tag>
             ))}
             <div style={{ marginLeft: "auto" }}>
-              <DeleteIcon color="disabled" sx={{ fontSize: 35 }} />
+              <DeleteIcon
+                color="disabled"
+                sx={{ fontSize: 35 }}
+                onClick={handlePostDelete}
+              />
             </div>
           </div>
         )}
