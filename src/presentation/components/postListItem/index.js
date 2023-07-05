@@ -27,7 +27,8 @@ const SubmitButton = styled.button`
   align-self: flex-end;
   border-radius: 100px;
   border: none;
-  background: #11E3B2;
+  background: ${props => props.disabled ? 'rgba(216, 216, 216, 1)' : props.theme.color.primary300};
+  width: 122.674px;
   width: 122.674px;
   height: 45.196px;
   justify-content: center;
@@ -35,8 +36,9 @@ const SubmitButton = styled.button`
   display: flex;
   font-family: ${props => props.theme.fontFamily.mainfont};
   font-weight: ${props => props.theme.fontWeights.semibold};
-  font-size: ${props => props.theme.fontSizes.body2};
+  font-size: ${props => props.theme.fontSizes.Body1};
   color: white;
+  cursor: ${props => props.disabled ? null : 'pointer'};
 `;
 
 const tags = [
@@ -129,7 +131,7 @@ function ListModal({disquiteId, closeModal}) {
       <Divider />
       <ExplainModal userId={disquiteId} isLoading={isLoading} />
       {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>}
-      <SubmitButton onClick={handleSubmit}>추가하기</SubmitButton>
+      <SubmitButton onClick={handleSubmit} disabled={isLoading}>추가하기</SubmitButton>
     </ModalContainer>
     </div>
     </Background>

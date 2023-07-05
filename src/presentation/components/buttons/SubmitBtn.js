@@ -36,7 +36,6 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysV
   };
 
   const checkValidity = () => {
-    console.log(dataInput["selected-tags"]);
     return alwaysValid ?? (
       (dataInput["title"] &&
         dataInput["selected-tags"] &&
