@@ -78,7 +78,9 @@ class PostService {
             
             let summarizedText = null;
             if(flattenedMessage.length > 20){
+                console.log('flattenedMessage', flattenedMessage);
                 summarizedText = await requestSummarize(20, flattenedMessage);
+                console.log('summarizedText', summarizedText);
             }
             
             // Combine the userId with the post data

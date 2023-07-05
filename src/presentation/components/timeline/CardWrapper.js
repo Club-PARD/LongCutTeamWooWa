@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   flex-direction: ${({ isAbove }) => (isAbove ? "column-reverse" : "column")};
   position: absolute;
   font-size: 12px;
-  white-space: nowrap;
   ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
 `;
 
