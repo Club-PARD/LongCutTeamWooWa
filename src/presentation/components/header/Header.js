@@ -13,6 +13,7 @@ import { useUpdateTimelineData } from "../../../service/providers/timeline_data_
 import { is } from "@react-spring/shared";
 import InfoIcon from "../../../assets/img/InfoIcon.svg";
 import ListModal from "../postListItem";
+import { da } from "date-fns/locale";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
