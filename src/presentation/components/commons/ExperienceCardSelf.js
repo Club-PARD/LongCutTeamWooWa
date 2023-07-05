@@ -1,6 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
+// const CardBox = styled.div`
+//   width: 184px;
+//   height: 225px;
+//   background-color: ${(props) => props.theme.color.surface};
+//   border-radius: 15px;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+//   padding: 11px;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   flex-wrap: wrap;
+//   position: relative;
+// `;
+
 const CardBox = styled.div`
   width: 184px;
   height: 225px;
@@ -12,6 +25,7 @@ const CardBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
+  overflow: hidden; /* Add this line */
 `;
 
 const SpeechBubbleBottom = styled.div`
@@ -82,14 +96,18 @@ const SummaryText = styled.p`
 `;
 
 const ImgBox = styled.div`
-  width: 100%;
+  width: 90%;
   height: 0;
   padding-bottom: 50%;
-  position: relative;
+  position: absolute;
+  top: 55%;
+  left: 0; /* Add this line */
+  right: 0; /* Add this line */
+  margin: 0 auto; /* Add this line */
   overflow: hidden;
-  border-radius: 5px;
-  margin-top: 8px;
+  border-radius: 8px;
 `;
+
 
 const Img = styled.img`
   position: absolute;
