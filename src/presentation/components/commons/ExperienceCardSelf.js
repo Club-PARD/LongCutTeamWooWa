@@ -4,12 +4,11 @@ import styled from "styled-components";
 const CardBox = styled.div`
   width: 184px;
 
-  height: auto;
+  height: 225px;
   background-color: ${(props) => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 11px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap; /* 변경된 부분 */
@@ -55,7 +54,10 @@ const TitleText = styled.p`
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
   width: 100%;
-  height: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-top: 15px;
   margin-bottom: 10px;
 `;
@@ -66,6 +68,12 @@ const SummaryText = styled.p`
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
   color: ${(props) => props.theme.color.blackHigh};
   line-height: 160%;
+
+  height: 100%;
+  max-height: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   margin-top: 0px;
   margin-bottom: 0px;
@@ -101,9 +109,7 @@ function ExperienceCardSelf({ data }) {
         </div>
       )}
       <TitleText>
-        {data["title"].length > 19
-          ? `${data["title"].slice(0, 13)}   ...`
-          : data["title"]}
+        {data["title"]}
       </TitleText>
       {data["tag-is"] !== null && tags && (
         <div style={{ display: "flex" }}>

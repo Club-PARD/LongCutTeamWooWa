@@ -22,19 +22,8 @@ import {
 import postService from "../../../service/firebase/PostService";
 import storageService from "../../../service/firebase/storageService";
 import { useImageInput, useUpdateImageInput } from "../../../service/providers/image_input_provider";
+import { tags } from "../../../constants/tags";
 
-
-const tags = [
-  { tagName: "인사이트", color: "#4386F7" },
-  { tagName: "여행", color: "#F0935F" },
-  { tagName: "친구", color: "#90BC77" },
-  { tagName: "업무", color: "#77BCAB" },
-  { tagName: "학업", color: "#F673A2" },
-  { tagName: "회고", color: "#ED735D" },
-  { tagName: "연애", color: "#8560F6" },
-  { tagName: "추억", color: "#FFCF55" },
-  { tagName: "기타", color: "#4386F7" },
-];
 
 const ModalSheet = ({
   modalType,

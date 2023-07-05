@@ -173,7 +173,12 @@ const TimelineDataBuilder = () => {
   targetData = Object.entries(targetData);
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
-    const selectedTags = timelineData["selected-tags"];
+    let selectedTags = timelineData["selected-tags"];
+    selectedTags = [
+      ...selectedTags,
+      ...timelineData["selected-hashs"],
+    ]
+    console.log(selectedTags);
 
     const filteredData = targetData.filter((element) => {
       return element[1].some((item) => {

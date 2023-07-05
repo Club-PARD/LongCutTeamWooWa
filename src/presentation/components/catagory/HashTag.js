@@ -40,7 +40,7 @@ const HashTag = ({ hash, onClick }) => {
         setIsHovered(false);
       }}
     >
-      #{hash.hashName}
+      #{hash.tagName}
     </StyledHash>
   );
 };

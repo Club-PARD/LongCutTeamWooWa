@@ -25,8 +25,7 @@ const SelectAllButton = styled.button`
 `;
 
 
-function ListContainer({ data, setSelectedTags, selectedTags }) {
-  const [selectedItems, setSelectedItems] = useState([]);
+function ListContainer({ data, setSelectedTags, selectedTags, selectedItems, setSelectedItems }) {
 //   const [selectAllIcon, setSelectAllIcon] = useState(Icon_checkDefault);
 
   const handleSelectAll = () => {

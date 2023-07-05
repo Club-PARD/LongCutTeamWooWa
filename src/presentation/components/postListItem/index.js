@@ -9,6 +9,7 @@ import { Divider } from "@mui/material";
 import ExplainModal from "./ExplainModal";
 import ListContainer from "./ListContainer";
 import postService from "../../../service/firebase/PostService";
+import { tags } from "../../../constants/tags";
 
 const ModalContainer = styled.div`
   display: flex;
@@ -41,22 +42,11 @@ const SubmitButton = styled.button`
   cursor: ${props => props.disabled ? null : 'pointer'};
 `;
 
-const tags = [
-  {id:1, tagName: "인사이트", color: "#4386F7" },
-  {id:2, tagName: "여행", color: "#F0935F" },
-  {id:3, tagName: "친구", color: "#90BC77" },
-  {id:4, tagName: "업무", color: "#77BCAB" },
-  {id:5, tagName: "학업", color: "#F673A2" },
-  {id:6, tagName: "회고", color: "#ED735D" },
-  {id:7, tagName: "연애", color: "#8560F6" },
-  {id:8, tagName: "추억", color: "#FFCF55" },
-  {id:9, tagName: "기타", color: "#4386F7" },
-];
-
 function ListModal({disquiteId, closeModal}) {
   const [isLoading, setIsLoading] = useState(true);
   const [crawledData, setCrawledData] = useState([]);
   const [selectedTags, setSelectedTags] = useState({});
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const addMetaData = (data) => {
     const updatedData = {
@@ -91,7 +81,7 @@ function ListModal({disquiteId, closeModal}) {
   }, []);
 
   const handleSubmit = () => {
-    const items = crawledData.items;
+    const items = crawledData.items.filter(it => selectedItems.includes(it.id));
     const result = items.map((item, index) => {
       const dateRowForm = item.date;
       const [month, day, year] = dateRowForm.split("/");
@@ -130,7 +120,7 @@ function ListModal({disquiteId, closeModal}) {
       <PostHeader userId={disquiteId} closeModal={closeModal} />
       <Divider />
       <ExplainModal userId={disquiteId} isLoading={isLoading} />
-      {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>}
+      {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags} selectedItems={selectedItems} setSelectedItems={setSelectedItems}/>}
       <SubmitButton onClick={handleSubmit} disabled={isLoading}>추가하기</SubmitButton>
     </ModalContainer>
     </div>
