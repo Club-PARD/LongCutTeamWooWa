@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import LogoImage from "../../../assets/img/LogoImg.svg";
-import LogoText from "../../../assets/img/LogoText.svg";
+
+import LogoFinal from "../../../assets/img/Logo_Final.svg";
+
 import UserProfile from "../../../assets/img/UserProfileExample.svg";
 import SearchIcon from "../../../assets/img/SearchIcon.svg";
 
@@ -21,9 +22,8 @@ const Logo = styled.div`
 `;
 
 const LogoImg = styled.img`
-  width: 24px;
+  width: 92px;
   height: 24px;
-  margin-right: 8px;
 `;
 
 const LogoTextImg = styled.img`
@@ -71,39 +71,6 @@ const NavButtons = styled.div`
   padding-right: 70px; 
 `;
 
-const TimelineButton = styled.button`
-  margin-right: 16px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  background-color: transparent;
-  color: #F8F5F0;
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-size: ${props => props.theme.fontSizes.Subtitle2};
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #343434;
-  }
-`;
-
-const ListButton = styled.button`
-  margin-right: 16px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  background-color: transparent;
-  color: #F8F5F0;
-  font-family: ${props => props.theme.fontFamily.mainfont};
-  font-size: ${props => props.theme.fontSizes.Subtitle2};
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #343434;
-  }
-`;
 
 const Profile = styled.div`
   display: flex;
@@ -128,12 +95,11 @@ const GlobalNavBar = () => {
   return (
     <GlobalContainer>
       <Logo>
-        <LogoImg src={LogoImage} />
-        <LogoTextImg src={LogoText} />
-        <SearchExperience>
+        <LogoImg src={LogoFinal} />
+        {/* <SearchExperience>
           <SearchIconImg src={SearchIcon} />
           <SearchInput type="text" placeholder="내 경험 검색하기" />
-        </SearchExperience>
+        </SearchExperience> */}
       </Logo>
       <NavButtons>
         {/* <TimelineButton>타임라인</TimelineButton>
