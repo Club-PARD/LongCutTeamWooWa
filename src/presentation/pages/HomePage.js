@@ -69,16 +69,18 @@ const exampleCrawledData = {
 
 function HomePage() {
   const [open, setOpen] = React.useState(false);
+  const [rerender, setRerender] = React.useState(false);
 
   const handleSnack = () => {
     setOpen(true);
+    setRerender(true);
   };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
+    
     setOpen(false);
   };
 
@@ -101,7 +103,7 @@ function HomePage() {
               <DataInputProvider>
                 <Header handleSnack={handleSnack} />
               </DataInputProvider>
-              <Timeline />
+              <Timeline rerender = {rerender} setRerender = {setRerender}/>
             </div>
           </div>
         </TimelineDataProvider>
