@@ -32,14 +32,8 @@ const CloseButton = styled(IconButton)`
   margin-left: auto;
 `;
 
-function PostHeader({ data }) {
+function PostHeader({ data, closeModal }) {
   
-  // 확인필요 **********************************************************
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-  };
-  // 확인필요 **********************************************************
 
   return (
     <HeaderContainer>
@@ -48,7 +42,7 @@ function PostHeader({ data }) {
       <CloseButton
         iconImage={CloseIcon}
         size={"16px"}
-        onClick={handlePopupClose}
+        onClick={closeModal}
       />
     </HeaderContainer>
   );

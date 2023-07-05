@@ -9,7 +9,7 @@ import ListContainer from "./ListContainer";
 import postService from "../../../service/firebase/PostService";
 
 const ModalContainer = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
@@ -49,7 +49,7 @@ const tags = [
   {id:9, tagName: "기타", color: "#4386F7" },
 ];
 
-function ListModal({disquiteId}) {
+function ListModal({disquiteId, closeModal}) {
   const [isLoading, setIsLoading] = useState(true);
   const [crawledData, setCrawledData] = useState([]);
   const [selectedTags, setSelectedTags] = useState({});
@@ -108,15 +108,36 @@ function ListModal({disquiteId}) {
   }
 
   return (
+    <Background>
+    <div style={{position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '5',
+      }}>
     <ModalContainer>
-      <PostHeader data={crawledData} />
+      <PostHeader data={crawledData} closeModal={closeModal} />
       <Divider />
       <ExplainModal data={crawledData} />
-      {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>}
+      {/* {!isLoading && <ListContainer data={crawledData} setSelectedTags={setSelectedTags} selectedTags={selectedTags}/>} */}
       <SubmitButton onClick={handleSubmit}>제출하기</SubmitButton>
     </ModalContainer>
+    </div>
+    </Background>
   );
 }
 
 export default ListModal;
 
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+`;

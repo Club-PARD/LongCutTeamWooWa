@@ -12,6 +12,7 @@ import ModalSheetBuilder from "../modal";
 import { useUpdateTimelineData } from "../../../service/providers/timeline_data_provider";
 import { is } from "@react-spring/shared";
 import InfoIcon from "../../../assets/img/InfoIcon.svg";
+import ListModal from "../postListItem";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
@@ -267,6 +268,13 @@ function Header({ handleSnack }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("add-free");
 
+  const dataInput = useDataInput();
+  const [isDalogOpen, setIsDalogOpen] = useState(false);
+
+  const handleListDialog = () => {
+    setIsDalogOpen(!isDalogOpen);
+  }
+
   const handleSetModalType = () => {
     if (modalType === "add-free") {
       setModalType("add-template");
@@ -310,7 +318,7 @@ function Header({ handleSnack }) {
   };
 
   return (
-    <DataInputProvider>
+    <>
       <HeaderContainer>
         <TipContaioner show={showTip}>
           <TipTitle>
@@ -377,15 +385,11 @@ function Header({ handleSnack }) {
         handleSetModalType={handleSetModalType}
         isModalOpen={isModalOpen}
         handleModalOpen={handleModalOpen}
+        handleListDialog={handleListDialog}
       />
-      <ModalSheetBuilder
-        handleSnack={handleSnack}
-        modalType={modalType}
-        handleSetModalType={handleSetModalType}
-        isModalOpen={isModalOpen}
-        handleModalOpen={handleModalOpen}
-      />
-    </DataInputProvider>
+      {isDalogOpen && <ListModal disquiteId={dataInput['disquite-id']} closeModal = {handleListDialog}/>}
+    </>
+
   );
 }
 
