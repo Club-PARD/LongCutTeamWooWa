@@ -27,8 +27,8 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
           <div onClick={() => {
               handleDotClick();
               setPostData(post);
-            }}>
-            <ExperienceCardSelf data={post} />
+            }} >
+            <ExperienceCardSelf isAbove={isAbove} data={post} />
           </div>
         ));
       case largeSize:

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const CardBox = styled.div`
   width: 184px;
-
   height: 225px;
   background-color: ${(props) => props.theme.color.surface};
   border-radius: 15px;
@@ -11,20 +10,23 @@ const CardBox = styled.div`
   padding: 11px;
   flex-direction: column;
   justify-content: space-between;
-  flex-wrap: wrap; /* 변경된 부분 */
-  position: relative; /* 추가된 부분 */
+  flex-wrap: wrap;
+  position: relative;
 `;
 
 const SpeechBubbleBottom = styled.div`
   position: absolute;
-  width: 13px;
-  height: 13px;
+  width: 20px;
+  height: 15px;
   background-color: ${(props) => props.theme.color.surface};
   transform: rotate(45deg);
-  bottom: -5px;
+  ${(props) => (props.isAbove ?  "bottom: -5px;" : "top: -5px;")}
   left: 50%;
   margin-left: -10px;
 `;
+
+
+
 
 const Tag = styled.div`
   background-color: ${(props) => props.backgroundColor};
@@ -96,7 +98,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-function ExperienceCardSelf({ data }) {
+function ExperienceCardSelf({ data, isAbove }) {
   const imgSource = data["imageURL"];
   const tags = data["selected-tags"];
   return (
@@ -124,7 +126,7 @@ function ExperienceCardSelf({ data }) {
           <Img src={imgSource} alt="이미지" />
         </ImgBox>
       )}
-      <SpeechBubbleBottom />
+      <SpeechBubbleBottom isAbove={isAbove} />
     </CardBox>
   );
 }
