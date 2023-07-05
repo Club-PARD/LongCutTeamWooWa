@@ -271,6 +271,7 @@ const Timeline = () => {
     };
 
     fetchPosts();
+    setIsPostDeleted(false);
   }, [isPostDeleted]);
 
   const handlePostDelete = () => {
@@ -374,7 +375,7 @@ const Timeline = () => {
         <ModalView
           postDotData={selectedDotData}
           handleDotClick={handleDotClick}
-          onDelete={handlePostDelete}
+          onDelete={() => setIsPostDeleted(true)}
         />
       )}
     </>

@@ -22,6 +22,7 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
   const handlePostDelete = () => {
     const userId = "tlsgn";
     postService.deletePost(postDotData.docId, userId);
+    console.log('onDelete', onDelete)
     onDelete();
     handleDotClick();
   };
