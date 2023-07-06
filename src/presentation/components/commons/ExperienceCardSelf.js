@@ -27,17 +27,6 @@ const CardBox = styled.div`
   }
 `;
 
-// const SpeechBubbleBottom = styled.div`
-//   position: absolute;
-//   width: 20px;
-//   height: 15px;
-//   background-color: ${(props) => props.theme.color.surface};
-//   transform: rotate(45deg);
-//   ${(props) => (props.isAbove ? "bottom: -5px;" : "top: -5px;")}
-//   left: 50%;
-//   margin-left: -10px;
-// `;
-
 const Tag = styled.div`
   background-color: ${(props) => props.backgroundColor};
   color: white;
@@ -74,21 +63,35 @@ const TitleText = styled.p`
   margin-bottom: 10px;
 `;
 
-const SummaryText = styled.p`
+const SummaryText = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
   color: ${(props) => props.theme.color.blackHigh};
   line-height: 160%;
-
   height: 100%;
   max-height: 100%;
-
   overflow: hidden;
-  text-overflow: ellipsis;
-
   margin-top: 0px;
   margin-bottom: 0px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const SummaryText2 = styled.div`
+  text-align: start;
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-size: ${(props) => props.theme.fontSizes.Subtitle2};
+  color: ${(props) => props.theme.color.blackHigh};
+  line-height: 160%;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  max-height: 100%;
 `;
 
 const ImgBox = styled.div`
@@ -115,6 +118,8 @@ const Img = styled.img`
 function ExperienceCardSelf({ data, isAbove }) {
   const imgSource = data["imageURL"];
   const tags = data["selected-tags"];
+  const showFullSummary = !imgSource; 
+
   return (
     <CardBox isAbove={isAbove}>
       {tags && (
@@ -132,7 +137,14 @@ function ExperienceCardSelf({ data, isAbove }) {
           ))}
         </div>
       )}
-      <SummaryText>{data["summary"]}</SummaryText>
+      {showFullSummary ? (
+        <SummaryText2>
+          {data["summary"]}
+        </SummaryText2>
+      ) : (
+        <SummaryText>{data["summary"]}</SummaryText>
+      )}
+
       {imgSource && (
         <ImgBox>
           <Img src={imgSource} alt="이미지" />

@@ -1,7 +1,7 @@
 import "./ModalLayout.css";
+import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
-
 import { Divider, DashedDivider } from "../commons/Divider";
 import ModalHeader from "./ModalSheetHeader";
 import VerticalSpacing from "../commons/VerticalSpacing";
@@ -49,28 +49,30 @@ const ModalSheet = ({
       const userId = user.uid;
       let previewData;
       let imageInput;
-      setProgreeMsg('입력된 링크를 확인하는 중이에요!');
-      if(dataInput['add-link'] !== null && dataInput['add-link'] !== undefined){
-        previewData = await fetchPreviewData(dataInput['add-link']);
-        if(previewData !== null){
-          dataInput['title'] = previewData.title;
-          dataInput['summary'] = previewData.description;
+      setProgreeMsg("입력된 링크를 확인하는 중입니다!");
+      if (
+        dataInput["add-link"] !== null &&
+        dataInput["add-link"] !== undefined
+      ) {
+        previewData = await fetchPreviewData(dataInput["add-link"]);
+        if (previewData !== null) {
+          dataInput["title"] = previewData.title;
+          dataInput["summary"] = previewData.description;
           imageInput = previewData.image;
-          setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐어요!`);
+          setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐습니다!`);
         }
       }
-      if (!dataInput["date"]){
+      if (!dataInput["date"]) {
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       }
-      
+
       console.log(dataInput);
       console.log(imageInput);
 
       const docId = await postService.createPost(userId, dataInput);
-      setProgreeMsg('내용을 안전하게 저장중에요!');
+      setProgreeMsg("내용을 안전하게 저장중입니다!");
 
-      if(imageInput !== null){
-
+      if (imageInput !== null) {
         const postId = docId; // Post ID (same as the created document ID)
         const file = imageInput; // The selected file to upload
         const downloadUrl = await storageService.uploadPostImage(
@@ -79,20 +81,19 @@ const ModalSheet = ({
           file
         );
         console.log("Image uploaded successfully:", downloadUrl);
-        setProgreeMsg('내용이 안전하게 저장되었어요!');
+        setProgreeMsg("내용이 안전하게 저장되었습니다!");
 
         // Update the Firestore document with the download URL
         const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
         await postService.updatePost(postId, userId, updateData);
-        
 
         console.log("Document updated with imageURL successfully!");
       }
-     
+
       handleSnack();
     } catch (error) {
       console.error("Error creating document:", error);
-    } finally{
+    } finally {
       handleModalOpen();
       setIsBusy(false);
     }
@@ -106,7 +107,6 @@ const ModalSheet = ({
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
-      
       const userId = user.uid;
       if (!dataInput["date"])
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
@@ -268,9 +268,9 @@ const ModalSheet = ({
           alt="Preview"
         />
       )}
-      
+
       {data["children"]}
-      {progressMsg}
+      <ProgressMsg>{progressMsg}</ProgressMsg>
       {data["hasDatePicker"] ? (
         <>
           <Divider />
@@ -322,3 +322,10 @@ const ModalSheet = ({
 };
 
 export default ModalSheet;
+
+const ProgressMsg = styled.p`
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 10px;
+  color: #7A7A7A;
+`;
