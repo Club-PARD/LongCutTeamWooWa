@@ -54,6 +54,7 @@ const SummaryText = styled.p`
   color: ${props => props.theme.color.blackHigh};
   margin-top: 8px;
   line-height: 160%;
+  
 `;
 
 const BigLogoContainer = styled.img`
