@@ -3,6 +3,7 @@ import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
 import ExperienceCardSelfSmall from "../commons/ExperienceCardSelfSmall";
 import ExperienceCardSelfMiddle from "../commons/ExperienceCardSelfMiddle";
 import ExperienceCardSelf from "../commons/ExperienceCardSelf";
+import ExperienceCardSelfExtraSmall from "../commons/ExperienceCardSelfExtraSmall";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const gapList = {
   [lxSize]: "0px",
   [largeSize]: "14px",
   [mediumSize]: "11px",
-  [smallSize]: "5px",
+  [smallSize]: "6px",
 };
 
 const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick }) => {
@@ -55,7 +56,7 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
               handleDotClick();
               setPostData(post);
             }}>
-          <ExperienceCardSelfSmall data={post} />
+          <ExperienceCardSelfExtraSmall data={post} />
           </div>
         ));
       default:

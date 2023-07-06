@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const CardBox = styled.div`
   width: 184px;
-  height: 225px;
+  height: 200px;
   background-color: ${(props) => props.theme.color.surface};
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

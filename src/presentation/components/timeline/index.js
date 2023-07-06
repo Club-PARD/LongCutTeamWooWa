@@ -28,7 +28,7 @@ const TimelineContainer = styled.div`
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   width: 100%;
-  height: 100%;
+  height: 630px;
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;
@@ -203,7 +203,7 @@ const CardSizeBuilder = (size) => {
     return lxSize;
   } else if (size <= 2) {
     return largeSize;
-  } else if (size <= 4) {
+  } else if (size <= 3) {
     return mediumSize;
   } else {
     return smallSize;
