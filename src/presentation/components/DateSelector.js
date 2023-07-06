@@ -42,7 +42,7 @@ const CustomDatePicker = styled(DatePicker)`
   padding-right: 0px; 
 `;
 
-function DateSelector() {
+function DateSelector({shouldNavigateTimeline}) {
   const [startDate, setStartDate] = useState(new Date());
   const updateDataInput = useUpdateDataInput();
   const handleInputChange = (name, value) => {
@@ -54,6 +54,9 @@ function DateSelector() {
     // Convert the date to a Firestore-compatible format
     const firestoreDate = firebase.firestore.Timestamp.fromDate(date);
     handleInputChange("date", firestoreDate);
+    if(shouldNavigateTimeline){
+      handleInputChange("date-navigate", firestoreDate);
+    }
   };
 
   return (
