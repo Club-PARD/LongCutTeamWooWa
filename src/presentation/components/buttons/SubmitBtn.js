@@ -15,6 +15,7 @@ const BtnText = styled.div`
   text-align: center;
 `;
 
+
 const BtnDiv = styled.button`
   padding: 4px 12px;
   background: ${(props) =>
@@ -57,16 +58,18 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysV
     await onSubmit();
     setOpen(true);
     setIsBusy(false);
+    
     if (buttonText === "기록하기") handleClose();
+    
   };
 
   return (
     <>
       <BtnDiv
         onClick={!isBusy ? handleClick : () => {}}
-        disabled={!checkValidity()}
+        disabled={!checkValidity() || isBusy}
       >
-        <BtnText>{buttonText}</BtnText>
+        <BtnText>{isBusy ? "기록중":  buttonText }</BtnText>
       </BtnDiv>
     </>
   );

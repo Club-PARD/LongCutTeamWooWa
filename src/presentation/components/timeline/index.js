@@ -16,12 +16,14 @@ import {
 import CardWrapper from "./CardWrapper";
 
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
-
+import Lottie from "lottie-react";
+import EmptyImg from "../../../assets/img/empty.json";
 import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 import ModalView from "../modal/ModalView";
 import { useUser } from "../../../service/providers/auth_provider";
+import { useDataInput } from "../../../service/providers/data_input_provider";
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -54,10 +56,10 @@ const TransparentButton = styled.button`
   margin-top: 10px;
 `;
 const ButtonText = styled.span`
-  color: ${(props) => props.theme.color.blackHigh};
+  color: ${(props) => props.theme.color.primary400};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   margin-left: 6px;
   margin-right: 6px;
 `;
@@ -153,6 +155,7 @@ function formatDate(date) {
 
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
+  
   let targetData;
   switch (timelineData["grouping"]) {
     case "year":
@@ -173,13 +176,18 @@ const TimelineDataBuilder = () => {
   }
   if (!targetData) return [];
 
+
   targetData = Object.entries(targetData);
+
+  if(targetData.length === 0) {
+    return targetData;
+  }
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
     let selectedTags = timelineData["selected-tags"];
-    selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
-    console.log(selectedTags);
-
+    if(timelineData["selected-hashs"] !== undefined && timelineData["selected-hashs"] != null ){
+      selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
+    }
     const filteredData = targetData.filter((element) => {
       return element[1].some((item) => {
         if (item["selected-tags"]) {
@@ -219,6 +227,7 @@ const Timeline = ({ rerender, setRerender }) => {
     setIsCardCliked(!isCardCliked);
   };
   const user = useUser();
+  const dataInput = useDataInput();
 
   const timelineContainerRef = useRef(null);
 
@@ -241,7 +250,7 @@ const Timeline = ({ rerender, setRerender }) => {
 
       try {
         const dateStr = "06/09/2023";
-        
+
         const userId = user.uid;
         const [month, day, year] = dateStr.split("/");
         const givenDate = new Date(year, month - 1, day);
@@ -286,6 +295,41 @@ const Timeline = ({ rerender, setRerender }) => {
     setIsPostDeleted(true);
   };
 
+  const buttonOnClick = (mode) => {
+    const timelineContainer = timelineContainerRef.current;
+    if(timelineContainer === null) return;
+    const targetDate = dataInput['date-navigate']; // Target date to navigate to
+    console.log('got data: ', targetDate,mode );
+    let targetIndex;
+
+    switch (mode) {
+      case "end":
+        targetIndex = dataLength - 1;
+        break;
+      case "start":
+        targetIndex = 0;
+        break;
+      case "date":
+        if(targetDate === null) return;
+        targetIndex = timelinePostData.findIndex(
+          (item) => {return item[0] >= targetDate}
+        );
+        console.log(targetIndex);
+        break;
+      default:
+        return; //Do nothing
+    }
+
+    // Calculate the position of the target date on the timeline
+    const targetPosition = targetIndex * dotWidth;
+
+    // Scroll to the target position on the timeline
+    timelineContainer.scrollTo({
+      left: targetPosition,
+      behavior: "smooth", // Optional, for smooth scrolling effect
+    });
+  };
+
   useEffect(() => {
     if (!timelinePostData || !timelineContainerRef.current) {
       return; // Exit early if posts or timelineContainerRef.current is not available
@@ -306,43 +350,21 @@ const Timeline = ({ rerender, setRerender }) => {
     };
   }, [timelinePostData, timelineContainerRef.current]);
 
+  useEffect(() => {
+    buttonOnClick(dataInput['date-navigate'] !== null ? 'date' : 'start');
+  }, [dataInput['date-navigate']]);
+
   if (isLoading) {
     return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
   }
 
   const dataLength = timelinePostData.length;
 
-  const buttonOnClick = (mode) => {
-    const timelineContainer = timelineContainerRef.current;
-    const targetDate = "06/07/2023"; // Target date to navigate to
-    let targetIndex;
+  
 
-    switch (mode) {
-      case "end":
-        targetIndex = dataLength - 1;
-        break;
-      case "start":
-        targetIndex = 0;
-        break;
-      case "date":
-        targetIndex = timelinePostData.findIndex(
-          (item) => item[0] <= targetDate
-        );
-        console.log(targetIndex);
-        break;
-      default:
-        return; //Do nothing
-    }
+  
 
-    // Calculate the position of the target date on the timeline
-    const targetPosition = targetIndex * dotWidth;
-
-    // Scroll to the target position on the timeline
-    timelineContainer.scrollTo({
-      left: targetPosition,
-      behavior: "smooth", // Optional, for smooth scrolling effect
-    });
-  };
+  console.log(timelinePostData);
 
   return (
     <>
@@ -355,11 +377,31 @@ const Timeline = ({ rerender, setRerender }) => {
           <ButtonText>마지막 기록</ButtonText>
           <LastIcon src={GotoLastIcon} alt="GotoLastIcon" />
         </LastButton>
-        {/* <DateButton onClick={() => buttonOnClick('date')}>
-          <DateIcon src={GoToDateIcon} alt="GoToDateIcon" />
-          <ButtonText>06/07/2023로 이동</ButtonText>
-        </DateButton> */}
         <HorizontalLines lineWidth={dotWidth * dataLength} />
+        {timelinePostData.length === 0 ? (
+          <div
+            style={{
+              zIndex: "1",
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "${(props) => props.theme.fontFamily.mainfont}",
+              fontSize: "1.5rem",
+              color: "#9E9E9E",
+
+            }}
+          >
+            <Lottie animationData={EmptyImg} />
+            글을 추가해주세요
+          </div>
+        ) : (
+          <></>
+        )}
         {timelinePostData.map((entry, index) => {
           const cardSize = Object.entries(entry[1]).length;
           return (

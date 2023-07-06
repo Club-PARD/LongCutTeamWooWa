@@ -43,10 +43,11 @@ const ModalSheet = ({
   const handleLinkBoxSubmitBtnClick = async () => {
     try {
       const userId = user.uid;
+      handleModalOpen();
       if (!dataInput["date"])
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
-      handleModalOpen();
+     
       handleSnack();
     } catch (error) {
       console.error("Error creating document:", error);

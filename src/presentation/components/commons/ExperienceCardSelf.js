@@ -97,7 +97,7 @@ const ImgBox = styled.div`
   z-index: 2;
   padding-bottom: 50%;
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 0;
   right: 0;
   margin: 0 auto;

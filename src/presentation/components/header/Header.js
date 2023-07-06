@@ -356,16 +356,9 @@ function Header({ handleSnack }) {
               </Button>
             ))}
             <CustomDivider />
-            <Button
-              active={activeButton === 5}
-              onClick={() => handleButtonClick(5)}
-            >
-              전체
-              <ButtonIndicator active={activeButton === 5} />
-            </Button>
 
             <SelectDateText>날짜이동</SelectDateText>
-            <DateSelector />
+            <DateSelector shouldNavigateTimeline={true}/>
           </ButtonContainer>
           <ButtonContainer2>
             <AddLinkButton onClick={handleLinkModalOpen}>

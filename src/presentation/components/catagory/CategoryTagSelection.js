@@ -51,7 +51,7 @@ const EditButton = styled.button`
   margin-bottom: 10px;
 `;
 
-const CategoryTagSelection = ({ title, categoryTagList, width }) => {
+const CategoryTagSelection = ({ title, categoryTagList }) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const updateDataInput = useUpdateTimelineData();
   const handleInputChange = (name, value) => {

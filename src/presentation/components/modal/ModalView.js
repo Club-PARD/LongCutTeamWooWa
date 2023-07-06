@@ -77,9 +77,9 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
   if (date) {
     formattedDate = moment(date).format("YYYY년 M월 D일");
   }
-  const handlePostDelete = () => {
+  const handlePostDelete = async () => {
     const userId = user.uid;
-    postService.deletePost(postDotData.docId, userId);
+    await postService.deletePost(postDotData.docId, userId);
     console.log("onDelete", onDelete);
     onDelete();
     handleDotClick();
@@ -119,6 +119,26 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
               </Tag>
             ))}
             <div style={{ marginLeft: "auto", cursor: "pointer" }}>
+              <DeleteIcon
+                color="disabled"
+                sx={{ fontSize: 35 }}
+                onClick={handlePostDelete}
+              />
+            </div>
+          </div>
+        )}
+        {!tags && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              paddingTop: "20px",
+              paddingBottom: "12px",
+            }}
+          >
+            <div style={{ cursor: "pointer" }}>
               <DeleteIcon
                 color="disabled"
                 sx={{ fontSize: 35 }}
