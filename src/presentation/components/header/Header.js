@@ -21,8 +21,8 @@ const HeaderContainer = styled.div`
 `;
 
 const TimelineContainer = styled.div`
-  display : flex; 
-`
+  display: flex;
+`;
 
 const Timeline = styled.div`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
@@ -36,16 +36,15 @@ const Timeline = styled.div`
   padding-bottom: 0px;
 `;
 
-
 const InfoBoxImg = styled.img`
-  width : 14px;
-  height : 14px; 
-  cursor : pointer; 
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
   z-index: 9;
-  margin-left : 12px; 
-  margin-top : 15px;
+  margin-left: 12px;
+  margin-top: 15px;
   border-radius: 50%;
-`
+`;
 
 const TipContaioner = styled.div`
   position: absolute;
@@ -74,28 +73,23 @@ const TipContaioner = styled.div`
   }
 `;
 
-
-
 const TipTitle = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: 11px;
   color: ${(props) => props.theme.color.surface};
-  margin-left : 15px; 
-  margin-bottom : 4px; 
-`
+  margin-left: 15px;
+  margin-bottom: 4px;
+`;
 const TipContent = styled.p`
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-weight: ${(props) => props.theme.fontWeights.regular};
   font-size: 11px;
   color: ${(props) => props.theme.color.surface};
-  margin-top : 0px; 
-  margin-left : 15px; 
-  line-height:160%; 
-`
-
-
-
+  margin-top: 0px;
+  margin-left: 15px;
+  line-height: 160%;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -139,9 +133,9 @@ const Button = styled.button`
 
   &:hover {
     color: ${(props) =>
-    props.active
-      ? props.theme.color.primary300
-      : props.theme.color.primary300};
+      props.active
+        ? props.theme.color.primary300
+        : props.theme.color.primary300};
   }
 `;
 
@@ -272,7 +266,7 @@ function Header({ handleSnack }) {
 
   const handleListDialog = () => {
     setIsDalogOpen(!isDalogOpen);
-  }
+  };
 
   const handleSetModalType = () => {
     if (modalType === "add-free") {
@@ -327,13 +321,15 @@ function Header({ handleSnack }) {
     <>
       <HeaderContainer>
         <TipContaioner show={showTip}>
-          <TipTitle>
-            Quick Tip
-          </TipTitle>
+          <TipTitle>Quick Tip</TipTitle>
           <TipContent>
-            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수 있습니다.<br />
-            • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수 있습니다.<br />
-            • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수 있습니다.
+            • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수
+            있습니다.
+            <br />
+            • ‘전체’를 클릭하여 첫 기록부터 마지막 기록까지 한 눈에 볼 수
+            있습니다.
+            <br />• ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수
+            있습니다.
           </TipContent>
         </TipContaioner>
         <TimelineContainer>
@@ -344,7 +340,6 @@ function Header({ handleSnack }) {
             onMouseLeave={handleMouseLeave}
           />
         </TimelineContainer>
-
 
         <Container>
           <ButtonContainer>
@@ -393,9 +388,14 @@ function Header({ handleSnack }) {
         handleModalOpen={handleModalOpen}
         handleListDialog={handleListDialog}
       />
-      {isDalogOpen && <ListModal handleSnack={handleSnack} disquiteId={dataInput['disquite-id']} closeModal = {handleListDialog}/>}
+      {isDalogOpen && (
+        <ListModal
+          handleSnack={handleSnack}
+          disquiteId={dataInput["disquite-id"]}
+          closeModal={handleListDialog}
+        />
+      )}
     </>
-
   );
 }
 
