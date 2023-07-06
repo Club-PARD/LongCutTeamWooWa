@@ -54,7 +54,6 @@ const ModalSheet = ({
         previewData = await fetchPreviewData(dataInput['add-link']);
         if(previewData !== null){
           dataInput['title'] = previewData.title;
-          dataInput['add-free'] = previewData.description;
           dataInput['summary'] = previewData.description;
           imageInput = previewData.image;
           setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐어요!`);
