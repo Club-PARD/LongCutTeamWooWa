@@ -10,6 +10,7 @@ import ExplainModal from "./ExplainModal";
 import ListContainer from "./ListContainer";
 import postService from "../../../service/firebase/PostService";
 import { tags } from "../../../constants/tags";
+import { useUser } from "../../../service/providers/auth_provider";
 
 const ModalContainer = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ function ListModal({disquiteId, closeModal}) {
   const [crawledData, setCrawledData] = useState([]);
   const [selectedTags, setSelectedTags] = useState({});
   const [selectedItems, setSelectedItems] = useState([]);
+  const user = useUser();
 
   const addMetaData = (data) => {
     const updatedData = {
@@ -101,7 +103,8 @@ function ListModal({disquiteId, closeModal}) {
         };
       }
     });
-    const userId = "tlsgn";
+    
+    const userId = user.uid;
     result.forEach((element) => {
       console.log(element);
       postService.createPost(userId, element);

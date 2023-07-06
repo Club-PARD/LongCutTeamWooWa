@@ -5,7 +5,7 @@ import LogoFinal from "../../../assets/img/Logo_Final.svg";
 
 import UserProfile from "../../../assets/img/UserProfileExample.svg";
 import SearchIcon from "../../../assets/img/SearchIcon.svg";
-import { handleLogout } from "../../../service/providers/auth_provider";
+import { handleLogout, useUser } from "../../../service/providers/auth_provider";
 
 const GlobalContainer = styled.div`
   background-color: ${props => props.theme.color.blackHigh};
@@ -93,23 +93,17 @@ const ProfileName = styled.div`
 `;
 
 const GlobalNavBar = () => {
+  const user = useUser();
+  console.log(user);
   return (
     <GlobalContainer>
       <Logo>
         <LogoImg src={LogoFinal} />
-        {/* <SearchExperience>
-          <SearchIconImg src={SearchIcon} />
-          <SearchInput type="text" placeholder="내 경험 검색하기" />
-        </SearchExperience> */}
       </Logo>
       <NavButtons>
-        {/* <TimelineButton>타임라인</TimelineButton>
-        <ListButton>글 리스트</ListButton> */}
-        
         <Profile>
-          <ProfileImg src={UserProfile} />
-          <ProfileName>사용자 이름</ProfileName>
-          <div> | </div>
+          <ProfileImg src={user.photoURL} />
+          <ProfileName>{user.displayName}</ProfileName>
           <ProfileName onClick={handleLogout}>로그아웃</ProfileName>
         </Profile>
       </NavButtons>
