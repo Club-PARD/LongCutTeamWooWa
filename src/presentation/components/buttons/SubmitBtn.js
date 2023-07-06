@@ -15,6 +15,7 @@ const BtnText = styled.div`
   text-align: center;
 `;
 
+
 const BtnDiv = styled.button`
   padding: 4px 12px;
   background: ${(props) =>
