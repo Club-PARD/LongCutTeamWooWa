@@ -9,11 +9,11 @@ import ExplainModal from "./ExplainModal";
 import ListContainer from "./ListContainer";
 import postService from "../../../service/firebase/PostService";
 import { tags } from "../../../constants/tags";
-import { useUser } from "../../../service/providers/auth_provider";
+<<<<<<< HEAD
 import { grey } from "@mui/material/colors";
-
-
-
+=======
+import { useUser } from "../../../service/providers/auth_provider";
+>>>>>>> 81bd147f80295d5b905326c7cd24159e849d6216
 
 const ModalContainer = styled.div`
   display: flex;
@@ -121,7 +121,8 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
       console.log(element);
       postService.createPost(userId, element);
     });
-   
+    closeModal();
+    handleSnack();
   };
 
   return (
