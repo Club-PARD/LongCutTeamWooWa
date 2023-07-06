@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import styled from "styled-components";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -80,7 +80,7 @@ function HomePage() {
     if (reason === "clickaway") {
       return;
     }
-    
+
     setOpen(false);
   };
 
@@ -90,7 +90,7 @@ function HomePage() {
         <Background src={BackgroundImg} />
         <GlobalNavBar />
         <TimelineDataProvider>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", height: '100%'}}>
             <CategoryBuilder />
             <div
               style={{
@@ -103,50 +103,50 @@ function HomePage() {
               <DataInputProvider>
                 <Header handleSnack={handleSnack} />
               </DataInputProvider>
-              <Timeline rerender = {rerender} setRerender = {setRerender}/>
+              <Timeline rerender={rerender} setRerender={setRerender} />
             </div>
           </div>
         </TimelineDataProvider>
       </BackgroundContainer>
-      
+
       <Snackbar
-  anchorOrigin={{
-    vertical: "bottom",
-    horizontal: "center",
-  }}
-  open={open}
-  autoHideDuration={3000}
-  onClose={handleClose}
->
-  <Alert
-    action={null}
-    onClose={null}
-    severity="success"
-    sx={{
-      paddingLeft: "20px",
-      paddingRight: "25px",
-      borderRadius: "30.332px", 
-      width: "100%",
-      backgroundColor: "#272727",
-      "& .MuiAlert-icon": {
-        color: "rgba(17, 227, 178, 1)",
-      },
-      "& .MuiAlert-message": {
-        color: "#FFF",
-        fontSize: "20px",
-        fontFamily: "Pretendard",
-        fontStyle: "normal",
-        fontWeight: "700",
-        lineHeight: "160%",
-      },
-      "& .MuiAlert-icon svg": {
-        fontSize: "2rem",
-      },
-    }}
-  >
-    기록이 저장되었습니다!
-  </Alert>
-</Snackbar>
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert
+          action={null}
+          onClose={null}
+          severity="success"
+          sx={{
+            paddingLeft: "20px",
+            paddingRight: "25px",
+            borderRadius: "30.332px",
+            width: "100%",
+            backgroundColor: "#272727",
+            "& .MuiAlert-icon": {
+              color: "rgba(17, 227, 178, 1)",
+            },
+            "& .MuiAlert-message": {
+              color: "#FFF",
+              fontSize: "20px",
+              fontFamily: "Pretendard",
+              fontStyle: "normal",
+              fontWeight: "700",
+              lineHeight: "160%",
+            },
+            "& .MuiAlert-icon svg": {
+              fontSize: "2rem",
+            },
+          }}
+        >
+          기록이 저장되었습니다!
+        </Alert>
+      </Snackbar>
 
     </div>
   );
