@@ -56,6 +56,7 @@ const WarningText = styled.p`
   line-height: 22px;
   color: ${(props) => props.theme.color.error};
 `;
+const urlRegex = require("url-regex");
 
 function LinkBox() {
   const updateDataInput = useUpdateDataInput();
@@ -68,18 +69,16 @@ function LinkBox() {
     setLink(inputValue);
 
     if (event.type === "paste") {
-      event.preventDefault(); // 복사 붙여넣기 이벤트 발생 시 기본 동작을 막음
+      event.preventDefault();
 
       const clipboardText = event.clipboardData.getData("text/plain");
       const clipboardValue = clipboardText || "";
 
-      const validUrl = require("valid-url");
-      setIsValidUrl(validUrl.isWebUri(clipboardValue));
+      setIsValidUrl(urlRegex({ exact: true }).test(clipboardValue));
 
       updateDataInputHandler("add-link", clipboardValue);
     } else {
-      const validUrl = require("valid-url");
-      setIsValidUrl(validUrl.isWebUri(inputValue));
+      setIsValidUrl(urlRegex({ exact: true }).test(inputValue));
 
       updateDataInputHandler("add-link", inputValue);
     }
@@ -109,5 +108,5 @@ function LinkBox() {
   );
 }
 
-
 export default LinkBox;
+

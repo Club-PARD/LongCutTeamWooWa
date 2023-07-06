@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import firebase from "firebase/compat/app";
-import { keyframes } from "styled-components";
+import { keyframes, css } from "styled-components";
 import styled from "styled-components";
 import { ReactComponent as TimelineDot } from "../../../assets/img/timeline_dot.svg";
 import {
@@ -127,13 +127,56 @@ const scaleAnimation = keyframes`
 `;
 
 const Dot = styled(TimelineDot)`
-  width: 50px;
-  height: 50px;
-  animation: ${brightenAnimation} 2s linear infinite,
-    ${scaleAnimation} 2s linear infinite;
+  width: ${({ size }) => {
+    if (size === "day") {
+      return "40px";
+    } else if (size === "week") {
+      return "55px";
+    } else if (size === "month") {
+      return "70px";
+    } else if (size === "year") {
+      return "90px";
+    }
+  }};
+
+  height: ${({ size }) => {
+    if (size === "day") {
+      return "40px";
+    } else if (size === "week") {
+      return "55px";
+    } else if (size === "month") {
+      return "70px";
+    } else if (size === "year") {
+      return "90px";
+    }
+  }};
+
+  animation: ${({ size }) => {
+    if (
+      size === "day" ||
+      size === "week" ||
+      size === "month" ||
+      size === "year"
+    ) {
+      return css`
+        ${brightenAnimation} 2s linear infinite, ${scaleAnimation} 1.5s linear infinite
+      `;
+    }
+  }};
 
   &:hover {
-    animation: ${darkenAnimation} 2s linear infinite;
+    animation: ${({ size }) => {
+      if (
+        size === "day" ||
+        size === "week" ||
+        size === "month" ||
+        size === "year"
+      ) {
+        return css`
+          ${darkenAnimation} 2s linear infinite
+        `;
+      }
+    }};
   }
 `;
 
@@ -141,7 +184,19 @@ const Time = styled.div`
   position: absolute;
   font-size: 12px;
   white-space: nowrap;
-  margin-top: ${({ isAbove }) => (isAbove ? "-60px" : "60px")};
+  margin-top: ${({ locate, isAbove }) => {
+    let topValue;
+    if (locate === "day") {
+      topValue = isAbove ? "-60px" : "60px";
+    } else if (locate === "week") {
+      topValue = isAbove ? "-80px" : "80px";
+    } else if (locate === "month") {
+      topValue = isAbove ? "-97px" : "97px";
+    } else if (locate === "year") {
+      topValue = isAbove ? "-117px" : "117px";
+    }
+    return topValue;
+  }};
 `;
 
 function formatDate(date) {
@@ -154,7 +209,7 @@ function formatDate(date) {
 
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
-  
+
   let targetData;
   switch (timelineData["grouping"]) {
     case "year":
@@ -175,16 +230,18 @@ const TimelineDataBuilder = () => {
   }
   if (!targetData) return [];
 
-
   targetData = Object.entries(targetData);
 
-  if(targetData.length === 0) {
+  if (targetData.length === 0) {
     return targetData;
   }
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
     let selectedTags = timelineData["selected-tags"];
-    if(timelineData["selected-hashs"] !== undefined && timelineData["selected-hashs"] != null ){
+    if (
+      timelineData["selected-hashs"] !== undefined &&
+      timelineData["selected-hashs"] != null
+    ) {
       selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
     }
     const filteredData = targetData.filter((element) => {
@@ -227,6 +284,8 @@ const Timeline = ({ rerender, setRerender }) => {
   };
   const user = useUser();
   const dataInput = useDataInput();
+
+  const timelineData = useTimelineData();
 
   const timelineContainerRef = useRef(null);
 
@@ -296,9 +355,9 @@ const Timeline = ({ rerender, setRerender }) => {
 
   const buttonOnClick = (mode) => {
     const timelineContainer = timelineContainerRef.current;
-    if(timelineContainer === null) return;
-    const targetDate = dataInput['date-navigate']; // Target date to navigate to
-    console.log('got data: ', targetDate,mode );
+    if (timelineContainer === null) return;
+    const targetDate = dataInput["date-navigate"]; // Target date to navigate to
+    console.log("got data: ", targetDate, mode);
     let targetIndex;
 
     switch (mode) {
@@ -309,10 +368,10 @@ const Timeline = ({ rerender, setRerender }) => {
         targetIndex = 0;
         break;
       case "date":
-        if(targetDate === null) return;
-        targetIndex = timelinePostData.findIndex(
-          (item) => {return item[0] >= targetDate}
-        );
+        if (targetDate === null) return;
+        targetIndex = timelinePostData.findIndex((item) => {
+          return item[0] >= targetDate;
+        });
         console.log(targetIndex);
         break;
       default:
@@ -350,8 +409,8 @@ const Timeline = ({ rerender, setRerender }) => {
   }, [timelinePostData, timelineContainerRef.current]);
 
   useEffect(() => {
-    buttonOnClick(dataInput['date-navigate'] !== null ? 'date' : 'start');
-  }, [dataInput['date-navigate']]);
+    buttonOnClick(dataInput["date-navigate"] !== null ? "date" : "start");
+  }, [dataInput["date-navigate"]]);
 
   if (isLoading) {
     return <div>loading..</div>; // Render a loading state or return null while the data is being fetched
@@ -381,8 +440,14 @@ const Timeline = ({ rerender, setRerender }) => {
           return (
             <DotContainer key={entry[1][0].docId} dotWidth={dotWidth}>
               <DotTimeWrapper>
-                <Dot />
-                <Time isAbove={index % 2 === 0}>{entry[0]}</Time>
+                <Dot size={timelineData["grouping"]} />
+
+                <Time
+                  locate={timelineData["grouping"]}
+                  isAbove={index % 2 === 0}
+                >
+                  {entry[0]}
+                </Time>
                 <CardWrapper
                   setPostData={setSelectedDotData}
                   handleDotClick={handleDotClick}
