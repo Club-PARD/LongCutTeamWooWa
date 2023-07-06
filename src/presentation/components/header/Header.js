@@ -393,7 +393,7 @@ function Header({ handleSnack }) {
         handleModalOpen={handleModalOpen}
         handleListDialog={handleListDialog}
       />
-      {isDalogOpen && <ListModal disquiteId={dataInput['disquite-id']} closeModal = {handleListDialog}/>}
+      {isDalogOpen && <ListModal handleSnack={handleSnack} disquiteId={dataInput['disquite-id']} closeModal = {handleListDialog}/>}
     </>
 
   );

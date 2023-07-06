@@ -6,9 +6,8 @@ import IconButton from "../buttons/IconBtn";
 
 const HeaderContainer = styled.div`
     width : 100%; 
-    height : 90px; 
-    // background-color : ${(props) => props.theme.color.primary200};
-    
+    /* height : auto;  */
+    margin-top: 0px;  
     display : flex; 
     justify-content: space-between;
     align-items: center;
@@ -41,7 +40,7 @@ function PostHeader({ userId, closeModal }) {
       <UserId>{userId ?? "no id found"}</UserId>
       <CloseButton
         iconImage={CloseIcon}
-        size={"16px"}
+        size={"18px"}
         onClick={closeModal}
       />
     </HeaderContainer>
