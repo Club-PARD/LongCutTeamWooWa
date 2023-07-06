@@ -102,8 +102,8 @@ function HomePage() {
             >
               <DataInputProvider>
                 <Header handleSnack={handleSnack} />
+                <Timeline rerender={rerender} setRerender={setRerender} />
               </DataInputProvider>
-              <Timeline rerender={rerender} setRerender={setRerender} />
             </div>
           </div>
         </TimelineDataProvider>
