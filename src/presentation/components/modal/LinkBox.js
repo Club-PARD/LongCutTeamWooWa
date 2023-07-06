@@ -136,28 +136,31 @@ function LinkBox() {
   const [isValidUrl, setIsValidUrl] = useState(true);
 
   const handleInputChange = (event) => {
-    let inputValue = event.target.value || "";
-
-    if (!inputValue && event.clipboardData) {
-      const clipboardText = event.clipboardData.getData("text/plain");
-      inputValue = clipboardText || "";
-    }
+    const inputValue = event.target.value || "";
 
     setLink(inputValue);
 
-    const validUrl = require("valid-url");
+    if (event.type === "paste") {
+      event.preventDefault(); // 복사 붙여넣기 이벤트 발생 시 기본 동작을 막음
 
-    if (inputValue.trim() === "") {
-      setIsValidUrl(true);
+      const clipboardText = event.clipboardData.getData("text/plain");
+      const clipboardValue = clipboardText || "";
+
+      const validUrl = require("valid-url");
+      setIsValidUrl(validUrl.isWebUri(clipboardValue));
+
+      updateDataInputHandler("add-link", clipboardValue);
     } else {
+      const validUrl = require("valid-url");
       setIsValidUrl(validUrl.isWebUri(inputValue));
-    }
 
-    updateDataInputHandler("add-link");
+      updateDataInputHandler("add-link", inputValue);
+    }
   };
 
-  const updateDataInputHandler = (name) => {
-    updateDataInput(name, link);
+  const updateDataInputHandler = (name, value) => {
+    setLink(value);
+    updateDataInput(name, value);
   };
 
   return (
@@ -178,5 +181,6 @@ function LinkBox() {
     </Div>
   );
 }
+
 
 export default LinkBox;
