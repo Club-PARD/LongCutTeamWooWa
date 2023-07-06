@@ -12,7 +12,7 @@ const Title = styled.div`
   color: ${(props) => props.theme.color.blackHigh};
   font-style: normal;
   line-height: 22px;
-  margin-top : 20px; 
+  margin-top: 20px;
 `;
 
 const Div = styled.div`
@@ -63,35 +63,31 @@ function LinkBox() {
   const [isValidUrl, setIsValidUrl] = useState(true);
 
   const handleInputChange = (event) => {
-    let inputValue = event.target.value || "";
-  
-    if (!inputValue && event.clipboardData) {
-      const clipboardText = event.clipboardData.getData("text/plain");
-      inputValue = clipboardText || "";
-    }
-  
+    const inputValue = event.target.value || "";
+
     setLink(inputValue);
-  
-    if (inputValue.trim() === "") {
-      setIsValidUrl(true);
+
+    if (event.type === "paste") {
+      event.preventDefault(); // 복사 붙여넣기 이벤트 발생 시 기본 동작을 막음
+
+      const clipboardText = event.clipboardData.getData("text/plain");
+      const clipboardValue = clipboardText || "";
+
+      const validUrl = require("valid-url");
+      setIsValidUrl(validUrl.isWebUri(clipboardValue));
+
+      updateDataInputHandler("add-link", clipboardValue);
     } else {
-      const urlRegex = new RegExp(
-        "^(https?:\\/\\/)?" +
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
-        "((\\d{1,3}\\.){3}\\d{1,3}))" +
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
-        "(\\?[;&a-z\\d%_.~+=-]*)?" +
-        "(\\#[-a-z\\d_]*)?$",
-        "i"
-      );
-      setIsValidUrl(urlRegex.test(inputValue));
+      const validUrl = require("valid-url");
+      setIsValidUrl(validUrl.isWebUri(inputValue));
+
+      updateDataInputHandler("add-link", inputValue);
     }
-  
-    updateDataInputHandler("add-link");
   };
-  
-  const updateDataInputHandler = (name) => {
-    updateDataInput(name, link);
+
+  const updateDataInputHandler = (name, value) => {
+    setLink(value);
+    updateDataInput(name, value);
   };
 
   return (
@@ -112,5 +108,6 @@ function LinkBox() {
     </Div>
   );
 }
+
 
 export default LinkBox;

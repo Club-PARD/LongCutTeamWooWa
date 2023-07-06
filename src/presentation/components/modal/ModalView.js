@@ -126,6 +126,26 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
             </div>
           </div>
         )}
+        {!tags && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              paddingTop: "20px",
+              paddingBottom: "12px",
+            }}
+          >
+            <div style={{ cursor: "pointer" }}>
+              <DeleteIcon
+                color="disabled"
+                sx={{ fontSize: 35 }}
+                onClick={handlePostDelete}
+              />
+            </div>
+          </div>
+        )}
         <DateDiv>{formattedDate}</DateDiv>
         {link && <URLPreview url={link} />}
 

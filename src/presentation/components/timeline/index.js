@@ -55,10 +55,10 @@ const TransparentButton = styled.button`
   margin-top: 10px;
 `;
 const ButtonText = styled.span`
-  color: ${(props) => props.theme.color.blackHigh};
+  color: ${(props) => props.theme.color.primary400};
   font-family: ${(props) => props.theme.fontFamily.mainfont};
   font-size: ${(props) => props.theme.fontSizes.Subtitle2};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   margin-left: 6px;
   margin-right: 6px;
 `;
