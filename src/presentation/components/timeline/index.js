@@ -16,14 +16,13 @@ import {
 import CardWrapper from "./CardWrapper";
 
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
-import Lottie from "lottie-react";
-import EmptyImg from "../../../assets/img/empty.json";
 import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 import ModalView from "../modal/ModalView";
 import { useUser } from "../../../service/providers/auth_provider";
 import { useDataInput } from "../../../service/providers/data_input_provider";
+import CircularIndicator from "../loadingIndicator/CircularIndicator";
 
 const TimelineContainer = styled.div`
   display: flex;
@@ -360,12 +359,6 @@ const Timeline = ({ rerender, setRerender }) => {
 
   const dataLength = timelinePostData.length;
 
-  
-
-  
-
-  console.log(timelinePostData);
-
   return (
     <>
       <TimelineContainer ref={timelineContainerRef}>
@@ -379,26 +372,7 @@ const Timeline = ({ rerender, setRerender }) => {
         </LastButton>
         <HorizontalLines lineWidth={dotWidth * dataLength} />
         {timelinePostData.length === 0 ? (
-          <div
-            style={{
-              zIndex: "1",
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "${(props) => props.theme.fontFamily.mainfont}",
-              fontSize: "1.5rem",
-              color: "#9E9E9E",
-
-            }}
-          >
-            <Lottie animationData={EmptyImg} />
-            글을 추가해주세요
-          </div>
+          <CircularIndicator message={'글을 추가해주세요'}/>
         ) : (
           <></>
         )}

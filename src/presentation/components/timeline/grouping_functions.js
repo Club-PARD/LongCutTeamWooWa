@@ -41,7 +41,6 @@ const groupDataByWeek = (data) => {
 
   for (const [, value] of data.entries()) {
     const date = value.date.toDate();
-    console.log(date);
     const { year, month, week }  = getYearMonthWeek(date);
     const dateStr = `${year}년 ${month}월 ${week}주차`
 

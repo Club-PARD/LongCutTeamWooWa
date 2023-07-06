@@ -103,7 +103,7 @@ const Wrapper = styled.div`
   flex-direction: ${({ isAbove }) => (isAbove ? "column-reverse" : "column")};
   position: absolute;
   font-size: 12px;
-  ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
+  ${({ isAbove }) => (isAbove ? "bottom: 58%;" : "top: 58%;")};
 `;
 
 const Container = styled.div`
@@ -112,7 +112,7 @@ const Container = styled.div`
   justify-content: space-between;
   position: absolute;
   font-size: 12px;
-  ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
+  ${({ isAbove }) => (isAbove ? "bottom: 58%;" : "top: 58%;")};
 `;
 
 const gapList = {

@@ -26,6 +26,7 @@ import {
 } from "../../../service/providers/image_input_provider";
 import { tags } from "../../../constants/tags";
 import { useUser } from "../../../service/providers/auth_provider";
+import fetchPreviewData from "../../../utility/url_preview";
 
 const ModalSheet = ({
   modalType,
@@ -39,18 +40,62 @@ const ModalSheet = ({
   const imageUpdateHandler = useUpdateImageInput();
   const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true); // 추가한부분.
   const user = useUser();
+  const [isBusy, setIsBusy] = useState(false);
+  const [progressMsg, setProgreeMsg] = useState(null);
 
   const handleLinkBoxSubmitBtnClick = async () => {
+    setIsBusy(true);
     try {
       const userId = user.uid;
-      handleModalOpen();
-      if (!dataInput["date"])
+      let previewData;
+      let imageInput;
+      setProgreeMsg('입력된 링크를 확인하는 중이에요!');
+      if(dataInput['add-link'] !== null && dataInput['add-link'] !== undefined){
+        previewData = await fetchPreviewData(dataInput['add-link']);
+        if(previewData !== null){
+          dataInput['title'] = previewData.title;
+          dataInput['add-free'] = previewData.description;
+          dataInput['summary'] = previewData.description;
+          imageInput = previewData.image;
+          setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐어요!`);
+        }
+      }
+      if (!dataInput["date"]){
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
+      }
+      
+      console.log(dataInput);
+      console.log(imageInput);
+
       const docId = await postService.createPost(userId, dataInput);
+      setProgreeMsg('내용을 안전하게 저장중에요!');
+
+      if(imageInput !== null){
+
+        const postId = docId; // Post ID (same as the created document ID)
+        const file = imageInput; // The selected file to upload
+        const downloadUrl = await storageService.uploadPostImage(
+          userId,
+          postId,
+          file
+        );
+        console.log("Image uploaded successfully:", downloadUrl);
+        setProgreeMsg('내용이 안전하게 저장되었어요!');
+
+        // Update the Firestore document with the download URL
+        const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
+        await postService.updatePost(postId, userId, updateData);
+        
+
+        console.log("Document updated with imageURL successfully!");
+      }
      
       handleSnack();
     } catch (error) {
       console.error("Error creating document:", error);
+    } finally{
+      handleModalOpen();
+      setIsBusy(false);
     }
   };
 
@@ -224,8 +269,9 @@ const ModalSheet = ({
           alt="Preview"
         />
       )}
-
+      
       {data["children"]}
+      {progressMsg}
       {data["hasDatePicker"] ? (
         <>
           <Divider />

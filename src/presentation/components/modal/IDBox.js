@@ -95,10 +95,6 @@ function IDBox() {
       <ServiceDiv>
         <ServiceText>서비스 명</ServiceText>
         <DisquietText>디스콰이엇</DisquietText>
-        {/* <Divider />
-        <ServiceTextContent>네이버 블로그</ServiceTextContent>
-        <Divider />
-        <ServiceTextContent>브런치</ServiceTextContent> */}
       </ServiceDiv>
       <VerticalSpacing height={3} />
       <InputDiv>

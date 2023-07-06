@@ -9,8 +9,8 @@ import postService from "../../../service/firebase/PostService";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../../service/providers/auth_provider";
+import preview_api_key from "../../../constants/preview_api_key";
 
-const api_key = "8f36c262357dcd59a33a305878142997";
 
 function URLPreview({ url }) {
   const [previewData, setPreviewData] = useState(null);
@@ -20,7 +20,7 @@ function URLPreview({ url }) {
     const fetchPreviewData = async () => {
       try {
         const response = await axios.get(
-          `https://api.linkpreview.net/?key=${api_key}&q=${encodeURIComponent(
+          `https://api.linkpreview.net/?key=${preview_api_key}&q=${encodeURIComponent(
             url
           )}`
         );
@@ -47,7 +47,9 @@ function URLPreview({ url }) {
   return (
     <>
       <div
+        onClick={() => window.open(url, "_blank")}
         style={{
+          cursor: "pointer",
           height:
             "5000px" /* Set the desired maximum height for the container */,
           overflowY: "auto",
@@ -57,9 +59,6 @@ function URLPreview({ url }) {
         <p>{previewData.description}</p>
         <img style={{ width: "100%" }} src={previewData.image} alt="Preview" />
       </div>
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        Disquite으로 이동!
-      </a>
     </>
   );
 }
@@ -67,7 +66,7 @@ function URLPreview({ url }) {
 function ModalView({ postDotData, handleDotClick, onDelete }) {
   const tags = postDotData["selected-tags"];
   const imgURL = postDotData.imageURL;
-  const link = postDotData.url;
+  const link = postDotData.url ?? postDotData["add-link"];
   const timestamp = postDotData.date;
   const date = timestamp ? timestamp.toDate() : null;
   const [previewData, setPreviewData] = useState(null);
@@ -128,7 +127,7 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
           </div>
         )}
         <DateDiv>{formattedDate}</DateDiv>
-        <URLPreview url={link} />
+        {link && <URLPreview url={link} />}
 
         <SingleScrollView
           height={400}
