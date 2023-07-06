@@ -16,7 +16,8 @@ import {
 import CardWrapper from "./CardWrapper";
 
 import { lxSize, largeSize, mediumSize, smallSize } from "./CardBuilder";
-
+import Lottie from "lottie-react";
+import EmptyImg from "../../../assets/img/empty.json";
 import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
@@ -241,7 +242,7 @@ const Timeline = ({ rerender, setRerender }) => {
 
       try {
         const dateStr = "06/09/2023";
-        
+
         const userId = user.uid;
         const [month, day, year] = dateStr.split("/");
         const givenDate = new Date(year, month - 1, day);
@@ -362,7 +363,30 @@ const Timeline = ({ rerender, setRerender }) => {
           <ButtonText>06/07/2023로 이동</ButtonText>
         </DateButton> */}
         <HorizontalLines lineWidth={dotWidth * dataLength} />
-        {timelinePostData.length === 0 ? <div style={{zIndex: '1', position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>글을 추가해주세요</div> : <></>}
+        {timelinePostData.length === 0 ? (
+          <div
+            style={{
+              zIndex: "1",
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "${(props) => props.theme.fontFamily.mainfont}",
+              fontSize: "1.5rem",
+              color: "#9E9E9E",
+
+            }}
+          >
+            <Lottie animationData={EmptyImg} />
+            글을 추가해주세요
+          </div>
+        ) : (
+          <></>
+        )}
         {timelinePostData.map((entry, index) => {
           const cardSize = Object.entries(entry[1]).length;
           return (
