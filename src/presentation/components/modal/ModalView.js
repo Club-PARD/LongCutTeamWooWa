@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../../service/providers/auth_provider";
 
-const api_key = '8f36c262357dcd59a33a305878142997';
+const api_key = "8f36c262357dcd59a33a305878142997";
 
 function URLPreview({ url }) {
   const [previewData, setPreviewData] = useState(null);
@@ -19,7 +19,11 @@ function URLPreview({ url }) {
   useEffect(() => {
     const fetchPreviewData = async () => {
       try {
-        const response = await axios.get(`https://api.linkpreview.net/?key=${api_key}&q=${encodeURIComponent(url)}`);
+        const response = await axios.get(
+          `https://api.linkpreview.net/?key=${api_key}&q=${encodeURIComponent(
+            url
+          )}`
+        );
         setPreviewData(response.data);
       } catch (error) {
         console.error("Error:", error);
@@ -42,20 +46,23 @@ function URLPreview({ url }) {
 
   return (
     <>
-    <div style={{height: '5000px', /* Set the desired maximum height for the container */
-        overflowY: 'auto',}}>
-      <h2>{previewData.title}</h2>
-      <p>{previewData.description}</p>
-      <img style={{width: "100%"}} src={previewData.image} alt="Preview" />
-    </div>
-    <a href={url}
-    target="_blank"
-    rel="noopener noreferrer">
-  Disquite으로 이동!</a>
-  </>
+      <div
+        style={{
+          height:
+            "5000px" /* Set the desired maximum height for the container */,
+          overflowY: "auto",
+        }}
+      >
+        <h2>{previewData.title}</h2>
+        <p>{previewData.description}</p>
+        <img style={{ width: "100%" }} src={previewData.image} alt="Preview" />
+      </div>
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        Disquite으로 이동!
+      </a>
+    </>
   );
 }
-
 
 function ModalView({ postDotData, handleDotClick, onDelete }) {
   const tags = postDotData["selected-tags"];
@@ -65,17 +72,15 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
   const date = timestamp ? timestamp.toDate() : null;
   const [previewData, setPreviewData] = useState(null);
   const user = useUser();
-  
 
   let formattedDate = null;
   if (date) {
     formattedDate = moment(date).format("YYYY년 M월 D일");
   }
   const handlePostDelete = () => {
-    
     const userId = user.uid;
     postService.deletePost(postDotData.docId, userId);
-    console.log('onDelete', onDelete)
+    console.log("onDelete", onDelete);
     onDelete();
     handleDotClick();
   };
@@ -113,7 +118,7 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
                 {tag["tagName"]}
               </Tag>
             ))}
-            <div style={{ marginLeft: "auto" }}>
+            <div style={{ marginLeft: "auto", cursor: "pointer" }}>
               <DeleteIcon
                 color="disabled"
                 sx={{ fontSize: 35 }}
@@ -123,8 +128,8 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
           </div>
         )}
         <DateDiv>{formattedDate}</DateDiv>
-        <URLPreview url={link}/>
-        
+        <URLPreview url={link} />
+
         <SingleScrollView
           height={400}
           children={
