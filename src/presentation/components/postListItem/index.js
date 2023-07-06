@@ -12,9 +12,7 @@ import { tags } from "../../../constants/tags";
 import { useUser } from "../../../service/providers/auth_provider";
 import { grey } from "@mui/material/colors";
 
-import { grey } from "@mui/material/colors";
 
-import { useUser } from "../../../service/providers/auth_provider";
 
 
 const ModalContainer = styled.div`

@@ -8,12 +8,12 @@ import { tags, hashs } from "../../../constants/tags";
 const Div = styled.div`
   display: inline-flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   padding-left: 77px;
   padding-right: 23px;
   border-right: 1px solid #ccc;
   width: 170px;
-  height: 90%;
+  height: 100%;
   padding-top: 140px;
   padding-bottom: 80px;
   margin-top: 20px;

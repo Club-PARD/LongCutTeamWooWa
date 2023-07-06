@@ -26,12 +26,14 @@ import { useUser } from "../../../service/providers/auth_provider";
 const TimelineContainer = styled.div`
   display: flex;
   overflow-x: scroll;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   width: 100%;
-  height: 630px;
+  height: 100%;
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;
+  margin-bottom: 18px;
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   /* Remove scrollbar */
   scrollbar-width: none;
