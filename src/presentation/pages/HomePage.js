@@ -127,7 +127,7 @@ function HomePage() {
             paddingRight: "25px",
             borderRadius: "30.332px",
             width: "100%",
-            backgroundColor: "#272727",
+            backgroundColor: "#272727CC",
             "& .MuiAlert-icon": {
               color: "rgba(17, 227, 178, 1)",
             },

@@ -12,9 +12,6 @@ import { tags } from "../../../constants/tags";
 import { useUser } from "../../../service/providers/auth_provider";
 import { grey } from "@mui/material/colors";
 
-
-
-
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -115,13 +112,14 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
         };
       }
     });
-    
+
     const userId = user.uid;
     result.forEach((element) => {
       console.log(element);
       postService.createPost(userId, element);
     });
-   
+    closeModal();
+    handleSnack();
   };
 
   return (

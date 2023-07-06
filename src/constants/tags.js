@@ -1,6 +1,6 @@
 const tags = [
    // 인사이트, 여행, 친구, 업무, 학업, 회고, 연애, 추억, 기타
-    {id:1, tagName: "인사이트", color: "#D7B669" },
+    {id:1, tagName: "인사이트", color: "#2F53A1" },
     {id:2, tagName: "여행", color: "#809A7D" },
     {id:3, tagName: "친구", color: "#D7B669" },
     {id:4, tagName: "업무", color: "#B1BE63" },
