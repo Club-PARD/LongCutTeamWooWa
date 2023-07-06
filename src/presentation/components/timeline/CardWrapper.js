@@ -70,9 +70,9 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
     return (
       <Container>
         {columnArrays.map((column, index) => (
-          <Wrapper key={index} isAbove={isAbove} style={{ gap: gapList[mode] ?? "0px" }}>
+          <Column key={index} style={{ gap: gapList[mode] ?? "0px" }}>
             {renderCards(column)}
-          </Wrapper>
+          </Column>
         ))}
       </Container>
     );
@@ -85,13 +85,31 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
   }
 };
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  width: calc(25% - 4px); /* Adjust the width and margin as needed */
+  margin: 2px;
+
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ gap }) => gap};
 
   flex-direction: ${({ isAbove }) => (isAbove ? "column-reverse" : "column")};
+  position: absolute;
+  font-size: 12px;
+  ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   position: absolute;
   font-size: 12px;
   ${({ isAbove }) => (isAbove ? "bottom: 60%;" : "top: 60%;")};
@@ -103,11 +121,5 @@ const gapList = {
   [mediumSize]: "11px",
   [smallSize]: "6px",
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
 
 export default CardWrapper;
