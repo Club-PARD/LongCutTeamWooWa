@@ -129,6 +129,7 @@ const WarningText = styled.p`
   line-height: 22px;
   color: ${(props) => props.theme.color.error};
 `;
+const urlRegex = require("url-regex");
 
 function LinkBox() {
   const updateDataInput = useUpdateDataInput();
@@ -136,28 +137,29 @@ function LinkBox() {
   const [isValidUrl, setIsValidUrl] = useState(true);
 
   const handleInputChange = (event) => {
-    let inputValue = event.target.value || "";
-
-    if (!inputValue && event.clipboardData) {
-      const clipboardText = event.clipboardData.getData("text/plain");
-      inputValue = clipboardText || "";
-    }
+    const inputValue = event.target.value || "";
 
     setLink(inputValue);
 
-    const validUrl = require("valid-url");
+    if (event.type === "paste") {
+      event.preventDefault();
 
-    if (inputValue.trim() === "") {
-      setIsValidUrl(true);
+      const clipboardText = event.clipboardData.getData("text/plain");
+      const clipboardValue = clipboardText || "";
+
+      setIsValidUrl(urlRegex({ exact: true }).test(clipboardValue));
+
+      updateDataInputHandler("add-link", clipboardValue);
     } else {
-      setIsValidUrl(validUrl.isWebUri(inputValue));
-    }
+      setIsValidUrl(urlRegex({ exact: true }).test(inputValue));
 
-    updateDataInputHandler("add-link");
+      updateDataInputHandler("add-link", inputValue);
+    }
   };
 
-  const updateDataInputHandler = (name) => {
-    updateDataInput(name, link);
+  const updateDataInputHandler = (name, value) => {
+    setLink(value);
+    updateDataInput(name, value);
   };
 
   return (
@@ -180,3 +182,4 @@ function LinkBox() {
 }
 
 export default LinkBox;
+
