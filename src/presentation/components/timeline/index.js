@@ -31,7 +31,7 @@ const TimelineContainer = styled.div`
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;
-
+  font-weight: ${(props) => props.theme.fontWeights.semibold};
   /* Remove scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -174,10 +174,7 @@ const TimelineDataBuilder = () => {
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
     let selectedTags = timelineData["selected-tags"];
-    selectedTags = [
-      ...selectedTags,
-      ...timelineData["selected-hashs"],
-    ]
+    selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
     console.log(selectedTags);
 
     const filteredData = targetData.filter((element) => {
@@ -212,7 +209,7 @@ const CardSizeBuilder = (size) => {
   }
 };
 
-const Timeline = ({rerender, setRerender}) => {
+const Timeline = ({ rerender, setRerender }) => {
   const [selectedDotData, setSelectedDotData] = useState(null);
   const [isCardCliked, setIsCardCliked] = useState(false);
   const handleDotClick = () => {
@@ -246,7 +243,7 @@ const Timeline = ({rerender, setRerender}) => {
         const collectionRef = firebase.firestore().collection("posts");
         let query = collectionRef
           .where("userId", "==", userId)
-          .orderBy("date", "desc");
+          .orderBy("date", "asc");
         const querySnapshot = await query.get();
         const fetchedPosts = querySnapshot.docs.map((doc) => ({
           docId: doc.id,

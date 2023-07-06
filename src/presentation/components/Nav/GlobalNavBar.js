@@ -5,6 +5,7 @@ import LogoFinal from "../../../assets/img/Logo_Final.svg";
 
 import UserProfile from "../../../assets/img/UserProfileExample.svg";
 import SearchIcon from "../../../assets/img/SearchIcon.svg";
+import { handleLogout } from "../../../service/providers/auth_provider";
 
 const GlobalContainer = styled.div`
   background-color: ${props => props.theme.color.blackHigh};
@@ -108,6 +109,8 @@ const GlobalNavBar = () => {
         <Profile>
           <ProfileImg src={UserProfile} />
           <ProfileName>사용자 이름</ProfileName>
+          <div> | </div>
+          <ProfileName onClick={handleLogout}>로그아웃</ProfileName>
         </Profile>
       </NavButtons>
     </GlobalContainer>
