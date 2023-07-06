@@ -8,6 +8,7 @@ import "./assets/Fonts/Font.css"; //폰트적용
 
 import DisquiteCrawlerForm from './service/disquite_api_form.js'
 import { AuthProvider } from './service/providers/auth_provider';
+import App from './App';
 
 
  const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,7 @@ import { AuthProvider } from './service/providers/auth_provider';
    <ThemeProvider theme={theme}>
       {/* <DisquiteCrawlerForm/> */}
       <AuthProvider>
-        <Hompage/>
+        <App/>
       </AuthProvider>
    </ThemeProvider>
  );

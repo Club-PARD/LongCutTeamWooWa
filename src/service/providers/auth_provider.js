@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 
+import { getAuth, signInWithPopup, GoogleAuthProvider , signOut} from "firebase/auth";
+
+
 // Create a context for the inputData state
 const AuthContext = createContext();
 
@@ -28,4 +31,37 @@ const useUser = () => {
   return user;
 };
 
-export { AuthProvider, useUpdateUser, useUser };
+const handleGoogleLogin = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    console.log('clicked!');
+  
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // Handle successful login
+        const user = result.user;
+        // Update user state or perform any other necessary actions
+      })
+      .catch((error) => {
+        // Handle login error
+        console.log(error);
+      });
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+  
+    signOut(auth)
+      .then(() => {
+        // Handle successful logout
+        // Update user state or perform any other necessary actions
+      })
+      .catch((error) => {
+        // Handle logout error
+        console.log(error);
+      });
+  };
+  
+
+export { AuthProvider, useUpdateUser, useUser, handleGoogleLogin, handleLogout};

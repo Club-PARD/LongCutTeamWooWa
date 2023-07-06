@@ -4,12 +4,17 @@ import BackgroundImg from "../../assets/img/MainBackground.png";
 // import { signInWithGoogle, logout, addAuthStateChangedListener } from "../../../service/firebase/auth";
 import Login_LogoImg from "../../assets/img/Login_Logo.svg";
 import LogoPageIMG from "../../assets/img/LogoPageIMG.svg";
+import CustomGoogleBtn from "../components/buttons/GoogleBtn";
+
+const googleButtonStyle = {
+  borderRadius: '100px',
+};
+
 
 const BackgroundContainer = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  position: relative;
   z-index: -10;
 `;
 const Background = styled.img`
@@ -42,17 +47,8 @@ width: 80%;
 height: 80%;
 `
 
-const GoogleButton = styled.div`
-width : 343px;
-height : 54px;
-background-color : blue; 
-color : white; 
-border-radius: 15px;
-margin-left : 200px;
-margin-top : 100px;
-text-align : center; 
-`
 const LoginPage = () => {
+  
 
   return (
     <div>
@@ -64,9 +60,7 @@ const LoginPage = () => {
         <GroupIMGbox>
           <GroupIMG src={LogoPageIMG} />
         </GroupIMGbox>
-          <GoogleButton>
-            GoogleButton
-          </GoogleButton>
+        <CustomGoogleBtn/>
       </BackgroundContainer>
     </div>
 
