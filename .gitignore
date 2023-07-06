@@ -23,4 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 ./src/Test.js
-src/service/chatgpt/api_key.js
