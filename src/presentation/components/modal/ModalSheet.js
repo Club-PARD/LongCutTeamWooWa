@@ -25,6 +25,7 @@ import {
   useUpdateImageInput,
 } from "../../../service/providers/image_input_provider";
 import { tags } from "../../../constants/tags";
+import { useUser } from "../../../service/providers/auth_provider";
 
 const ModalSheet = ({
   modalType,
@@ -37,10 +38,11 @@ const ModalSheet = ({
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
   const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true); // 추가한부분.
+  const user = useUser();
 
   const handleLinkBoxSubmitBtnClick = async () => {
     try {
-      const userId = "tlsgn";
+      const userId = user.uid;
       if (!dataInput["date"])
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);
@@ -59,7 +61,8 @@ const ModalSheet = ({
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
     try {
-      const userId = "tlsgn"; // User ID
+      
+      const userId = user.uid;
       if (!dataInput["date"])
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
       const docId = await postService.createPost(userId, dataInput);

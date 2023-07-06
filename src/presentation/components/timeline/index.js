@@ -21,13 +21,14 @@ import GoToFirstIcon from "../../../assets/img/GoToFirstIcon.svg";
 import GotoLastIcon from "../../../assets/img/GotoLastIcon.svg";
 import GoToDateIcon from "../../../assets/img/GoToDateIcon.svg";
 import ModalView from "../modal/ModalView";
+import { useUser } from "../../../service/providers/auth_provider";
 
 const TimelineContainer = styled.div`
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   width: 100%;
-  height: 100%;
+  height: 630px;
   position: relative; /* Add relative positioning */
   margin-left: 18px;
   margin-right: 18px;
@@ -202,7 +203,7 @@ const CardSizeBuilder = (size) => {
     return lxSize;
   } else if (size <= 2) {
     return largeSize;
-  } else if (size <= 4) {
+  } else if (size <= 3) {
     return mediumSize;
   } else {
     return smallSize;
@@ -215,6 +216,7 @@ const Timeline = ({ rerender, setRerender }) => {
   const handleDotClick = () => {
     setIsCardCliked(!isCardCliked);
   };
+  const user = useUser();
 
   const timelineContainerRef = useRef(null);
 
@@ -237,7 +239,8 @@ const Timeline = ({ rerender, setRerender }) => {
 
       try {
         const dateStr = "06/09/2023";
-        const userId = "tlsgn";
+        
+        const userId = user.uid;
         const [month, day, year] = dateStr.split("/");
         const givenDate = new Date(year, month - 1, day);
         const collectionRef = firebase.firestore().collection("posts");

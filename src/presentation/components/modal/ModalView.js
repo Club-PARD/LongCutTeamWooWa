@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import postService from "../../../service/firebase/PostService";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useUser } from "../../../service/providers/auth_provider";
 
 const api_key = '8f36c262357dcd59a33a305878142997';
 
@@ -63,6 +64,7 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
   const timestamp = postDotData.date;
   const date = timestamp ? timestamp.toDate() : null;
   const [previewData, setPreviewData] = useState(null);
+  const user = useUser();
   
 
   let formattedDate = null;
@@ -70,7 +72,8 @@ function ModalView({ postDotData, handleDotClick, onDelete }) {
     formattedDate = moment(date).format("YYYY년 M월 D일");
   }
   const handlePostDelete = () => {
-    const userId = "tlsgn";
+    
+    const userId = user.uid;
     postService.deletePost(postDotData.docId, userId);
     console.log('onDelete', onDelete)
     onDelete();
