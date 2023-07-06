@@ -115,7 +115,7 @@ function HomePage() {
           horizontal: "center",
         }}
         open={open}
-        autoHideDuration={3000}
+        autoHideDuration={2400}
         onClose={handleClose}
       >
         <Alert
