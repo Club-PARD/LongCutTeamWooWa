@@ -14,9 +14,6 @@ class PostService {
 
     async verifyPostOwnership(postId, userId) {
         const post = await this.getPost(postId, userId);
-        console.log(post);
-        console.log(post.userId);
-        console.log(userId);
         return post && post.userId === userId;
     }
 

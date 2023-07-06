@@ -344,6 +344,8 @@ const Timeline = ({ rerender, setRerender }) => {
     });
   };
 
+  console.log(timelinePostData);
+
   return (
     <>
       <TimelineContainer ref={timelineContainerRef}>
@@ -360,6 +362,7 @@ const Timeline = ({ rerender, setRerender }) => {
           <ButtonText>06/07/2023로 이동</ButtonText>
         </DateButton> */}
         <HorizontalLines lineWidth={dotWidth * dataLength} />
+        {timelinePostData.length === 0 ? <div style={{zIndex: '1', position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>글을 추가해주세요</div> : <></>}
         {timelinePostData.map((entry, index) => {
           const cardSize = Object.entries(entry[1]).length;
           return (
