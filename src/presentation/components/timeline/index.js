@@ -156,7 +156,6 @@ function formatDate(date) {
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
   
-
   let targetData;
   switch (timelineData["grouping"]) {
     case "year":
@@ -186,9 +185,9 @@ const TimelineDataBuilder = () => {
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
     let selectedTags = timelineData["selected-tags"];
-    selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
-    console.log(selectedTags);
-
+    if(timelineData["selected-hashs"] !== undefined && timelineData["selected-hashs"] != null ){
+      selectedTags = [...selectedTags, ...timelineData["selected-hashs"]];
+    }
     const filteredData = targetData.filter((element) => {
       return element[1].some((item) => {
         if (item["selected-tags"]) {
@@ -313,7 +312,7 @@ const Timeline = ({ rerender, setRerender }) => {
       case "date":
         if(targetDate === null) return;
         targetIndex = timelinePostData.findIndex(
-          (item) => {return item[0] >= targetDate.seconds}
+          (item) => {return item[0] >= targetDate}
         );
         console.log(targetIndex);
         break;
