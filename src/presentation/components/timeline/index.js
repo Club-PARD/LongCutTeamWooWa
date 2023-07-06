@@ -154,6 +154,8 @@ function formatDate(date) {
 
 const TimelineDataBuilder = () => {
   const timelineData = useTimelineData();
+  
+
   let targetData;
   switch (timelineData["grouping"]) {
     case "year":
@@ -174,7 +176,12 @@ const TimelineDataBuilder = () => {
   }
   if (!targetData) return [];
 
+
   targetData = Object.entries(targetData);
+
+  if(targetData.length === 0) {
+    return targetData;
+  }
 
   if (timelineData["selected-tags"] && timelineData["selected-tags"][0]) {
     let selectedTags = timelineData["selected-tags"];
