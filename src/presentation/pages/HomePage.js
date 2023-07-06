@@ -123,6 +123,7 @@ function HomePage() {
           onClose={null}
           severity="success"
           sx={{
+            opacity: 0.8,
             paddingLeft: "20px",
             paddingRight: "25px",
             borderRadius: "30.332px",
