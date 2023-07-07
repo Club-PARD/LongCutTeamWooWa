@@ -1,13 +1,24 @@
-import api_key from './api_key';
+import get_openai_api_key from '../../constants/openai_api_key';
 import { Configuration, OpenAIApi } from 'openai';
 
-const configuration = new Configuration({
-  apiKey: api_key,
-});
+let openaiInstance = null;
 
-delete configuration.baseOptions.headers['User-Agent'];
+const initializeOpenAI = async () => {
+  if (openaiInstance) {
+    return openaiInstance;
+  }
 
-const openai = new OpenAIApi(configuration);
+  const apiKey = await get_openai_api_key();
+
+  const configuration = new Configuration({
+    apiKey: apiKey,
+  });
+
+  delete configuration.baseOptions.headers['User-Agent'];
+
+  openaiInstance = new OpenAIApi(configuration);
+  return openaiInstance;
+};
 
 const systemPrompt = [
   "I am going to provide a text and I want you to summarize the given text.",
@@ -24,16 +35,23 @@ const requestSummarize = async (maxNumLetter, targetMessage) => {
 
   messages = [...messages, userMessage];
 
+  console.log('openai init..')
 
-  return generateChatResponse(messages);
+  const openai = await initializeOpenAI();
+
+  console.log('openai init done!')
+
+  return generateChatResponse(openai, messages);
 };
 
-const generateChatResponse = async (messages) => {
+const generateChatResponse = async (openai, messages) => {
   try {
+    console.log('openai summrize request')
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: messages,
     });
+    console.log('openai summrize request done!')
     console.log(response);
     const chatResponse = response.data.choices[0].message.content;
     console.log(chatResponse);

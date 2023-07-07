@@ -9,7 +9,7 @@ import postService from "../../../service/firebase/PostService";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../../service/providers/auth_provider";
-import preview_api_key from "../../../constants/preview_api_key";
+import get_preview_api_key from "../../../constants/preview_api_key";
 
 
 function URLPreview({ url }) {
@@ -19,6 +19,7 @@ function URLPreview({ url }) {
   useEffect(() => {
     const fetchPreviewData = async () => {
       try {
+        const preview_api_key = await get_preview_api_key();
         const response = await axios.get(
           `https://api.linkpreview.net/?key=${preview_api_key}&q=${encodeURIComponent(
             url
