@@ -42,9 +42,9 @@ const ModalSheet = ({
   const user = useUser();
   const [isBusy, setIsBusy] = useState(false);
   const [progressMsg, setProgreeMsg] = useState(null);
-  const [isDisable, setIsDisable] = useState(false);
- const handleIsDisable = () => {
-    setIsDisable(true);
+  const [isDisable, setIsDisable] = useState(true);
+ const handleIsDisable = (b) => {
+    setIsDisable(b);
     console.log("TESTESTESTSET");
   };
   const handleLinkBoxSubmitBtnClick = async () => {
