@@ -76,5 +76,5 @@ function DateSelector({shouldNavigateTimeline}) {
   );
 }
 
-
 export default DateSelector;
+

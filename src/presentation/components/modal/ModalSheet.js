@@ -134,6 +134,7 @@ const ModalSheet = ({
 
         imageUpdateHandler("image", null);
       }
+      dataInput["date"] = null;
     } catch (error) {
       console.error("Error creating document:", error);
     }
