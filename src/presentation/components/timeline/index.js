@@ -32,7 +32,7 @@ const TimelineContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative; /* Add relative positioning */
-  margin-left: 18px;
+  /* margin-left: 18px; 디자인 수정사항 */
   margin-right: 18px;
   margin-bottom: 18px;
   font-weight: ${(props) => props.theme.fontWeights.semibold};

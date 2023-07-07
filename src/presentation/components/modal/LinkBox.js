@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import img1 from "../../../assets/img/link.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VerticalSpacing from "../commons/VerticalSpacing";
-import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
+import { useDataInput, useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
 const Title = styled.div`
   height: 22px;
@@ -58,15 +58,32 @@ const WarningText = styled.p`
 `;
 const urlRegex = require("url-regex");
 
-function LinkBox() {
+function LinkBox({ handleIsDisable }) {
+  const dataInput = useDataInput();
   const updateDataInput = useUpdateDataInput();
   const [link, setLink] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
 
+  const checkTagValidity = () => {
+    console.log( dataInput['selected-tags']);
+    if(dataInput['selected-tags'] === undefined) return false;
+    return dataInput['selected-tags'].length > 0;
+  }
+  const checkLinkValidity = () => {
+    return isValidUrl;
+  }
+  const checkLinkNotEmpty = () => {
+    return link.length > 0;
+  }
+  useEffect(() => {
+    handleIsDisable(!(checkTagValidity() && checkLinkValidity() && checkLinkNotEmpty()));
+  }, [dataInput['selected-tags']]);
   const handleInputChange = (event) => {
     const inputValue = event.target.value || "";
 
     setLink(inputValue);
+    handleIsDisable(!(checkTagValidity() && checkLinkValidity() && checkLinkNotEmpty()));
+
 
     if (event.type === "paste") {
       event.preventDefault();
@@ -77,11 +94,14 @@ function LinkBox() {
       setIsValidUrl(urlRegex({ exact: true }).test(clipboardValue));
 
       updateDataInputHandler("add-link", clipboardValue);
+      
+
     } else {
       setIsValidUrl(urlRegex({ exact: true }).test(inputValue));
 
       updateDataInputHandler("add-link", inputValue);
     }
+   
   };
 
   const updateDataInputHandler = (name, value) => {
@@ -109,4 +129,3 @@ function LinkBox() {
 }
 
 export default LinkBox;
-

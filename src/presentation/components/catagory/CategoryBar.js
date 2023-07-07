@@ -16,7 +16,6 @@ const Div = styled.div`
   height: 100%;
   padding-top: 140px;
   padding-bottom: 80px;
-  margin-top: 20px;
 `;
 
 const CategoryBar = () => {
