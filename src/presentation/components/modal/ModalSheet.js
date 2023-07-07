@@ -42,7 +42,11 @@ const ModalSheet = ({
   const user = useUser();
   const [isBusy, setIsBusy] = useState(false);
   const [progressMsg, setProgreeMsg] = useState(null);
-
+  const [isDisable, setIsDisable] = useState(false);
+ const handleIsDisable = () => {
+    setIsDisable(true);
+    console.log("TESTESTESTSET");
+  };
   const handleLinkBoxSubmitBtnClick = async () => {
     setIsBusy(true);
     try {
@@ -50,17 +54,20 @@ const ModalSheet = ({
       let previewData;
       let imageInput;
       setProgreeMsg("입력된 링크를 확인하는 중입니다!");
-      if (dataInput["add-link"] !== null && dataInput["add-link"] !== undefined) {
+      if (
+        dataInput["add-link"] !== null &&
+        dataInput["add-link"] !== undefined
+      ) {
         previewData = await fetchPreviewData(dataInput["add-link"]);
         if (previewData !== null) {
           dataInput["title"] = previewData.title;
           dataInput["summary"] = previewData.description;
           imageInput = previewData.image;
           setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐습니다!`);
-        } 
+        }
         // else {
         //   setProgreeMsg("잘못된 링크입니다!");
-        //   return; 
+        //   return;
         // }
       }
       if (!dataInput["date"]) {
@@ -150,7 +157,7 @@ const ModalSheet = ({
       height: "357px",
       IDvsLinkButton: true,
       hasTitleInput: false,
-      children: isIDvsLinkActive ? <IDBox /> : <LinkBox />,
+      children: isIDvsLinkActive ? <IDBox /> : <LinkBox handleIsDisable={handleIsDisable} />,
       hasDatePicker: !isIDvsLinkActive,
       hasTagSelection: !isIDvsLinkActive,
       Button: (
@@ -164,6 +171,7 @@ const ModalSheet = ({
               ? handleIdBoxSubmitBtnClick
               : handleLinkBoxSubmitBtnClick
           }
+          disabled={!isIDvsLinkActive && isDisable}
         />
       ),
     },
@@ -321,7 +329,6 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
-   
     </div>
   );
 };

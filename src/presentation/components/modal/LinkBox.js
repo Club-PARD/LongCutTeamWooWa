@@ -58,11 +58,13 @@ const WarningText = styled.p`
 `;
 const urlRegex = require("url-regex");
 
-function LinkBox() {
+function LinkBox({handleIsDisable}) {
   const updateDataInput = useUpdateDataInput();
   const [link, setLink] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
 
+
+  
   const handleInputChange = (event) => {
     const inputValue = event.target.value || "";
 
@@ -88,6 +90,7 @@ function LinkBox() {
     setLink(value);
     updateDataInput(name, value);
   };
+  
 
   return (
     <Div>
@@ -109,4 +112,3 @@ function LinkBox() {
 }
 
 export default LinkBox;
-

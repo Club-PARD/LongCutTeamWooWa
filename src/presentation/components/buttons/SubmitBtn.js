@@ -15,7 +15,6 @@ const BtnText = styled.div`
   text-align: center;
 `;
 
-
 const BtnDiv = styled.button`
   padding: 4px 12px;
   background: ${(props) =>
@@ -25,7 +24,14 @@ const BtnDiv = styled.button`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
-function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysValid }) {
+function SubmitBtn({
+  handleSnack,
+  handleModalOpen,
+  onSubmit,
+  buttonText,
+  alwaysValid,
+  disabled,
+}) {
   const [open, setOpen] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
@@ -37,17 +43,18 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysV
   };
 
   const checkValidity = () => {
-    return alwaysValid ?? (
-      (dataInput["title"] &&
+    return (
+      alwaysValid ??
+      ((dataInput["title"] &&
         dataInput["selected-tags"] &&
         Object.entries(dataInput["selected-tags"]).length < 3 &&
         Object.entries(dataInput["selected-tags"]).length > 0 &&
         ((dataInput["add-template-1"] && dataInput["add-template-2"]) ||
           dataInput["add-free"])) ||
-      (dataInput["selected-tags"] &&
-        Object.entries(dataInput["selected-tags"]).length < 3 &&
-        Object.entries(dataInput["selected-tags"]).length > 0 &&
-        dataInput["add-link"])
+        (dataInput["selected-tags"] &&
+          Object.entries(dataInput["selected-tags"]).length < 3 &&
+          Object.entries(dataInput["selected-tags"]).length > 0 &&
+          dataInput["add-link"]))
     );
   };
 
@@ -58,18 +65,17 @@ function SubmitBtn({ handleSnack, handleModalOpen, onSubmit, buttonText, alwaysV
     await onSubmit();
     setOpen(true);
     setIsBusy(false);
-    
+
     if (buttonText === "기록하기") handleClose();
-    
   };
 
   return (
     <>
       <BtnDiv
         onClick={!isBusy ? handleClick : () => {}}
-        disabled={!checkValidity() || isBusy}
+        disabled={!checkValidity() || isBusy || disabled}
       >
-        <BtnText>{isBusy ? "기록중":  buttonText }</BtnText>
+        <BtnText>{isBusy ? "기록중" : buttonText}</BtnText>
       </BtnDiv>
     </>
   );

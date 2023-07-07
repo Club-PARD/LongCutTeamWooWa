@@ -47,16 +47,28 @@ const SubmitButton = styled.button`
   pointer-events: ${(props) => (props.length ? "auto" : "none")};
 `;
 
+const ErrorMsg = styled.div`
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  font-size: ${(props) => props.theme.fontSizes.Header4};
+  color: ${(props) => props.theme.color.error};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 function ListModal({ disquiteId, closeModal, handleSnack }) {
   const [isLoading, setIsLoading] = useState(true);
   const [crawledData, setCrawledData] = useState([]);
   const [selectedTags, setSelectedTags] = useState({});
   const [selectedItems, setSelectedItems] = useState([]);
+  const [isCorrectId, setIsCorrectId] = useState(true);
   const user = useUser();
 
   const addMetaData = (data) => {
     const updatedData = {
-      userId: disquiteId ?? "owen",
+      userId: disquiteId,
       imgSrc:
         "https://img.seoul.co.kr//img/upload/2023/03/19/SSC_20230319153307.jpg",
       items: [...data],
@@ -67,14 +79,23 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
 
   const fetchCrawledData = async () => {
     try {
+      if (!disquiteId) {
+        throw new Error("Disquite Id is null");
+      }
       const response = await axios.post("http://127.0.0.1:5000/crawl", {
-        disquite_id: disquiteId ?? "owen",
+        disquite_id: disquiteId,
       });
       addMetaData(response.data);
       setIsLoading(false);
     } catch (error) {
-      console.log("Error:", error);
-      // Handle the error condition
+      console.log("ErrorTest:", error);
+      if (error.message === "Disquite Id is null") {
+        //아이디가 빈값일 때
+        setIsCorrectId(false);
+      } else {
+        //아이디가 없는 아이디 일 때
+        setIsCorrectId(false);
+      }
     } finally {
     }
   };
@@ -136,7 +157,16 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
         <ModalContainer>
           <PostHeader userId={disquiteId} closeModal={closeModal} />
           <Divider />
-          <ExplainModal userId={disquiteId} isLoading={isLoading} />
+          {isCorrectId ? (
+            <ExplainModal
+              userId={disquiteId}
+              isLoading={isLoading}
+              isCorrectId={isCorrectId}
+            />
+          ) : (
+            <ErrorMsg>유효하지 않은 ID입니다.</ErrorMsg>
+          )}
+
           {!isLoading && (
             <ListContainer
               data={crawledData}
