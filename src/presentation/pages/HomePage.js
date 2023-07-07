@@ -71,6 +71,10 @@ function HomePage() {
   const [open, setOpen] = React.useState(false);
   const [rerender, setRerender] = React.useState(false);
 
+const handleSetRerender = () => {
+    setRerender(true);
+  };
+
   const handleSnack = () => {
     setOpen(true);
     setRerender(true);
@@ -101,7 +105,7 @@ function HomePage() {
               }}
             >
               <DataInputProvider>
-                <Header handleSnack={handleSnack} />
+                <Header handleSnack={handleSnack} handleSetRerender={handleSetRerender} />
                 <Timeline rerender={rerender} setRerender={setRerender} />
               </DataInputProvider>
             </div>

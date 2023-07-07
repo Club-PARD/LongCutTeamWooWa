@@ -66,7 +66,7 @@ function LinkBox({ handleIsDisable }) {
 
   const checkTagValidity = () => {
     console.log( dataInput['selected-tags']);
-    if(dataInput['selected-tags'] === undefined) return false;
+    if(dataInput['selected-tags'] === undefined || dataInput['selected-tags'] === null ) return false;
     return dataInput['selected-tags'].length > 0;
   }
   const checkLinkValidity = () => {

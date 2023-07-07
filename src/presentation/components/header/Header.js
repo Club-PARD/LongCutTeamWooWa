@@ -255,7 +255,7 @@ const periodOption = {
   },
 };
 
-function Header({ handleSnack }) {
+function Header({ handleSnack, handleSetRerender }) {
   const [activeButton, setActiveButton] = useState(1);
   const updateDataInput = useUpdateTimelineData();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -325,8 +325,7 @@ function Header({ handleSnack }) {
           <TipContent>
             • 단위(일, 주, 월, 년)를 선택하여 타임라인의 기준을 설정할 수
             있습니다.
-            <br />
-            • ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수
+            <br />• ‘날짜 선택'을 하여 타임라인 시작점의 위치를 설정할 수
             있습니다.
           </TipContent>
         </TipContaioner>
@@ -356,7 +355,7 @@ function Header({ handleSnack }) {
             <CustomDivider />
 
             <SelectDateText>날짜이동</SelectDateText>
-            <DateSelector shouldNavigateTimeline={true}/>
+            <DateSelector shouldNavigateTimeline={true} />
           </ButtonContainer>
           <ButtonContainer2>
             <AddLinkButton onClick={handleLinkModalOpen}>
@@ -372,6 +371,7 @@ function Header({ handleSnack }) {
         <Divider />
       </HeaderContainer>
       <ModalSheetBuilder
+        handleSetRerender={handleSetRerender}
         handleSnack={handleSnack}
         modalType={modalType}
         handleSetModalType={handleSetModalType}

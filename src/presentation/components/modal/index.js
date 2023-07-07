@@ -22,6 +22,7 @@ export const ModalSheetBuilder = ({
   isModalOpen,
   handleModalOpen,
   handleListDialog,
+  handleSetRerender,
 }) => {
   // if (modalType === "post") {
   //   return <ModalView postDotData={postDotData} />;
@@ -35,6 +36,7 @@ export const ModalSheetBuilder = ({
             <ModalWrapper>
               <ImageInputProvider>
                 <ModalSheet
+                  handleSetRerender={handleSetRerender}
                   handleSnack={handleSnack}
                   modalType={modalType}
                   handleSetModalType={handleSetModalType}
