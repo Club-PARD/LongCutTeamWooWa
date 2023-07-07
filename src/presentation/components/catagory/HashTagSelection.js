@@ -6,10 +6,9 @@ import { styled } from "styled-components";
 const HashDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   align-items: flex-start;
-  
   & > * + * {
     margin-top: 10px;
   }
@@ -23,7 +22,7 @@ const BarDiv = styled.div`
 `;
 
 const Divider = styled.div`
-  height: 1px;
+  height: 2px;
   width: 100%;
   background-color: ${(props) => props.theme.color.disabled2};
 `;
