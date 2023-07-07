@@ -4,6 +4,9 @@
   <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/b862d930-16e0-4bf7-b349-b54ee4bd5d8a">
 </div>
 
+<br>
+<br>
+
 # ACRBOX
 
 <table>
@@ -15,6 +18,9 @@
 </td>
 </tr>
 </table>
+
+<br>
+<br>
 
 ## Problem & Solution
 
@@ -44,6 +50,9 @@
 </tr>
 </table>
 
+<br>
+<br>
+
 ## Demo
 
 <table>
@@ -56,66 +65,94 @@
 </tr>
 </table>
 
+<br>
+<br>
+
 ## Page Overview
 
-<table>
-<tr>
-<td>
-  
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/af53e460-8ecc-402d-9736-735b73ce1c44" style="width: 60%; height: auto; border-radius: 30px">
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto;">
+<div style="text-align: right">
+  <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/af53e460-8ecc-402d-9736-735b73ce1c44" style="width: 30%; height: auto; border-radius: 30px">
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto;">
+      </td>
+      <td>
+        타 플랫폼의 글을 한번에 모을 수 있는 서비스의 부재 &nbsp;-->&nbsp; <i>웹 크롤링, 글이나 링크 추가하기 기능을 통해 기억을 한곳에서 확인</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+        모은 글을 정리하는 것에 대한 어려움 &nbsp;-->&nbsp; <i>타임라인 기능과 카테고리 기능을 이용하여 손쉽게 정리</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+        글에 나타난 기억이 무엇인지 직접들어가 읽고 알아 내야하는 불편함 &nbsp;-->&nbsp; <i>ChatGPT를 이용한 요약 기능을 통해 한눈에 기록을 확인</i>
+      </td>
+    </tr>
+  </table>
+</div>
 
-### **타 플랫폼의 글을 한번에 모을 수 있는 서비스의 부재 --> ***웹 크롤링, 글이나 링크 추가하기 기능을 통해 기억을 한곳에서 확인*****
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; ">
-
-### **모은 글을 정리하는 것에 대한 어려움 --> ***타임라인 기능과 카테고리 기능을 이용하여 손쉽게 정리*****
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; ">
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/94d75156-5b58-411b-83db-d8956253a737" style="width: 40px; height: auto; ">
-
-### **글에 나타난 기억이 무엇인지 직접들어가 읽고 알아 내야하는 불편함 --> ***ChatGPT를 이용한 요약 기능을 통해 한눈에 기록을 확인*****
-
-
-</td>
-</tr>
-</table>
+<br>
+<br>
 
 ## Main Features
 
-<table>
-<tr>
-<td>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/511e99e8-a3ef-412b-af95-72d50ca02aa6" style="width: 60%; height: auto; border-radius: 20px">
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+<div style="text-align: right">
+ <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/511e99e8-a3ef-412b-af95-72d50ca02aa6" style="width: 30%; height: auto; border-radius: 20px">
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+        <i>외부 플렛폼에서 글 불러오기</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+       <i>타임라인 기능</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+       <i>글 작성 & 링크 추가</i>
+      </td>
+    </tr>
+     <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+        <i>카테고리 기능</i>
+      </td>
+    </tr>
+     <tr>
+      <td>
+        <img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
+      </td>
+      <td>
+        <i>ChatGPT 요약 기능</i>
+      </td>
+    </tr>
+  </table>
+</div>
 
-### **외부 플렛폼에서 글 불러오기**
-
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
-
-### **타임라인 기능**
-
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
-
-### **글 작성 & 링크 추가**
-
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
-
-### **카테고리 기능**
-
-<br><br>
-<img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; "><img src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/e3254832-ed1e-4ca6-9c2a-b83833c4381e" style="width: 40px; height: auto; ">
-
-### **ChatGPT 요약 기능**
 <br>
-</td>
-</tr>
-</table>
+<br>
 
 ## Built with
 
@@ -128,6 +165,9 @@
 </td>
 </tr>
 </table>
+
+<br>
+<br>
 
 ## Web Deploy
 
@@ -142,6 +182,9 @@
 </td>
 </tr>
 </table>
+
+<br>
+<br>
 
 ## Team
 
