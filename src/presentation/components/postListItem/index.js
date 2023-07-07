@@ -67,7 +67,8 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
 
   const fetchCrawledData = async () => {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/crawl", {
+
+      const response = await axios.post("http://123.123.123.123:8000/", {
         disquite_id: disquiteId ?? "owen",
       });
       addMetaData(response.data);
