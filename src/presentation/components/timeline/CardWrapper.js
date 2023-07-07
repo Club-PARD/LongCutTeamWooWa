@@ -68,7 +68,7 @@ const CardWrapper = ({ setPostData, isAbove, mode, postDataList, handleDotClick 
     });
 
     return (
-      <Container>
+      <Container isAbove={isAbove} >
         {columnArrays.map((column, index) => (
           <Column key={index} style={{ gap: gapList[mode] ?? "0px" }}>
             {renderCards(column)}
@@ -108,8 +108,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   position: absolute;
   font-size: 12px;
   ${({ isAbove }) => (isAbove ? "bottom: 58%;" : "top: 58%;")};
