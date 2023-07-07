@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import LoadingImg from "../../../assets/img/loading.gif";
 
 const Container = styled.div`
     width : 100%; 
@@ -39,7 +40,22 @@ function ExplainModal({ userId , isLoading}) {
         <SecondExplain>
             아크박스 목록에 추가할 글을 선택하세요!
         </SecondExplain>
+        {isLoading && (
+        <img
+          style={{
+            position: "fixed",
+            zIndex: 20,
+            width: "500px",
+            top: "30%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          src={LoadingImg}
+          alt="Loading"
+        />
+      )}
     </Container>
+    
     
   );
 }

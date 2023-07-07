@@ -50,17 +50,18 @@ const ModalSheet = ({
       let previewData;
       let imageInput;
       setProgreeMsg("입력된 링크를 확인하는 중입니다!");
-      if (
-        dataInput["add-link"] !== null &&
-        dataInput["add-link"] !== undefined
-      ) {
+      if (dataInput["add-link"] !== null && dataInput["add-link"] !== undefined) {
         previewData = await fetchPreviewData(dataInput["add-link"]);
         if (previewData !== null) {
           dataInput["title"] = previewData.title;
           dataInput["summary"] = previewData.description;
           imageInput = previewData.image;
           setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐습니다!`);
-        }
+        } 
+        // else {
+        //   setProgreeMsg("잘못된 링크입니다!");
+        //   return; 
+        // }
       }
       if (!dataInput["date"]) {
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
@@ -100,12 +101,14 @@ const ModalSheet = ({
   };
 
   const handleIdBoxSubmitBtnClick = async () => {
+    setIsBusy(true);
     handleListDialog();
     handleModalOpen();
   };
 
   // Function to handle button click and collect the input data
   const handleSubmitBtnClick = async () => {
+    setIsBusy(true);
     try {
       const userId = user.uid;
       if (!dataInput["date"])
@@ -317,6 +320,7 @@ const ModalSheet = ({
       ) : (
         <></>
       )}
+   
     </div>
   );
 };
@@ -327,5 +331,5 @@ const ProgressMsg = styled.p`
   font-size: 17px;
   font-weight: 600;
   margin-left: 10px;
-  color: #7A7A7A;
+  color: #7a7a7a;
 `;
