@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HashTagSelection from "./HashTagSelection";
 import { styled } from "styled-components";
 import CategoryTagSelection from "./CategoryTagSelection";
-import { tags, hashs } from "../../../constants/tags";
+import { hashs, FetchUserTags} from "../../../constants/tags";
+import { useUser } from "../../../service/providers/auth_provider";
 
 
 const Div = styled.div`
@@ -19,9 +20,15 @@ const Div = styled.div`
 `;
 
 const CategoryBar = () => {
+  const [fetchTags, setFetchTags] = useState(null);
+  const user = useUser();
+  useEffect(()=> {
+    FetchUserTags(user.uid).then((value) => setFetchTags(value));
+  }, []);
   return (
     <Div>
-      <CategoryTagSelection title={"Category"} categoryTagList={tags} />
+      {fetchTags ? <CategoryTagSelection title={"Category"} categoryTagList={fetchTags} /> : <>태그 불러오는 중...</>}
+      
       <HashTagSelection hashTagList={hashs} />
     </Div>
   );

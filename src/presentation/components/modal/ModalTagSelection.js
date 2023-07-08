@@ -42,13 +42,6 @@ const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
             }}
           />
         ))}
-        {/* {hasButton ? (
-          <button className="add-button" onClick={handleAddButtonClick}>
-            <FiPlus />
-          </button>
-        ) : (
-          <></>
-        )} */}
       </div>
     </div>
   );

@@ -1,3 +1,13 @@
+import FirebaseService from '../service/firebase/FirebaseService';
+
+const collectionName = 'user';
+
+const FetchUserTags = async (userId) => {
+    const docName = userId;
+    const snap = await FirebaseService.getDocument(collectionName, docName);
+    return snap['tags'];
+}
+
 const tags = [
    // 인사이트, 여행, 친구, 업무, 학업, 회고, 연애, 추억, 기타
     {id:1, tagName: "인사이트", color: "#2F53A1" },
@@ -15,4 +25,4 @@ const tags = [
     {id:1, tagName: "디스콰이엇", color: "#9E86D0" },
   ];
 
-export { tags, hashs}
+export { tags, hashs, FetchUserTags}

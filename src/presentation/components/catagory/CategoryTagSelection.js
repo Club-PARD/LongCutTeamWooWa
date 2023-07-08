@@ -31,20 +31,20 @@ const TitleDiv = styled.div`
   margin-bottom: 10px;
 `;
 
-// const GearImg = styled.img`
-//   width: 16px;
-// `;
+const GearImg = styled.img`
+  width: 16px;
+`;
 
 const EditButton = styled.button`
-  // display: flex;
-  // flex-direction: row;
-  // align-items: flex-start;
-  // justify-content: center;
-  // color: var(--black-medium, #7a7a7a);
-  // font-size: 12px;
-  // font-family: ${(props) => props.theme.fontFamily.mainfont};
-  // line-height: 160%;
-  // margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--black-medium, #7a7a7a);
+  font-size: 12px;
+  font-family: ${(props) => props.theme.fontFamily.mainfont};
+  line-height: 160%;
+  margin-top: 10px;
 
   background-color: transparent;
   border: none;
@@ -87,8 +87,8 @@ const CategoryTagSelection = ({ title, categoryTagList }) => {
         ))}
       </TagDiv>
       <EditButton>
-        {/* <GearImg src={gearImg} />
-        &nbsp;카테고리 수정 */}
+        <GearImg src={gearImg} />
+        &nbsp;카테고리 수정
       </EditButton>
     </BarDiv>
   );

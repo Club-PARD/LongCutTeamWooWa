@@ -8,7 +8,7 @@ import { Divider } from "@mui/material";
 import ExplainModal from "./ExplainModal";
 import ListContainer from "./ListContainer";
 import postService from "../../../service/firebase/PostService";
-import { tags } from "../../../constants/tags";
+import { tags, FetchUserTags } from "../../../constants/tags";
 import { useUser } from "../../../service/providers/auth_provider";
 import { grey } from "@mui/material/colors";
 
@@ -58,21 +58,25 @@ const ErrorMsg = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-function ListModal({ disquiteId, closeModal, handleSnack }) {
+function ListModal({fetchTags, disquiteId, closeModal, handleSnack }) {
   const [isLoading, setIsLoading] = useState(true);
   const [crawledData, setCrawledData] = useState([]);
   const [selectedTags, setSelectedTags] = useState({});
   const [selectedItems, setSelectedItems] = useState([]);
   const [isCorrectId, setIsCorrectId] = useState(true);
+  const [progressMsg, setProgreeMsg] = useState(null);
+
   const user = useUser();
 
+  console.log('fetchTags', fetchTags);
+
+
   const addMetaData = (data) => {
+    
     const updatedData = {
       userId: disquiteId,
-      imgSrc:
-        "https://img.seoul.co.kr//img/upload/2023/03/19/SSC_20230319153307.jpg",
       items: [...data],
-      tags: [...tags],
+      tags: [...fetchTags],
     };
     setCrawledData(updatedData);
   };
@@ -82,7 +86,7 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
       if (!disquiteId) {
         throw new Error("Disquite Id is null");
       }
-      const response = await axios.post("http://106.10.44.111:8000/crawl", {
+      const response = await axios.post("http://0.0.0.0:8000/crawl", {
         disquite_id: disquiteId,
       });
       addMetaData(response.data);
@@ -121,7 +125,7 @@ function ListModal({ disquiteId, closeModal, handleSnack }) {
           "selected-tags": [{ tagName: "디스콰이엇", color: "#8560F6" }], // Add an empty "selected-tags" property to each item
         };
       } else {
-        const filteredTags = tags.filter((tag) =>
+        const filteredTags = fetchTags.filter((tag) =>
           selectedTags[item.id].includes(tag.id)
         );
         return {

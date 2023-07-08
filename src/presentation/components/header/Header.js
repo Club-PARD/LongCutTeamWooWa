@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DateSelector from "../DateSelector";
 import {
@@ -14,6 +14,8 @@ import { is } from "@react-spring/shared";
 import InfoIcon from "../../../assets/img/InfoIcon.svg";
 import ListModal from "../postListItem";
 import { da } from "date-fns/locale";
+import { useUser } from "../../../service/providers/auth_provider";
+import { FetchUserTags } from "../../../constants/tags";
 
 const HeaderContainer = styled.div`
   padding-top: 40px;
@@ -264,6 +266,13 @@ function Header({ handleSnack }) {
   const dataInput = useDataInput();
   const [isDalogOpen, setIsDalogOpen] = useState(false);
 
+  const [fetchTags, setFetchTags] = useState(null);
+  const user = useUser();
+
+  useEffect(()=> {
+    FetchUserTags(user.uid).then((value) => setFetchTags(value));
+  }, []);
+
   const handleListDialog = () => {
     setIsDalogOpen(!isDalogOpen);
   };
@@ -379,8 +388,9 @@ function Header({ handleSnack }) {
         handleModalOpen={handleModalOpen}
         handleListDialog={handleListDialog}
       />
-      {isDalogOpen && (
+      {isDalogOpen && fetchTags && (
         <ListModal
+        fetchTags={fetchTags}
           handleSnack={handleSnack}
           disquiteId={dataInput["disquite-id"]}
           closeModal={handleListDialog}

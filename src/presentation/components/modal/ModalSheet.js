@@ -24,7 +24,7 @@ import {
   useImageInput,
   useUpdateImageInput,
 } from "../../../service/providers/image_input_provider";
-import { tags } from "../../../constants/tags";
+import { FetchUserTags} from "../../../constants/tags";
 import { useUser } from "../../../service/providers/auth_provider";
 import fetchPreviewData from "../../../utility/url_preview";
 
@@ -39,10 +39,15 @@ const ModalSheet = ({
   const imageInput = useImageInput();
   const imageUpdateHandler = useUpdateImageInput();
   const [isIDvsLinkActive, setIsIDvsLinkActive] = useState(true); // 추가한부분.
-  const user = useUser();
   const [isBusy, setIsBusy] = useState(false);
   const [progressMsg, setProgreeMsg] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+
+  const [fetchTags, setFetchTags] = useState(null);
+  const user = useUser();
+  useEffect(()=> {
+    FetchUserTags(user.uid).then((value) => setFetchTags(value));
+  }, []);
  const handleIsDisable = (b) => {
     setIsDisable(b);
     console.log("TESTESTESTSET");
@@ -310,11 +315,11 @@ const ModalSheet = ({
         <>
           <Divider />
           <VerticalSpacing height={14} />
-          <ModalTagSelection
+          {fetchTags ? <ModalTagSelection
             title={"태그 입력"}
             hasButton={false}
-            modalTagList={tags}
-          />
+            modalTagList={fetchTags}
+          /> : "태그 불러오는 중..."}
           <VerticalSpacing height={14} />
           <Divider />
         </>
