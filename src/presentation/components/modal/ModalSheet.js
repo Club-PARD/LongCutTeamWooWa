@@ -34,6 +34,7 @@ const ModalSheet = ({
   handleModalOpen,
   handleSetModalType,
   handleListDialog,
+  handleSetRerender,
 }) => {
   const dataInput = useDataInput();
   const imageInput = useImageInput();
@@ -42,6 +43,7 @@ const ModalSheet = ({
   const [isBusy, setIsBusy] = useState(false);
   const [progressMsg, setProgreeMsg] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+<<<<<<< HEAD
 
   const [fetchTags, setFetchTags] = useState(null);
   const user = useUser();
@@ -49,8 +51,10 @@ const ModalSheet = ({
     FetchUserTags(user.uid).then((value) => setFetchTags(value));
   }, []);
  const handleIsDisable = (b) => {
+=======
+  const handleIsDisable = (b) => {
+>>>>>>> 8c5a7d0dc29d630c9241cb388d47266bc96df96d
     setIsDisable(b);
-    console.log("TESTESTESTSET");
   };
   const handleLinkBoxSubmitBtnClick = async () => {
     setIsBusy(true);
@@ -70,10 +74,6 @@ const ModalSheet = ({
           imageInput = previewData.image;
           setProgreeMsg(`입력된 링크가 ${previewData.title}로 확인됐습니다!`);
         }
-        // else {
-        //   setProgreeMsg("잘못된 링크입니다!");
-        //   return;
-        // }
       }
       if (!dataInput["date"]) {
         dataInput["date"] = firebase.firestore.Timestamp.fromDate(new Date());
@@ -99,7 +99,7 @@ const ModalSheet = ({
         // Update the Firestore document with the download URL
         const updateData = { imageURL: downloadUrl }; // Replace 'imageURL' with the actual field name in your Firestore document
         await postService.updatePost(postId, userId, updateData);
-
+       
         console.log("Document updated with imageURL successfully!");
       }
 
@@ -107,6 +107,7 @@ const ModalSheet = ({
     } catch (error) {
       console.error("Error creating document:", error);
     } finally {
+      handleSetRerender();
       handleModalOpen();
       setIsBusy(false);
     }
@@ -162,7 +163,11 @@ const ModalSheet = ({
       height: "357px",
       IDvsLinkButton: true,
       hasTitleInput: false,
-      children: isIDvsLinkActive ? <IDBox /> : <LinkBox handleIsDisable={handleIsDisable} />,
+      children: isIDvsLinkActive ? (
+        <IDBox />
+      ) : (
+        <LinkBox handleIsDisable={handleIsDisable} />
+      ),
       hasDatePicker: !isIDvsLinkActive,
       hasTagSelection: !isIDvsLinkActive,
       Button: (
