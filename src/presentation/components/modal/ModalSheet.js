@@ -43,7 +43,6 @@ const ModalSheet = ({
   const [isBusy, setIsBusy] = useState(false);
   const [progressMsg, setProgreeMsg] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
-<<<<<<< HEAD
 
   const [fetchTags, setFetchTags] = useState(null);
   const user = useUser();
@@ -51,9 +50,6 @@ const ModalSheet = ({
     FetchUserTags(user.uid).then((value) => setFetchTags(value));
   }, []);
  const handleIsDisable = (b) => {
-=======
-  const handleIsDisable = (b) => {
->>>>>>> 8c5a7d0dc29d630c9241cb388d47266bc96df96d
     setIsDisable(b);
   };
   const handleLinkBoxSubmitBtnClick = async () => {
