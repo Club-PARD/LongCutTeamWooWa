@@ -186,13 +186,15 @@
 <br>
 <br>
 
-## Team
+## Limitations
 
 <table>
 <tr>
 <td>
-  
-<img width="673" alt="스크린샷 2023-07-07 오후 8 29 12" src="https://github.com/Club-PARD/LongCutTeamWooWa/assets/93187535/877e7065-ebec-4166-b7ae-d32a39f71132">
+
+웹 크롤링 기능은 현재 개발자의 로컬 서버 환경에서만 정상적으로 작동합니다. 
+웹 크롤링은 localhost:8000에서 호스팅되는 서비스에 대해서만 테스트되었습니다.
+로컬 서버 이외의 환경(예: 프로덕션 서버, 다른 개발자의 서버 등)에서는 웹 크롤링 기능이 제약됩니다.
 
 </td>
 </tr>
