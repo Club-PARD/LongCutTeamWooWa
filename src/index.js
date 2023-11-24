@@ -1,11 +1,22 @@
 import React from 'react';
  import ReactDOM from 'react-dom/client';
- import App from './App';
- import ModalSheet from'./presentation/components/ModalPostTitle';
- import "./index.css";
-import TestPage from './Test';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
+import Hompage from "./presentation/pages/HomePage"
+import "./index.css";
+import "./assets/Fonts/Font.css"; //폰트적용 
+
+import DisquiteCrawlerForm from './service/disquite_api_form.js'
+import { AuthProvider } from './service/providers/auth_provider';
+import App from './App';
+
 
  const root = ReactDOM.createRoot(document.getElementById('root'));
  root.render(
-   <TestPage/>
-);
+   <ThemeProvider theme={theme}>
+      {/* <DisquiteCrawlerForm/> */}
+      <AuthProvider>
+        <App/>
+      </AuthProvider>
+   </ThemeProvider>
+ );

@@ -1,3 +1,4 @@
-.button-layout{
-    align-self: flex-end;
-}
+.button-layout {
+    margin-left: auto;
+    padding-right: 11px;
+  }

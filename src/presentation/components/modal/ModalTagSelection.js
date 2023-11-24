@@ -1,29 +1,50 @@
 import ModalTag from "./ModalTag";
-import { FiPlus } from 'react-icons/fi';
-
 import "./ModalStyle.css";
+import React, { useState } from "react";
+import { useUpdateDataInput } from "../../../service/providers/data_input_provider";
 
-const ModalTagSelection = ({title, modalTagList, width, hasButton}) => {
-    return (
-        <div className="tag-chips-container">
-            {title != null ? 
-                <div className="chip-title">
-                    {title}
-                </div> : 
-                <></>}
-            <div className="tag-chips" style={{width: width != null ? `${width}px` : "100%"}}>
-                {modalTagList.map((tag, index) => (
-                    <ModalTag text={tag}/>
-                ))}
-                {hasButton ? 
-                    <button className="add-button">
-                        <FiPlus />
-                    </button> : 
-                    <></>
-                }
-            </div>
-        </div>
-    );
-}
+const ModalTagSelection = ({ title, modalTagList, width, hasButton }) => {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const updateDataInput = useUpdateDataInput();
+  const handleInputChange = (name, value) => {
+    updateDataInput(name, value);
+  };
+
+  const handleTagClick = (tag) => {
+    const isTagSelected = selectedTags.includes(tag);
+    let updatedTags;
+
+    if (isTagSelected) {
+      updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+    } else {
+      updatedTags = [...selectedTags, tag];
+    }
+
+    setSelectedTags(updatedTags);
+    handleInputChange("selected-tags", updatedTags);
+  };
+
+ 
+  return (
+    <div className="tag-chips-container">
+      {title != null ? <div className="chip-title">{title}</div> : <></>}
+      <div
+        className="tag-chips"
+        style={{ width: width != null ? `${width}px` : "100%" }}
+      >
+        {modalTagList.map((tag, index) => (
+          <ModalTag
+            key={index}
+            tag={tag}
+            isSelected={selectedTags.includes(tag)}
+            onClick={() => {
+              handleTagClick(tag);
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default ModalTagSelection;

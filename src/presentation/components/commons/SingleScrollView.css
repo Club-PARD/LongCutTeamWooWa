@@ -1,0 +1,8 @@
+.single-scroll-view {
+  height: var(--frame-height, 200px);
+  overflow-y: auto;
+}
+
+.scroll-content {
+  padding: 0px;
+}
